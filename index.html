@@ -9,11 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script src="scripts/common.js" defer></script>
+  <script src="scripts/pop-up.js" defer></script>
+  <script src="scripts/validation.js" defer></script>
 </head>
 <body>
   <div class="header">
-    <div class="header__logo bg-logo" alt="logotype"></div>
+    <img class="header__logo" src="images/logo.svg" alt="logotype"/>
     <nav class="header__menu">
       <ul class="header__inline-list">
         <li class="header__list-item"><a class="header__nav-link" href="#">Что будет на курсе?</a></li>
@@ -30,30 +31,27 @@
       <div class="top__btn-sign button" onclick="openForm();">Записаться на курс</div>
     </div>
     <div class="top__illustration">
-      <img src="images/main-illustration.webp" alt="chill"/>
+      <img src="images/main-illustration.png" alt="chill"/>
     </div>
   </div>
   <div class="benefits">
     <div class="benefits__first-item">
-      <picture>
-        <source srcset="images/clock.webp" type="image/webp">
-        <img src="images/clock.png" alt="clock"/>
-      </picture>
+      <img src="images/clock.png" alt="clock" />
       <p class="benefits__first-item__description">Для тех, у кого слишком много<br> идей и слишком мало времени</p>
     </div>
     <div class="benefits__second-item">
-      <img src="images/notebook.webp" alt="notebook" />
+      <img src="images/notebook.png" alt="notebook" />
       <p class="benefits__second-item__description">Метод «списка не дел», который позволит успевать и реализовывать</p>
     </div>
     <div class="benefits__third-item">
-      <img src="images/target.webp" alt="target" />
+      <img src="images/target.png" alt="target" />
       <p class="benefits__third-item__description">Курс научит творческих людей<br> сосредоточиваться</p>
     </div>
   </div>
   <div class="deadline">
     <div class="deadline__first__item">
       <div class="deadline__first__item__image">
-        <img src="images/finances.webp" alt="finances" />
+        <img src="images/finances.png" alt="finances" />
       </div>
       <div class="deadline__first__item__text">
         <p class="deadline__first__item__text__title">Ты не успеешь</p>
@@ -66,34 +64,34 @@
         <p class="deadline__second__item__text__description">В мире, где столько всего интересного, когда же успевать жить?</p>
       </div>
       <div class="deadline__second__item__image">
-        <img src="images/blowing.webp" alt="blowing" />
+        <img src="images/blowing.png" alt="blowing" />
       </div>
     </div>
   </div>
   <p class="arguments-title">На курсе ты <span class="pink">сможешь</span></p>
   <div class="arguments">
     <div class="arguments__item">
-      <img src="images/hand_one.webp" alt="hand first" />
+      <img src="images/hand_one.png" alt="hand first" />
       <p class="arguments__item__description">Понять, что нужно делать, а что делать не стоит.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_two.webp" alt="hand second" />
+      <img src="images/hand_two.png" alt="hand second" />
       <p class="arguments__item__description">Перестать себя искусственно ограничивать.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_three.webp" alt="hand third" />
+      <img src="images/hand_three.png" alt="hand third" />
       <p class="arguments__item__description">Определить сильные стороны <br>и начать использовать слабые.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_four.webp" alt="hand fourth" />
+      <img src="images/hand_four.png" alt="hand fourth" />
       <p class="arguments__item__description">Научиться достигать любой цели <br>в 3 понятных шага.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_five.webp" alt="hand fifth" />
+      <img src="images/hand_five.png" alt="hand fifth" />
       <p class="arguments__item__description">Сотрудничать эффективно <br>и с правильными людьми.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_six.webp" alt="hand sixth" />
+      <img src="images/hand_six.png" alt="hand sixth" />
       <p class="arguments__item__description">Оптимизировать общение с клиентами и проведение совещаний.</p>
     </div>
   </div>
@@ -101,7 +99,7 @@
   <div class="pop-up invisible">
     <div class="sign">
       <img class="sign__close-img" src="images/close.svg" alt="Закрыть" />
-      <img class="sign__image" src="images/welcome.webp" alt="welcome" />
+      <img class="sign__image" src="images/welcome.png" alt="welcome" />
       <h1 class="sign__title">Записаться на курс</h1>
       <form class="sign__form" action="form_handler.php" method="POST">
         <input class="sign__form-input" placeholder="Ваше имя" type="text" name="first_name" />
