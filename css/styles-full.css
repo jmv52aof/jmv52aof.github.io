@@ -1,31 +1,19 @@
 .bg-arrow 
 {
     width: 25px; height: 14px;
-    background: url('css_sprites.png') -54px -102px;
+    background: url('../images/css_sprites.png') -54px -10px;
 }
 
 .bg-close 
 {
     width: 16px; height: 16px;
-    background: url('css_sprites.png') -10px -141px;
-}
-
-.bg-logo 
-{
-    width: 165px; height: 26px;
-    background: url('css_sprites.png') -10px -10px;
-}
-
-.bg-logo_white 
-{
-    width: 165px; height: 26px;
-    background: url('css_sprites.png') -10px -56px;
+    background: url('../images/css_sprites.png') -10px -49px;
 }
 
 .bg-selected 
 {
     width: 24px; height: 19px;
-    background: url('css_sprites.png') -10px -102px;
+    background: url('../images/css_sprites.png') -10px -10px;
 }
 
 body

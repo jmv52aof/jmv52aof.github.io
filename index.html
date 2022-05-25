@@ -4,17 +4,16 @@
   <meta charset="utf-8">
   <title>Don't do it</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com">
+  <link href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script src="scripts/pop-up.js" defer></script>
-  <script src="scripts/validation.js" defer></script>
+  <script src="scripts/common.js" defer></script>
 </head>
 <body>
   <div class="header">
-    <img class="header__logo" src="images/logo.svg" alt="logotype"/>
+   <img src="images/logo.svg" width=165 height=26 loading="lazy" alt="white logotype" />
     <nav class="header__menu">
       <ul class="header__inline-list">
         <li class="header__list-item"><a class="header__nav-link" href="#">Что будет на курсе?</a></li>
@@ -31,27 +30,43 @@
       <div class="top__btn-sign button" onclick="openForm();">Записаться на курс</div>
     </div>
     <div class="top__illustration">
-      <img src="images/main-illustration.png" alt="chill"/>
+      <picture>
+        <source srcset="images/main-illustration.webp" type="image/webp" />
+        <img src="images/main-illustration.png" alt="chill"/>
+      </picture>
+        
     </div>
   </div>
   <div class="benefits">
     <div class="benefits__first-item">
-      <img src="images/clock.png" alt="clock" />
+      <picture>
+        <source srcset="images/clock.webp" type="image/webp" />
+        <img width=50 height=51 loading="lazy" src="images/clock.png" alt="clock" />
+      </picture>
       <p class="benefits__first-item__description">Для тех, у кого слишком много<br> идей и слишком мало времени</p>
     </div>
     <div class="benefits__second-item">
-      <img src="images/notebook.png" alt="notebook" />
+      <picture>
+        <source srcset="images/notebook.webp" type="image/webp" />
+        <img width=50 height=51 loading="lazy" src="images/notebook.png" alt="notebook" />
+      </picture>
       <p class="benefits__second-item__description">Метод «списка не дел», который позволит успевать и реализовывать</p>
     </div>
     <div class="benefits__third-item">
-      <img src="images/target.png" alt="target" />
+      <picture>
+        <source srcset="images/target.webp" type="image/webp" />
+        <img width=50 height=51 loading="lazy" src="images/target.png" alt="target" />
+      </picture>
       <p class="benefits__third-item__description">Курс научит творческих людей<br> сосредоточиваться</p>
     </div>
   </div>
   <div class="deadline">
     <div class="deadline__first__item">
       <div class="deadline__first__item__image">
-        <img src="images/finances.png" alt="finances" />
+      <picture>
+        <source srcset="images/finances.webp" type="image/webp" />
+        <img loading="lazy" src="images/finances.png" alt="finances" />
+      </picture>
       </div>
       <div class="deadline__first__item__text">
         <p class="deadline__first__item__text__title">Ты не успеешь</p>
@@ -64,42 +79,66 @@
         <p class="deadline__second__item__text__description">В мире, где столько всего интересного, когда же успевать жить?</p>
       </div>
       <div class="deadline__second__item__image">
-        <img src="images/blowing.png" alt="blowing" />
+        <picture>
+          <source srcset="images/blowing.webp" type="image/webp" />
+          <img loading="lazy" src="images/blowing.png" alt="blowing" />
+        </picture>
       </div>
     </div>
   </div>
   <p class="arguments-title">На курсе ты <span class="pink">сможешь</span></p>
   <div class="arguments">
     <div class="arguments__item">
-      <img src="images/hand_one.png" alt="hand first" />
+      <picture>
+        <source srcset="images/hand_one.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_one.png" alt="hand first" />
+      </picture>
       <p class="arguments__item__description">Понять, что нужно делать, а что делать не стоит.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_two.png" alt="hand second" />
+      <picture>
+        <source srcset="images/hand_one.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_two.png" alt="hand second" />
+      </picture>
       <p class="arguments__item__description">Перестать себя искусственно ограничивать.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_three.png" alt="hand third" />
+      <picture>
+        <source srcset="images/hand_three.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_three.png" alt="hand third" />
+      </picture>
       <p class="arguments__item__description">Определить сильные стороны <br>и начать использовать слабые.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_four.png" alt="hand fourth" />
+      <picture>
+        <source srcset="images/hand_four.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_four.png" alt="hand fourth" />
+      </picture>
       <p class="arguments__item__description">Научиться достигать любой цели <br>в 3 понятных шага.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_five.png" alt="hand fifth" />
+      <picture>
+        <source srcset="images/hand_five.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_five.png" alt="hand fifth" />
+      </picture>>
       <p class="arguments__item__description">Сотрудничать эффективно <br>и с правильными людьми.</p>
     </div>
     <div class="arguments__item">
-      <img src="images/hand_six.png" alt="hand sixth" />
+      <picture>
+        <source srcset="images/hand_six.webp" type="image/webp" />
+        <img width=38 height=49 loading="lazy" src="images/hand_six.png" alt="hand sixth" />
+      </picture>
       <p class="arguments__item__description">Оптимизировать общение с клиентами и проведение совещаний.</p>
     </div>
   </div>
   <div class="arguments__btn-sign button" onclick="openForm();">Записаться на курс</div>
   <div class="pop-up invisible">
     <div class="sign">
-      <img class="sign__close-img" src="images/close.svg" alt="Закрыть" />
-      <img class="sign__image" src="images/welcome.png" alt="welcome" />
+      <div class="sign__close-img bg-close" src="images/close.svg" alt="Закрыть"></div>
+      <picture>
+        <source srcset="images/welcome.webp" type="image/webp" />
+        <img width=322 height=307 loading="lazy" class="sign__image" src="images/welcome.png" alt="welcome" />
+      </picture>
       <h1 class="sign__title">Записаться на курс</h1>
       <form class="sign__form" action="form_handler.php" method="POST">
         <input class="sign__form-input" placeholder="Ваше имя" type="text" name="first_name" />
@@ -118,7 +157,7 @@
     </div>
   </div>
   <div class="footer">
-    <img class="footer__image" src="images/logo-white.svg" alt="white logotype" />
+    <img loading="lazy" class="footer__image" src="images/logo-white.svg" alt="white logotype" />
   </div>
 </body>
 </html>
