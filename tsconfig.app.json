@@ -28,7 +28,8 @@
 			"@common/*": ["common/*"],
 			"@components/*": ["components/*"],
 			"@features/*": ["features/*"],
-			"@pages/*": ["pages/*"]
+			"@pages/*": ["pages/*"],
+			"@layouts/*": ["layouts/*"]
 		}
 	},
 	"include": ["src"]
