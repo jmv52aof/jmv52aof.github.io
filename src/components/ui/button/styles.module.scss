@@ -1,0 +1,152 @@
+$transition-duration: 0.3s;
+
+.button {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	box-sizing: border-box;
+	white-space: nowrap;
+	background: none;
+	outline: none;
+	border: none;
+	font-family: 'Roboto', sans-serif;
+	cursor: pointer;
+	transition: $transition-duration;
+
+	img {
+		width: 24px;
+		height: 24px;
+		transition: $transition-duration;
+	}
+}
+
+.outlined {
+	border: 1px solid #373435;
+	color: #373435;
+}
+
+.fill {
+	background-color: #17c3b9;
+	color: #fff;
+}
+
+.fillWithIcon {
+	background-color: #017598;
+	color: #fff;
+}
+
+.icon {
+	padding: 12px;
+	border-radius: 100%;
+	background-color: #17c3b9;
+}
+
+.iconSmall {
+	padding: 4px;
+	border-radius: 100%;
+	background-color: #f7f7f7;
+}
+
+.text {
+	color: #8e949f;
+	img {
+		width: 0;
+		height: 0;
+	}
+}
+
+.textWithIcon {
+	font-size: 12px;
+	line-height: 120%;
+	gap: 4px;
+	color: #017598;
+	img {
+		width: 16px;
+		height: 16px;
+		filter: brightness(0) saturate(100%) invert(29%) sepia(27%) saturate(3708%)
+			hue-rotate(165deg) brightness(103%) contrast(99%);
+	}
+	flex-direction: row-reverse;
+}
+
+.outlined,
+.fill,
+.fillWithIcon {
+	padding: 8px 24px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	gap: 12px;
+}
+
+.outlined,
+.iconSmall {
+	img {
+		filter: brightness(0) saturate(100%) invert(18%) sepia(4%) saturate(585%)
+			hue-rotate(289deg) brightness(91%) contrast(87%);
+	}
+}
+
+.fillWithIcon,
+.icon {
+	img {
+		filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
+			hue-rotate(323deg) brightness(102%) contrast(101%);
+	}
+}
+
+.outlined:hover,
+.iconSmall:hover {
+	background-color: #e6f2f5;
+}
+
+.fill:hover {
+	background-color: #13a69d;
+}
+
+.fillWithIcon:hover {
+	background-color: #045d78;
+}
+
+.icon:hover {
+	background-color: #13a69d;
+}
+
+.text:hover {
+	color: #767d8a;
+}
+
+.textWithIcon:hover {
+	color: #045d78;
+	img {
+		filter: brightness(0) saturate(100%) invert(24%) sepia(62%) saturate(1903%)
+			hue-rotate(167deg) brightness(90%) contrast(97%);
+	}
+}
+
+.outlinedDisabled,
+.fillDisabled,
+.fillWithIconDisabled,
+.iconDisabled,
+.iconSmallDisabled,
+.textDisabled,
+.textWithIconDisabled {
+	user-select: none;
+	pointer-events: none;
+	background-color: #f7f7f7 !important;
+	color: #c8ced8 !important;
+	img {
+		filter: brightness(0) saturate(100%) invert(84%) sepia(4%) saturate(471%)
+			hue-rotate(179deg) brightness(103%) contrast(83%) !important;
+	}
+}
+
+.outlinedDisabled {
+	border-color: #c8ced8 !important;
+}
+
+.textDisabled,
+.textWithIconDisabled {
+	background: none !important;
+}
