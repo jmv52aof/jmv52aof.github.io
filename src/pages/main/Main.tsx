@@ -4,6 +4,7 @@ import commonStyles from '@common/styles.module.scss'
 import ControlPanel from '@features/controlPanel/ControlPanel'
 import Search from '@components/search/Search'
 import Button from '@components/ui/button/Button'
+import Switch from '@components/ui/switch/Switch'
 import tuningImage from '@assets/images/tuning.svg'
 
 /**
@@ -15,6 +16,7 @@ export default function MainPage(): React.JSX.Element {
 			<div className={styles.header}>
 				<Search />
 				<Button iconSrc={tuningImage} onClick={() => {}} variant='icon' />
+				<Switch onChange={(enabled) => { }} />	
 			</div>
 			<StationsMap />
 			<div className={styles.footer}>
