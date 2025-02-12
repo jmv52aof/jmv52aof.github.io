@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 type Props = {
-    onChange: (checked: boolean) => void;
+    onChange: (enabled: boolean) => void;
     enabled?: boolean;
     disabled?: boolean;
 };
@@ -22,13 +22,15 @@ export default function Switch(props: Props) {
     };
 
     return (
-        <div
-            className={`${styles.switch} ${isEnabled ? styles.on : styles.off} ${
-                props.disabled ? styles.disabled : ""
-            }`}
-            onClick={toggleSwitch}
-        >
-            <div className={styles.toggle} />
+        <div className={styles["switch-wrapper"]}>
+            <div
+                className={`${styles.switch} ${isEnabled ? styles.on : styles.off} ${
+                    props.disabled ? styles.disabled : ""
+                }`}
+                onClick={toggleSwitch}
+            >
+                <div className={styles.switch__toggle} />
+            </div>
         </div>
     );
 }
