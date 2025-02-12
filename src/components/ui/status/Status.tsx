@@ -1,10 +1,10 @@
-import { Variant } from '../status/lib/types'
+import { ColorTemplate } from '../status/lib/types'
 import styles from './styles.module.scss'
 
 type Props = {
-	onClick: () => void
-	variant: Variant
-	text?: string
+	color: ColorTemplate
+	text: string
+	textSize: number
 }
 
 /**
@@ -12,14 +12,16 @@ type Props = {
  */
 export default function Status(props: Props): React.JSX.Element {
 
-	const variant = props.variant
+	const color = props.color
+	const textSize = {
+		fontSize: props.textSize + 'px'
+	}
 
 	return (
 		<div
-			className={`${styles.status} ${styles[variant]}`}
-			// onClick={onClickHandler}
+			className={`${styles.status} ${styles[color]}`}
 		>
-			<p className={`${styles.text}`}> 
+			<p className={styles.text} style={textSize}> 
 				{props.text} 
 			</p>
 		</div>

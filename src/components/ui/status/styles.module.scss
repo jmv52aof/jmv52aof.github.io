@@ -1,49 +1,40 @@
-$transition-duration: 0.3s;
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .status {
-    display: inline-block;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     background: none;
 	outline: none;
 	border: none;
-    font-family: 'Roboto', sans-serif;
-	cursor: pointer;
-    transition: $transition-duration;
 
-    height: 20px;
+    max-height: 100px;
+    width: fit-content;
+    padding: 4px 12px;
     border-radius: 12px;
 }
 
-.available {
+.green {
     background-color:rgba(39, 174, 96, 0.1);
     color: rgba(39, 174, 96, 1);
 }
 
-.busy {
+.orange {
     background-color:rgba(248, 149, 32, 0.1);
     color: rgba(248, 149, 32, 1);
 }
 
-.invalid {
+.red {
     background-color:rgba(246, 50, 85, 1);
     color: rgba(255, 255, 255, 1);
 }
 
-.unavailable {
+.grey {
     background-color:rgba(142, 148, 159, 0.1);
     color: rgba(142, 148, 159, 1);
 }
 
 
 .text {
-    padding: 4px 12px;
-    display: flex;
-    font-size: 12px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }

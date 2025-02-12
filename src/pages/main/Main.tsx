@@ -16,10 +16,10 @@ export default function MainPage(): React.JSX.Element {
 			<div className={styles.header}>
 				<Search />
 				<Button iconSrc={tuningImage} onClick={() => {}} variant='icon' />
-				<Status onClick={() => {}} variant='available' text='Доступен'/>
-				<Status onClick={() => {}} variant='busy' text='Занят'/>
-				<Status onClick={() => {}} variant='unavailable' text='Нет соединения'/>
-				<Status onClick={() => {}} variant='invalid' text='Невалидна'/>
+				<Status textSize={10} color='green' text='Доступен'/>
+				<Status textSize={12} color='orange' text='Занят'/>
+				<Status textSize={12} color='red' text='Нет соединения'/>
+				<Status textSize={14} color='grey' text='Невалидна'/>
 			</div>
 			<StationsMap />
 			<div className={styles.footer}>

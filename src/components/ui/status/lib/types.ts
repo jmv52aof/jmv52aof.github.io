@@ -1,1 +1,1 @@
-export type Variant = 'available' | 'busy' | 'invalid' | 'unavailable'
+export type ColorTemplate = 'green' | 'orange' | 'red' | 'grey'
