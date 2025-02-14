@@ -80,5 +80,5 @@ export interface ConnectorInfoDto {
 	connector_id: string
 	standard: ConnectorStandard
 	format: ConnectorFormat
-	powerType: ConnectorPowerType
+	power_type: ConnectorPowerType
 }
