@@ -1,10 +1,10 @@
-import { ColorTemplate } from '../status/lib/types'
+import { ColorTemplate, TextSize } from '../status/lib/types'
 import styles from './styles.module.scss'
 
 type Props = {
 	color: ColorTemplate
 	text: string
-	textSize: number
+	textSize: TextSize
 }
 
 /**
@@ -13,9 +13,18 @@ type Props = {
 export default function Status(props: Props): React.JSX.Element {
 
 	const color = props.color
+
+	const textSizeMap: Record<TextSize, number> = {
+		small: 10,
+		medium: 12,
+		large: 14,
+	};
+
 	const textSize = {
-		fontSize: props.textSize + 'px'
+		fontSize: textSizeMap[props.textSize] + 'px'
 	}
+
+
 
 	return (
 		<div
