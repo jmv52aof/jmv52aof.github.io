@@ -22,15 +22,13 @@ export default function Switch(props: Props) {
     };
 
     return (
-        <div className={styles["switch-wrapper"]}>
-            <div
-                className={`${styles.switch} ${isEnabled ? styles.on : styles.off} ${
-                    props.disabled ? styles.disabled : ""
-                }`}
-                onClick={toggleSwitch}
-            >
-                <div className={styles.switch__toggle} />
-            </div>
+        <div
+            className={`${styles.switch} ${isEnabled ? styles.on : styles.off} ${
+                props.disabled ? styles.disabled : ""
+            }`}
+            onClick={toggleSwitch}
+        >
+            <div className={styles.switch__toggle} />
         </div>
     );
 }
