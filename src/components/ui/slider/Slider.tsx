@@ -1,50 +1,37 @@
-import { useState } from 'react';
 import styles from './styles.module.scss'
+import { initMarkers } from './lib/finction';
 
 interface SliderProps {
-	min: number;
-	max: number;
-	step: number;
-	defaultValue: number;
-	onChange: (value: number) => void;
-}
-
-const initMarkers = (min: number, max: number, step: number) => {
-	const result = [];
-	for (let i = min; i <= max; i += step) {
-		result.push(i);
-	}
-	return result;
+	min: number | string;
+	max: number | string;
+	step: number | string;
+	defaultValue: number | string;
+	onChange: (value: string) => void;
 }
 
 /**
  * Горизонтальный ползунок, перемещаемый мышкой вдоль прямой
  */
 export default function Slider(props: SliderProps): React.JSX.Element {
-	const markers = initMarkers(props.min, props.max, props.step)
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const newValue = Number(event.target.value);
-		if (props.onChange)
-			props.onChange(newValue);
-	};
-
-	const sliderMarkers = markers.map(item => {
-		return <span>{item}</span>
-	})
+	const markers = initMarkers(Number(props.min), Number(props.max), Number(props.step))
+	const handleChange = (value: string) => {
+		props.onChange(value)
+	}	
 
 	return(
-		<div className={styles.slider__wrap}>
-			<div className={styles.slider}>
+		<div className={styles.slider}>
+			<div className={styles.slider__wrapper}>
 				<input 
 					type="range"
 					min={props.min}
 					max={props.max}
+					className={styles.wrapper__range}
 					step={props.step}
 					defaultValue={props.defaultValue}
-					onChange={handleChange}		
+					onChange={(event) => handleChange(event.target.value)}		
 				/>
-				<div className={styles.slider__markers}>
-					{sliderMarkers}
+				<div className={styles.wrapper__markers}>
+					{markers.map(item => <span key={item}>{item}</span>)}
 				</div>
 			</div>			
 		</div>)
