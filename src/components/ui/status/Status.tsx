@@ -1,10 +1,38 @@
+import { ColorTemplate, TextSize } from '../status/lib/types'
 import styles from './styles.module.scss'
 
-type Props = {}
+type Props = {
+	color: ColorTemplate
+	text: string
+	textSize: TextSize
+}
 
 /**
  * Блок с отображением статуса: соответствующие цвет и текст
  */
 export default function Status(props: Props): React.JSX.Element {
-	return <div></div>
+
+	const color = props.color
+
+	const textSizeMap: Record<TextSize, number> = {
+		small: 10,
+		medium: 12,
+		large: 14,
+	};
+
+	const textSize = {
+		fontSize: textSizeMap[props.textSize] + 'px'
+	}
+
+
+
+	return (
+		<div
+			className={`${styles.status} ${styles[color]}`}
+		>
+			<p className={styles.text} style={textSize}> 
+				{props.text} 
+			</p>
+		</div>
+	)
 }
