@@ -1,10 +1,34 @@
-import styles from './styles.module.scss'
+import { useState, useEffect } from "react";
+import styles from "./styles.module.scss";
 
-type Props = {}
+type Props = {
+    onChange: (enabled: boolean) => void;
+    enabled?: boolean;
+    disabled?: boolean;
+};
 
-/**
- * Горизонтальная кнопка-переключатель. Может быть в положении "выкл" или "вкл"
- */
-export default function Switch(props: Props): React.JSX.Element {
-	return <div></div>
+export default function Switch(props: Props) {
+    const [isEnabled, setIsEnabled] = useState(props.enabled);
+
+    useEffect(() => {
+        setIsEnabled(props.enabled);
+    }, [props.enabled]);
+
+    const toggleSwitch = () => {
+        if (!props.disabled) {
+            setIsEnabled(!isEnabled);
+            props.onChange(!isEnabled);
+        }
+    };
+
+    return (
+        <div
+            className={`${styles.switch} ${isEnabled ? styles.on : styles.off} ${
+                props.disabled ? styles.disabled : ""
+            }`}
+            onClick={toggleSwitch}
+        >
+            <div className={styles.switch__toggle} />
+        </div>
+    );
 }
