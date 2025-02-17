@@ -1,0 +1,22 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.block__title {
+    font-family: Roboto;
+    font-weight: 500;
+    color: #373435;
+    font-size: 16px;
+    line-height: 19.2px;    
+}
+
+.block__chart {
+    display: flex;
+}
+
+.chart {
+    background-color: #fcfcfc;
+}
