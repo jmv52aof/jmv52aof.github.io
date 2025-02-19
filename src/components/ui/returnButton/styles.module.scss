@@ -1,0 +1,20 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 100%;
+
+    img {
+        width: 16px;
+        height: 12px;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
