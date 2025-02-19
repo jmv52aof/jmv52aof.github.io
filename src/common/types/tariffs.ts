@@ -1,4 +1,4 @@
-export type TariffType = 'energy' | 'flat' | 'time' | 'parking_time'
+export type TariffType = 'ENERGY' | 'FLAT' | 'TIME' | 'PARKING_TIME'
 
 export type TariffCurrency = 'RUB'
 
