@@ -13,7 +13,7 @@ import DailyOccupation from '@components/dailyOccupation/DailyOccupation'
  */
 export default function MainPage(): React.JSX.Element {
 	const dailyOccupations = [
-		{ weekday: 1, occupancy_in_percentage: 20 }, // Понедельник
+		{ weekday: 1, occupancy_in_percentage: 100 }, // Понедельник
 		{ weekday: 2, occupancy_in_percentage: 40 }, // Вторник
 		{ weekday: 3, occupancy_in_percentage: 60 }, // Среда
 		{ weekday: 4, occupancy_in_percentage: 80 }, // Четверг
