@@ -1,11 +1,21 @@
 .carouselContainer {
     margin: 0px;
+    margin-left: 10px;
     position: relative;
     width: 100%;
     max-width: 304px;
+    max-height: 304px;
     overflow: hidden;
+    border-radius: 16px;
 }
   
+.carouselItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
 .carouselTrack {
     display: flex;
     transition: transform 0.3s ease-in-out;
@@ -13,8 +23,9 @@
   
 .carouselImage {
     width: 100%;
-    flex-shrink: 0;
-    border-radius: 16px;
+    height: 100%;
+    object-fit: cover; // 
+    pointer-events: none; // 
 }
   
 .carouselButtonLeft,
@@ -53,6 +64,7 @@
     align-items: center;
     margin-top: 10px;
     gap: 5px;
+    pointer-events: none;
 }
   
 .indicator {
@@ -69,4 +81,13 @@
     height: 14px;
     background-color: black;
     border: 1px solid rgba(200, 206, 216, 1);
+}
+
+.react-multi-carousel-dot button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(200, 206, 216, 1);
+    background-color: white;
+    transition: all 0.3s ease;
 }

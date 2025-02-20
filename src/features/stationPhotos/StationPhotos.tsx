@@ -1,5 +1,5 @@
 import Status from '@components/ui/status/Status';
-import Carousel from '@components/ui/carousel/Carousel';
+import CustomCarousel from '@components/ui/carousel/Carousel';
 import styles from './styles.module.scss'
 
 type Props = {
@@ -17,7 +17,7 @@ export default function StationPhotos(props: Props): React.JSX.Element {
     return (
         <div>
             <Status color='green' textSize='small' text='Доступна'/>
-            <Carousel imageSources={props.imageSources}/>
+            <CustomCarousel imageSources={props.imageSources}/>
         </div>
     );
 }

@@ -6,8 +6,7 @@ import Search from '@components/search/Search'
 import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
 import Status from '@components/ui/status/Status'
-import Carousel from '@components/ui/carousel/Carousel'
-import StationPhotos from '@features/stationPhotos/stationPhotos'
+import CustomCarousel from '@components/ui/carousel/Carousel'
 import tuningImage from '@assets/images/tuning.svg'
 
 import station1 from "../../assets/images/station/station1.png";
@@ -29,7 +28,7 @@ export default function MainPage(): React.JSX.Element {
 				<Status textSize='medium' color='orange' text='Занят'/>
 				<Status textSize='medium' color='red' text='Нет соединения'/>
 				<Status textSize='large' color='grey' text='Невалидна'/>
-				<Carousel imageSources={images}/>
+				<CustomCarousel imageSources={images}/>
 				{/* <StationPhotos imageSources={images}/> */}
 			</div>
 			<StationsMap />
