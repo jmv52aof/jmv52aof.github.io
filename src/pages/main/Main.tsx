@@ -6,21 +6,13 @@ import Search from '@components/search/Search'
 import Button from '@components/ui/button/Button'
 import Status from '@components/ui/status/Status'
 import tuningImage from '@assets/images/tuning.svg'
-import DailyOccupation from '@components/dailyOccupation/DailyOccupation'
+import {DailyOccupation} from '@components/dailyOccupation/DailyOccupation'
+import { Loader } from '@components/ui/loader/Loader'
 
 /**
  * Главная страница с картой станций
  */
 export default function MainPage(): React.JSX.Element {
-	const dailyOccupations = [
-		{ weekday: 1, occupancy_in_percentage: 100 }, // Понедельник
-		{ weekday: 2, occupancy_in_percentage: 40 }, // Вторник
-		{ weekday: 3, occupancy_in_percentage: 60 }, // Среда
-		{ weekday: 4, occupancy_in_percentage: 80 }, // Четверг
-		{ weekday: 5, occupancy_in_percentage: 70 }, // Пятница
-		{ weekday: 6, occupancy_in_percentage: 50 }, // Суббота
-		{ weekday: 7, occupancy_in_percentage: 30 }, // Воскресенье
-	  ];
 	return (
 		<div className={commonStyles.page}>
 			<div className={styles.header}>
@@ -34,9 +26,6 @@ export default function MainPage(): React.JSX.Element {
 			<StationsMap />
 			<div className={styles.footer}>
 				<ControlPanel />
-			</div>
-			<div>
-				<DailyOccupation data={dailyOccupations} chartWidth={400} chartHeight={500}/>
 			</div>
 		</div>
 	)

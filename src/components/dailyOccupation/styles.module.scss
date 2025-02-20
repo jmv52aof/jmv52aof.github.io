@@ -15,8 +15,18 @@
 
 .block__chart {
     display: flex;
+    width: 100%;
 }
 
 .chart {
     background-color: #fff;
+    width: 100%;
+}
+
+.chart__text {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.8px;
+
 }

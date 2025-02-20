@@ -1,39 +1,62 @@
 import { DailyOccupationDto } from '@common/types/stations'
 import styles from './styles.module.scss'
-import { JSX } from 'react'
+import { JSX, useEffect, useRef, useState } from 'react'
+import { ChartState, weekDayNamesMap } from './lib/utils'
 
 interface Props {
     data: DailyOccupationDto[]
-    chartWidth: number
-    chartHeight: number
+    barPlotWidth: number
+    sidePadding: number
+    paddingTop: number
+    paddingBottom: number
 }
 
-const weekDayNamesMap = new Map<number, string>([
-    [1, 'ПН'],
-    [2, 'ВТ'],
-    [3, 'СР'],
-    [4, 'ЧТ'],
-    [5, 'ПТ'],
-    [6, 'СБ'],
-    [7, 'ВС'],
-])
+DailyOccupation.defaultProps = {
+    data: [],
+    barPlotWidth: 25,
+    sidePadding: 15,
+    paddingTop: 10,
+    paddingBottom: 25,
+}
 
+export function DailyOccupation({data, barPlotWidth = 25, sidePadding = 15, paddingBottom = 25, paddingTop = 10}: Props): React.JSX.Element {
+    const chartBlock = useRef<HTMLDivElement>(null)
+    const [state, setState] = useState<ChartState>({} as ChartState)
+    const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
 
-export default function DailyOccupation({data, chartHeight, chartWidth}: Props): React.JSX.Element {
-    const margin = 30
-    const width = chartWidth - margin * 2
-    const height = chartHeight - margin * 2  
-    const barPlotWidth = width / data.length;
-    const sidePadding = 10
-    const textPadding = 25
+    useEffect(() => {
+        if (chartBlock.current !== null) {
+            const clientWidth = chartBlock.current.clientWidth ?? 0
+            const clientHeight = chartBlock.current.clientHeight ?? 0
+            const marginX = (clientWidth - (barPlotWidth + sidePadding) * 7) / 2
+            const marginTop = 10
+            const marginBottom = 25
+            setState({
+                clientHeight: clientHeight,
+                clientWidth: clientWidth,
+                width: clientWidth - marginX * 2,
+                height: clientHeight - marginTop -  marginBottom,
+                marginX: marginX,
+                marginTop: paddingTop,
+                marginBottom: paddingBottom
+            })
+        }        
+    }, [chartBlock, windowSize])
+
+    useEffect(() => {
+      const resizeHandler = () => setWindowSize([window.innerWidth, window.innerHeight]);
+      window.addEventListener('resize', resizeHandler);
+      return () => window.removeEventListener('resize', resizeHandler);
+    }, []);
+
     const color = '#0000ff'
     const generateDottedLines = () => {        
         const result: JSX.Element[] = []
-        const gap = Math.floor(height / 4)
-        for (let i = margin; i <= height; i += gap) {
+        const gap = Math.floor(state.height / 4)
+        for (let i = state.marginTop; i <= state.height; i += gap) {
             result.push(
-                <line key={i} x1={sidePadding} y1={i} x2={chartWidth - sidePadding} y2={i} stroke="#E8E8EE" 
-                    stroke-width="2" stroke-dasharray="15" />)
+                <line key={i} x1={sidePadding} y1={i} x2={state.clientWidth - sidePadding} y2={i} stroke="#E8E8EE" 
+                    strokeWidth="2" strokeDasharray="15" />)
         }
         return result
     }
@@ -41,13 +64,13 @@ export default function DailyOccupation({data, chartHeight, chartWidth}: Props):
 	return (
         <div className={styles.block}>
             <h2 className={styles.block__title}>График загруженности</h2>
-            <div className={styles.block__chart}>
-                <svg width={chartWidth} height={chartHeight} className={styles.chart}>
+            <div className={styles.block__chart} ref={chartBlock}>
+                <svg className={styles.chart}>
                     {generateDottedLines()}
-                    {data.map((item, index) => {                    
-                        const x = margin + index * barPlotWidth;                                            
-                        const y = height - item.occupancy_in_percentage * height / 100;
-                        const heightBar = item.occupancy_in_percentage * height / 100;
+                    {data.map((item, index) => {                
+                        const x = state.marginX + index * (barPlotWidth + sidePadding);                                            
+                        const y = state.height - item.occupancy_in_percentage * state.height / 100;
+                        const heightBar = item.occupancy_in_percentage * state.height / 100;
                         let r = parseInt(color.substring(1, 3), 16);
                         let g = parseInt(color.substring(3, 5), 16);
                         let b = parseInt(color.substring(5, 7), 16);
@@ -61,14 +84,15 @@ export default function DailyOccupation({data, chartHeight, chartWidth}: Props):
                         return (
                             <g key={index}>
                               <rect
-                                x={x + sidePadding / 2}
+                                x={x}
                                 y={y}
                                 rx={10}
                                 fill={`#${toHex(r)}${toHex(g)}${toHex(b)}`}
-                                width={barPlotWidth - sidePadding}
+                                width={barPlotWidth}
                                 height={heightBar}
                               />
-                              <text x={x + barPlotWidth / 2} y={y + heightBar + textPadding} textAnchor="middle">
+                              <text x={x + barPlotWidth / 2} y={y + heightBar + state.marginBottom} 
+                                textAnchor="middle" className={styles.chart__text}>
                                 {weekDayNamesMap.get(item.weekday)}
                               </text>
                             </g>
