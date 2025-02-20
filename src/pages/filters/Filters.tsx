@@ -1,8 +1,9 @@
 import styles from './styles.module.scss'
 import Switch from '@components/ui/switch/Switch'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
-import arrowImage from '@assets/images/arrow.svg'
+import arrowImage from '@assets/images/arrowLeft.svg'
 import FiltersBlock from '@layouts/filtersBlock/FiltersBlock'
+import StationFilters from '@features/stationFilters/StationFilters'
 
 /**
  * Страница с фильтрами
@@ -26,6 +27,9 @@ export default function FiltesrPage(): React.JSX.Element {
 							<Switch onChange={(enabled) => { }} />
 						</div>
 					</FiltersBlock>
+					<StationFilters>
+						
+					</StationFilters>
 				</div>
 			</div>
 		</div>
