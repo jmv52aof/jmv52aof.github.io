@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -10,27 +10,30 @@ type Props = {
 };
 
 export default function ConnectorCard(props: Props) {
-    const [selected, setSelected] = useState(props.enabled);
+    const [isEnabled, setSelected] = useState(props.enabled ?? true);
+
+    useEffect(() => {
+        setSelected(props.enabled ?? true);
+    }, [props.enabled]);
 
     const handleClick = () => {
         if (!props.disabled) {
-            const newState = !selected;
-            setSelected(newState);
-            props.onChange(newState);
+            setSelected(!isEnabled);
+            props.onChange(!isEnabled);
         }
     };
 
     return (
         <div 
-            className={`${styles.card} ${selected ? styles.selected : ""} ${props.disabled ? styles.disabled : ""}`} 
+            className={`${styles.card} ${isEnabled ? styles.card_enabled : ""} ${props.disabled ? styles.card_disabled : ""}`} 
             onClick={handleClick}
         >
-            <div className={styles.cardContent}>
-                <div className={styles.cardIcon}>
+            <div className={styles.card__content}>
+                <div className={styles.card__icon}>
                     <img src={props.iconSrc} alt="icon" />
                 </div>
-                <div className={styles.cardTittle}>
-                    <span className={styles.cardText}>{props.text}</span>
+                <div className={styles.card__tittle}>
+                    <span className={styles.card__tittle__text}>{props.text}</span>
                 </div>
             </div>     
         </div>

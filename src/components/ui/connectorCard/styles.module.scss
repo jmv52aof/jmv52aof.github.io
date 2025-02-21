@@ -5,30 +5,30 @@
     border-radius: 16px;
     border: 1px solid #C8CED8;
     cursor: pointer;
-    transition: border 0.2s ease-in-out;
+    transition: border 0.3s ease-in-out;
 
     &:hover {
         border: 1px solid #8E949F;
     }
 }
 
-.selected {
+.card_enabled {
     border: 1px solid #17C3B9 !important;
 }
 
-.disabled {
+.card_disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.cardContent {
+.card__content {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.cardIcon {
+.card__icon {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -40,14 +40,14 @@
     }
 }
 
-.cardTittle {
+.card__tittle {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     text-align: center;
 
-    .cardText {
+    .card__tittle__text {
         font-family: "Roboto";
         font-weight: 500;
         font-size: 10px;

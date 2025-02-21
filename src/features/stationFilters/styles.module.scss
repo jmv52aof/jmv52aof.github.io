@@ -5,14 +5,14 @@
     gap: 12px;
 }
 
-.minimalPowerBlock{
+.stationFilters__minimalPowerBlock{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
 
-.minimalPowerBlockText{
+.stationFilters__minimalPowerBlock__text{
     font-family: "Roboto";
     font-weight: 500;
     font-size: 14px;
@@ -21,21 +21,21 @@
     color: #373435;
 }
 
-.connectorsBlock{
+.stationFilters__connectorsBlock{
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.connectorsBlockTittle{
+.stationFilters__connectorsBlock__tittle{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
 
-.connectorsBlockText{
+.stationFilters__connectorsBlock__tittle__text{
     font-family: "Roboto";
     font-weight: 500;
     font-size: 14px;
@@ -44,27 +44,24 @@
     color: #373435;
 }
 
-.connectorsList{
+.stationFilters__connectorsBlock__list{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-.connectorsListWithTwoElements{
+.stationFilters__connectorsBlock__listWithTwoElements{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
 }
 
-.stationFiltersFooter{
+.stationFilters__footer{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.resetButton{
-
+    gap: 6px;
 }

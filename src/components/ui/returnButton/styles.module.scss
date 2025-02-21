@@ -1,4 +1,4 @@
-.button {
+.returnButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     }
 }
 
-.disabled {
+.returnButton_disabled {
     pointer-events: none;
     opacity: 0.5;
 }

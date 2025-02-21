@@ -1,0 +1,34 @@
+.applyButton {
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 12px;
+    border-radius: 8px;
+    border: none;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.applyButton_active {
+    background: #13A69D;
+    color: #FFFFFF;
+}
+
+.applyButton_disabled {
+    background: #F7F7F7;
+    color: #C8CED8;
+    cursor: default;
+}
+
+.applyButton__text_active {
+    color: #FFFFFF;
+}
+
+.applyButton__text_disabled {
+    color: #C8CED8;
+}

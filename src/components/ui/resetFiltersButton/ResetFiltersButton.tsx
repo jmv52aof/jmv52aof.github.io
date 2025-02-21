@@ -1,4 +1,3 @@
-//import { useState } from "react";
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -12,7 +11,7 @@ type Props = {
 export default function ResetFiltersButton(props: Props) {
     return (
         <button 
-            className={`${styles.resetButton} ${props.disabled ? styles.disabled : styles.active}`} 
+            className={`${styles.resetButton} ${props.disabled ? styles.resetButton_disabled : styles.resetButton_active}`} 
             onClick={props.onClick} 
             disabled={props.disabled}
         >
