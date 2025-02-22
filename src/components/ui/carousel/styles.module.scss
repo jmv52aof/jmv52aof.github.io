@@ -1,93 +1,85 @@
-.carouselContainer {
+.carousel {
     margin: 0px;
-    margin-left: 10px;
     position: relative;
     width: 100%;
     max-width: 304px;
     max-height: 304px;
     overflow: hidden;
     border-radius: 16px;
+    border: 1px solid rgba(232, 232, 238, 1);
 }
   
-.carouselItem {
+.carousel_item {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    width: 100%;
     overflow: hidden; 
 }
-
-.carouselTrack {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-}
   
-.carouselImage {
+.carousel_image {
     width: 100%;
     height: 100%;
-    object-fit: cover; // 
-    pointer-events: none; // 
-}
-  
-.carouselButtonLeft,
-.carouselButtonRight {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 32px;
-    width: 100%;
-    height: 32px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #F7F7F7;
-    padding: 8px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-  
-.carouselButtonLeft {
-    left: 10px;
-    svg {
-        transform: scaleX(-1);
-    }
-}
-  
-.carouselButtonRight {
-    right: 10px;
-}
-  
-.indicatorContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    gap: 5px;
+    object-fit: cover;
     pointer-events: none;
 }
-  
-.indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 0.5px solid rgba(200, 206, 216, 1);
-    background-color: white;
-    transition: all 0.3s ease;
-}
-  
-.active {
-    width: 14px;
-    height: 14px;
-    background-color: black;
-    border: 1px solid rgba(200, 206, 216, 1);
+
+:global(.react-multiple-carousel__arrow) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    background-color: #F7F7F7 !important;
+    border-radius: 50% !important;
+    border: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+    opacity: 1 !important;
 }
 
-.react-multi-carousel-dot button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 0.5px solid rgba(200, 206, 216, 1);
-    background-color: white;
-    transition: all 0.3s ease;
+:global(.react-multiple-carousel__arrow--left) {
+    left: 10px !important;
 }
+
+:global(.react-multiple-carousel__arrow--right) {
+    right: 10px !important;
+}
+
+:global(.react-multiple-carousel__arrow::before) {
+    color: black !important;
+    font-size: 16px !important;
+    background-color: #F7F7F7 !important;
+}
+
+:global(.react-multi-carousel-dot-list) {
+    margin-top: 100px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    pointer-events: none !important;
+}
+
+:global(.react-multi-carousel-dot button) {
+    pointer-events: none !important;
+    border: none !important;
+    cursor: default !important;
+
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    border: 0.5px solid rgba(200, 206, 216, 1) !important;
+    background-color: white !important;
+    transition: all 0.3s ease !important;
+}
+
+:global(.react-multi-carousel-dot--active button) {
+    width: 14px !important;
+    height: 14px !important;
+    background-color: black !important;
+    border: 1px solid rgba(200, 206, 216, 1) !important;
+}
+

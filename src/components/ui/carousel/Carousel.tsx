@@ -34,32 +34,30 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
     };
   
     return (
-        <div className={styles.carouselContainer}>
-            <Carousel 
-            responsive={responsive}
-            infinite={false}
-            autoPlay={false}
-            arrows={true}
-            showDots={true}
-            swipeable={true}
-            draggable={true}
-            containerClass={styles.carouselContainer}
-            itemClass={styles.carouselItem}
-            beforeChange={(nextSlide) => {
-                window.getSelection()?.removeAllRanges();
-            }}      
-            >
-                {props.imageSources.map((src, index) => (
-                <img 
-                key={index} 
-                src={src} 
-                alt={`Slide ${index}`} 
-                className={styles.carouselImage} 
-                draggable={false} // 
-                onDragStart={(e) => e.preventDefault()} // 
-                />
-                ))}
-            </Carousel>
-        </div>
+        <Carousel 
+        responsive={responsive}
+        infinite={false}
+        autoPlay={false}
+        arrows={true}
+        showDots={true}
+        swipeable={true}
+        draggable={true}
+        containerClass={styles.carousel}
+        itemClass={styles.carousel_item}
+        beforeChange={(nextSlide) => {
+            window.getSelection()?.removeAllRanges();
+        }}      
+        >
+            {props.imageSources.map((src, index) => (
+            <img 
+            key={index} 
+            src={src} 
+            alt={`Slide ${index}`} 
+            className={styles.carousel_image} 
+            draggable={false} // 
+            onDragStart={(e) => e.preventDefault()} // 
+            />
+            ))}
+        </Carousel>
     );
 }

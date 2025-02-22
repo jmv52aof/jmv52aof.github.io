@@ -7,6 +7,7 @@ import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
 import Status from '@components/ui/status/Status'
 import CustomCarousel from '@components/ui/carousel/Carousel'
+import StationPhotos from '@features/stationPhotos/StationPhotos'
 import tuningImage from '@assets/images/tuning.svg'
 
 import station1 from "../../assets/images/station/station1.png";
@@ -29,7 +30,9 @@ export default function MainPage(): React.JSX.Element {
 				<Status textSize='medium' color='red' text='Нет соединения'/>
 				<Status textSize='large' color='grey' text='Невалидна'/>
 				<CustomCarousel imageSources={images}/>
-				{/* <StationPhotos imageSources={images}/> */}
+				<StationPhotos imageSources={images} stationStatus='Доступна' rating={4.7}/>
+				<StationPhotos imageSources={images} stationStatus='Занята'/>
+				<StationPhotos imageSources={images} stationStatus='Не работает' rating={5}/>
 			</div>
 			<StationsMap />
 			<div className={styles.footer}>
