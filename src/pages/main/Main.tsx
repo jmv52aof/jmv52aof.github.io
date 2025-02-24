@@ -6,7 +6,6 @@ import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
 import Status from '@components/ui/status/Status'
 import tuningImage from '@assets/images/tuning.svg'
-
 /**
  * Главная страница с картой станций
  */
