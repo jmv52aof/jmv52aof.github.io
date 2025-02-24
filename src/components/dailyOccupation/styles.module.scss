@@ -3,10 +3,11 @@
     flex-direction: column;
     width: 100%;
     align-items: flex-start;
+    height: 100%;
 }
 
 .block__title {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     color: #373435;
     font-size: 16px;
@@ -15,16 +16,20 @@
 
 .block__chart {
     display: flex;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px 0px #02272B1A;
     width: 100%;
+    height: 95%;
 }
 
 .chart {
     background-color: #fff;
     width: 100%;
+    height: 100%;
 }
 
 .chart__text {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 16.8px;

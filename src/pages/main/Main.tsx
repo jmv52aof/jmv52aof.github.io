@@ -6,9 +6,6 @@ import Search from '@components/search/Search'
 import Button from '@components/ui/button/Button'
 import Status from '@components/ui/status/Status'
 import tuningImage from '@assets/images/tuning.svg'
-import {DailyOccupation} from '@components/dailyOccupation/DailyOccupation'
-import { Loader } from '@components/ui/loader/Loader'
-
 /**
  * Главная страница с картой станций
  */
