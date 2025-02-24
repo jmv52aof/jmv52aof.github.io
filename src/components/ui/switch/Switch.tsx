@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function Switch(props: Props) {
-    const [isEnabled, setIsEnabled] = useState(props.enabled ?? true);
+    const [isEnabled, setIsEnabled] = useState<boolean>(props.enabled ?? true);
 
     useEffect(() => {
         setIsEnabled(props.enabled ?? true);

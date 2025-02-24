@@ -18,7 +18,7 @@
 
 .card_disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .card__content {
@@ -28,31 +28,30 @@
     gap: 4px;
 }
 
-.card__icon {
+.content__icon {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 
     img {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 }
 
-.card__tittle {
+.content__title {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     text-align: center;
 
-    .card__tittle__text {
-        font-family: "Roboto";
+    .title__text {
+        font-family: 'Roboto', sans-serif;
         font-weight: 500;
         font-size: 10px;
         line-height: 12px;
-        letter-spacing: 0%;
         color: #373435;
     }
 }

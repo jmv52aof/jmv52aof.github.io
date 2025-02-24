@@ -6,8 +6,6 @@ type Props = {
     disabled?: boolean;
 };
 
-//Пока никуда не ведёт. Можно добавить useNavigate
-
 export default function ReturnButton(props: Props) {
     return (
         <button

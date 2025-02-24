@@ -5,20 +5,34 @@
     gap: 12px;
 }
 
+.stationFilters__onlyAvailableBlock{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .onlyAvailableBlock__text{
+        font-family: "Roboto";
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #373435;
+    }
+}
+
 .stationFilters__minimalPowerBlock{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
-}
 
-.stationFilters__minimalPowerBlock__text{
-    font-family: "Roboto";
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0%;
-    color: #373435;
+    .minimalPowerBlock__text{
+        font-family: "Roboto";
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color: #373435;
+    }
 }
 
 .stationFilters__connectorsBlock{
@@ -26,32 +40,31 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    .connectorsBlock__tittle{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+
+        .tittle__text{
+            font-family: "Roboto";
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: #373435;
+        }
+    }
 }
 
-.stationFilters__connectorsBlock__tittle{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-}
-
-.stationFilters__connectorsBlock__tittle__text{
-    font-family: "Roboto";
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0%;
-    color: #373435;
-}
-
-.stationFilters__connectorsBlock__list{
+.connectorsBlock__list{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-.stationFilters__connectorsBlock__listWithTwoElements{
+.connectorsBlock__listWithTwoElements{
     display: flex;
     flex-direction: row;
     align-items: center;

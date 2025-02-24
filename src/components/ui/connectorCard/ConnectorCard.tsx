@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+import { ConnectorStandard } from "@common/types/stations";
+import { CONNECTOR_TYPE_AND_IMAGE } from "@common/consts/stations";
 
 type Props = {
     onChange: (enabled: boolean) => void;
     enabled?: boolean;
-    iconSrc: string;
-    text: string;
+    connector: ConnectorStandard;
     disabled?: boolean;
 };
 
 export default function ConnectorCard(props: Props) {
-    const [isEnabled, setSelected] = useState(props.enabled ?? true);
+    const [isEnabled, setIsEnabled] = useState<boolean>(props.enabled ?? true);
 
     useEffect(() => {
-        setSelected(props.enabled ?? true);
+        setIsEnabled(props.enabled ?? true);
     }, [props.enabled]);
 
     const handleClick = () => {
         if (!props.disabled) {
-            setSelected(!isEnabled);
+            setIsEnabled(!isEnabled);
             props.onChange(!isEnabled);
         }
     };
@@ -29,11 +30,11 @@ export default function ConnectorCard(props: Props) {
             onClick={handleClick}
         >
             <div className={styles.card__content}>
-                <div className={styles.card__icon}>
-                    <img src={props.iconSrc} alt="icon" />
+                <div className={styles.content__icon}>
+                    <img src={CONNECTOR_TYPE_AND_IMAGE[props.connector]} alt={props.connector} />
                 </div>
-                <div className={styles.card__tittle}>
-                    <span className={styles.card__tittle__text}>{props.text}</span>
+                <div className={styles.content__title}>
+                    <span className={styles.title__text}>{props.connector}</span>
                 </div>
             </div>     
         </div>
