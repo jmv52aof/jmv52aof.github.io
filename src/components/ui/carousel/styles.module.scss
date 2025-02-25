@@ -8,7 +8,11 @@
     border-radius: 16px;
     border: 1px solid rgba(232, 232, 238, 1);
 }
-  
+
+:global(.react-multi-carousel-list) {
+    display: flex !important;
+    align-items: normal !important;
+}
 .carousel_item {
     display: flex;
     justify-content: center;
@@ -27,6 +31,7 @@
 
 :global(.react-multiple-carousel__arrow) {
     display: flex !important;
+    top: 45%;
     align-items: center !important;
     justify-content: center !important;
     width: 32px !important;
