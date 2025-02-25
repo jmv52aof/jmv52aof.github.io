@@ -11,23 +11,35 @@ import { ConnectorStandard } from '@common/types/stations'
 import { CONNECTORS } from '@common/consts/stations'
 
 export default function StationFilters(): React.JSX.Element {
-    const [selectedFilters, setSelectedFilters] = useState<string[]>([...CONNECTORS]);
+    const [selectedFilters, setSelectedFilters] = useState<ConnectorStandard[]>([...CONNECTORS]);
     const [isOnlyAvailableEnabled, setIsOnlyAvailableEnabled] = useState<boolean>(true);
     const [isModified, setIsModified] = useState<boolean>(false);
 
     const handleConnectorChange = (connector: ConnectorStandard, enabled: boolean) => {
         setSelectedFilters((prev) => {
-            const newFilters = enabled
+            const newFilters: ConnectorStandard[] = enabled
                 ? [...prev, connector]
                 : prev.filter((item) => item !== connector);
-            setIsModified(true);
+    
+            const isStateDefault = 
+                newFilters.length === CONNECTORS.length &&
+                newFilters.every((item) => (CONNECTORS as ConnectorStandard[]).includes(item)) &&
+                isOnlyAvailableEnabled;
+    
+            setIsModified(!isStateDefault);
             return newFilters;
         });
     };
-
+    
     const handleSwitchChange = (enabled: boolean) => {
         setIsOnlyAvailableEnabled(enabled);
-        setIsModified(true);
+    
+        const isStateDefault = 
+            selectedFilters.length === CONNECTORS.length &&
+            selectedFilters.every((item) => (CONNECTORS as ConnectorStandard[]).includes(item)) &&
+            enabled;
+    
+        setIsModified(!isStateDefault);
     };
 
     const resetFilters = () => {
