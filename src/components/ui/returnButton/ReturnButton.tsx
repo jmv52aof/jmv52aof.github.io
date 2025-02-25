@@ -1,10 +1,19 @@
 import styles from './styles.module.scss'
 
-type Props = {}
+type Props = {
+    onClick: () => void;
+    iconSrc: string;
+    disabled?: boolean;
+};
 
-/**
- * Кнопка возвращения на предыдущую страницу
- */
-export default function ReturnButton(props: Props): React.JSX.Element {
-	return <div></div>
+export default function ReturnButton(props: Props) {
+    return (
+        <button
+            className={`${styles.returnButton} ${props.disabled ? styles.returnButton_disabled : ""}`}
+            onClick={props.onClick}
+            disabled={props.disabled}
+        >
+            <img src={props.iconSrc} alt="returnButton" />
+        </button>
+    );
 }
