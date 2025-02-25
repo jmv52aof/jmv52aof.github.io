@@ -40,7 +40,7 @@ export default function StationFilters(): React.JSX.Element {
         <div className={styles.stationFilters}>
             <ContentBlockLayout>
                 <div className={styles.stationFilters__onlyAvailableBlock}>
-                    <span className={styles.stationFilters__onlyAvailableBlock__text}>Только доступные</span>
+                    <span className={styles.onlyAvailableBlock__text}>Только доступные</span>
                     <Switch onChange={handleSwitchChange} enabled={isOnlyAvailableEnabled} />
                 </div>
             </ContentBlockLayout>
