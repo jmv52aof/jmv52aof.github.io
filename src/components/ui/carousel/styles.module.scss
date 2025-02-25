@@ -2,8 +2,8 @@
     margin: 0px;
     position: relative;
     width: 100%;
-    max-width: 304px;
     max-height: 304px;
+    height: 100%;
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid rgba(232, 232, 238, 1);
@@ -74,6 +74,8 @@
     border: 0.5px solid rgba(200, 206, 216, 1) !important;
     background-color: white !important;
     transition: all 0.3s ease !important;
+
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.15) !important;
 }
 
 :global(.react-multi-carousel-dot--active button) {

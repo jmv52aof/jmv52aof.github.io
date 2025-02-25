@@ -29,7 +29,7 @@ export default function Status(props: Props): React.JSX.Element {
 
 	return (
 		<div
-			className={`${styles.status} ${props.className || ""} ${styles[color]}`}
+			className={`${styles.status} ${props.className ?? ""} ${styles[color]}`}
 		>
 			<p className={styles.text} style={textSize}> 
 				{props.text} 
