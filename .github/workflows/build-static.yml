@@ -1,0 +1,31 @@
+name: Сборка и деплой в Github Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v3
+
+      - name: Установка NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'  # Adjust Node.js version as needed
+
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Сборка статических файлов через Vite
+        run: npx vite build
+
+      - name: Сохранение файлов в ветку Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
