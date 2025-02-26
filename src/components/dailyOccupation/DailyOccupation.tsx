@@ -2,9 +2,10 @@ import { DailyOccupationDto } from '@common/types/stations'
 import styles from './styles.module.scss'
 import { JSX, useEffect, useRef, useState } from 'react'
 import { ChartState } from './lib/types'
-import { BAR_PLOT_WIDTH, BAR_RADIUS, GAP_BEETWEEN_LINES, HEIGHT, 
+import { BAR_PLOT_WIDTH, BAR_RADIUS, COUNT_DAYS_IN_WEEK, GAP_BEETWEEN_LINES, HEIGHT, 
+    HEIGHT_BAR_WITH_SMALL_BAR_RADIUS, 
     INACTIVE_COLUMN_COLOR, LINE_STROKE_COLOR, LINE_STROKE_DASHARRAY, LINE_STROKE_WIDTH,
-    MIN_HEIGHT_BAR, MIN_PERCENTAGE, PADDING_BOTTOM, PADDING_TOP, TEXT_ANCHOR, WEEK_DAY_NAMES_MAP 
+    MIN_HEIGHT_BAR, MIN_PERCENTAGE, PADDING_BOTTOM, PADDING_TOP, SMALL_BAR_RADIUS, TEXT_ANCHOR, WEEK_DAY_NAMES_MAP 
 } from './lib/consts'
 import { generateColorByPercentage } from './lib/functions'
 
@@ -12,17 +13,18 @@ interface Props {
     data: DailyOccupationDto[]
 }
 
-export default function DailyOccupation(props: Props): React.JSX.Element {
+export default function DailyOccupation(props: Props): React.JSX.Element {    
     const chartBlock = useRef<HTMLDivElement>(null)
     const [chartState, setChartState] = useState<ChartState>({} as ChartState)
     const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
     const marginX = BAR_PLOT_WIDTH
 
+
     useEffect(() => {
         if (chartBlock.current !== null) {
             const clientWidth = chartBlock.current.clientWidth
             const width = clientWidth - marginX * 2
-            const distanceBetweenBars = (width - (BAR_PLOT_WIDTH * props.data.length)) / (props.data.length - 1)
+            const distanceBetweenBars = (width - (BAR_PLOT_WIDTH * COUNT_DAYS_IN_WEEK)) / (COUNT_DAYS_IN_WEEK - 1)
             setChartState({
                 clientWidth: clientWidth,
                 width: width,
@@ -47,42 +49,54 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
         return result
     }
 
+    
+    const generateChartBars = () => {
+        const result: JSX.Element[] = []
+        let dataIdx = 0
+        for (let i = 1; i <= COUNT_DAYS_IN_WEEK; i++) {
+            let percentage = 0
+            if (dataIdx < props.data.length && props.data[dataIdx].weekday === i) {
+                percentage = props.data[dataIdx].occupancy_in_percentage
+                dataIdx++
+            }
+            const x = marginX + (i - 1) * (BAR_PLOT_WIDTH + chartState.distanceBetweenBars);  
+            let y = 0                   
+            let heightBar = 0
+            if (percentage < MIN_PERCENTAGE) {                            
+                heightBar = MIN_HEIGHT_BAR
+                y = HEIGHT + PADDING_TOP - heightBar
+            } else {
+                y = HEIGHT + PADDING_TOP - percentage * HEIGHT / 100;
+                heightBar = percentage * HEIGHT / 100;
+            }
+
+            result.push (<g key={i}>
+                            <rect
+                                x={x}
+                                y={y}
+                                rx={heightBar >= HEIGHT_BAR_WITH_SMALL_BAR_RADIUS 
+                                        ? BAR_RADIUS 
+                                        : SMALL_BAR_RADIUS}
+                                fill={percentage === 0 
+                                        ? INACTIVE_COLUMN_COLOR
+                                        : generateColorByPercentage(percentage)}
+                                width={BAR_PLOT_WIDTH}
+                                height={heightBar}
+                            />
+                            <text x={x + BAR_PLOT_WIDTH / 2} y={y + heightBar + PADDING_BOTTOM} 
+                                textAnchor={TEXT_ANCHOR} className={styles.chart__text}>
+                                {WEEK_DAY_NAMES_MAP[i]}
+                            </text>
+                        </g>);
+        }
+        return result
+    }
+
 	return (
         <div className={styles.block} ref={chartBlock}>
             <svg className={styles.block__chart}>
                 {generateDottedLines()}
-                {props.data.map((item, index) => {
-                    const x = marginX + index * (BAR_PLOT_WIDTH + chartState.distanceBetweenBars);  
-                    let y = 0                   
-                    let heightBar = 0
-                    const color = item.occupancy_in_percentage === 0 
-                        ? INACTIVE_COLUMN_COLOR
-                        : generateColorByPercentage(item.occupancy_in_percentage)
-                    if (item.occupancy_in_percentage < MIN_PERCENTAGE) {                            
-                        heightBar = MIN_HEIGHT_BAR
-                        y = HEIGHT + PADDING_TOP - heightBar
-                    } else {
-                        y = HEIGHT + PADDING_TOP - item.occupancy_in_percentage * HEIGHT / 100;
-                        heightBar = item.occupancy_in_percentage * HEIGHT / 100;
-                    }
-                
-                    return (
-                        <g key={index}>
-                        <rect
-                            x={x}
-                            y={y}
-                            rx={BAR_RADIUS}
-                            fill={color}
-                            width={BAR_PLOT_WIDTH}
-                            height={heightBar}
-                        />
-                        <text x={x + BAR_PLOT_WIDTH / 2} y={y + heightBar + PADDING_BOTTOM} 
-                            textAnchor={TEXT_ANCHOR} className={styles.chart__text}>
-                            {WEEK_DAY_NAMES_MAP[item.weekday]}
-                        </text>
-                        </g>
-                    );
-                })}
+                {generateChartBars()}               
             </svg>
         </div>)
 }

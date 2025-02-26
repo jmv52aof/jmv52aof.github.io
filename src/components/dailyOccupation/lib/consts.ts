@@ -30,6 +30,8 @@ export const GAP_BEETWEEN_LINES = HEIGHT / 4
 
 export const INACTIVE_COLUMN_COLOR = '#C8CED8'
 
+export const SMALL_BAR_RADIUS = 3
+
 export const BAR_RADIUS = 5
 
 export const LINE_STROKE_COLOR = '#E8E8EE'
@@ -43,3 +45,7 @@ export const MIN_HEIGHT_BAR = 5
 export const TEXT_ANCHOR = "middle"
 
 export const MIN_PERCENTAGE = 5
+
+export const COUNT_DAYS_IN_WEEK = 7
+
+export const HEIGHT_BAR_WITH_SMALL_BAR_RADIUS = 7
