@@ -27,6 +27,7 @@ jobs:
         continue-on-error: true
 
   build:
+    name: Сборка и деплой статических файлов
     runs-on: ubuntu-latest
 
     steps:
