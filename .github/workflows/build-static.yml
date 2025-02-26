@@ -6,6 +6,26 @@ on:
       - main
 
 jobs:
+  tests:
+    name: Тесты TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v3
+
+      - name: Установка NodeJS
+        uses: actions/setup-node@v3
+        with:
+          # Изменить версию NodeJS при необходимости
+          node-version: '22' # (NodeJS LTS)
+      
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Тесты tsc
+        run: npx tsc -b
+        continue-on-error: true
+
   build:
     runs-on: ubuntu-latest
 
