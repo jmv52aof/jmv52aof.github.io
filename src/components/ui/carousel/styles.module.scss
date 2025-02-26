@@ -6,13 +6,21 @@
     height: 100%;
     overflow: hidden;
     border-radius: 16px;
-    border: 1px solid rgba(232, 232, 238, 1);
+
 }
 
 :global(.react-multi-carousel-list) {
     display: flex !important;
+    position: relative !important;
     align-items: normal !important;
+    width: 100% !important;
 }
+
+:global(.react-multi-carousel-item) {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+}
+
 .carousel_item {
     display: flex;
     justify-content: center;
@@ -27,6 +35,7 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+    user-select: none;
 }
 
 :global(.react-multiple-carousel__arrow) {
@@ -59,8 +68,6 @@
 }
 
 :global(.react-multi-carousel-dot-list) {
-    margin-top: 100px !important;
-
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -72,12 +79,12 @@
     pointer-events: none !important;
     border: none !important;
     cursor: default !important;
-
+    margin-bottom: 10px !important;
     width: 10px !important;
     height: 10px !important;
     border-radius: 50% !important;
     border: 0.5px solid rgba(200, 206, 216, 1) !important;
-    background-color: white !important;
+    background-color: #FFF !important;
     transition: all 0.3s ease !important;
 
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.15) !important;

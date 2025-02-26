@@ -23,12 +23,9 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
     };
     
     const responsive = {
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 1
-        },
         mobile: {
-            breakpoint: { max: 464, min: 0 },
+            breakpoint: { max: 3000, min: 0 },
+            partialVisibilityGutter: 0,
             items: 1
         }
     };
