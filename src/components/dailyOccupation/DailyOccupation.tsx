@@ -58,7 +58,7 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
                     const color = item.occupancy_in_percentage === 0 
                         ? INACTIVE_COLUMN_COLOR
                         : generateColorByPercentage(item.occupancy_in_percentage)
-                    if (item.occupancy_in_percentage < MIN_PERCENTAGE) {                            
+                    if (item.occupancy_in_percentage <= MIN_PERCENTAGE) {                            
                         heightBar = MIN_HEIGHT_BAR
                         y = HEIGHT + PADDING_TOP - heightBar
                     } else {
