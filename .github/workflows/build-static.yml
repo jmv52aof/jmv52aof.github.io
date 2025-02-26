@@ -16,7 +16,8 @@ jobs:
       - name: Установка NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '22'  # Adjust Node.js version as needed
+          # Изменить версию NodeJS при необходимости
+          node-version: '22' # (NodeJS LTS)
 
       - name: Установка зависимостей
         run: npm install
