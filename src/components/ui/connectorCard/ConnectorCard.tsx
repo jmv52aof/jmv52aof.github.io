@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { ConnectorStandard } from "@common/types/stations";
-import { CONNECTOR_TYPE_AND_IMAGE } from "@common/consts/stations";
+import { CONNECTOR_HAS_ICON } from "@common/consts/stations";
 
 type Props = {
     onChange: (enabled: boolean) => void;
@@ -31,7 +31,7 @@ export default function ConnectorCard(props: Props) {
         >
             <div className={styles.card__content}>
                 <div className={styles.content__icon}>
-                    <img src={CONNECTOR_TYPE_AND_IMAGE[props.connector]} alt={props.connector} />
+                    <img src={CONNECTOR_HAS_ICON[props.connector]} alt={props.connector} />
                 </div>
                 <div className={styles.content__title}>
                     <span className={styles.title__text}>{props.connector}</span>

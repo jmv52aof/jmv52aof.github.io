@@ -1,4 +1,5 @@
-import { ConnectorStandard } from "@common/types/stations";
+import { ConnectorStandard } from "@common/types/stations"
+import { StationFilters } from "@features/stationFilters/lib/types"
 import type1Image from '@assets/images/connectors/type1.svg'
 import type2Image from '@assets/images/connectors/type2.svg'
 import ccs1Image from '@assets/images/connectors/ccs1.svg'
@@ -8,7 +9,7 @@ import gbtDcImage from '@assets/images/connectors/gbt-dc.svg'
 import chademoImage from '@assets/images/connectors/chademo.svg'
 import teslaImage from '@assets/images/connectors/tesla.svg'
 
-export const CONNECTOR_TYPE_AND_IMAGE: Record<ConnectorStandard, string> = {
+export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
 	"Type 1": type1Image,
     "Type 2": type2Image,
     "CCS1": ccs1Image,
@@ -20,3 +21,9 @@ export const CONNECTOR_TYPE_AND_IMAGE: Record<ConnectorStandard, string> = {
 };
 
 export const CONNECTORS: ConnectorStandard[] = ['Type 1', 'Type 2', 'CCS1', 'CCS2', 'GB/T (AC)', 'GB/T (DC)', 'CHAdeMO', 'Tesla'];
+
+export const DEFAULT_FILTERS: StationFilters = {
+    connectors: [...CONNECTORS],
+    onlyAvailableStations: true,
+    minimalPower: 0,
+};

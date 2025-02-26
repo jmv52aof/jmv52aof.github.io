@@ -3,8 +3,7 @@ import styles from "./styles.module.scss";
 type Props = {
     onClick: () => void;
     disabled: boolean;
-    activeIcon: string;
-    disabledIcon: string;
+    iconSrc: string
     text: string;
 };
 
@@ -15,7 +14,7 @@ export default function ResetFiltersButton(props: Props) {
             onClick={props.onClick} 
             disabled={props.disabled}
         >
-            <img src={props.disabled ? props.disabledIcon : props.activeIcon} alt="resetFiltersIcon" />
+            <img src={props.iconSrc} alt="resetFiltersIcon" className={styles.resetButton__icon} />
             <span>{props.text}</span>
         </button>
     );

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import arrowImage from '@assets/images/arrow-left.svg'
-import StationFilters from '@features/stationFilters/StationFilters'
+import StationFiltersFeature from '@features/stationFilters/StationFilters'
 
 /**
  * Страница с фильтрами
@@ -18,7 +18,7 @@ export default function FiltersPage(): React.JSX.Element {
                         <span className={styles.header__text}>Фильтры</span>
                     </div>
                 </div>
-                <StationFilters />
+                <StationFiltersFeature />
             </div>
         </div>
     );
