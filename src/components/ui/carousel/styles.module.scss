@@ -2,12 +2,16 @@
     margin: 0px;
     position: relative;
     width: 100%;
-    max-height: 304px;
     height: 100%;
     overflow: hidden;
     border-radius: 16px;
-
+    aspect-ratio: 1 / 1;
 }
+
+:global(.react-multi-carousel-track) {
+    user-select: none;
+}
+
 
 :global(.react-multi-carousel-list) {
     display: flex !important;
