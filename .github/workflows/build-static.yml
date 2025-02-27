@@ -1,0 +1,53 @@
+name: Сборка и деплой в Github Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Тесты TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v3
+
+      - name: Установка NodeJS
+        uses: actions/setup-node@v3
+        with:
+          # Изменить версию NodeJS при необходимости
+          node-version: '22' # (NodeJS LTS)
+      
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Тесты tsc
+        run: npx tsc -b
+        continue-on-error: true
+
+  build:
+    name: Сборка и деплой статических файлов
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v3
+
+      - name: Установка NodeJS
+        uses: actions/setup-node@v3
+        with:
+          # Изменить версию NodeJS при необходимости
+          node-version: '22' # (NodeJS LTS)
+
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Сборка статических файлов через Vite
+        run: npx vite build
+
+      - name: Сохранение файлов в ветку Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
