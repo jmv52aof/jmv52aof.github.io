@@ -1,4 +1,4 @@
-.borderBox {
+.photos {
     position: relative;
     border-radius: 16px;
     border: 1px solid rgba(232, 232, 238, 1);
@@ -10,11 +10,7 @@
     overflow: hidden !important;
 }
 
-.borderBox_stationPhotosBox {
-    position: relative;
-}
-
-.stationPhotosBox_infoBar {
+.photos__infoBar {
     position: absolute;
     width: 100%;
     height: 28px;
@@ -23,28 +19,21 @@
     z-index: 10;
 }
 
-.infoBar_substrate {
+.infoBar__substrate {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    background: none;
-	outline: none;
-	border: none;
 
-    overflow: hidden !important;
+    overflow: hidden;
     
-    margin: 0;
-    padding: 0;
-    width: fit-content;
     height: fit-content;
-    border-radius: 0;
     border-bottom-right-radius: 12px;
     background-color: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.infoBar__customStatus {
+.substrate__customStatus {
     position: relative;
     border-radius: 0 !important;
 }
@@ -67,7 +56,7 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.text {
+.customRating__text {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     font-weight: 500;

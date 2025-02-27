@@ -40,7 +40,7 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
         swipeable={true}
         draggable={true}
         containerClass={styles.carousel}
-        itemClass={styles.carousel_item}
+        itemClass={styles.carousel__item}
         beforeChange={(nextSlide) => {
             window.getSelection()?.removeAllRanges();
         }}      
@@ -50,7 +50,7 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
             key={index} 
             src={src} 
             alt={`Slide ${index}`} 
-            className={styles.carousel_image} 
+            className={styles.item__image} 
             draggable={false} // 
             onDragStart={(e) => e.preventDefault()} // 
             />

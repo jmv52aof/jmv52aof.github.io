@@ -19,21 +19,19 @@ export default function StationPhotos(props: Props): React.JSX.Element {
     const statusColor = STATION_STATUS_COLORS[props.stationStatus];
 
     return (
-        <div className={styles.borderBox}>
-            <div className={styles.borderBox_stationPhotosBox}>
-                <div className={styles.stationPhotosBox_infoBar}>
-                    <div className={styles.infoBar_substrate}>
-                        <Status textSize='large' text={props.stationStatus} className={styles.infoBar__customStatus} color={statusColor}/>
-                    </div>
-                    {props.rating && (
-                        <div className={styles.infoBar__customRating}>
-                            <img src={ratingImage} alt='Rating'/>
-                            <p className={` ${styles.text}`}>{props.rating}</p>
-                        </div>
-                    )}
+        <div className={styles.photos}>
+            <div className={styles.photos__infoBar}>
+                <div className={styles.infoBar__substrate}>
+                    <Status textSize='large' text={props.stationStatus} className={styles.substrate__customStatus} color={statusColor}/>
                 </div>
-                <CustomCarousel imageSources={props.imageSources}/>
+                {props.rating && (
+                    <div className={styles.infoBar__customRating}>
+                        <img src={ratingImage} alt='Rating'/>
+                        <p className={styles.customRating__text}> {props.rating}</p>
+                    </div>
+                )}
             </div>
+            <CustomCarousel imageSources={props.imageSources}/>
         </div>
     );
 }

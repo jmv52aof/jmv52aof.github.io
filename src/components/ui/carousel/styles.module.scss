@@ -25,7 +25,7 @@
     flex: 0 0 100% !important;
 }
 
-.carousel_item {
+.carousel__item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@
     overflow: hidden; 
 }
   
-.carousel_image {
+.item__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -100,4 +100,3 @@
     background-color: black !important;
     border: 1px solid rgba(200, 206, 216, 1) !important;
 }
-
