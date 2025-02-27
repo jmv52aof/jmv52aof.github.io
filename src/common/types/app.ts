@@ -1,5 +1,6 @@
 import { StationFilters } from "@features/stationFilters/lib/types"
 
 export type RootState = {
-    stationFilters: StationFilters
-}
+    stationFilters: StationFilters;
+    setStationFilters: React.Dispatch<React.SetStateAction<StationFilters>>;
+};
