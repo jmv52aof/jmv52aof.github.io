@@ -1,0 +1,32 @@
+$transition-duration: 0.3s;
+
+.resetButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: $transition-duration;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.resetButton__icon {
+    transition: filter $transition-duration;
+}
+
+.resetButton_active {
+    color: #373435;
+}
+
+.resetButton_disabled {
+    color: #C8CED8;
+    cursor: default;
+    
+    .resetButton__icon {
+        filter: brightness(0) saturate(100%) invert(81%) sepia(5%) saturate(381%) hue-rotate(179deg) brightness(103%) contrast(90%);
+    }
+}
