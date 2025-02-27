@@ -26,4 +26,5 @@ export const DEFAULT_FILTERS: StationFilters = {
     connectors: [...CONNECTORS],
     onlyAvailableStations: true,
     minimalPower: 0,
+    isModified: false,
 };

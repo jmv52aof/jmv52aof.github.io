@@ -2,7 +2,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+    flex-grow: 1;
 }
 
 .stationFilters__onlyAvailable{
@@ -10,29 +11,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
 
-    .onlyAvailable__text{
-        font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 16px;
-        color: #373435;
-    }
+.onlyAvailable__text{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #373435;
+    margin: 0;
 }
 
 .stationFilters__minimalPower{
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: left;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    flex-grow: 0;
+}
 
-    .minimalPower__text{
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
-        color: #373435;
-    }
+.minimalPower__text, .tittle__text{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #373435;
 }
 
 .stationFilters__connectors{
@@ -40,34 +44,27 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 0;
 
     .connectors__tittle{
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: left;
-
-        .tittle__text{
-            font-family: "Roboto", sans-serif;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 16px;
-            color: #373435;
-        }
     }
 }
 
-.connectors__list{
+.connectors__row, .connectors__lastRow{
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.connectors__row{
     justify-content: space-between;
 }
 
-.connectors__listWithTwoElements{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.connectors__lastRow{
     justify-content: space-around;
 }
 
@@ -77,4 +74,7 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
+    margin-top: 8px;
+    flex-grow: 1;
+    justify-content: end;
 }

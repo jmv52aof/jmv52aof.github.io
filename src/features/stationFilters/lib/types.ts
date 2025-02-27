@@ -4,4 +4,5 @@ export type StationFilters = {
     connectors: ConnectorStandard[];
     onlyAvailableStations: boolean;
     minimalPower: number;
+    isModified: boolean;
 };

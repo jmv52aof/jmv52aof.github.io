@@ -10,22 +10,21 @@ import { ConnectorStandard } from '@common/types/stations'
 import { CONNECTORS } from '@common/consts/stations'
 import { StationFilters } from './lib/types'
 import { DEFAULT_FILTERS } from '@common/consts/stations'
+import { isFiltersDefault } from './lib/functions'
+import { useContext } from 'react'
+import RootStateContext from '@common/context/RootStateContext'
 
 export default function StationFiltersFeature(): React.JSX.Element {
     const [filters, setFilters] = useState<StationFilters>({
         connectors: [...CONNECTORS],
         onlyAvailableStations: true,
         minimalPower: 0,
+        isModified: false,
     });
 
-    const [savedFilters, setSavedFilters] = useState<StationFilters>({ ...filters });
-    const [isModified, setIsModified] = useState<boolean>(false);
+    const { stationFilters } = useContext(RootStateContext);
 
-    const isFiltersDefault = () => 
-        filters.connectors.length === DEFAULT_FILTERS.connectors.length &&
-        filters.connectors.every((item) => DEFAULT_FILTERS.connectors.includes(item)) &&
-        filters.onlyAvailableStations === DEFAULT_FILTERS.onlyAvailableStations &&
-        filters.minimalPower === DEFAULT_FILTERS.minimalPower;
+    const [isModified, setIsModified] = useState<boolean>(false);
 
     const handleConnectorChange = (connector: ConnectorStandard, enabled: boolean) => {
         setFilters((prev) => ({
@@ -43,7 +42,6 @@ export default function StationFiltersFeature(): React.JSX.Element {
     };
 
     const applyFilters = () => {
-        setSavedFilters({ ...filters });
         setIsModified(false);
     };
 
@@ -56,22 +54,22 @@ export default function StationFiltersFeature(): React.JSX.Element {
         <div className={styles.stationFilters}>
             <ContentBlockLayout>
                 <div className={styles.stationFilters__onlyAvailable}>
-                    <span className={styles.onlyAvailable__text}>Только доступные</span>
+                    <p className={styles.onlyAvailable__text}>Только доступные</p>
                     <Switch onChange={handleSwitchChange} enabled={filters.onlyAvailableStations} />
                 </div>
             </ContentBlockLayout>
             <div className={styles.stationFilters__minimalPower}>
                 <span className={styles.minimalPower__text}>Минимальная мощность, кВт</span>
+                <ContentBlockLayout>
+                    <span style={{ height: '60px', display: 'block' }}>Здесь будет слайдер</span>
+                </ContentBlockLayout>
             </div>
-            <ContentBlockLayout>
-                <span style={{ height: '60px', display: 'block' }}>Здесь будет слайдер</span>
-            </ContentBlockLayout>
             <div className={styles.stationFilters__connectors}>
                 <div className={styles.connectors__tittle}>
                     <span className={styles.tittle__text}>Коннекторы</span>
                 </div>
                 <ContentBlockLayout>
-                    <div className={styles.connectors__list}>
+                    <div className={styles.connectors__row}>
                         <ConnectorCard
                             onChange={(enabled) => handleConnectorChange("Type 1", enabled)}
                             connector={"Type 1" as ConnectorStandard}
@@ -90,7 +88,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
                     </div>
                 </ContentBlockLayout>
                 <ContentBlockLayout>
-                    <div className={styles.connectors__list}>
+                    <div className={styles.connectors__row}>
                         <ConnectorCard
                             onChange={(enabled) => handleConnectorChange("CCS2", enabled)}
                             connector={"CCS2" as ConnectorStandard}
@@ -109,7 +107,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
                     </div>
                 </ContentBlockLayout>
                 <ContentBlockLayout>
-                    <div className={styles.connectors__listWithTwoElements}>
+                    <div className={styles.connectors__lastRow}>
                         <ConnectorCard
                             onChange={(enabled) => handleConnectorChange("CHAdeMO", enabled)}
                             connector={"CHAdeMO" as ConnectorStandard}
@@ -126,7 +124,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
             <div className={styles.stationFilters__footer}>
                 <ResetFiltersButton
                     onClick={resetFilters}
-                    disabled={isFiltersDefault()}
+                    disabled={isFiltersDefault(filters)}
                     iconSrc={refreshImageActive}
                     text="Сбросить фильтры"
                 />
