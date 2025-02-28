@@ -12,8 +12,17 @@
 }
 
 .chart__text {
+    fill: #373435;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 16.8px;
+}
+
+.chart__procentage {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    fill: #8E949F;
 }

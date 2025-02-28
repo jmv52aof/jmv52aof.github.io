@@ -2,33 +2,34 @@ import { DailyOccupationDto } from '@common/types/stations'
 import styles from './styles.module.scss'
 import { JSX, useEffect, useRef, useState } from 'react'
 import { ChartState } from './lib/types'
-import { BAR_PLOT_WIDTH, BAR_RADIUS, COUNT_DAYS_IN_WEEK, GAP_BEETWEEN_LINES, HEIGHT, 
-    HEIGHT_BAR_WITH_SMALL_BAR_RADIUS, 
-    INACTIVE_COLUMN_COLOR, LINE_STROKE_COLOR, LINE_STROKE_DASHARRAY, LINE_STROKE_WIDTH,
-    MIN_HEIGHT_BAR, MIN_PERCENTAGE, PADDING_BOTTOM, PADDING_TOP, SMALL_BAR_RADIUS, TEXT_ANCHOR, WEEK_DAY_NAMES_MAP 
-} from './lib/consts'
-import { generateColorByPercentage } from './lib/functions'
+import * as consts from './lib/consts'
+import { fillData, generateHexColorByPercentage } from './lib/functions'
+import { Colors, ColumnRadii } from './lib/consts'
+import { DAYS_IN_WEEK } from '@common/consts/date'
 
 interface Props {
     data: DailyOccupationDto[]
 }
 
 export default function DailyOccupation(props: Props): React.JSX.Element {    
-    const chartBlock = useRef<HTMLDivElement>(null)
+    const chartBlock = useRef<HTMLDivElement  | null>(null)
     const [chartState, setChartState] = useState<ChartState>({} as ChartState)
     const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
-    const marginX = BAR_PLOT_WIDTH
-
+    const marginRight = 6
+    //Расстояние от левого края до линии/колонки
+    const marginLeft = 25
+    const textAnchor = "middle"
+    const filledData = props.data.length < 7 ? fillData(props.data) : props.data
 
     useEffect(() => {
         if (chartBlock.current !== null) {
             const clientWidth = chartBlock.current.clientWidth
-            const width = clientWidth - marginX * 2
-            const distanceBetweenBars = (width - (BAR_PLOT_WIDTH * COUNT_DAYS_IN_WEEK)) / (COUNT_DAYS_IN_WEEK - 1)
+            const width = clientWidth - marginRight - marginLeft
+            const distanceBetweenColums = (width - (consts.COLUMN_WIDTH * DAYS_IN_WEEK)) / (DAYS_IN_WEEK - 1)
             setChartState({
                 clientWidth: clientWidth,
                 width: width,
-                distanceBetweenBars: distanceBetweenBars
+                distanceBetweenColums: distanceBetweenColums
             })
         }        
     }, [chartBlock, windowSize])
@@ -41,53 +42,22 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
 
     const generateDottedLines = () => {        
         const result: JSX.Element[] = []
-        for (let y = PADDING_TOP; y <= HEIGHT; y += GAP_BEETWEEN_LINES) {
+        for (let y = consts.PADDING_TOP, i = 4; y <= consts.HEIGHT + consts.PADDING_TOP, i >= 0; y += consts.GAP_BEETWEEN_LINES, i--) {
             result.push(
-                <line key={y} x1={marginX / 2} y1={y} x2={chartState.clientWidth - marginX / 2} y2={y} stroke={LINE_STROKE_COLOR} 
-                    strokeWidth={LINE_STROKE_WIDTH} strokeDasharray={LINE_STROKE_DASHARRAY} />)
-        }
-        return result
-    }
-
-    
-    const generateChartBars = () => {
-        const result: JSX.Element[] = []
-        let dataIdx = 0
-        for (let i = 1; i <= COUNT_DAYS_IN_WEEK; i++) {
-            let percentage = 0
-            if (dataIdx < props.data.length && props.data[dataIdx].weekday === i) {
-                percentage = props.data[dataIdx].occupancy_in_percentage
-                dataIdx++
+                <text key={i} x={marginLeft / 2} y={y + consts.PADDING_TOP / 2}
+                    textAnchor={textAnchor} className={styles.chart__procentage}>
+                    {25 * i}%
+                </text>
+            )
+            if (i !== 0) {
+                // marginLeft + i, для того чтоб был промежуток между линией и процентов
+                result.push(
+                    <line key={y} x1={marginLeft + i} y1={y} x2={chartState.clientWidth} y2={y}
+                        stroke={Colors.LINE_STROKE_COLOR} 
+                        strokeWidth={consts.LINE_STROKE_WIDTH} strokeDasharray={consts.LINE_STROKE_DASHARRAY} />
+                )
             }
-            const x = marginX + (i - 1) * (BAR_PLOT_WIDTH + chartState.distanceBetweenBars);  
-            let y = 0                   
-            let heightBar = 0
-            if (percentage < MIN_PERCENTAGE) {                            
-                heightBar = MIN_HEIGHT_BAR
-                y = HEIGHT + PADDING_TOP - heightBar
-            } else {
-                y = HEIGHT + PADDING_TOP - percentage * HEIGHT / 100;
-                heightBar = percentage * HEIGHT / 100;
-            }
-
-            result.push (<g key={i}>
-                            <rect
-                                x={x}
-                                y={y}
-                                rx={heightBar >= HEIGHT_BAR_WITH_SMALL_BAR_RADIUS 
-                                        ? BAR_RADIUS 
-                                        : SMALL_BAR_RADIUS}
-                                fill={percentage === 0 
-                                        ? INACTIVE_COLUMN_COLOR
-                                        : generateColorByPercentage(percentage)}
-                                width={BAR_PLOT_WIDTH}
-                                height={heightBar}
-                            />
-                            <text x={x + BAR_PLOT_WIDTH / 2} y={y + heightBar + PADDING_BOTTOM} 
-                                textAnchor={TEXT_ANCHOR} className={styles.chart__text}>
-                                {WEEK_DAY_NAMES_MAP[i]}
-                            </text>
-                        </g>);
+                
         }
         return result
     }
@@ -96,7 +66,38 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
         <div className={styles.block} ref={chartBlock}>
             <svg className={styles.block__chart}>
                 {generateDottedLines()}
-                {generateChartBars()}               
+                {filledData.map((item, index) => {
+                    const x = marginLeft + index * (consts.COLUMN_WIDTH + chartState.distanceBetweenColums);             
+                    let heightColumn = 0
+                    const color = item.occupancy_in_percentage === 0 
+                        ? Colors.INACTIVE_COLUMN_COLOR
+                        : generateHexColorByPercentage(item.occupancy_in_percentage)                 
+                    if (item.occupancy_in_percentage < consts.MIN_PERCENTAGE) {                            
+                        heightColumn = consts.MIN_HEIGHT_COLUMN
+                    } else {
+                        heightColumn = item.occupancy_in_percentage * consts.HEIGHT / 100;
+                    }
+                    const y = consts.HEIGHT + consts.PADDING_TOP - heightColumn;
+                    
+                    return (
+                        <g key={index}>
+                        <rect
+                            x={x}
+                            y={y}
+                            rx={heightColumn >= consts.MAX_COLUMN_HEIGHT_WITH_SMALL_RADIUS 
+                                ? ColumnRadii.NORMAL 
+                                : ColumnRadii.SMALL}
+                            fill={color}
+                            width={consts.COLUMN_WIDTH}
+                            height={heightColumn}
+                        />
+                        <text x={x + consts.COLUMN_WIDTH / 2} y={y + heightColumn + consts.BOTTOM_AND_COLUMN_DISTANCE} 
+                            textAnchor={textAnchor} className={styles.chart__text}>
+                            {consts.WEEKDAY_HAS_READABLE_DAY[item.weekday]}
+                        </text>
+                        </g>
+                    );
+                })}               
             </svg>
         </div>)
 }
