@@ -1,9 +1,9 @@
-import { StationFilters } from "@features/stationFilters/lib/types"
+import { StationFilters } from "./stations";
 
 export type RootState = {
     stationFilters: StationFilters;
 };
 
 export interface IRootStateContext extends RootState {
-    setStationFilters: React.Dispatch<React.SetStateAction<StationFilters>>;
+    setStationFilters: (filters: StationFilters) => void;
 };

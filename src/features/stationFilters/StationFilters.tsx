@@ -15,21 +15,28 @@ export default function StationFiltersFeature(): React.JSX.Element {
     const { stationFilters, setStationFilters } = useContext(RootStateContext);
 
     const handleConnectorChange = (connector: ConnectorStandard, enabled: boolean) => {
-        setStationFilters((filters) => ({
-            ...filters,
+        setStationFilters({
+            ...stationFilters,
             connectors: enabled
-                ? [...filters.connectors, connector]
-                : filters.connectors.filter((item) => item !== connector),
+                ? [...stationFilters.connectors, connector]
+                : stationFilters.connectors.filter((item) => item !== connector),
             isModified: true,
-        }));
+        });
     };
 
     const handleSwitchChange = (enabled: boolean) => {
-        setStationFilters((filters) => ({ ...filters, onlyAvailableStations: enabled, isModified: true }));
+        setStationFilters({
+            ...stationFilters,
+            onlyAvailableStations: enabled,
+            isModified: true
+        });
     };
 
     const applyFilters = () => {
-        setStationFilters((filters) => ({ ...filters, isModified: false }));
+        setStationFilters({
+            ...stationFilters,
+            isModified: false
+        });
     };
 
     const resetFilters = () => {

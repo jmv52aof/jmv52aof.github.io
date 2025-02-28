@@ -10,13 +10,7 @@ export default function App() {
     return (
         <RootStateContext.Provider value={{ 
             stationFilters: rootState.stationFilters, 
-            setStationFilters: (filters) => 
-                setRootState(rootState => ({
-                    ...rootState, 
-                    stationFilters: typeof filters === "function" 
-                        ? filters(rootState.stationFilters) 
-                        : filters
-                }))
+            setStationFilters: (filters) => setRootState(rootState => ({ ...rootState, stationFilters: filters }))
         }}>
             <AppRouter />
         </RootStateContext.Provider>

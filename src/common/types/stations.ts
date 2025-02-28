@@ -19,6 +19,13 @@ export type ConnectorStandard =
 	| 'CCS2'
 	| 'Tesla'
 
+export type StationFilters = {
+	connectors: ConnectorStandard[];
+	onlyAvailableStations: boolean;
+	minimalPower: number;
+	isModified: boolean;
+};
+
 export type ConnectorFormat = 'Розетка' | 'Кабель'
 
 export type ConnectorPowerType = 'AC' | 'AC-2' | 'AC-3' | 'DC'
