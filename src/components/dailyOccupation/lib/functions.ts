@@ -9,7 +9,11 @@ export const generateHexColorByPercentage = (percentage: number) : string => {
         - (percentage / 100) * (ColumnInterpolationColors.MIN_BLUE - ColumnInterpolationColors.MAX_BLUE))
     return `#00${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
 }
-
+/** 
+* Функция наполняет наполняет массив объектов DailyOccupationDto, недостающими днями недели
+* @param data - отсортированный массив объектов DailyOccupationDto[]
+* @returns - массив заполненный всеми днями недели
+*/
 export const fillData = (data: DailyOccupationDto[]): DailyOccupationDto[] => {
     const result: DailyOccupationDto[] = []
     let dataIdx = 0
@@ -18,10 +22,10 @@ export const fillData = (data: DailyOccupationDto[]): DailyOccupationDto[] => {
             weekday: i,
             occupancy_in_percentage: 0
         }
-        if (data[dataIdx].weekday === i) {
+        if (dataIdx < data.length && data[dataIdx].weekday === i) {
             item.occupancy_in_percentage = data[dataIdx].occupancy_in_percentage
             dataIdx++
-        }
+        }        
         result.push(item)
     }
     return result

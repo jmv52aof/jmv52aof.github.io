@@ -1,3 +1,5 @@
+const CHART_HEIGHT = 166
+
 export const WEEKDAY_HAS_READABLE_DAY: Record<number, string> = {
     1: 'ПН',
     2: 'ВТ',
@@ -8,11 +10,20 @@ export const WEEKDAY_HAS_READABLE_DAY: Record<number, string> = {
     7: 'ВС',
 }
 
+export namespace Distances {
+
+    export const TOP_AND_COLUMN_DISTANCE = 6
+
+    export const BOTTOM_AND_COLUMN_DISTANCE = 17
+
+    export const RIGHT_AND_COLUMN_DISTANCE = 6
+
+    export const LEFT_AND_COLUMN_DISTANCE = 25
+
+    export const BOTTOM_AND_TEXT_DISTANCE = 2
+}
+
 export const COLUMN_WIDTH = 20
-
-export const PADDING_TOP = 6
-
-export const BOTTOM_AND_COLUMN_DISTANCE = 17
 
 export namespace ColumnInterpolationColors {
 
@@ -25,9 +36,7 @@ export namespace ColumnInterpolationColors {
     export const MAX_GREEN = 112
 }
 
-const CHART_HEIGHT = 166
-
-export const HEIGHT = CHART_HEIGHT - BOTTOM_AND_COLUMN_DISTANCE - PADDING_TOP
+export const HEIGHT = CHART_HEIGHT - Distances.BOTTOM_AND_COLUMN_DISTANCE - Distances.TOP_AND_COLUMN_DISTANCE
 
 export const GAP_BEETWEEN_LINES = HEIGHT / 4
 
