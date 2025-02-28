@@ -1,5 +1,9 @@
-import { StationFilters } from "@features/stationFilters/lib/types"
+import { StationFilters } from "./stations";
 
 export type RootState = {
-    stationFilters: StationFilters
-}
+    stationFilters: StationFilters;
+};
+
+export interface IRootStateContext extends RootState {
+    setStationFilters: (filters: StationFilters) => void;
+};

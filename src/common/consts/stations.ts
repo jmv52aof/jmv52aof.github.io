@@ -1,5 +1,5 @@
 import { ConnectorStandard } from "@common/types/stations"
-import { StationFilters } from "@features/stationFilters/lib/types"
+import { StationFilters } from "@common/types/stations"
 import type1Image from '@assets/images/connectors/type1.svg'
 import type2Image from '@assets/images/connectors/type2.svg'
 import ccs1Image from '@assets/images/connectors/ccs1.svg'
