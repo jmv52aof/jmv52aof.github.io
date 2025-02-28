@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import { DEFAULT_ROOT_STATE } from "@common/consts/app";
-import { RootState } from "@common/types/app";
+import { IRootStateContext } from "@common/types/app";
 
-export const RootStateContext = createContext<RootState>({
-    stationFilters: DEFAULT_ROOT_STATE,
-    setStationFilters: () => {}
+export const RootStateContext = createContext<IRootStateContext>({
+    ...DEFAULT_ROOT_STATE,
+    setStationFilters: () => {},
 });

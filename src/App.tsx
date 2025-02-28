@@ -1,20 +1,23 @@
 import AppRouter from './router/AppRouter'
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from "@common/consts/app"
 import { RootStateContext } from 'contexts/RootStateContext'
-import { StationFilters } from '@features/stationFilters/lib/types'
 
 export default function App() {
-    const [stationFilters, setStationFilters] = useState<StationFilters>(DEFAULT_ROOT_STATE);
-
-    const contextValue = useMemo<RootState>(() => ({
-        stationFilters,
-        setStationFilters
-    }), [stationFilters]);
+    const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE);
 
     return (
-        <RootStateContext.Provider value={contextValue}>
+        <RootStateContext.Provider value={{ 
+            stationFilters: rootState.stationFilters, 
+            setStationFilters: (filters) => 
+                setRootState(rootState => ({
+                    ...rootState, 
+                    stationFilters: typeof filters === "function" 
+                        ? filters(rootState.stationFilters) 
+                        : filters
+                }))
+        }}>
             <AppRouter />
         </RootStateContext.Provider>
     );
