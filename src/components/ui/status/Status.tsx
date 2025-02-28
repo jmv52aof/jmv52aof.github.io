@@ -5,6 +5,7 @@ type Props = {
 	color: ColorTemplate
 	text: string
 	textSize: TextSize
+	className?: string
 }
 
 /**
@@ -28,7 +29,7 @@ export default function Status(props: Props): React.JSX.Element {
 
 	return (
 		<div
-			className={`${styles.status} ${styles[color]}`}
+			className={`${styles.status} ${props.className ?? ""} ${styles[color]}`}
 		>
 			<p className={styles.text} style={textSize}> 
 				{props.text} 
