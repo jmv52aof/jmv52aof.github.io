@@ -7,7 +7,7 @@ export default function AppRouter(): React.JSX.Element {
 	return (
 		<Routes>
 			<Route
-				path={endpoints.STATIONS_LIST_FILTERS_ENDPOINT}
+				path={endpoints.STATIONS_FILTERS_ENDPOINT}
 				element={<StationsFiltersPage />}
 			/>
 			<Route path='*' element={<MainPage />} />
