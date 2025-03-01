@@ -7,9 +7,12 @@ import NotFoundPage from '@pages/notFound/NotFound'
 export default function AppRouter(): React.JSX.Element {
 	return (
 		<Routes>
-			<Route path='/' element={<MainPage />} />
-			<Route path='*' element={<NotFoundPage />} />
-			<Route path={endpoints.STATIONS_LIST_FILTERS_ENDPOINT} element={<FilterPage />} />
+			<Route
+				path={endpoints.STATIONS_LIST_FILTERS_ENDPOINT}
+				element={<FilterPage />}
+			/>
+			<Route path='*' element={<MainPage />} />
+			{/* <Route path='*' element={<NotFoundPage />} /> */}
 		</Routes>
 	)
 }
