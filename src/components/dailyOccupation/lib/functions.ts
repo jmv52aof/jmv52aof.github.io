@@ -10,7 +10,7 @@ export const generateHexColorByPercentage = (percentage: number) : string => {
     return `#00${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
 }
 /** 
-* Функция наполняет наполняет массив объектов DailyOccupationDto, недостающими днями недели
+* Функция заполняет массив объектов DailyOccupationDto недостающими днями недели
 * @param data - отсортированный массив объектов DailyOccupationDto[]
 * @returns - массив заполненный всеми днями недели
 */

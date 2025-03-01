@@ -18,13 +18,8 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
     const textAnchor = "middle"    
     const filledData = useMemo(() => { 
         const sortedData = props.data.sort((a, b) => {
-            if (a.weekday > b.weekday) {
-                return 1;
-            }
-            if (a.weekday < b.weekday) {
-                return -1;
-            }
-            return 0;
+            if (a.weekday === b.weekday) return 0
+            return a.weekday > b.weekday ? 1 : -1
         })
         return props.data.length < 7 ? fillData(sortedData) : sortedData
     }, [props.data])
@@ -32,7 +27,7 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
     useEffect(() => {
         if (chartBlock.current !== null) {
             const clientWidth = chartBlock.current.clientWidth
-            const width = clientWidth - Distances.RIGHT_AND_COLUMN_DISTANCE - Distances.LEFT_AND_COLUMN_DISTANCE
+            const width = clientWidth - Distances.RIGHT_EDGE_DISTANCE - Distances.LEFT_EDGE_DISTANCE
             const distanceBetweenColums = (width - (consts.COLUMN_WIDTH * DAYS_IN_WEEK)) / (DAYS_IN_WEEK - 1)
             setChartState({
                 clientWidth: clientWidth,
@@ -50,9 +45,9 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
 
     const generateDottedLines = () => {        
         const result: JSX.Element[] = []
-        for (let y = Distances.TOP_AND_COLUMN_DISTANCE, i = 4; y <= consts.HEIGHT + Distances.TOP_AND_COLUMN_DISTANCE, i >= 0; y += consts.GAP_BEETWEEN_LINES, i--) {
+        for (let y = Distances.TOP_EDGE_DISTANCE, i = 4; y <= consts.HEIGHT + Distances.TOP_EDGE_DISTANCE, i >= 0; y += consts.GAP_BEETWEEN_LINES, i--) {
             result.push(
-                <text key={i} x={Distances.LEFT_AND_COLUMN_DISTANCE / 2} y={y + Distances.TOP_AND_COLUMN_DISTANCE / 2}
+                <text key={i} x={Distances.LEFT_EDGE_DISTANCE / 2} y={y + Distances.TOP_EDGE_DISTANCE / 2}
                     textAnchor={textAnchor} className={styles.chart__procentage}>
                     {25 * i}%
                 </text>
@@ -60,7 +55,7 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
             if (i !== 0) {
                 // marginLeft + i, для того чтоб был промежуток между линией и процентов
                 result.push(
-                    <line key={y} x1={Distances.LEFT_AND_COLUMN_DISTANCE + i} y1={y} x2={chartState.clientWidth} y2={y}
+                    <line key={y} x1={Distances.LEFT_EDGE_DISTANCE + i} y1={y} x2={chartState.clientWidth} y2={y}
                         stroke={Colors.LINE_STROKE_COLOR} 
                         strokeWidth={consts.LINE_STROKE_WIDTH} strokeDasharray={consts.LINE_STROKE_DASHARRAY} />
                 )
@@ -74,11 +69,11 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
             <svg className={styles.block__chart}>
                 {generateDottedLines()}
                 {filledData.map((item, index) => {
-                    const x = Distances.LEFT_AND_COLUMN_DISTANCE + index * (consts.COLUMN_WIDTH + chartState.distanceBetweenColums);             
+                    const x = Distances.LEFT_EDGE_DISTANCE + index * (consts.COLUMN_WIDTH + chartState.distanceBetweenColums);             
                     const heightColumn = item.occupancy_in_percentage < consts.MIN_PERCENTAGE 
                         ? consts.MIN_HEIGHT_COLUMN
                         : item.occupancy_in_percentage * consts.HEIGHT / 100                                                       
-                    const y = consts.HEIGHT + Distances.TOP_AND_COLUMN_DISTANCE - heightColumn;                    
+                    const y = consts.HEIGHT + Distances.TOP_EDGE_DISTANCE - heightColumn;                    
                     return (
                         <g key={index}>
                         <rect
@@ -95,7 +90,7 @@ export default function DailyOccupation(props: Props): React.JSX.Element {
                             height={heightColumn}
                         />
                         <text x={x + consts.COLUMN_WIDTH / 2} 
-                            y={y + heightColumn + Distances.BOTTOM_AND_COLUMN_DISTANCE - Distances.BOTTOM_AND_TEXT_DISTANCE} 
+                            y={y + heightColumn + Distances.BOTTOM_EDGE_DISTANCE - Distances.DISTANCE_BETWEEN_BOTTOM_AND_TEXT} 
                             textAnchor={textAnchor} className={styles.chart__text}>
                             {consts.WEEKDAY_HAS_READABLE_DAY[item.weekday]}
                         </text>

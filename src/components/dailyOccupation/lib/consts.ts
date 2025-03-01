@@ -12,15 +12,15 @@ export const WEEKDAY_HAS_READABLE_DAY: Record<number, string> = {
 
 export namespace Distances {
 
-    export const TOP_AND_COLUMN_DISTANCE = 6
+    export const TOP_EDGE_DISTANCE = 6
 
-    export const BOTTOM_AND_COLUMN_DISTANCE = 17
+    export const BOTTOM_EDGE_DISTANCE = 17
 
-    export const RIGHT_AND_COLUMN_DISTANCE = 6
+    export const RIGHT_EDGE_DISTANCE = 6
 
-    export const LEFT_AND_COLUMN_DISTANCE = 25
+    export const LEFT_EDGE_DISTANCE = 25
 
-    export const BOTTOM_AND_TEXT_DISTANCE = 2
+    export const DISTANCE_BETWEEN_BOTTOM_AND_TEXT = 2
 }
 
 export const COLUMN_WIDTH = 20
@@ -36,7 +36,7 @@ export namespace ColumnInterpolationColors {
     export const MAX_GREEN = 112
 }
 
-export const HEIGHT = CHART_HEIGHT - Distances.BOTTOM_AND_COLUMN_DISTANCE - Distances.TOP_AND_COLUMN_DISTANCE
+export const HEIGHT = CHART_HEIGHT - Distances.BOTTOM_EDGE_DISTANCE - Distances.TOP_EDGE_DISTANCE
 
 export const GAP_BEETWEEN_LINES = HEIGHT / 4
 
