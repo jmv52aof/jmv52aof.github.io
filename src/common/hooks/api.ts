@@ -1,25 +1,28 @@
+import { StationDto } from '@common/types/stations'
 import { getStationById, getStations } from 'api/stations/api'
+import { convertResponseStationDto } from 'api/stations/lib/converters'
 import {
 	GetStationByIdRequestOptions,
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
-import {
-	GetStationByIdResponse,
-	GetStationsResponse,
-} from 'api/stations/types/response'
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
-	const getStationsFromApi = (
+	const getStationsFromApi = async (
 		options: GetStationsRequestOptions
-	): Promise<GetStationsResponse> => {
-		return getStations({ ...options, token: undefined })
+	): Promise<StationDto[]> => {
+		const response = await getStations({ ...options, token: undefined })
+		if (response.data)
+			return response.data.map(value => convertResponseStationDto(value))
+		return []
 	}
 
-	const getStationByIdFromApi = (
+	const getStationByIdFromApi = async (
 		options: GetStationByIdRequestOptions
-	): Promise<GetStationByIdResponse> => {
-		return getStationById({ ...options, token: undefined })
+	): Promise<StationDto | undefined> => {
+		const response = await getStationById({ ...options, token: undefined })
+		if (response.data) return convertResponseStationDto(response.data)
+		return undefined
 	}
 
 	return {

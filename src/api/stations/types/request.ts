@@ -2,15 +2,15 @@ import {
 	AuthorizationRequestOptions,
 	PaginationRequestOptions,
 } from '@common/types/requests'
-import { ConnectorStandard, StationStatus } from './dto'
+import { ConnectorStandardResponse, StationStatusResponse } from './dto'
 
 export interface GetStationsRequestOptions
 	extends PaginationRequestOptions,
 		AuthorizationRequestOptions {
 	partOfName?: string
 	minElectricPower?: number
-	stationStatus?: StationStatus
-	standards?: ConnectorStandard[]
+	stationStatus?: StationStatusResponse
+	standards?: ConnectorStandardResponse[]
 	latitude?: string
 	longitude?: string
 }

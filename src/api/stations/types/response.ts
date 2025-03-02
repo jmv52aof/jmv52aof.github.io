@@ -1,12 +1,12 @@
 import { ResponseError } from '@common/types/requests'
-import { StationDto } from './dto'
+import { StationResponseDto } from './dto'
 
 export interface GetStationsResponse {
-	data?: StationDto[]
+	data?: StationResponseDto[]
 	error?: ResponseError
 }
 
 export interface GetStationByIdResponse {
-	data?: StationDto
+	data?: StationResponseDto
 	error?: ResponseError
 }
