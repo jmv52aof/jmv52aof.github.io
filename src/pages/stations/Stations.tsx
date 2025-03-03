@@ -4,7 +4,7 @@ import arrowImage from '@assets/images/arrow-left.svg'
 import StationFiltersFeature from '@features/stationFilters/StationFilters'
 import StationCard from '@components/stationCard/StationCard'
 import { ConnectorStandard } from '@common/types/stations'
-import { StationStatus } from '@common/types/stations'
+import { ConnectorStatus } from '@common/types/stations'
 import Button from '@components/ui/button/Button'
 import tuningImage from '@assets/images/tuning.svg'
 import Search from '@components/ui/search/Search'
@@ -48,11 +48,14 @@ export default function StationsPage(): React.JSX.Element {
                         onChange={(enabled) => (enabled)}
                         onClick={() => console.log("Station clicked")}
                         enabled={true}
-                        connector={"Type 1" as ConnectorStandard}
+                        connectors={[
+                            { type: "Type 1", status: "Доступен" as ConnectorStatus, power: 22 },
+                            { type: "GB/T (AC)", status: "Занят", power: 20 },
+                            { type: "CCS2", status: "Недоступен", power: 40 }
+                        ]}
                         name="Отель Кукарский двор"
-                        status={"Доступна" as StationStatus}
                         address="г. Киров, ул. Дзержинского, 110"
-                        rating={4.5}
+                        rating={4.7}
                         metres_to_station={2.94}
                         disabled={false}
                     />

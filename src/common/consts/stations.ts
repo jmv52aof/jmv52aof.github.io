@@ -1,5 +1,7 @@
 import { ConnectorStandard } from "@common/types/stations"
 import { StationFilters } from "@common/types/stations"
+import { ConnectorStatus } from "@common/types/stations"
+import { ColorTemplate } from "@components/stationCard/lib/types"
 import type1Image from '@assets/images/connectors/type1.svg'
 import type2Image from '@assets/images/connectors/type2.svg'
 import ccs1Image from '@assets/images/connectors/ccs1.svg'
@@ -18,6 +20,14 @@ export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
     "GB/T (DC)": gbtDcImage,
     "CHAdeMO": chademoImage,
     "Tesla": teslaImage
+};
+
+export const CONNECTOR_STATUS_COLORS: Record<ConnectorStatus, ColorTemplate> = {
+    'Доступен' :  'green',
+    'Занят' : 'orange',
+    'Отключен' : 'red',
+    'Нет соединения': 'red',
+    'Недоступен' : 'grey',
 };
 
 export const CONNECTORS: ConnectorStandard[] = ['Type 1', 'Type 2', 'CCS1', 'CCS2', 'GB/T (AC)', 'GB/T (DC)', 'CHAdeMO', 'Tesla'];
