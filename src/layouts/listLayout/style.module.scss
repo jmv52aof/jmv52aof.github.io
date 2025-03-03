@@ -3,3 +3,17 @@
     margin-left: 8px;
     margin-right: 8px;
 }
+
+
+.listLayout__loader {
+    animation: rotateLoader 1.5s linear infinite;
+  }
+  
+  @keyframes rotateLoader {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './style.module.scss';
+import loaderImage from '@assets/images/loader.svg'
 
 type Props = {
     items: React.JSX.Element[];
@@ -13,7 +14,7 @@ type Props = {
 export default function ListLayout({ items, loading, getData }: Props) {
     const [offset, setOffset] = useState(0);
     const [limit] = useState(5);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(loading);
     const [hasMoreData, setHasMoreData] = useState(true);
     const listContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,8 +54,12 @@ export default function ListLayout({ items, loading, getData }: Props) {
     return (
         <div>
             <div ref={listContainerRef} onScroll={handleScroll} className={styles.listLayout}>
-                {loading && items.length === 0 && <div>Loading...</div>}
-                {!loading && items.length === 0 && <div>No data available.</div>}
+                {isLoading && items.length === 0 && 
+                    <div>
+                        <img src={loaderImage}  className={styles.listLayout__loader} alt="loader"/>
+                    </div>
+                }
+                {!isLoading && items.length === 0 && <div>No data available.</div>}
                 {items.length > 0 && !loading && (
                     <div>
                         {items.map((item, index) =>  (
@@ -65,8 +70,12 @@ export default function ListLayout({ items, loading, getData }: Props) {
                     </div>
                 )}
             </div>
-            {isLoading && items.length > 0 && <div>Loading more...</div>}
-            {!isLoading && (
+            {isLoading && items.length > 0 && 
+                <div>
+                    <img src={loaderImage}  className={styles.listLayout__loader} alt="loader"/>
+                </div>
+            }
+            {!hasMoreData && (
                 <button onClick={scrollToTop}>
                     Scroll to Top
                 </button>
