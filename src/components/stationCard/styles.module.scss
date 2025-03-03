@@ -1,0 +1,180 @@
+.stationCard{
+    border-radius: 8px;
+    border-width: 1px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: #FFFFFF;
+    gap: 12px;
+}
+
+.stationCard__header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header__icon{
+    border-radius: 20px;
+
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0px 2px 4px 0px #02272B33;
+
+    background: #27AE60;
+    img {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.header__content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content__stationInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stationInfo__text1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin: 0;
+    color: #373435;
+}
+
+.stationInfo__text2{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    margin: 0;
+    color: #8E949F;
+}
+
+.content__path{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.path__icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.path__text{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    text-align: right;
+    color: #8E949F;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.stationCard__body{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.body__connectorsList {
+    width: 216px;
+    height: 100px;
+}
+
+.connectorsList__connector {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.connector__icon {
+    display: flex;
+
+    img {
+        width: 24px;
+        height: 26px;
+    }
+}
+
+.connector__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .info__text1 {
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        margin: 0;
+        color: #373435;
+    }
+    
+    .info__text2 {
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-size: 8px;
+        line-height: 9px;
+        margin: 0;
+        color: #8E949F;
+    }
+}
+
+
+
+
+
+.body__rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.rating__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+    }
+
+    .content__text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: #373435;    
+        line-height: 14px;
+        margin: 0;
+    }
+}
