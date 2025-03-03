@@ -44,8 +44,8 @@ export default function PieChart(props: Props): React.JSX.Element {
                         data: [
                             {id: props.maxValue, value: props.maxValue}
                         ],
-                        innerRadius: 40,
-                        outerRadius: 95,
+                        innerRadius: 50,
+                        outerRadius: 90,
                     }
             ]}/>
             <MaterialPieChart 
@@ -55,11 +55,11 @@ export default function PieChart(props: Props): React.JSX.Element {
                 series={[
                     {
                         data: [
-                            {id: 0, value: value},
+                            {id: props.value, value: value},
                         ],
 
-                        innerRadius: 40,
-                        outerRadius: 95,
+                        innerRadius: 50,
+                        outerRadius: 90,
                         startAngle: MIN_ANGLE,
                         endAngle: endAngle
                     }

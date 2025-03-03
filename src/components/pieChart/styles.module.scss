@@ -1,14 +1,12 @@
 .chart {
     position: relative;
-    height: 300px;
 }
 
 .chart div {
     position: absolute;
 
     svg g path {
-        stroke: none;
-        // transition: opacity 1s ease-in, fill 1s ease-in, filter 1s ease-in;    
+        stroke: none;  
     }
 }
 .chart__fonPie {
