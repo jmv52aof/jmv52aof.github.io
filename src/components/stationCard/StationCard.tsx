@@ -3,7 +3,9 @@ import styles from "./styles.module.scss"
 import Status from '@components/ui/status/Status'
 import { ConnectorStandard } from "@common/types/stations"
 import { CONNECTOR_HAS_ICON, CONNECTOR_STATUS_COLORS } from "@common/consts/stations"
+import { STATION_STATUS_COLORS } from "@common/consts/station"
 import { ConnectorStatus } from "@common/types/stations"
+import { StationStatus } from "@common/types/stations"
 import electricRefuelingImage from '@assets/images/electric-refueling.svg'
 import pathImage from '@assets/images/path.svg'
 import ratingImage from '@assets/images/ratingStar.svg'
@@ -14,13 +16,14 @@ type Props = {
     enabled?: boolean;
     connectors: { 
         type: ConnectorStandard; 
-        status: ConnectorStatus; 
+        connectorStatus: ConnectorStatus; 
         power: number;
     }[];
     name: string;
     address: string;
     rating?: number;
     metres_to_station?: number;
+    stationStatus: StationStatus;
     disabled?: boolean;
 };
 
@@ -42,7 +45,7 @@ export default function StationCard(props: Props) {
 
     return (
         <div 
-            className={`${styles.stationCard} ${isEnabled ? styles.card_enabled : ""} ${props.disabled ? styles.card_disabled : ""}`} 
+            className={`${styles.stationCard} ${props.disabled ? styles.stationCard_disabled : ""}`} 
             onClick={handleClick}
         >
             <div className={styles.stationCard__header}>
@@ -64,27 +67,33 @@ export default function StationCard(props: Props) {
             </div>
             <div className={styles.stationCard__body}>
                 <div className={styles.body__connectorsList}>
-                    <div className={styles.connectorsList__wrap}>
+                    <div className={styles.connectorsList}>
                         {connectorsToRender.map((connector, index) => (
                             <div key={index} className={styles.connectorsList__connector}>
                                 <div className={styles.connector__wrap}>
                                     <div className={styles.connector__icon}>
                                         <img src={CONNECTOR_HAS_ICON[connector.type]} alt={connector.type} />
                                     </div>
-                                    <div className={styles.connector__info}>
-                                        <p className={styles.info__text1}>{connector.type}</p>
-                                        <p className={styles.info__text2}>{connector.power} кВт</p>
+                                    <div className={styles.connector__content}>
+                                        <div className={styles.content__firstColumn}>
+                                            <p className={styles.firstColumn__text1}>{connector.type}</p>
+                                            <p className={styles.firstColumn__text2}>{connector.power} кВт</p>
+                                        </div>
+                                        <div className={styles.content__secondColumn}>
+                                            <div className={styles.secondColumn__veticalSplit}>
+                                                <div className={styles.rectangleV}></div>
+                                            </div>
+                                            <div className={styles.secondColumn__status}>
+                                                <Status textSize='small' text={connector.connectorStatus} color={CONNECTOR_STATUS_COLORS[connector.connectorStatus]}/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className={styles.connector__veticalBorder}>
-                                    <div className={styles.rectangle}></div>
-                                </div>
-                                <div className={styles.connector__status}>
-                                    <Status textSize='small' text={connector.status} color={CONNECTOR_STATUS_COLORS[connector.status]}/>
-                                </div>
-                                <div className={styles.connector__horizontalBorder}>
-                                    <div className={styles.rectangleH}></div>
-                                </div>  //не отображается
+                                {index !== connectorsToRender.length - 1 && (
+                                    <div className={styles.connector__horizontalSplit}>
+                                        <div className={styles.rectangleH}></div>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>

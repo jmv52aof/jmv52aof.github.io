@@ -9,6 +9,11 @@
     gap: 12px;
 }
 
+.stationCard_disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
 .stationCard__header{
     width: 100%;
     display: flex;
@@ -103,13 +108,11 @@
 }
 
 .body__connectorsList {
-    // width: 216px;
-    height: 100px;
     display: flex;
     flex-grow: 1;
 }
 
-.connectorsList__wrap {
+.connectorsList {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -118,15 +121,14 @@
 
 .connectorsList__connector {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .connector__wrap {
     display: flex;
+    flex-direction: row;
 }
-
-
 
 .connector__icon {
     display: flex;
@@ -138,62 +140,79 @@
     }
 }
 
-.connector__info {
+.connector__content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    width: 100%;
+    min-width: 180px;
+}
+
+.content__firstColumn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    .info__text1 {
+    flex-grow: 1;
+    
+    .firstColumn__text1 {
         font-family: "Roboto", sans-serif;
         font-weight: 500;
         font-size: 12px;
         line-height: 14px;
         margin: 0;
         color: #373435;
+        word-wrap: break-word;
     }
     
-    .info__text2 {
+    .firstColumn__text2 {
         font-family: "Roboto", sans-serif;
         font-weight: 400;
         font-size: 8px;
         line-height: 9px;
         margin: 0;
         color: #373435;
+        word-wrap: break-word;
     }
 }
 
-.connector__veticalBorder {
+.content__secondColumn {
     display: flex;
-
-    .rectangle {
-        width: 1px;
-        height: 22px;
-        border-radius: 3px;
-        background: #E8E8EE;
-    }
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.connector__horizontalBorder {
+.secondColumn__veticalSplit {
     display: flex;
-
-    .rectangleH {
-        width: 100%;
-        height: 1px;
-        border-radius: 3px;
-        background: #E8E8EE;
-    }
+    justify-content: center;
+    align-items: center;
+    width: 1px;
+    margin-right: 10px;
 }
 
-.connector__status {
+.rectangleV {
+    width: 1px;
+    height: 22px;
+    border-radius: 3px;
+    background: #E8E8EE;
+}
+
+.secondColumn__status {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: left;
+    flex-grow: 1;
 }
 
+.connector__horizontalSplit {
+    display: flex;
+}
 
-
-
+.rectangleH {
+    width: 95%;
+    height: 1px;
+    border-radius: 3px;
+    background: #E8E8EE;
+}
 
 .body__rating {
     display: flex;
