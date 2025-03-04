@@ -12,7 +12,7 @@ export default function AppRouter(): React.JSX.Element {
 				element={<StationsFiltersPage />}
 			/>
 			<Route
-				path={`${endpoints.SESSION_PROFILE_ENDPOINT}/:id`}
+				path={`${endpoints.SESSION_PROFILE_ENDPOINT}:id`}
 				element={<ChargingSessionPage />}
 			/>
 			<Route path='*' element={<MainPage />} />
