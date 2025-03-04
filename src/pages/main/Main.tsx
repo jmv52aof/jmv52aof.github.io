@@ -7,9 +7,6 @@ import Switch from '@components/ui/switch/Switch'
 import Status from '@components/ui/status/Status'
 import tuningImage from '@assets/images/tuning.svg'
 import ListLayout from '@layouts/listLayout/ListLayout'
-import station1 from "../../assets/images/station/station1.png";
-import station2 from "../../assets/images/station/station2.png";
-import station3 from "../../assets/images/station/station3.png";
 import { useState, useEffect } from 'react';
 
 /**
@@ -41,6 +38,36 @@ export default function MainPage(): React.JSX.Element {
 		<div key={18}>Item 18</div>,
 		<div key={19}>Item 19</div>,
 		<div key={20}>Item 20</div>,
+		<div key={21}>Item 21</div>,
+		<div key={22}>Item 22</div>,
+		<div key={23}>Item 23</div>,
+		<div key={24}>Item 24</div>,
+		<div key={25}>Item 25</div>,
+		<div key={26}>Item 26</div>,
+		<div key={27}>Item 27</div>,
+		<div key={28}>Item 28</div>,
+		<div key={29}>Item 29</div>,
+		<div key={30}>Item 30</div>,
+		<div key={31}>Item 31</div>,
+		<div key={32}>Item 32</div>,
+		<div key={33}>Item 33</div>,
+		<div key={34}>Item 34</div>,
+		<div key={35}>Item 35</div>,
+		<div key={36}>Item 36</div>,
+		<div key={37}>Item 37</div>,
+		<div key={38}>Item 38</div>,
+		<div key={39}>Item 39</div>,
+		<div key={40}>Item 40</div>,
+		<div key={41}>Item 41</div>,
+		<div key={42}>Item 42</div>,
+		<div key={43}>Item 43</div>,
+		<div key={44}>Item 44</div>,
+		<div key={45}>Item 45</div>,
+		<div key={46}>Item 46</div>,
+		<div key={47}>Item 47</div>,
+		<div key={48}>Item 48</div>,
+		<div key={49}>Item 49</div>,
+		<div key={50}>Item 50</div>,
 	  ];
 
 	  const getData = (offset: number, limit: number): Promise<Object[]> => {
@@ -59,7 +86,7 @@ export default function MainPage(): React.JSX.Element {
 	
 	
 	useEffect(() => {
-		getData(0, 5).then(initialData => {
+		getData(0, 15).then(initialData => {
 			setListLayoutItems(initialData);
 		});
 	}, []);
@@ -68,7 +95,7 @@ export default function MainPage(): React.JSX.Element {
 	useEffect(() => {
 		if (!loading && listLayoutItems.length > 0 && listLayoutItems.length < initialItems.length) {
 			const nextOffset = listLayoutItems.length;
-			getData(nextOffset, 5).then(newData => {
+			getData(nextOffset, 15).then(newData => {
 				if (newData && newData.length > 0) {
 					setListLayoutItems(prevItems => [...prevItems, ...newData]);
 				}

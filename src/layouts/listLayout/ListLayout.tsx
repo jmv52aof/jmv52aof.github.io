@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './style.module.scss';
 import loaderImage from '@assets/images/loader.svg'
+import { LIST_LAYOUT_LIMIT } from './lib/consts.ts';
 
 type Props = {
     items: React.JSX.Element[];
@@ -13,19 +14,26 @@ type Props = {
  */
 export default function ListLayout({ items, loading, getData }: Props) {
     const [offset, setOffset] = useState(0);
-    const [limit] = useState(5);
+    const [limit] = useState(LIST_LAYOUT_LIMIT);
     const [isLoading, setIsLoading] = useState(loading);
     const [hasMoreData, setHasMoreData] = useState(true);
     const listContainerRef = useRef<HTMLDivElement | null>(null);
 
     const fetchData = useCallback(async () => {
         setIsLoading(true);
-        const newData = await getData(offset, limit);
-        
-        if (newData.length < limit) {
-            setHasMoreData(false);
+        const currentOffset = offset;
+        const currentLimit = limit;
+        try {
+            const newData = await getData(currentOffset, currentLimit);
+    
+            if (newData.length < currentLimit) {
+                setHasMoreData(false);
+            } else {
+                setOffset(prevOffset => prevOffset + currentLimit);
+            }
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }, [offset, limit, getData]);
 
     useEffect(() => {
@@ -36,9 +44,9 @@ export default function ListLayout({ items, loading, getData }: Props) {
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const target = e.target as HTMLDivElement;
-        const bottom = target.scrollHeight === target.scrollTop + target.clientHeight;
+        const bottom = target.scrollHeight <= target.scrollTop + target.clientHeight;
         if (bottom && !isLoading && hasMoreData) {
-            setOffset((prevOffset) => prevOffset + limit);
+            fetchData();
         }
     };
 
