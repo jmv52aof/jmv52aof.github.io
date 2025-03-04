@@ -18,6 +18,14 @@ export type ConnectorStandard =
 	| 'CCS1'
 	| 'CCS2'
 	| 'Tesla'
+	| 'Другой'
+
+export type StationFilters = {
+	connectors: ConnectorStandard[]
+	onlyAvailableStations: boolean
+	minimalPower: number
+	isModified: boolean
+}
 
 export type ConnectorFormat = 'Розетка' | 'Кабель'
 
@@ -51,7 +59,7 @@ export interface ConnectorDto {
 	max_amperage: number
 	/** Максимальная мощность */
 	max_electric_power: number
-	tariffs?: ConnectorTariffDto[]
+	tariffs: ConnectorTariffDto[]
 }
 
 export interface StationDto {
@@ -68,7 +76,7 @@ export interface StationDto {
 	/** Рейтинг станции: оценка от 1 до 5 */
 	rating?: number
 	/** Загруженность станции по дням недели */
-	occupation?: DailyOccupationDto[]
+	occupation: DailyOccupationDto[]
 }
 
 export interface ConnectorInfoDto {

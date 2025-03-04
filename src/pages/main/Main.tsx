@@ -11,9 +11,8 @@ import { useState, useEffect } from 'react';
 
 /**
  * Главная страница с картой станций
-*/
+ */
 export default function MainPage(): React.JSX.Element {
-
 	const [loading, setLoading] = useState(true);
     const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>([]);
 
@@ -102,18 +101,11 @@ export default function MainPage(): React.JSX.Element {
 			});
 		}
 	}, [loading, listLayoutItems, initialItems.length]);
-
+      
 	return (
 		<div className={commonStyles.page}>
-			<div className={styles.header}>
-				<Button iconSrc={tuningImage} onClick={() => {}} variant='icon' />
-				<Switch onChange={enabled => {}} />
-				<Status textSize='small' color='green' text='Доступен' />
-				<Status textSize='medium' color='orange' text='Занят' />
-				<Status textSize='medium' color='red' text='Нет соединения' />
-				<Status textSize='large' color='grey' text='Невалидна' />
-			</div>
-			<ListLayout items={listLayoutItems} loading={loading} getData={getData} />
+			<div className={styles.header}></div>
+      <ListLayout items={listLayoutItems} loading={loading} getData={getData} />
 			<StationsMap />
 			<div className={styles.footer}>
 				<ControlPanel />
