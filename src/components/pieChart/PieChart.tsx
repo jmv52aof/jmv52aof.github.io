@@ -38,7 +38,7 @@ export default function PieChart(props: Props): React.JSX.Element {
         <div className={`${styles.chart} ${props.className}`}>
             <MaterialPieChart
                 className={styles.chart__fonPie}
-                colors={[COLOR_TEMPLATES_MAP[props.colorTemplate].fonColor]}
+                colors={[COLOR_TEMPLATES_MAP[props.colorTemplate].backgroundColor]}
                 series={[
                     {
                         data: [

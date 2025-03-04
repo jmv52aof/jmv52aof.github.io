@@ -1,7 +1,7 @@
 import { CircleColor, CircleColorTemplate } from "./types";
 
 export const COLOR_TEMPLATES_MAP: Record<CircleColorTemplate, CircleColor> = {
-    'blue': {fonColor: '#05A6BE33', mainColor: '#05A6BE'}
+    'blue': {backgroundColor: '#05A6BE33', mainColor: '#05A6BE'}
 }
 
 export const MIN_ANGLE = -90

@@ -1,5 +1,24 @@
+import { Timestamp } from "@common/types/date"
+
 const formatTimeNumber = (timeNumber: number) => {
     return timeNumber < 10 ? `0${timeNumber}` : `${timeNumber}`
+}
+
+const timeToDate = (timestamp: Timestamp) => {
+    const date = new Date()    
+    date.setHours(timestamp.hours, timestamp.minutes, timestamp.seconds)
+    return date
+}
+
+const dateToTimestamp = (date: Date): Timestamp => {
+    return {
+        year: date.getUTCFullYear(),
+        month: date.getUTCMonth() + 1,
+        day: date.getUTCDate(),
+        hours: date.getUTCHours(),
+        minutes: date.getUTCMinutes(),
+        seconds: date.getUTCSeconds()
+    }
 }
 
 export const timeToISOString = (hours: number, minutes: number, seconds: number) => {
@@ -8,4 +27,11 @@ export const timeToISOString = (hours: number, minutes: number, seconds: number)
 
 export const timeToString = (hours: number, minutes: number, seconds: number) => {
     return `${hours === 0 ? '' : `${hours}ч.`} ${minutes === 0 ? '' : `${minutes}м.`} ${seconds === 0 ? '' : `${seconds}сек.`}`
+}
+
+export const getTimesDifference = (reduced: Timestamp, subtracted: Timestamp) => {
+    if (reduced.hours < subtracted.hours) 
+        throw new Error('The hours of the reduced must be greater than the hours of the subtracted')
+    const difference = timeToDate(reduced).getTime() - timeToDate(subtracted).getTime()
+    return dateToTimestamp(new Date(difference))
 }

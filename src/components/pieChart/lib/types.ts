@@ -1,6 +1,6 @@
 export type CircleColorTemplate = 'blue'
 
 export interface CircleColor {
-    fonColor: string
+    backgroundColor: string
     mainColor: string
 }
