@@ -1,0 +1,34 @@
+.listLayout {
+    width: 100%;
+    overflow-y: auto;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+
+.listLayout__loader {
+    animation: rotateLoader 1.5s linear infinite;
+}
+  
+@keyframes rotateLoader {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
+    }
+}
+
+.button__scrollToTop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: #F7F7F7;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    opacity: 1;
+}
