@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react"
 import styles from "./styles.module.scss"
 import Status from '@components/ui/status/Status'
 import { ConnectorStandard } from "@common/types/stations"
 import { CONNECTOR_HAS_ICON, CONNECTOR_STATUS_COLORS } from "@common/consts/stations"
-import { STATION_STATUS_COLORS } from "@common/consts/station"
+import { STATION_STATUS_COLORS } from "@common/consts/stations"
 import { ConnectorStatus } from "@common/types/stations"
 import { StationStatus } from "@common/types/stations"
 import electricRefuelingImage from '@assets/images/electric-refueling.svg'
@@ -11,12 +10,10 @@ import pathImage from '@assets/images/path.svg'
 import ratingImage from '@assets/images/ratingStar.svg'
 
 type Props = {
-    onChange: (enabled: boolean) => void;
     onClick?: () => void;
-    enabled?: boolean;
-    connectors: { 
-        type: ConnectorStandard; 
-        connectorStatus: ConnectorStatus; 
+    connectors: {
+        type: ConnectorStandard;
+        connectorStatus: ConnectorStatus;
         power: number;
     }[];
     name: string;
@@ -28,28 +25,24 @@ type Props = {
 };
 
 export default function StationCard(props: Props) {
-    const [isEnabled, setIsEnabled] = useState(props.enabled);
-
-    useEffect(() => {
-        setIsEnabled(props.enabled);
-    }, [props.enabled]);
 
     const handleClick = () => {
-        if (!props.disabled) {
-            setIsEnabled(!isEnabled);
-            props.onChange(!isEnabled);
+        if (props.onClick) {
+            props.onClick();
         }
     };
 
     const connectorsToRender = props.connectors.length > 0 ? props.connectors : [props.connectors[0]];
 
     return (
-        <div 
-            className={`${styles.stationCard} ${props.disabled ? styles.stationCard_disabled : ""}`} 
+        <div
+            className={`${styles.stationCard} ${props.disabled ? styles.stationCard_disabled : ""}`}
             onClick={handleClick}
         >
             <div className={styles.stationCard__header}>
-                <div className={styles.header__icon}>
+                <div
+                    className={`${styles.header__icon} ${styles[`icon_${STATION_STATUS_COLORS[props.stationStatus]}`]}`}
+                >
                     <img src={electricRefuelingImage} alt="electric-refueling" />
                 </div>
                 <div className={styles.header__content}>
@@ -61,7 +54,7 @@ export default function StationCard(props: Props) {
                         <div className={styles.path__icon}>
                             <img src={pathImage} alt="path" />
                         </div>
-                        <p className={styles.path__text}>{props.metres_to_station} км</p>
+                        <p className={styles.path__text}>{props.metres_to_station?.toLocaleString("ru-RU")} км</p>
                     </div>
                 </div>
             </div>

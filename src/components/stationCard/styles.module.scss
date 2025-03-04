@@ -21,24 +21,33 @@
     align-items: center;
 }
 
-.header__icon{
-    border-radius: 20px;
-
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-
+.header__icon,
+.path__icon,
+.connector__icon {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header__icon{
+    border-radius: 20px;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
     border: 1px solid #FFFFFF;
     box-shadow: 0px 2px 4px 0px #02272B33;
+}
 
+.icon_green {
     background: #27AE60;
-    img {
-        width: 14px;
-        height: 14px;
-    }
+}
+
+.icon_orange {
+    background: #F89520;
+}
+
+.icon_grey {
+    background: #8E949F;
 }
 
 .header__content{
@@ -52,9 +61,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-width: 158px;
 }
 
-.stationInfo__text1{
+.stationInfo__text1,
+.content__firstColumn .firstColumn__text1,
+.rating__content .content__text {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 12px;
@@ -63,42 +75,46 @@
     color: #373435;
 }
 
-.stationInfo__text2{
+.stationInfo__text2,
+.path__text,
+.content__firstColumn .firstColumn__text2 {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 8px;
     line-height: 9px;
     margin: 0;
+}
+
+.stationInfo__text2,
+.path__text {
     color: #8E949F;
 }
+
+.content__firstColumn .firstColumn__text2 {
+    color: #373435;
+}
+
+.path__text {
+    text-align: right;
+    white-space: nowrap;
+}
+
 
 .content__path{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    flex-grow: 0.15;
 }
 
 .path__icon{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
     img {
         width: 24px;
         height: 24px;
     }
 }
 
-.path__text{
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-size: 8px;
-    line-height: 9px;
-    text-align: right;
-    color: #8E949F;
-    margin: 0;
-    white-space: nowrap;
-}
 
 .stationCard__body{
     width: 100%;
@@ -131,8 +147,6 @@
 }
 
 .connector__icon {
-    display: flex;
-
     img {
         width: 24px;
         height: 26px;
@@ -153,26 +167,6 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
-    
-    .firstColumn__text1 {
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 14px;
-        margin: 0;
-        color: #373435;
-        word-wrap: break-word;
-    }
-    
-    .firstColumn__text2 {
-        font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        font-size: 8px;
-        line-height: 9px;
-        margin: 0;
-        color: #373435;
-        word-wrap: break-word;
-    }
 }
 
 .content__secondColumn {
@@ -189,11 +183,20 @@
     margin-right: 10px;
 }
 
+.rectangleV,
+.rectangleH {
+    border-radius: 3px;
+    background: #E8E8EE;
+}
+
 .rectangleV {
     width: 1px;
     height: 22px;
-    border-radius: 3px;
-    background: #E8E8EE;
+}
+
+.rectangleH {
+    width: 95%;
+    height: 1px;
 }
 
 .secondColumn__status {
@@ -205,13 +208,6 @@
 
 .connector__horizontalSplit {
     display: flex;
-}
-
-.rectangleH {
-    width: 95%;
-    height: 1px;
-    border-radius: 3px;
-    background: #E8E8EE;
 }
 
 .body__rating {
@@ -226,19 +222,4 @@
     flex-direction: row;
     align-items: center;
     justify-content: end;
-
-    img {
-        width: 20px;
-        height: 20px;
-        margin-right: 4px;
-    }
-
-    .content__text {
-        font-family: 'Roboto', sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        color: #373435;
-        line-height: 14px;
-        margin: 0;
-    }
 }

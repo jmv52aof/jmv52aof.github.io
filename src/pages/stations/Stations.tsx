@@ -2,8 +2,6 @@ import styles from './styles.module.scss'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import arrowImage from '@assets/images/arrow-left.svg'
 import StationCard from '@components/stationCard/StationCard'
-import { ConnectorStatus } from '@common/types/stations'
-import { StationStatus } from '@common/types/stations'
 import Button from '@components/ui/button/Button'
 import tuningImage from '@assets/images/tuning.svg'
 import Search from '@components/ui/search/Search'
@@ -44,11 +42,9 @@ export default function StationsPage(): React.JSX.Element {
                     onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
                 >
                     <StationCard
-                        onChange={(enabled) => (enabled)}
                         onClick={() => console.log("Station clicked")}
-                        enabled={true}
                         connectors={[
-                            { type: "Type 1", connectorStatus: "Доступен" as ConnectorStatus, power: 22 },
+                            { type: "Type 1", connectorStatus: "Доступен", power: 22 },
                             { type: "GB/T (AC)", connectorStatus: "Занят", power: 20 },
                             { type: "CCS2", connectorStatus: "Недоступен", power: 40 }
                         ]}
@@ -73,9 +69,7 @@ export default function StationsPage(): React.JSX.Element {
                     onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
                 >
                 <StationCard
-                    onChange={(enabled) => (enabled)}
                     onClick={() => console.log("Station clicked")}
-                    enabled={true}
                     connectors={[
                         { type: "Type 1", connectorStatus: "Недоступен", power: 22 },
                         { type: "CCS2", connectorStatus: "Недоступен", power: 40 }
@@ -101,9 +95,7 @@ export default function StationsPage(): React.JSX.Element {
                     onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
                 >
                 <StationCard
-                    onChange={(enabled) => (enabled)}
                     onClick={() => console.log("Station clicked")}
-                    enabled={true}
                     connectors={[
                         { type: "Type 1", connectorStatus: "Занят", power: 22 },
                         { type: "CCS2", connectorStatus: "Занят", power: 40 }

@@ -1,7 +1,7 @@
 import { ConnectorStandard } from "@common/types/stations"
 import { StationFilters } from "@common/types/stations"
 import { ConnectorStatus } from "@common/types/stations"
-import { ColorTemplate } from "@components/stationCard/lib/types"
+import { ConnectorColorTemplate } from "@components/stationCard/lib/types"
 import type1Image from '@assets/images/connectors/type1.svg'
 import type2Image from '@assets/images/connectors/type2.svg'
 import ccs1Image from '@assets/images/connectors/ccs1.svg'
@@ -10,6 +10,8 @@ import gbtAcImage from '@assets/images/connectors/gbt-ac.svg'
 import gbtDcImage from '@assets/images/connectors/gbt-dc.svg'
 import chademoImage from '@assets/images/connectors/chademo.svg'
 import teslaImage from '@assets/images/connectors/tesla.svg'
+import { StationStatus } from '@common/types/stations'
+import { ColorTemplate } from '@components/ui/status/lib/types'
 
 export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
 	"Type 1": type1Image,
@@ -22,7 +24,7 @@ export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
     "Tesla": teslaImage
 };
 
-export const CONNECTOR_STATUS_COLORS: Record<ConnectorStatus, ColorTemplate> = {
+export const CONNECTOR_STATUS_COLORS: Record<ConnectorStatus, ConnectorColorTemplate> = {
     'Доступен' :  'green',
     'Занят' : 'orange',
     'Отключен' : 'red',
@@ -37,4 +39,10 @@ export const DEFAULT_FILTERS: StationFilters = {
     onlyAvailableStations: true,
     minimalPower: 0,
     isModified: false,
+};
+
+export const STATION_STATUS_COLORS: Record<StationStatus, ColorTemplate> = {
+    'Доступна' :  'green',
+    'Занята' : 'orange',
+    'Не работает' : 'grey',
 };
