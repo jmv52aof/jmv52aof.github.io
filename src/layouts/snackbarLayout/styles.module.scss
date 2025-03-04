@@ -1,0 +1,10 @@
+.snackbarLayout {
+    position: absolute;
+    z-index: 500;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 304px;
+    display: flex;
+    justify-content: center;
+  }
