@@ -1,16 +1,16 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useMemo} from 'react';
 import styles from './styles.module.scss';
 
 interface Props {
-  items: {[key: number | string]: any};
-  onChange: (value: any) => void;
+  items: {[key: number | string]: number | string};
+  onChange: (value: number | string) => void;
 }
 
 const Slider: React.FC<Props> = ({items, onChange}) => {
 	const [pointOffset, setPointOffset] = useState(0);
 	const [isDragging, setIsDragging] = useState(false);
 	const sliderRef = useRef<HTMLDivElement>(null);
-	const keys = Object.keys(items);
+	const keys = useMemo(() => Object.keys(items), [items]);
 	
 	let selectedIndex = 0;
   
@@ -71,7 +71,7 @@ const Slider: React.FC<Props> = ({items, onChange}) => {
 	}, [isDragging]);
   
 	return (
-		<div style={{width: '100%', padding: '20px 0'}}>
+		<div className={styles.sliderContainer}>
 			<div
 				ref={sliderRef}
 				className={styles.slider}

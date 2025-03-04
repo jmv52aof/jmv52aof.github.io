@@ -1,3 +1,9 @@
+.sliderContainer
+{
+    width: '100%';
+    padding: '20px 0';
+}
+
 .slider
 {
     position: relative;
@@ -30,7 +36,8 @@
 
 .legendContainer__text
 {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
+    color: #373435;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px; 
