@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './style.module.scss';
-import { Loader } from '@components/ui/loader/Loader.tsx'; 
+import { Loader } from '@components/ui/loader/Loader.tsx';
+import arrow from '@assets/images/arrow-up.svg'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts';
 
 type Props = {
@@ -25,7 +26,7 @@ export default function ListLayout({ items, loading, getData }: Props) {
         const currentLimit = limit;
         try {
             const newData = await getData(currentOffset, currentLimit);
-            
+    
             if (newData.length < currentLimit) {
                 setHasMoreData(false);
             } else {
@@ -79,11 +80,10 @@ export default function ListLayout({ items, loading, getData }: Props) {
             {isLoading && items.length > 0 && 
                 <Loader/>
             }
-            {!hasMoreData && (
-                <button onClick={scrollToTop}>
-                    Scroll to Top
-                </button>
-            )}
+           
+            <button onClick={scrollToTop} className={styles.button__scrollToTop}>
+                <img src={arrow} alt="arrow" />
+            </button>
         </div>
     );
 };

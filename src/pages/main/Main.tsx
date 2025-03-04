@@ -105,7 +105,7 @@ export default function MainPage(): React.JSX.Element {
 	return (
 		<div className={commonStyles.page}>
 			<div className={styles.header}></div>
-      <ListLayout items={listLayoutItems} loading={loading} getData={getData} />
+      		<ListLayout items={listLayoutItems} loading={loading} getData={getData} />
 			<StationsMap />
 			<div className={styles.footer}>
 				<ControlPanel />
