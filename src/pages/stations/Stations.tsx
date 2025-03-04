@@ -2,18 +2,22 @@ import styles from './styles.module.scss'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import arrowImage from '@assets/images/arrow-left.svg'
 import StationCard from '@components/stationCard/StationCard'
-import Button from '@components/ui/button/Button'
 import tuningImage from '@assets/images/tuning.svg'
 import Search from '@components/ui/search/Search'
 import { STATIONS_LIST_FILTERS_ENDPOINT } from '@common/consts/endpoints'
+import { useNavigate } from 'react-router'
+import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
+import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 
 /**
  * Страница со списком станций
  */
 export default function StationsPage(): React.JSX.Element {
 
+    const nav = useNavigate();
+
     const handleClick = () => {
-        window.location.href = `#${STATIONS_LIST_FILTERS_ENDPOINT}`;
+        nav(`#${STATIONS_LIST_FILTERS_ENDPOINT}`);
     };
 
     return (
@@ -24,90 +28,49 @@ export default function StationsPage(): React.JSX.Element {
                     <div className={styles.content__tittle}>
                         <span className={styles.content__text}>Список станций</span>
                     </div>
-                    <Button iconSrc={tuningImage} onClick={handleClick} variant='icon' />
+                    <FiltersButton iconSrc={tuningImage} onClick={handleClick} variant='fill' />
                 </div>
                 <Search variant='outlined' placeholder='Название станции'/>
             </div>
             <div className={styles.stationsPage__stationList}>
-                <div
-                    style={{
-                        boxShadow: "0px 4px 10px 0px #02272B1A",
-                        transition: "border 0.3s ease-in-out",
-                        border: "1px solid transparent",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        background: "#FFFFFF",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid #8E949F")}
-                    onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
-                >
+                <ContentBlockLayout className={styles.ContentBlocHover}>
                     <StationCard
                         onClick={() => console.log("Station clicked")}
-                        connectors={[
-                            { type: "Type 1", connectorStatus: "Доступен", power: 22 },
-                            { type: "GB/T (AC)", connectorStatus: "Занят", power: 20 },
-                            { type: "CCS2", connectorStatus: "Недоступен", power: 40 }
-                        ]}
-                        name="Отель Кукарский двор"
-                        address="г. Киров, ул. Дзержинского, 110"
-                        rating={4.7}
-                        metres_to_station={2.94}
-                        stationStatus="Доступна"
-                        disabled={false}
+                        station={{
+                            id: "1",
+                            name: "Отель Кукарский двор",
+                            address: "г. Киров, ул. Дзержинского, 110",
+                            status: "Доступна",
+                            coordinates: { latitude: "0", longitude: "0" },
+                            connectors: [
+                                { evse_uid: "1", id: "1", standard: "Type 1", status: "Доступен", format: "Кабель", power_type: "AC", max_voltage: 230, max_amperage: 32, max_electric_power: 22 },
+                                { evse_uid: "2", id: "2", standard: "GB/T (AC)", status: "Занят", format: "Кабель", power_type: "AC", max_voltage: 230, max_amperage: 32, max_electric_power: 20 },
+                                { evse_uid: "3", id: "3", standard: "CCS2", status: "Недоступен", format: "Кабель", power_type: "DC", max_voltage: 400, max_amperage: 125, max_electric_power: 40 }
+                            ],
+                            rating: 4.7,
+                            metres_to_station: 2.94
+                        }}
                     />
-                </div>
-                <div
-                    style={{
-                        boxShadow: "0px 4px 10px 0px #02272B1A",
-                        transition: "border 0.3s ease-in-out",
-                        border: "1px solid transparent",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        background: "#FFFFFF",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid #8E949F")}
-                    onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
-                >
-                <StationCard
-                    onClick={() => console.log("Station clicked")}
-                    connectors={[
-                        { type: "Type 1", connectorStatus: "Недоступен", power: 22 },
-                        { type: "CCS2", connectorStatus: "Недоступен", power: 40 }
-                    ]}
-                    name="Отель 2020"
-                    address="г. Киров, ул. Дзержинского, 110"
-                    rating={3.6}
-                    metres_to_station={3.45}
-                    stationStatus="Не работает"
-                    disabled={false}
-                />
-                </div>
-                <div
-                    style={{
-                        boxShadow: "0px 4px 10px 0px #02272B1A",
-                        transition: "border 0.3s ease-in-out",
-                        border: "1px solid transparent",
-                        borderRadius: "8px",
-                        cursor: "pointer",
-                        background: "#FFFFFF",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.border = "1px solid #8E949F")}
-                    onMouseLeave={(e) => (e.currentTarget.style.border = "1px solid transparent")}
-                >
-                <StationCard
-                    onClick={() => console.log("Station clicked")}
-                    connectors={[
-                        { type: "Type 1", connectorStatus: "Занят", power: 22 },
-                        { type: "CCS2", connectorStatus: "Занят", power: 40 }
-                    ]}
-                    name="Отель Вега Измайлово №2"
-                    address="г. Москва, Измайловское шоссе, дом 71, корпус 3В"
-                    rating={4.2}
-                    metres_to_station={14.43}
-                    stationStatus="Занята"
-                    disabled={false}
-                />
-                </div>
+                </ContentBlockLayout>
+                <ContentBlockLayout className={styles.ContentBlocHover}>
+                    <StationCard
+                        onClick={() => console.log("Station clicked")}
+                        station={{
+                            id: "2",
+                            name: "Отель 2020",
+                            address: "г. Киров, ул. Дзержинского, 110",
+                            status: "Не работает",
+                            coordinates: { latitude: "0", longitude: "0" },
+                            connectors: [
+                                { evse_uid: "1", id: "1", standard: "Type 1", status: "Недоступен", format: "Кабель", power_type: "AC", max_voltage: 230, max_amperage: 32, max_electric_power: 22 },
+                                { evse_uid: "2", id: "2", standard: "GB/T (AC)", status: "Занят", format: "Кабель", power_type: "AC", max_voltage: 230, max_amperage: 32, max_electric_power: 20 },
+                                { evse_uid: "3", id: "3", standard: "CCS2", status: "Недоступен", format: "Кабель", power_type: "DC", max_voltage: 400, max_amperage: 125, max_electric_power: 40 }
+                            ],
+                            rating: 3.6,
+                            metres_to_station: 3.45
+                        }}
+                    />
+                </ContentBlockLayout>
             </div>
         </div>
     );
