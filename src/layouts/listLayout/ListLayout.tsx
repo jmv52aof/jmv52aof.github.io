@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './style.module.scss';
-import loaderImage from '@assets/images/loader.svg'
+import { Loader } from '@components/ui/loader/Loader.tsx'; 
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts';
 
 type Props = {
@@ -25,7 +25,7 @@ export default function ListLayout({ items, loading, getData }: Props) {
         const currentLimit = limit;
         try {
             const newData = await getData(currentOffset, currentLimit);
-    
+            
             if (newData.length < currentLimit) {
                 setHasMoreData(false);
             } else {
@@ -63,9 +63,7 @@ export default function ListLayout({ items, loading, getData }: Props) {
         <div>
             <div ref={listContainerRef} onScroll={handleScroll} className={styles.listLayout}>
                 {isLoading && items.length === 0 && 
-                    <div>
-                        <img src={loaderImage}  className={styles.listLayout__loader} alt="loader"/>
-                    </div>
+                    <Loader/>
                 }
                 {!isLoading && items.length === 0 && <div>No data available.</div>}
                 {items.length > 0 && !loading && (
@@ -79,9 +77,7 @@ export default function ListLayout({ items, loading, getData }: Props) {
                 )}
             </div>
             {isLoading && items.length > 0 && 
-                <div>
-                    <img src={loaderImage}  className={styles.listLayout__loader} alt="loader"/>
-                </div>
+                <Loader/>
             }
             {!hasMoreData && (
                 <button onClick={scrollToTop}>
