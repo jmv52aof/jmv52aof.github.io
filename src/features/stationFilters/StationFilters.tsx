@@ -81,7 +81,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
 							'75': 75,
 							'>100': 100,
 						}}
-						current={stationFilters.minimalPower}
+						current={stationFilters.minimalPower / 1000}
 					/>
 				</ContentBlockLayout>
 			</div>

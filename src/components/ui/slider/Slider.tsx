@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Slider: React.FC<Props> = ({ items, onChange, current }) => {
-	const [initialized, setInitialized] = useState<boolean>(false)
 	const [pointOffset, setPointOffset] = useState<number>(0)
 	const [isDragging, setIsDragging] = useState<boolean>(false)
 
@@ -18,11 +17,10 @@ const Slider: React.FC<Props> = ({ items, onChange, current }) => {
 	let selectedIndex: number = 0
 
 	useEffect(() => {
-		if (!initialized && undefined !== current) {
+		if (undefined !== current) {
 			const indexByItems = keys.findIndex(key => items[key] === current)
 			const newIndex = -1 === indexByItems ? 0 : indexByItems
 			setPointOffset((newIndex / (keys.length - 1)) * 100)
-			setInitialized(true)
 		}
 	}, [current])
 
