@@ -8,15 +8,26 @@ import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
+import { useContext, useEffect } from 'react'
+import { RootStateContext } from 'contexts/RootStateContext'
+import { useApi } from '@common/hooks/api'
 
 /**
  * Страница со списком станций
  */
 export default function StationsPage(): React.JSX.Element {
 	const nav = useNavigate()
+	const { getStationsFromApi } = useApi()
+	const { stations, setStations } = useContext(RootStateContext)
 
-	const handleClick = () => {
-		nav(`#${STATIONS_FILTERS_ENDPOINT}`)
+	useEffect(() => {
+		getStationsFromApi().then(res => {
+			setStations(res)
+		})
+	}, [])
+
+	const onFiltersClick = () => {
+		nav(STATIONS_FILTERS_ENDPOINT)
 	}
 
 	return (
@@ -29,111 +40,23 @@ export default function StationsPage(): React.JSX.Element {
 					</div>
 					<FiltersButton
 						iconSrc={tuningImage}
-						onClick={handleClick}
+						onClick={onFiltersClick}
 						variant='fill'
 					/>
 				</div>
 				<Search variant='outlined' placeholder='Название станции' />
 			</div>
 			<div className={styles.stationsPage__stationList}>
-				<ContentBlockLayout className={styles.ContentBlocHover}>
-					<StationCard
-						onClick={() => console.log('Station clicked')}
-						station={{
-							id: '1',
-							name: 'Отель Кукарский двор',
-							address: 'г. Киров, ул. Дзержинского, 110',
-							status: 'Доступна',
-							coordinates: { latitude: '0', longitude: '0' },
-							connectors: [
-								{
-									evse_uid: '1',
-									id: '1',
-									standard: 'Type 1',
-									status: 'Доступен',
-									format: 'Кабель',
-									power_type: 'AC',
-									max_voltage: 230,
-									max_amperage: 32,
-									max_electric_power: 22,
-								},
-								{
-									evse_uid: '2',
-									id: '2',
-									standard: 'GB/T (AC)',
-									status: 'Занят',
-									format: 'Кабель',
-									power_type: 'AC',
-									max_voltage: 230,
-									max_amperage: 32,
-									max_electric_power: 20,
-								},
-								{
-									evse_uid: '3',
-									id: '3',
-									standard: 'CCS2',
-									status: 'Недоступен',
-									format: 'Кабель',
-									power_type: 'DC',
-									max_voltage: 400,
-									max_amperage: 125,
-									max_electric_power: 40,
-								},
-							],
-							rating: 4.7,
-							metres_to_station: 2.94,
-						}}
-					/>
-				</ContentBlockLayout>
-				<ContentBlockLayout className={styles.ContentBlocHover}>
-					<StationCard
-						onClick={() => console.log('Station clicked')}
-						station={{
-							id: '2',
-							name: 'Отель 2020',
-							address: 'г. Киров, ул. Дзержинского, 110',
-							status: 'Не работает',
-							coordinates: { latitude: '0', longitude: '0' },
-							connectors: [
-								{
-									evse_uid: '1',
-									id: '1',
-									standard: 'Type 1',
-									status: 'Недоступен',
-									format: 'Кабель',
-									power_type: 'AC',
-									max_voltage: 230,
-									max_amperage: 32,
-									max_electric_power: 22,
-								},
-								{
-									evse_uid: '2',
-									id: '2',
-									standard: 'GB/T (AC)',
-									status: 'Занят',
-									format: 'Кабель',
-									power_type: 'AC',
-									max_voltage: 230,
-									max_amperage: 32,
-									max_electric_power: 20,
-								},
-								{
-									evse_uid: '3',
-									id: '3',
-									standard: 'CCS2',
-									status: 'Недоступен',
-									format: 'Кабель',
-									power_type: 'DC',
-									max_voltage: 400,
-									max_amperage: 125,
-									max_electric_power: 40,
-								},
-							],
-							rating: 3.6,
-							metres_to_station: 3.45,
-						}}
-					/>
-				</ContentBlockLayout>
+				{stations.map((value, index) => {
+					return (
+						<ContentBlockLayout
+							key={index}
+							className={styles.stationsList__station}
+						>
+							<StationCard onClick={() => {}} station={value} />
+						</ContentBlockLayout>
+					)
+				})}
 			</div>
 		</div>
 	)

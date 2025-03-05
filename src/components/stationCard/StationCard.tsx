@@ -26,28 +26,28 @@ export default function StationCard(props: Props) {
 	return (
 		<div className={styles.stationCard} onClick={handleClick}>
 			<div className={styles.stationCard__header}>
-				<div
-					className={`${styles.header__icon} ${
-						styles[`icon_${STATION_STATUS_COLORS[props.station.status]}`]
-					}`}
-				>
-					<img src={electricRefuelingImage} alt='electric-refueling' />
+				<div className={styles.header__mainInfo}>
+					<div
+						className={`${styles.mainInfo__icon} ${
+							styles[`icon_${STATION_STATUS_COLORS[props.station.status]}`]
+						}`}
+					>
+						<img src={electricRefuelingImage} alt='electric-refueling' />
+					</div>
+					<div className={styles.mainInfo__texts}>
+						<p className={styles.texts__name}>{props.station.name}</p>
+						<p className={styles.texts__description}>{props.station.address}</p>
+					</div>
 				</div>
-				<div className={styles.header__content}>
-					<div className={styles.content__stationInfo}>
-						<p className={styles.stationInfo__text1}>{props.station.name}</p>
-						<p className={styles.stationInfo__text2}>{props.station.address}</p>
+				<div className={styles.content__path}>
+					<div className={styles.path__icon}>
+						<img src={pathImage} alt='path' />
 					</div>
-					<div className={styles.content__path}>
-						<div className={styles.path__icon}>
-							<img src={pathImage} alt='path' />
-						</div>
-						{undefined !== props.station.metres_to_station && (
-							<p className={styles.path__text}>
-								{props.station.metres_to_station} км
-							</p>
-						)}
-					</div>
+					{undefined !== props.station.metres_to_station && (
+						<p className={styles.path__text}>
+							{props.station.metres_to_station} км
+						</p>
+					)}
 				</div>
 			</div>
 			<div className={styles.stationCard__body}>

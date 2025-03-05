@@ -1,144 +1,143 @@
-.stationCard{
-    border-radius: 8px;
-    border-width: 1px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    background: #FFFFFF;
-    gap: 12px;
+.stationCard {
+	border-radius: 8px;
+	border-width: 1px;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	background: #ffffff;
+	gap: 12px;
 }
 
-.stationCard__header{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.stationCard__header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.header__icon,
+.header__mainInfo {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	align-items: center;
+}
+
+.mainInfo__icon,
 .path__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.header__icon{
-    border-radius: 20px;
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    border: 1px solid #FFFFFF;
-    box-shadow: 0px 2px 4px 0px #02272B33;
+.mainInfo__icon {
+	border-radius: 20px;
+	width: 24px;
+	height: 24px;
+	border: 1px solid #ffffff;
+	box-shadow: 0px 2px 4px 0px #02272b33;
 }
 
 .icon_green {
-    background: #27AE60;
+	background: #27ae60;
 }
 
 .icon_orange {
-    background: #F89520;
+	background: #f89520;
 }
 
 .icon_grey {
-    background: #8E949F;
+	background: #8e949f;
 }
 
-.header__content{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.mainInfo__texts {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
 }
 
-.content__stationInfo{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 158px;
-}
-
-.stationInfo__text1,
+.texts__name,
 .content__text {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
-    color: #373435;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 14px;
+	color: #373435;
 }
 
-.stationInfo__text1 {
-    margin: 0;
+.texts__name {
+	margin: 0;
 }
 
-.stationInfo__text2,
+.texts__description,
 .path__text {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-size: 8px;
-    line-height: 9px;
-    margin: 0;
-    color: #8E949F;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 9px;
+	margin: 0;
+	color: #8e949f;
 }
 
 .path__text {
-    text-align: right;
-    white-space: nowrap;
+	text-align: right;
+	white-space: nowrap;
+	min-width: 38px;
 }
 
-.content__path{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-grow: 0.15;
+.content__path {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2px;
 }
 
-.path__icon{
-    img {
-        width: 24px;
-        height: 24px;
-    }
+.path__icon {
+	img {
+		width: 24px;
+		height: 24px;
+	}
 }
 
-.stationCard__body{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.stationCard__body {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .body__connectorsList {
-    display: flex;
-    flex-grow: 1;
+	display: flex;
+	flex-grow: 1;
 }
 
 .connectorsList {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	flex-grow: 1;
 }
 
 .body__rating {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    flex-grow: 0.5;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	flex-grow: 0.5;
 }
 
 .rating__content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: end;
 
-    img {
-        width: 18px;
-        height: 18px;
-        margin-right: 3px;
-    }
+	img {
+		width: 18px;
+		height: 18px;
+		margin-right: 3px;
+	}
 }
 
 .content__text {
-    margin: 2px;
+	margin: 2px;
 }
