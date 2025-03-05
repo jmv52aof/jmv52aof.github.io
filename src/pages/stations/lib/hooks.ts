@@ -24,7 +24,6 @@ export const useStationsLoader = () => {
 	useEffect(() => {
 		getStationsFromApi(getRequestOptions())
 			.then(res => {
-				console.log('new data: ', res)
 				setStations(res)
 			})
 			.finally(() => {

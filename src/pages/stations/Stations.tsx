@@ -3,7 +3,6 @@ import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import arrowImage from '@assets/images/arrow-left.svg'
 import StationCard from '@components/stationCard/StationCard'
 import tuningImage from '@assets/images/tuning.svg'
-import Search from '@components/ui/search/Search'
 import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
@@ -52,7 +51,7 @@ export default function StationsPage(): React.JSX.Element {
 						variant='fill'
 					/>
 				</div>
-				<Search variant='outlined' placeholder='Название станции' />
+				{/* <Search variant='outlined' placeholder='Название станции' /> */}
 			</div>
 			<div className={styles.stationsPage__stationList}>
 				{stations.map((value, index) => {

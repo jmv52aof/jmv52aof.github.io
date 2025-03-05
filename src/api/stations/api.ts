@@ -40,7 +40,6 @@ const getQueryArgumentsForStations = (
 		query.push({ key: 'limit', value: options.limit })
 	if (undefined !== options.offset)
 		query.push({ key: 'offset', value: options.offset })
-	console.log(query)
 	return query
 }
 
