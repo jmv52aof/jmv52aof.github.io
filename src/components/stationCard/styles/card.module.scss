@@ -1,0 +1,144 @@
+.stationCard{
+    border-radius: 8px;
+    border-width: 1px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: #FFFFFF;
+    gap: 12px;
+}
+
+.stationCard__header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header__icon,
+.path__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__icon{
+    border-radius: 20px;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0px 2px 4px 0px #02272B33;
+}
+
+.icon_green {
+    background: #27AE60;
+}
+
+.icon_orange {
+    background: #F89520;
+}
+
+.icon_grey {
+    background: #8E949F;
+}
+
+.header__content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content__stationInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 158px;
+}
+
+.stationInfo__text1,
+.content__text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #373435;
+}
+
+.stationInfo__text1 {
+    margin: 0;
+}
+
+.stationInfo__text2,
+.path__text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    margin: 0;
+    color: #8E949F;
+}
+
+.path__text {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.content__path{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 0.15;
+}
+
+.path__icon{
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.stationCard__body{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.body__connectorsList {
+    display: flex;
+    flex-grow: 1;
+}
+
+.connectorsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.body__rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    flex-grow: 0.5;
+}
+
+.rating__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+
+    img {
+        width: 18px;
+        height: 18px;
+        margin-right: 3px;
+    }
+}
+
+.content__text {
+    margin: 2px;
+}
