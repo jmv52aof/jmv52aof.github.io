@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './style.module.scss';
 import { Loader } from '@components/ui/loader/Loader.tsx';
+import  Button  from '@components/ui/button/Button.tsx';
 import arrow from '@assets/images/arrow-up.svg'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts';
 
@@ -13,19 +14,19 @@ type Props = {
 /**
  * Layout списка
  */
-export default function ListLayout({ items, loading, getData }: Props) {
+export default function ListLayout(props: Props): React.JSX.Element {
     const [offset, setOffset] = useState(0);
-    const [limit] = useState(LIST_LAYOUT_LIMIT);
-    const [isLoading, setIsLoading] = useState(loading);
+    const limit = LIST_LAYOUT_LIMIT;
+    const [dataIsLoading, setIsLoading] = useState(true);
     const [hasMoreData, setHasMoreData] = useState(true);
     const listContainerRef = useRef<HTMLDivElement | null>(null);
 
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         setIsLoading(true);
         const currentOffset = offset;
         const currentLimit = limit;
         try {
-            const newData = await getData(currentOffset, currentLimit);
+            const newData = await props.getData(currentOffset, currentLimit);
     
             if (newData.length < currentLimit) {
                 setHasMoreData(false);
@@ -35,7 +36,7 @@ export default function ListLayout({ items, loading, getData }: Props) {
         } finally {
             setIsLoading(false);
         }
-    }, [offset, limit, getData]);
+    };
 
     useEffect(() => {
         if (offset > 0 && hasMoreData) {
@@ -45,8 +46,8 @@ export default function ListLayout({ items, loading, getData }: Props) {
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
         const target = e.target as HTMLDivElement;
-        const bottom = target.scrollHeight <= target.scrollTop + target.clientHeight;
-        if (bottom && !isLoading && hasMoreData) {
+        const userScrolledToEnd = target.scrollHeight <= target.scrollTop + target.clientHeight;
+        if (userScrolledToEnd && !dataIsLoading && hasMoreData) {
             fetchData();
         }
     };
@@ -63,27 +64,24 @@ export default function ListLayout({ items, loading, getData }: Props) {
     return (
         <div>
             <div ref={listContainerRef} onScroll={handleScroll} className={styles.listLayout}>
-                {isLoading && items.length === 0 && 
+                {dataIsLoading && props.items.length === 0 && 
                     <Loader/>
                 }
-                {!isLoading && items.length === 0 && <div>No data available.</div>}
-                {items.length > 0 && !loading && (
+                {!dataIsLoading && props.items.length === 0 && <div>No data available.</div>}
+                {props.items.length > 0 && !props.loading && (
                     <div>
-                        {items.map((item, index) =>  (
-                            <div key={index}>
+                        {props.items.map((item, index) =>  (
+                            <div key={index} className={styles.listLayout__item}>
                                 {item}
                             </div>
                         ))}
                     </div>
                 )}
             </div>
-            {isLoading && items.length > 0 && 
+            {dataIsLoading && props.items.length > 0 && 
                 <Loader/>
             }
-           
-            <button onClick={scrollToTop} className={styles.button__scrollToTop}>
-                <img src={arrow} alt="arrow" />
-            </button>
+            <Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow}/>
         </div>
     );
 };
