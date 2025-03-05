@@ -21,21 +21,17 @@ export default function ListLayout(props: Props): React.JSX.Element {
     const [hasMoreData, setHasMoreData] = useState(true);
     const listContainerRef = useRef<HTMLDivElement | null>(null);
 
-    const fetchData = async () => {
+    const fetchData = () => {
         setIsLoading(true);
-        const currentOffset = offset;
-        const currentLimit = limit;
-        try {
-            const newData = await props.getData(currentOffset, currentLimit);
-    
-            if (newData.length < currentLimit) {
-                setHasMoreData(false);
-            } else {
-                setOffset(prevOffset => prevOffset + currentLimit);
-            }
-        } finally {
-            setIsLoading(false);
-        }
+        props.getData(offset, limit)
+            .then(newData => {
+                if (newData.length < limit) {
+                    setHasMoreData(false);
+                } else {
+                    setOffset(prevOffset => prevOffset + limit);
+                }
+            })
+            .finally(() => setIsLoading(false));
     };
 
     useEffect(() => {
