@@ -39,7 +39,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
 	const handleSliderChange = (value: number) => {
 		setStationFilters({
 			...stationFilters,
-			minimalPower: value,
+			minimalPower: value * 1000,
 			isModified: true,
 		})
 	}
