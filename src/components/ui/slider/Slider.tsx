@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect, useMemo } from 'react'
 import styles from './styles.module.scss'
 
 interface Props {
-	items: { [key: number | string]: number | string }
-	onChange: (value: number | string) => void
+	items: { [key: number | string]: number }
+	onChange: (value: number) => void
+	current?: number
 }
 
-const Slider: React.FC<Props> = ({ items, onChange }) => {
+const Slider: React.FC<Props> = ({ items, onChange, current }) => {
 	const [pointOffset, setPointOffset] = useState<number>(0)
 	const [isDragging, setIsDragging] = useState<boolean>(false)
 
@@ -14,6 +15,14 @@ const Slider: React.FC<Props> = ({ items, onChange }) => {
 	const keys = useMemo(() => Object.keys(items), [items])
 
 	let selectedIndex: number = 0
+
+	useEffect(() => {
+		if (undefined !== current) {
+			const indexByItems = keys.findIndex(key => items[key] === current)
+			const newIndex = -1 === indexByItems ? 0 : indexByItems
+			setPointOffset((newIndex / (keys.length - 1)) * 100)
+		}
+	}, [current])
 
 	const handleMouseDown = (event: React.MouseEvent) => {
 		setIsDragging(true)

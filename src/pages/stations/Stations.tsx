@@ -8,26 +8,34 @@ import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
-import { useApi } from '@common/hooks/api'
+import { useStationsLoader } from './lib/hooks'
+import { createQueryString } from '@common/functions/strings'
+import {
+	StationsFiltersPageQueryArguments,
+	StationsFiltersPreviousPageQueries,
+} from '@common/consts/pages'
 
 /**
  * Страница со списком станций
  */
 export default function StationsPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { getStationsFromApi } = useApi()
-	const { stations, setStations } = useContext(RootStateContext)
+	const { stations } = useContext(RootStateContext)
 
-	useEffect(() => {
-		getStationsFromApi().then(res => {
-			setStations(res)
-		})
-	}, [])
+	const { loading } = useStationsLoader()
 
 	const onFiltersClick = () => {
-		nav(STATIONS_FILTERS_ENDPOINT)
+		nav(
+			STATIONS_FILTERS_ENDPOINT +
+				createQueryString([
+					{
+						key: StationsFiltersPageQueryArguments.PREVIOUS_PAGE,
+						value: StationsFiltersPreviousPageQueries.STATIONS_LIST,
+					},
+				])
+		)
 	}
 
 	return (

@@ -14,6 +14,12 @@ import unknownTypeImage from '@assets/images/connectors/unknown-type.png'
 import { StationStatus } from '@common/types/stations'
 import { ColorTemplate } from '@components/ui/status/lib/types'
 
+export namespace StationStatuses {
+	export const AVAILABLE: StationStatus = 'Доступна'
+	export const CHARGING: StationStatus = 'Занята'
+	export const INOPERATIVE: StationStatus = 'Не работает'
+}
+
 export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
 	'Type 1': type1Image,
 	'Type 2': type2Image,

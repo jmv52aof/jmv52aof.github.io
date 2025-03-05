@@ -4,7 +4,7 @@ import { RootState } from '@common/types/app'
 export const DEFAULT_ROOT_STATE: RootState = {
 	stationFilters: {
 		connectors: [...CONNECTORS],
-		onlyAvailableStations: true,
+		onlyAvailableStations: false,
 		minimalPower: 0,
 		isModified: false,
 	},
