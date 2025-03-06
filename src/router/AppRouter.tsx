@@ -3,6 +3,7 @@ import * as endpoints from '@common/consts/endpoints'
 import StationsPage from '@pages/stations/Stations'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
+import MainPage from '@pages/main/Main'
 
 export default function AppRouter(): React.JSX.Element {
 	return (
