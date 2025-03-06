@@ -1,39 +1,39 @@
 .status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    background: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	background: none;
 	outline: none;
 	border: none;
 
-    width: fit-content;
-    padding: 4px 12px;
-    border-radius: 12px;
+	width: fit-content;
+	padding: 4px 12px;
+	border-radius: 12px;
 }
 
 .green {
-    background-color:rgba(39, 174, 96, 0.1);
-    color: rgba(39, 174, 96, 1);
+	background-color: rgba(39, 174, 96, 0.1);
+	color: rgba(39, 174, 96, 1);
 }
 
 .orange {
-    background-color:rgba(248, 149, 32, 0.1);
-    color: rgba(248, 149, 32, 1);
+	background-color: rgba(248, 149, 32, 0.1);
+	color: rgba(248, 149, 32, 1);
 }
 
 .red {
-    background-color:rgba(246, 50, 85, 1);
-    color: rgba(255, 255, 255, 1);
+	background-color: rgba(246, 50, 85, 1);
+	color: rgba(255, 255, 255, 1);
 }
 
 .grey {
-    background-color:rgba(142, 148, 159, 0.1);
-    color: rgba(142, 148, 159, 1);
+	background-color: rgba(142, 148, 159, 0.1);
+	color: rgba(142, 148, 159, 1);
 }
 
-
 .text {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	white-space: nowrap;
 }

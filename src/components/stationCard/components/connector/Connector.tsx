@@ -12,41 +12,34 @@ type Props = {
 	isLast: boolean
 }
 
-export default function Connector({ connector, isLast }: Props) {
+export default function Connector(props: Readonly<Props>) {
 	return (
 		<div className={styles.connector}>
 			<div className={styles.connector__wrap}>
-				<div className={styles.connector__icon}>
-					<img
-						src={CONNECTOR_HAS_ICON[connector.standard]}
-						alt={connector.standard}
-					/>
-				</div>
+				<img
+					src={CONNECTOR_HAS_ICON[props.connector.standard]}
+					alt={props.connector.standard}
+					className={styles.connector__icon}
+				/>
 				<div className={styles.connector__content}>
-					<div className={styles.content__firstColumn}>
-						<p className={styles.firstColumn__text1}>{connector.standard}</p>
-						<p className={styles.firstColumn__text2}>
-							{getMaxPowerForConnector(connector)} кВт
+					<div className={styles.content__main}>
+						<p className={styles.main__standard}>{props.connector.standard}</p>
+						<p className={styles.main__power}>
+							{getMaxPowerForConnector(props.connector)} кВт
 						</p>
 					</div>
-					<div className={styles.content__secondColumn}>
-						<div className={styles.secondColumn__veticalSplit}>
-							<div className={styles.rectangleV}></div>
-						</div>
-						<div className={styles.secondColumn__status}>
-							<Status
-								textSize='small'
-								text={connector.status}
-								color={CONNECTOR_STATUS_COLORS[connector.status]}
-							/>
-						</div>
+					<div className={styles.content__additional}>
+						<div className={styles.additional__verticalSplit}></div>
+						<Status
+							textSize='small'
+							text={props.connector.status}
+							color={CONNECTOR_STATUS_COLORS[props.connector.status]}
+						/>
 					</div>
 				</div>
 			</div>
-			{!isLast && (
-				<div className={styles.connector__horizontalSplit}>
-					<div className={styles.rectangleH}></div>
-				</div>
+			{!props.isLast && (
+				<div className={styles.connector__horizontalSplit}></div>
 			)}
 		</div>
 	)

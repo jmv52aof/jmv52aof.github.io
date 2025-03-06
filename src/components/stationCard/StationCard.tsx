@@ -10,7 +10,7 @@ type Props = {
 	station: StationDto
 }
 
-export default function StationCard(props: Props) {
+export default function StationCard(props: Readonly<Props>) {
 	const handleClick = () => {
 		if (props.onClick) {
 			props.onClick()

@@ -7,91 +7,73 @@
 .connector__wrap {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	gap: 8px;
 }
 
 .connector__icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	img {
-		width: 24px;
-		height: 24px;
-	}
+	width: 28px;
+	height: 28px;
 }
 
 .connector__content {
-	display: grid;
-	grid-template-columns: 1fr 1.5fr;
+	display: flex;
+	flex-direction: row;
 	align-items: center;
 	width: 100%;
-	min-width: 180px;
 }
 
-.content__firstColumn {
+.content__main {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	flex-grow: 1;
 	gap: 2px;
+	min-width: 80px;
+	max-width: 140px;
+	width: 100%;
 }
 
-.firstColumn__text1 {
+.main__standard {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
-	font-size: 12px;
-	line-height: 14px;
+	font-size: 14px;
+	line-height: 18px;
 	margin: 0;
 	color: #373435;
 }
 
-.firstColumn__text2 {
+.main__power {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
-	font-size: 8px;
-	line-height: 9px;
+	font-size: 10px;
+	line-height: 12px;
 	margin: 0;
 	color: #373435;
 }
 
-.content__secondColumn {
+.content__additional {
 	display: flex;
-	justify-content: flex-start;
+	flex-direction: row;
+	gap: 10px;
 	align-items: center;
+	padding-right: 10px;
+	box-sizing: border-box;
+	min-width: 140px;
 }
 
-.secondColumn__veticalSplit {
+.additional__verticalSplit {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 1px;
-	margin-right: 10px;
-}
-
-.rectangleV,
-.rectangleH {
+	height: 22px;
 	border-radius: 3px;
 	background: #e8e8ee;
 }
 
-.rectangleV {
-	width: 1px;
-	height: 22px;
-}
-
-.rectangleH {
-	width: 95%;
-	height: 1px;
-}
-
-.secondColumn__status {
-	display: flex;
-	align-items: center;
-	justify-content: left;
-	flex-grow: 1;
-}
-
 .connector__horizontalSplit {
-	display: flex;
+	width: 100%;
+	max-width: 300px;
+	height: 1px;
+	border-radius: 3px;
+	background: #e8e8ee;
 }
