@@ -29,9 +29,9 @@ export const timeToString = (hours: number, minutes: number, seconds: number) =>
     return `${hours === 0 ? '' : `${hours}ч.`} ${minutes === 0 ? '' : `${minutes}м.`} ${seconds === 0 ? '' : `${seconds}сек.`}`
 }
 
-export const getTimesDifference = (reduced: Timestamp, subtracted: Timestamp) => {
-    if (reduced.hours < subtracted.hours) 
-        throw new Error('The hours of the reduced must be greater than the hours of the subtracted')
-    const difference = timeToDate(reduced).getTime() - timeToDate(subtracted).getTime()
+export const getTimesDifference = (reduced: Timestamp, subtracted: Timestamp) => {   
+    const difference = reduced.hours < subtracted.hours 
+        ? timeToDate(subtracted).getTime() - timeToDate(reduced).getTime()
+        : timeToDate(reduced).getTime() - timeToDate(subtracted).getTime()
     return dateToTimestamp(new Date(difference))
 }

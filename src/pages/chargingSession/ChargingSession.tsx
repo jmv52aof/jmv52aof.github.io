@@ -3,7 +3,7 @@ import commonStyles from '@common/styles.module.scss'
 import arrowImage from '@assets/images/arrow-left.svg'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
-import ChargingSessionFeatures from '@features/chargingSession/CharginSession'
+import ChargingSession from '@features/chargingSession/CharginSession'
 
 export default function ChargingSessionPage(): React.JSX.Element {
     const chargingSession: ChargingSessionDto  = {
@@ -61,7 +61,7 @@ export default function ChargingSessionPage(): React.JSX.Element {
 					</div>
 					<a className={styles.header__tittle}>Зарядная сессия</a>
 				</div>
-                <ChargingSessionFeatures chargingSession={chargingSession}/>    
+                <ChargingSession chargingSession={chargingSession}/>    
 			</div>     
 		</div>
     )
