@@ -1,9 +1,9 @@
 import Status from '@components/ui/status/Status'
 import CustomCarousel from '@components/ui/carousel/Carousel'
 import styles from './styles.module.scss'
-import { StationStatus } from '@common/types/stations'
-import { STATION_STATUS_COLORS } from '@common/consts/station'
-import ratingImage from '@assets/images/rating-star.svg'
+import { StationStatus } from '@common/types/stations';
+import { STATION_STATUS_COLORS } from '@common/consts/stations';
+import ratingImage from '@assets/images/ratingStar.svg';
 
 type Props = {
 	imageSources: string[]

@@ -1,6 +1,6 @@
-import MainPage from '@pages/main/Main'
 import { Route, Routes } from 'react-router'
 import * as endpoints from '@common/consts/endpoints'
+import StationsPage from '@pages/stations/Stations'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 

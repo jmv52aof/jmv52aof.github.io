@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 type Props = {
     onClick: () => void;
     disabled?: boolean;
-    iconSrc: string
+    iconSrc: string;
     text: string;
 };
 

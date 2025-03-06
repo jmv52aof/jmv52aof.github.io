@@ -29,6 +29,8 @@ import {
 	TariffType,
 } from '@common/types/tariffs'
 
+/** Конвертация из серверных моделей в dto */
+
 const convertStationStatusResponse = (
 	status: StationStatusResponse
 ): StationStatus => {
@@ -217,5 +219,47 @@ export const convertResponseStationDto = (
 					convertDailyOccupationResponseDto(value)
 			  )
 			: [],
+	}
+}
+
+/** Конвертация dto в серверные модели */
+
+export const convertStationStatus = (
+	status: StationStatus
+): StationStatusResponse => {
+	switch (status) {
+		case 'Доступна':
+			return 'AVAILABLE'
+		case 'Занята':
+			return 'CHARGING'
+		case 'Не работает':
+			return 'INOPERATIVE'
+		default:
+			throw new Error('Conversion for station status not exists')
+	}
+}
+
+export const convertConnectorStandard = (
+	standard: ConnectorStandard
+): ConnectorStandardResponse => {
+	switch (standard) {
+		case 'CCS1':
+			return 'CCS1'
+		case 'CCS2':
+			return 'CCS2'
+		case 'CHAdeMO':
+			return 'CHADEMO'
+		case 'GB/T (AC)':
+			return 'GBT_AC'
+		case 'GB/T (DC)':
+			return 'GBT_DC'
+		case 'Tesla':
+			return 'TESLA'
+		case 'Type 1':
+			return 'TYPE_1'
+		case 'Type 2':
+			return 'TYPE_2'
+		default:
+			return 'OTHER'
 	}
 }

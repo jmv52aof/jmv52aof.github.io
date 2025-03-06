@@ -7,6 +7,10 @@ import { RequestQuery } from '@common/types/requests'
 import { STATIONS_URL } from '@common/consts/urls'
 import { createQueryString } from '@common/functions/strings'
 import { GetStationByIdResponse, GetStationsResponse } from './types/response'
+import {
+	convertConnectorStandard,
+	convertStationStatus,
+} from './lib/converters'
 
 const getQueryArgumentsForStations = (
 	options: GetStationsRequestOptions
@@ -19,11 +23,19 @@ const getQueryArgumentsForStations = (
 	if (undefined !== options.longitude)
 		query.push({ key: 'longitude', value: options.longitude })
 	if (undefined !== options.stationStatus)
-		query.push({ key: 'stationStatus', value: options.stationStatus })
+		query.push({
+			key: 'stationStatus',
+			value: convertStationStatus(options.stationStatus),
+		})
 	if (undefined !== options.minElectricPower)
 		query.push({ key: 'minElectricPower', value: options.minElectricPower })
 	if (options.standards?.length)
-		query.push({ key: 'standards', value: options.standards.join(',') })
+		query.push({
+			key: 'standards',
+			value: options.standards
+				.map(value => convertConnectorStandard(value))
+				.join(','),
+		})
 	if (undefined !== options.limit)
 		query.push({ key: 'limit', value: options.limit })
 	if (undefined !== options.offset)
