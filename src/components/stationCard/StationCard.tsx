@@ -1,10 +1,9 @@
 import styles from './styles/card.module.scss'
-import { STATION_STATUS_COLORS } from '@common/consts/stations'
-import electricRefuelingImage from '@assets/images/electric-refueling.svg'
 import pathImage from '@assets/images/path.svg'
 import ratingImage from '@assets/images/rating-star.svg'
 import { StationDto } from '@common/types/stations'
 import Connector from './components/connector/Connector'
+import StationMarker from '@components/ui/stationMarker/StationMarker'
 
 type Props = {
 	onClick: () => void
@@ -27,13 +26,7 @@ export default function StationCard(props: Props) {
 		<div className={styles.stationCard} onClick={handleClick}>
 			<div className={styles.stationCard__header}>
 				<div className={styles.header__mainInfo}>
-					<div
-						className={`${styles.mainInfo__icon} ${
-							styles[`icon_${STATION_STATUS_COLORS[props.station.status]}`]
-						}`}
-					>
-						<img src={electricRefuelingImage} alt='electric-refueling' />
-					</div>
+					<StationMarker status={props.station.status} />
 					<div className={styles.mainInfo__texts}>
 						<p className={styles.texts__name}>{props.station.name}</p>
 						<p className={styles.texts__description}>{props.station.address}</p>
