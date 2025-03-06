@@ -2,9 +2,9 @@
     position: absolute;
     z-index: 500;
     top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 304px;
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
   }
