@@ -10,3 +10,5 @@ export const DEFAULT_ROOT_STATE: RootState = {
 	},
 	stations: [],
 }
+
+export const GET_DATA_LIMIT = 4

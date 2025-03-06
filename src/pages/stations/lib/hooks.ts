@@ -1,3 +1,4 @@
+import { GET_DATA_LIMIT } from '@common/consts/app'
 import { StationStatuses } from '@common/consts/stations'
 import { useApi } from '@common/hooks/api'
 import { RootStateContext } from 'contexts/RootStateContext'
@@ -18,6 +19,7 @@ export const useStationsLoader = () => {
 			stationStatus: stationFilters.onlyAvailableStations
 				? StationStatuses.AVAILABLE
 				: undefined,
+			limit: GET_DATA_LIMIT,
 		}
 	}
 
@@ -31,7 +33,17 @@ export const useStationsLoader = () => {
 			})
 	}, [])
 
+	/** Получение станций по заданным параметрам отступа и лимита */
+	const getByOffsetAndLimit = (offset: number, limit: number) => {
+		return getStationsFromApi({
+			...getRequestOptions(),
+			offset: offset,
+			limit: limit,
+		})
+	}
+
 	return {
 		loading,
+		getByOffsetAndLimit,
 	}
 }
