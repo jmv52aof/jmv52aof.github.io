@@ -1,0 +1,32 @@
+.connector {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.connector__icon {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	img {
+		width: 60px;
+		height: 60px;
+		//padding: 5px;
+	}
+}
+
+.connector__standard {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.standard__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 120%;
+	margin: 0;
+	color: #373435;
+}

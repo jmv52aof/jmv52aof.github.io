@@ -1,0 +1,16 @@
+.sessionCard {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	background: #ffffff;
+	gap: 12px;
+}
+
+.sessionCard__header {
+	display: flex;
+	flex-direction: row;
+}
+
+.header__connector {
+	display: flex;
+}

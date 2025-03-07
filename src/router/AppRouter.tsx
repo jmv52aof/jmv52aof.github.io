@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router'
 import * as endpoints from '@common/consts/endpoints'
 import StationsPage from '@pages/stations/Stations'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
+import SessiosPage from '@pages/sessions/Sessions'
 
 export default function AppRouter(): React.JSX.Element {
 	return (
@@ -13,6 +14,10 @@ export default function AppRouter(): React.JSX.Element {
 			<Route
 				path={endpoints.STATIONS_LIST_ENDPOINT}
 				element={<StationsPage />}
+			/>
+			<Route
+				path={endpoints.SESSIONS_HISTORY_ENDPOINT}
+				element={<SessiosPage />}
 			/>
 			<Route path='*' element={<StationsPage />} />
 		</Routes>
