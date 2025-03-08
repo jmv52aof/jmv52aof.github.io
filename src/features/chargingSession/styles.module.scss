@@ -4,10 +4,18 @@
 	flex-direction: row;
 
 	button {
-		background: #F63255;
+		background: #F63255 !important;
 	}
 
 	button:hover {
-		background:#E02E4E
+		background:#E02E4E !important;
 	}
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    gap: 16px;
 }

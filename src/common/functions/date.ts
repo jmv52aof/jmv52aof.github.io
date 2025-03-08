@@ -10,7 +10,7 @@ const timeToDate = (timestamp: Timestamp) => {
     return date
 }
 
-const dateToTimestamp = (date: Date): Timestamp => {
+export const dateToTimestamp = (date: Date): Timestamp => {
     return {
         year: date.getUTCFullYear(),
         month: date.getUTCMonth() + 1,

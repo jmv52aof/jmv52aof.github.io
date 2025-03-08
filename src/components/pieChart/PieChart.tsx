@@ -1,7 +1,7 @@
 import { PieChart as RechartsPieChart, Pie, ResponsiveContainer } from 'recharts';
 import styles from './styles.module.scss'
 import { CircleColorTemplate } from "./lib/types"
-import { COLOR_TEMPLATES_MAP, MAX_ANGLE, MIN_ANGLE, ANIMATION_DURATION } from "./lib/consts"
+import { COLOR_TEMPLATES_MAP, MAX_ANGLE, MIN_ANGLE, ANIMATION_DURATION_IN_MS } from "./lib/consts"
 
 interface Props {
     colorTemplate: CircleColorTemplate
@@ -37,7 +37,7 @@ export default function PieChart(props: Props): React.JSX.Element {
                         dataKey='value'
                         fill={COLOR_TEMPLATES_MAP[props.colorTemplate].mainColor}
                         innerRadius={50}
-                        animationDuration={ANIMATION_DURATION}
+                        animationDuration={ANIMATION_DURATION_IN_MS}
                         outerRadius={90}
                         startAngle={MIN_ANGLE}
                         stroke='none'

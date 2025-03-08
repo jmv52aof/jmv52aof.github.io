@@ -1,69 +1,71 @@
 .content {
-    width: 304px;
-    height: 92px;
+    width: 100%;
     display: flex;
+    flex-grow: 1;
     flex-direction: row;
-    align-items: center;
     gap: 16px;
+    padding: 8px;
 }
 
-.content__imgBlock {
+.content__connector {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.imgBlock__img {
+.connector__icon {
     width: 60px;
     height: 60px;
 }
 
-.imgBlock__label {
-    width: 25px;
-    height: 12px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+.connector__type {
     font-size: 10px;
     line-height: 12px;
-    margin: 0px;
-    color: #373435
 }
 
-.textBlock__title, .imgBlock__label  {
+.content__details {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+
+    button {
+        padding: 7px !important; 
+        
+        img {
+            width: 18px !important;
+            height: 18px !important;
+        }
+    }
+}
+
+.details__station {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.station__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info__name {
+    font-size: 12px;
+    line-height: 14.4px;
+}
+
+.info__name, .connector__type  {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     color: #373435;
     margin: 0px;
 }
 
-.content__details {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.details__connector {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1;
-    margin-bottom: 5px;
-}
-
-.connector__textBlock {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.textBlock__title {
-    font-size: 12px;
-    line-height: 14.4px;
-}
-
-.textBlock__subtitle {
+.info__address {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 8px;
@@ -76,7 +78,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 10px;
 }
 
 .tariffs__title {
@@ -87,7 +88,7 @@
     color: #373435;
 }
 
-.tariffs__text, .tariffs__title {
+.tariffs__data, .tariffs__title {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 10px;
@@ -95,6 +96,6 @@
     margin: 0px;
 }
 
-.tariffs__text {
+.tariffs__data {
     color: #05A6BE;
 }

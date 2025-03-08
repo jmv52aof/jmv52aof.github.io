@@ -20,20 +20,20 @@ export default function ConnectorAndTariffsInfo(props: Props): React.JSX.Element
     
     return (
         <ContentBlockLayout className={styles.content}>
-            <div className={styles.content__imgBlock}>
+            <div className={styles.content__connector}>
                 <img
-                    className={styles.imgBlock__img}
+                    className={styles.connector__icon}
                     src={CONNECTOR_HAS_ICON[props.connectorInfo.standard]} 
                     alt={props.connectorInfo.standard} />
-                <p className={styles.imgBlock__label}>{props.connectorInfo.standard}</p>
+                <p className={styles.connector__type}>{props.connectorInfo.standard}</p>
             </div>
             <div className={styles.content__details}>
-                <div className={styles.details__connector}>
-                    <div className={styles.connector__textBlock}>
-                        <p className={styles.textBlock__title}>
+                <div className={styles.details__station}>
+                    <div className={styles.station__info}>
+                        <p className={styles.info__name}>
                             {props.connectorInfo.station_name}
                         </p>
-                        <p className={styles.textBlock__subtitle}>
+                        <p className={styles.info__address}>
                             {props.connectorInfo.station_address}
                         </p>
                     </div>
@@ -41,7 +41,7 @@ export default function ConnectorAndTariffsInfo(props: Props): React.JSX.Element
                 </div>
                 <div className={styles.details__tariffs}>
                     <p className={styles.tariffs__title}><img src={walletIcon} /> Используемые тарифы:</p>
-                    <p className={styles.tariffs__text}>
+                    <p className={styles.tariffs__data}>
                         {props.tariffs?.map(item => `${item.price} ${item.currency}`).join(' ')}
                     </p>
                 </div>

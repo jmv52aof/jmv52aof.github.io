@@ -8,5 +8,4 @@ export const MIN_ANGLE = -90
 
 export const MAX_ANGLE = -450
 
-// 1000 миллисекунд
-export const ANIMATION_DURATION = 1000
+export const ANIMATION_DURATION_IN_MS = 1000
