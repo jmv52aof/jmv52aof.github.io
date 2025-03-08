@@ -5,11 +5,19 @@ import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import SessionCard from '@components/sessionCard/SessionCard'
+import { useNavigate } from 'react-router'
+import { SESSIONS_HISTORY_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 
 /**
  * Страница с зарядными сессиями
  */
 export default function SessiosPage(): React.JSX.Element {
+	const nav = useNavigate()
+
+	const onSessionsFiltersClick = () => {
+		nav(SESSIONS_HISTORY_FILTERS_ENDPOINT)
+	}
+
 	return (
 		<div className={styles.sessionsPage}>
 			<div className={styles.sessionsPage__header}>
@@ -20,7 +28,7 @@ export default function SessiosPage(): React.JSX.Element {
 					</div>
 					<FiltersButton
 						iconSrc={tuningImage}
-						onClick={() => {}}
+						onClick={onSessionsFiltersClick}
 						variant='fill'
 					/>
 				</div>
@@ -48,9 +56,14 @@ export default function SessiosPage(): React.JSX.Element {
 								month: 3,
 								day: 10,
 								hours: 13,
-								minutes: 2,
+								minutes: 20,
 								seconds: 48,
 							},
+							max_power: 36,
+							min_power: 6.2,
+							payment_method: 'Т-Банк',
+							total_cost: 637.28,
+							payment_status: 'Неоплачено',
 						}}
 					/>
 				</ContentBlockLayout>
