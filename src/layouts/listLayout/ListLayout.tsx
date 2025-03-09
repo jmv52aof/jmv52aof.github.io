@@ -4,6 +4,7 @@ import { Loader } from '@components/ui/loader/Loader.tsx'
 import Button from '@components/ui/button/Button.tsx'
 import arrow from '@assets/images/arrow-up.svg'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
+import chargeStation from '@assets/images/chargeStation.svg'
 
 type Props = {
 	items: React.JSX.Element[]
@@ -22,6 +23,10 @@ export default function ListLayout(props: Props): React.JSX.Element {
 	const [hasMoreData, setHasMoreData] = useState(true)
 	const [hasScroll, setHasScroll] = useState(false)
 	const listContainerRef = useRef<HTMLDivElement | null>(null)
+	const [isButtonVisible, setIsButtonVisible] = useState(false)
+	const [isDragging, setIsDragging] = useState(false)
+	const [startX, setStartX] = useState(0)
+	const [startY, setStartY] = useState(0)
 
 	const fetchData = () => {
 		setIsLoading(true)
@@ -44,6 +49,16 @@ export default function ListLayout(props: Props): React.JSX.Element {
 		const target = e.target as HTMLDivElement
 		const userScrolledToEnd =
 			target.scrollHeight <= target.scrollTop + target.clientHeight
+
+		const isScrollableContent = target.scrollHeight > target.clientHeight
+		const isScrolledDown = target.scrollTop > 0
+
+		if (isScrollableContent && isScrolledDown) {
+			setIsButtonVisible(true)
+		} else {
+			setIsButtonVisible(false)
+		}
+
 		if (userScrolledToEnd && hasMoreData) {
 			fetchData()
 		}
@@ -58,19 +73,58 @@ export default function ListLayout(props: Props): React.JSX.Element {
 		}
 	}
 
+	const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+		setIsDragging(true)
+		setStartX(e.clientX)
+		setStartY(e.clientY)
+	}
+
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (!isDragging) return
+
+		const container = listContainerRef.current
+		if (!container) return
+
+		const deltaX = e.clientX - startX
+		const deltaY = e.clientY - startY
+
+		container.scrollTop -= deltaY
+		container.scrollLeft -= deltaX
+
+		setStartX(e.clientX)
+		setStartY(e.clientY)
+
+		e.preventDefault()
+	}
+
+	const handleMouseUp = () => {
+		setIsDragging(false)
+	}
+
 	return (
 		<div>
 			<div
 				ref={listContainerRef}
 				onScroll={handleScroll}
+				onMouseDown={handleMouseDown}
+				onMouseMove={handleMouseMove}
+				onMouseUp={handleMouseUp}
+				onMouseLeave={handleMouseUp}
 				className={styles.listLayout__list}
 			>
 				{dataIsLoading && props.items.length === 0 && <Loader />}
 				{!dataIsLoading && props.items.length === 0 && (
-					<div>No data available.</div>
+					<div className={styles.listLayout__noData}>
+						<img src={chargeStation} alt='chargeStation' />
+						<p
+							className={`${styles.noData__text} ${styles.noData__text_position}`}
+						>
+							Здесь будут показаны зарядные станции
+						</p>
+					</div>
 				)}
 				{props.items.length > 0 && !props.loading && (
-					<div>
+					<div className={styles.list_noSelection}>
 						{props.items.map((item, index) => (
 							<div key={index} className={styles.list__item}>
 								{item}
@@ -80,11 +134,11 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				)}
 			</div>
 			{dataIsLoading && props.items.length > 0 && <Loader />}
-			{/* { && ( */}
-			<div className={styles.listLayout__blockButton}>
-				<Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow} />
-			</div>
-			{/* )} */}
+			{isButtonVisible && (
+				<div className={styles.listLayout__blockButton}>
+					<Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow} />
+				</div>
+			)}
 		</div>
 	)
 }
