@@ -5,12 +5,12 @@ import { COLOR_TEMPLATES_MAP, MAX_ANGLE, MIN_ANGLE, ANIMATION_DURATION_IN_MS } f
 
 interface Props {
     colorTemplate: CircleColorTemplate
-    value: number
-    maxValue: number
+    power: number
+    maxPower: number
     className?: string
 }
 
-export default function PieChart(props: Props): React.JSX.Element { 
+export default function PieChart(props: Props): React.JSX.Element {
     return (
         <div className={`${styles.chart} ${props.className}`}>
             <ResponsiveContainer width="100%" height="100%">
@@ -18,30 +18,30 @@ export default function PieChart(props: Props): React.JSX.Element {
                     <Pie
                         data={[
                             {
-                                value: props.maxValue
+                                value: props.maxPower
                             }
                         ]}
                         dataKey='value'
                         fill={COLOR_TEMPLATES_MAP[props.colorTemplate].backgroundColor}
                         animationDuration={0}
-                        innerRadius={50}
-                        outerRadius={90}
+                        innerRadius={'55%'}
+                        outerRadius={'100%'}
                         stroke='none'
                     />
                     <Pie
                         data={[
                             {
-                                value:  props.value / props.maxValue * 100
+                                value:  props.power
                             }
                         ]}
                         dataKey='value'
                         fill={COLOR_TEMPLATES_MAP[props.colorTemplate].mainColor}
-                        innerRadius={50}
+                        innerRadius={'55%'}
                         animationDuration={ANIMATION_DURATION_IN_MS}
-                        outerRadius={90}
+                        outerRadius={'100%'}
                         startAngle={MIN_ANGLE}
                         stroke='none'
-                        endAngle={MIN_ANGLE + (MAX_ANGLE - MIN_ANGLE) * props.value / props.maxValue}
+                        endAngle={MIN_ANGLE + (MAX_ANGLE - MIN_ANGLE) * props.power / props.maxPower}
                     />
                 </RechartsPieChart>
             </ResponsiveContainer>           

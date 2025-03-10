@@ -6,6 +6,7 @@ import { CONNECTOR_HAS_ICON } from '@common/consts/stations'
 import squareShareLineIcon from '@assets/images/square-share-line.svg'
 import walletIcon from '@assets/images/wallet.svg'
 import Button from '@components/ui/button/Button'
+import { TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT } from '@common/consts/tariffs'
 
 interface Props {
     connectorInfo: ConnectorInfoDto
@@ -41,9 +42,13 @@ export default function ConnectorAndTariffsInfo(props: Props): React.JSX.Element
                 </div>
                 <div className={styles.details__tariffs}>
                     <p className={styles.tariffs__title}><img src={walletIcon} /> Используемые тарифы:</p>
-                    <p className={styles.tariffs__data}>
-                        {props.tariffs?.map(item => `${item.price} ${item.currency}`).join(' ')}
-                    </p>
+                    <div className={styles.tariffs__data}>
+                        {props.tariffs?.map((item, index) => {
+                            return <p key={index} className={styles.data__item}>{
+                                `${item.price} ${item.currency}/${TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]}`
+                            }</p>
+                        })}
+                    </div>
                 </div>
             </div>
         </ContentBlockLayout>

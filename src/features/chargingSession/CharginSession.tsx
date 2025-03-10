@@ -8,7 +8,7 @@ import lightingIcon from '@assets/images/lighting.svg'
 import batteryChargeIcon from '@assets/images/battery-charge.svg'
 import clockIcon from '@assets/images/clock.svg'
 import { checkVisible } from './lib/functions'
-import { dateToTimestamp, getTimesDifference, timeToISOString, timeToString } from "@common/functions/date"
+import { dateToTimestamp, getTimesDifference, timeToISOString, timeToStringWithUnitsOfMeasurement } from "@common/functions/date"
 
 interface Props {
     chargingSession: ChargingSessionDto    
@@ -26,8 +26,8 @@ export default function ChargingSession(props: Props): React.JSX.Element {
     return (
         <>
             <ChargingSessionActivePower 
-                charged={props.chargingSession.charged_kwh} 
-                batteryPercentage={props.chargingSession.battery_percentage ?? 0}/>
+                power={props.chargingSession.charged_kwh} 
+                maxPower={props.chargingSession.connector_info.max_electric_power}/>
             <div className={styles.buttonBlock}>
                 <Button variant='fill' onClick={onComplete} text='Завершить'/>
             </div>
@@ -41,11 +41,11 @@ export default function ChargingSession(props: Props): React.JSX.Element {
                     iconSrc={batteryChargeIcon}
                     items={[
                         {
-                            description: 'Заряжено: ',
+                            description: 'Заряжено:',
                             value: `${props.chargingSession.charged_kwh} кВт·ч`
                         },
                         {
-                            description: 'Процент батареи: ',
+                            description: 'Процент батареи:',
                             value: props.chargingSession.battery_percentage !== undefined 
                                 ? `${props.chargingSession.battery_percentage} %`
                                 : '',
@@ -54,11 +54,11 @@ export default function ChargingSession(props: Props): React.JSX.Element {
                     ]}
                 />
                 <ContentBlock 
-                    title={'Время и длительность: '}
+                    title={'Время и длительность:'}
                     iconSrc={clockIcon}
                     items={[
                         {
-                            description: 'Старт: ',
+                            description: 'Старт:',
                             value: timeToISOString(
                                 props.chargingSession.start_date.hours, 
                                 props.chargingSession.start_date.minutes, 
@@ -66,8 +66,8 @@ export default function ChargingSession(props: Props): React.JSX.Element {
                             )
                         },
                         {
-                            description: 'Длительность: ',
-                            value: timeToString(duration.hours, duration.minutes, duration.seconds)
+                            description: 'Длительность:',
+                            value: timeToStringWithUnitsOfMeasurement(duration.hours, duration.minutes, duration.seconds)
                         },
                     ]}
                 />
@@ -77,28 +77,28 @@ export default function ChargingSession(props: Props): React.JSX.Element {
                     iconSrc={lightingIcon}
                     items={[
                         {
-                                description: 'Максимальная: ',
+                                description: 'Максимальная:',
                                 value: props.chargingSession.max_power !== undefined 
                                     ? `${props.chargingSession.max_power} кВт`
                                     : '',
                                 checkVisible: checkVisible
                         },
                         {
-                                description: 'Минимальная: ',
+                                description: 'Минимальная:',
                                 value: props.chargingSession.min_power !== undefined 
                                     ? `${props.chargingSession.min_power} кВт`
                                     : '',
                                 checkVisible: checkVisible
                         },
                         {
-                                description: 'Текущая: ',
+                                description: 'Текущая:',
                                 value: props.chargingSession.current_power !== undefined 
                                     ? `${props.chargingSession.current_power} кВт`
                                     : '',
                                 checkVisible: checkVisible
                             },
                             {
-                                description: 'Средная: ',
+                                description: 'Средная:',
                                 value: (props.chargingSession.min_power !== undefined && props.chargingSession.max_power !== undefined)
                                     ? `${(props.chargingSession.max_power + props.chargingSession.min_power) / 2} кВт`
                                     : '',

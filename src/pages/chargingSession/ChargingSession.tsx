@@ -18,7 +18,8 @@ export default function ChargingSessionPage(): React.JSX.Element {
             connector_id: "Connector-1",
             standard: 'CCS2',
             format: "Кабель",
-            power_type: "AC-3"			
+            power_type: "AC-3",
+            max_electric_power: 34
         },
         tariffs: [
         {

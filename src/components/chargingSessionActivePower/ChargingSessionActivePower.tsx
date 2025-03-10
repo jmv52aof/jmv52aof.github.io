@@ -3,8 +3,8 @@ import styles from './styles.module.scss'
 import lightingIcon from '@assets/images/lighting-fill-blue.svg'
 
 interface Props {
-    charged: number
-    batteryPercentage: number
+    power: number
+    maxPower: number
 }
 
 export default function ChargingSessionActivePower(props: Props): React.JSX.Element {
@@ -13,16 +13,13 @@ export default function ChargingSessionActivePower(props: Props): React.JSX.Elem
         <div className={styles.power}>
             <div className={styles.power__content}>               
                 <img className={styles.content__icon } src={lightingIcon}/>
-                {props.charged !== 0 && 
+                {props.power !== 0 && 
                     <span className={styles.content__text}>
-                    {props.charged} кВт</span>}       
+                    {props.power} кВт</span>}       
             </div>
             <PieChart 
-                value={props.charged} 
-                maxValue={props.batteryPercentage === 0
-                    ? 0
-                    : props.charged / (props.batteryPercentage / 100)
-                } 
+                power={props.power} 
+                maxPower={props.maxPower} 
                 colorTemplate='blue' 
                 className={styles.power__pieChart}/>                        
 
