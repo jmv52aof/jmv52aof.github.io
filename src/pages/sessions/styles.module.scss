@@ -1,0 +1,71 @@
+.sessionsPage {
+	min-width: 320px;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 100vh;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	margin: 0 auto;
+}
+
+.sessionsPage__header {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.header__content {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.content__tittle {
+	text-align: center;
+}
+
+.content__text,
+.date__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+	margin: 0;
+}
+
+.sessionsPage__main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sessionCard {
+	border: 1px solid transparent;
+	transition: border 0.3s;
+
+	&:hover {
+		border: 1px solid #8e949f;
+	}
+}
+
+.main__sessionsMap {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.sessionsMap__date {
+	display: flex;
+	flex-direction: row;
+}
+
+.date__text {
+	vertical-align: middle;
+}
