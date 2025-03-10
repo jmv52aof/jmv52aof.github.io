@@ -6,14 +6,13 @@
 	gap: 8px;
 }
 
-.sessionCard__header {
+.sessionCard__header,
+.header__content {
 	display: flex;
 	flex-direction: row;
 }
 
 .header__content {
-	display: flex;
-	flex-direction: row;
 	flex-grow: 1;
 }
 

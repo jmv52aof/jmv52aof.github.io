@@ -9,11 +9,18 @@ import { useNavigate } from 'react-router'
 import { SESSIONS_HISTORY_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { groupSessionsByDate } from './lib/functions'
+import ListLayout from '@layouts/listLayout/ListLayout'
+import { useState, useEffect } from 'react'
 
 /**
  * Страница с зарядными сессиями
  */
 export default function SessiosPage(): React.JSX.Element {
+	const [loading, setLoading] = useState(true)
+	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
+		[]
+	)
+
 	const nav = useNavigate()
 
 	const onSessionsFiltersClick = () => {
@@ -220,6 +227,45 @@ export default function SessiosPage(): React.JSX.Element {
 
 	const groupedSessions = groupSessionsByDate(sessions)
 
+	const createSessionItems = (offset: number, limit: number) => {
+		const dates = Object.keys(groupedSessions)
+		const slicedDates = dates.slice(offset, offset + limit)
+		const items = slicedDates.flatMap(date => [
+			<div key={`date-${date}`} className={styles.sessionsMap__date}>
+				<p className={styles.date__text}>{date}</p>
+			</div>,
+			...groupedSessions[date].map(session => (
+				<ContentBlockLayout
+					key={session.id}
+					className={styles.sessionCard}
+				>
+					<SessionCard session={session} />
+				</ContentBlockLayout>
+			)),
+		])
+		return items
+	}
+
+	const getData = (
+		offset: number,
+		limit: number
+	): Promise<React.JSX.Element[]> => {
+		return new Promise(resolve => {
+			setTimeout(() => {
+				resolve(createSessionItems(offset, limit))
+			}, 1000)
+		}).then(newData => {
+			setLoading(false)
+			return newData
+		})
+	}
+
+	useEffect(() => {
+		getData(0, 10).then(initialData => {
+			setListLayoutItems(initialData)
+		})
+	}, [])
+
 	return (
 		<div className={styles.sessionsPage}>
 			<div className={styles.sessionsPage__header}>
@@ -236,21 +282,11 @@ export default function SessiosPage(): React.JSX.Element {
 				</div>
 			</div>
 			<div className={styles.sessionsPage__main}>
-				{Object.entries(groupedSessions).map(([date, sessions]) => (
-					<div key={date} className={styles.main__sessionsMap}>
-						<div className={styles.sessionsMap__date}>
-							<p className={styles.date__text}>{date}</p>
-						</div>
-						{sessions.map(session => (
-							<ContentBlockLayout
-								key={session.id}
-								className={styles.sessionCard}
-							>
-								<SessionCard session={session} />
-							</ContentBlockLayout>
-						))}
-					</div>
-				))}
+				<ListLayout
+					items={listLayoutItems}
+					loading={loading}
+					getData={getData}
+				/>
 			</div>
 		</div>
 	)
