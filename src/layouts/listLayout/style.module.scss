@@ -1,8 +1,43 @@
-.listLayout {
+.listLayout__list {
 	width: 100%;
+	height: 500px;
 	overflow-y: auto;
+	margin-right: 8px;
+	margin-bottom: 43px;
 }
 
-.listLayout__item {
+.list__item {
 	margin-bottom: 12px;
+}
+
+.listLayout__blockButton {
+	position: absolute;
+	bottom: 16px;
+	right: 8px;
+}
+
+.listLayout__noData {
+	margin-top: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.noData__text_position {
+	margin-top: 16px;
+	margin-bottom: 0px;
+}
+
+.noData__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 120%;
+	color: #8e949f;
+}
+
+.list_noSelection {
+	user-select: none;
 }

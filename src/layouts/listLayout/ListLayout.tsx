@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styles from './style.module.scss'
-import { Loader } from '@components/ui/loader/Loader.tsx'
-import Button from '@components/ui/button/Button.tsx'
-import arrow from '@assets/images/arrow-up.svg'
-import { GET_DATA_LIMIT } from '@common/consts/app'
-import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification'
-import electricRefuelingImage from '@assets/images/electric-refueling.svg'
+import React, { useState, useRef } from 'react'
+import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
+import chargeStation from '@assets/images/chargeStation.svg'
 
 type Props = {
 	items: React.JSX.Element[]
-	loading?: boolean
+	loading: boolean
 	getData: (offset: number, limit: number) => Promise<Object[]>
+	onDataLoad: () => void
 }
 
 /**
@@ -18,11 +14,15 @@ type Props = {
  */
 export default function ListLayout(props: Props): React.JSX.Element {
 	const [offset, setOffset] = useState(0)
+	const limit = LIST_LAYOUT_LIMIT
 	const [dataIsLoading, setIsLoading] = useState(false)
 	const [hasMoreData, setHasMoreData] = useState(true)
+	const [hasScroll, setHasScroll] = useState(false)
 	const listContainerRef = useRef<HTMLDivElement | null>(null)
-
-	const limit = GET_DATA_LIMIT
+	const [isButtonVisible, setIsButtonVisible] = useState(false)
+	const [isDragging, setIsDragging] = useState(false)
+	const [startX, setStartX] = useState(0)
+	const [startY, setStartY] = useState(0)
 
 	const fetchData = () => {
 		setIsLoading(true)
@@ -35,20 +35,27 @@ export default function ListLayout(props: Props): React.JSX.Element {
 					setOffset(prevOffset => prevOffset + limit)
 				}
 			})
-			.finally(() => setIsLoading(false))
+			.finally(() => {
+				props.onDataLoad()
+				setIsLoading(false)
+			})
 	}
-
-	useEffect(() => {
-		if (offset > 0 && hasMoreData) {
-			fetchData()
-		}
-	}, [offset, hasMoreData])
 
 	const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
 		const target = e.target as HTMLDivElement
 		const userScrolledToEnd =
 			target.scrollHeight <= target.scrollTop + target.clientHeight
-		if (userScrolledToEnd && !dataIsLoading && hasMoreData) {
+
+		const isScrollableContent = target.scrollHeight > target.clientHeight
+		const isScrolledDown = target.scrollTop > 0
+
+		if (isScrollableContent && isScrolledDown) {
+			setIsButtonVisible(true)
+		} else {
+			setIsButtonVisible(false)
+		}
+
+		if (userScrolledToEnd && hasMoreData) {
 			fetchData()
 		}
 	}
@@ -62,26 +69,60 @@ export default function ListLayout(props: Props): React.JSX.Element {
 		}
 	}
 
+	const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+		setIsDragging(true)
+		setStartX(e.clientX)
+		setStartY(e.clientY)
+	}
+
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (!isDragging) return
+
+		const container = listContainerRef.current
+		if (!container) return
+
+		const deltaX = e.clientX - startX
+		const deltaY = e.clientY - startY
+
+		container.scrollTop -= deltaY
+		container.scrollLeft -= deltaX
+
+		setStartX(e.clientX)
+		setStartY(e.clientY)
+
+		e.preventDefault()
+	}
+
+	const handleMouseUp = () => {
+		setIsDragging(false)
+	}
+
 	return (
 		<div>
 			<div
 				ref={listContainerRef}
 				onScroll={handleScroll}
-				className={styles.listLayout}
+				onMouseDown={handleMouseDown}
+				onMouseMove={handleMouseMove}
+				onMouseUp={handleMouseUp}
+				onMouseLeave={handleMouseUp}
+				className={styles.listLayout__list}
 			>
-				{((dataIsLoading && props.items.length === 0) || props.loading) && (
-					<Loader />
-				)}
+				{dataIsLoading && props.items.length === 0 && <Loader />}
 				{!dataIsLoading && props.items.length === 0 && (
-					<EmptyDataNotification
-						iconSrc={electricRefuelingImage}
-						text='Здесь будут показаны зарядные станции'
-					/>
+					<div className={styles.listLayout__noData}>
+						<img src={chargeStation} alt='chargeStation' />
+						<p
+							className={`${styles.noData__text} ${styles.noData__text_position}`}
+						>
+							Здесь будут показаны зарядные станции
+						</p>
+					</div>
 				)}
 				{props.items.length > 0 && !props.loading && (
-					<div>
+					<div className={styles.list_noSelection}>
 						{props.items.map((item, index) => (
-							<div key={index} className={styles.listLayout__item}>
+							<div key={index} className={styles.list__item}>
 								{item}
 							</div>
 						))}
@@ -89,7 +130,11 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				)}
 			</div>
 			{dataIsLoading && props.items.length > 0 && <Loader />}
-			<Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow} />
+			{isButtonVisible && (
+				<div className={styles.listLayout__blockButton}>
+					<Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow} />
+				</div>
+			)}
 		</div>
 	)
 }
