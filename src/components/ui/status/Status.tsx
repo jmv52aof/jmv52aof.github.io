@@ -12,27 +12,24 @@ type Props = {
  * Блок с отображением статуса: соответствующие цвет и текст
  */
 export default function Status(props: Props): React.JSX.Element {
-
 	const color = props.color
 
 	const textSizeMap: Record<TextSize, number> = {
-		small: 10,
-		medium: 12,
-		large: 14,
-	};
-
-	const textSize = {
-		fontSize: textSizeMap[props.textSize] + 'px'
+		small: 12,
+		medium: 14,
+		large: 16,
 	}
 
-
+	const textSize = {
+		fontSize: textSizeMap[props.textSize] + 'px',
+	}
 
 	return (
 		<div
-			className={`${styles.status} ${props.className ?? ""} ${styles[color]}`}
+			className={`${styles.status} ${props.className ?? ''} ${styles[color]}`}
 		>
-			<p className={styles.text} style={textSize}> 
-				{props.text} 
+			<p className={styles.text} style={textSize}>
+				{props.text}
 			</p>
 		</div>
 	)

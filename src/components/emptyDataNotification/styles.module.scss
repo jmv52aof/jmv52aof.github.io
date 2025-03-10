@@ -1,0 +1,22 @@
+.block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	opacity: 0.5;
+}
+
+.block__icon {
+	width: 64px;
+	height: 64px;
+	filter: brightness(0) saturate(100%) invert(65%) sepia(2%) saturate(1188%)
+		hue-rotate(180deg) brightness(89%) contrast(100%);
+}
+
+.block__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 120%;
+	color: #8e949f;
+}

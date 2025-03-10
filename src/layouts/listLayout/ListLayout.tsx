@@ -1,8 +1,4 @@
 import React, { useState, useRef } from 'react'
-import styles from './style.module.scss'
-import { Loader } from '@components/ui/loader/Loader.tsx'
-import Button from '@components/ui/button/Button.tsx'
-import arrow from '@assets/images/arrow-up.svg'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
 import chargeStation from '@assets/images/chargeStation.svg'
 

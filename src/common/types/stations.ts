@@ -89,4 +89,5 @@ export interface ConnectorInfoDto {
 	standard: ConnectorStandard
 	format: ConnectorFormat
 	power_type: ConnectorPowerType
+	max_electric_power: number
 }
