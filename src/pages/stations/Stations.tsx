@@ -16,15 +16,16 @@ import {
 import ListLayout from '@layouts/listLayout/ListLayout'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import StationCard from '@components/stationCard/StationCard'
+import { StationDto } from '@common/types/stations'
 
 /**
  * Страница со списком станций
  */
 export default function StationsPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { stations } = useContext(RootStateContext)
+	const { stations, setStations } = useContext(RootStateContext)
 
-	const { loading, getByOffsetAndLimit } = useStationsLoader()
+	const { getByOffsetAndLimit } = useStationsLoader()
 
 	const onFiltersClick = () => {
 		nav(
@@ -67,7 +68,7 @@ export default function StationsPage(): React.JSX.Element {
 						)
 					})}
 					getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
-					loading={loading}
+					onDataLoad={data => setStations(data as StationDto[])}
 				/>
 			</div>
 		</div>

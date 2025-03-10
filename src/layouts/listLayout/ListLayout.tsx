@@ -1,12 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
 import chargeStation from '@assets/images/chargeStation.svg'
+import styles from './styles.module.scss'
+import Button from '@components/ui/button/Button.tsx'
+import { Loader } from '@components/ui/loader/Loader.tsx'
+import arrowImage from '@assets/images/arrow-up.svg'
 
 type Props = {
 	items: React.JSX.Element[]
 	loading: boolean
 	getData: (offset: number, limit: number) => Promise<Object[]>
-	onDataLoad: () => void
+	onDataLoad: (newData: Object[]) => void
 }
 
 /**
@@ -14,15 +18,22 @@ type Props = {
  */
 export default function ListLayout(props: Props): React.JSX.Element {
 	const [offset, setOffset] = useState(0)
-	const limit = LIST_LAYOUT_LIMIT
 	const [dataIsLoading, setIsLoading] = useState(false)
 	const [hasMoreData, setHasMoreData] = useState(true)
-	const [hasScroll, setHasScroll] = useState(false)
 	const listContainerRef = useRef<HTMLDivElement | null>(null)
 	const [isButtonVisible, setIsButtonVisible] = useState(false)
 	const [isDragging, setIsDragging] = useState(false)
 	const [startX, setStartX] = useState(0)
 	const [startY, setStartY] = useState(0)
+	const [data, setData] = useState<Object[]>([])
+
+	useEffect(() => {
+		fetchData()
+	}, [])
+
+	console.log(data)
+
+	const limit = LIST_LAYOUT_LIMIT
 
 	const fetchData = () => {
 		setIsLoading(true)
@@ -34,9 +45,12 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				} else {
 					setOffset(prevOffset => prevOffset + limit)
 				}
+
+				const updatedData = data.concat(newData)
+				setData(updatedData)
+				props.onDataLoad(updatedData)
 			})
 			.finally(() => {
-				props.onDataLoad()
 				setIsLoading(false)
 			})
 	}
@@ -132,7 +146,11 @@ export default function ListLayout(props: Props): React.JSX.Element {
 			{dataIsLoading && props.items.length > 0 && <Loader />}
 			{isButtonVisible && (
 				<div className={styles.listLayout__blockButton}>
-					<Button onClick={scrollToTop} variant='iconSmall' iconSrc={arrow} />
+					<Button
+						onClick={scrollToTop}
+						variant='iconSmall'
+						iconSrc={arrowImage}
+					/>
 				</div>
 			)}
 		</div>
