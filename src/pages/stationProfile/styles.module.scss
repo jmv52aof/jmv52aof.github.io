@@ -1,0 +1,81 @@
+.stationProfile__header {
+	display: flex;
+	padding-top: 10.5px;
+	padding-bottom: 10.5px;
+	margin-top: 32px;
+	margin-bottom: 12px;
+}
+
+.stationProfile__addressBox {
+	margin: 0 8px 16px 8px;
+}
+
+.text__address_title {
+	margin-bottom: 6px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.addressBox__description {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.addressBox__description_text {
+	margin: 0;
+}
+
+.addressBox__distanceBox {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.stationProfile__description {
+	margin: 0 8px;
+}
+
+.line_separator {
+	margin: 16px 8px;
+	height: 1px;
+	background-color: #e8e8ee;
+	border-radius: 50%;
+}
+
+.text__description_title {
+	margin-bottom: 6px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.text_title {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.text_distance {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 120%;
+	color: #8e949f;
+}
