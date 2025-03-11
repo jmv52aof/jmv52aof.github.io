@@ -22,8 +22,16 @@
   background: #27ae60;
 }
 
+.actionButton_add:hover {
+  background: #259c57;
+}
+
 .actionButton_remove {
   background: #f63255;
+}
+
+.actionButton_remove:hover {
+  background: #e02e4e;
 }
 
 .actionButton_disabled {
