@@ -213,7 +213,6 @@ export const convertResponseStationDto = (
 		),
 		images: station.images,
 		metres_to_station: station.metres_to_station,
-		rating: station.rating,
 		occupation: station.occupation
 			? station.occupation.map(value =>
 					convertDailyOccupationResponseDto(value)
