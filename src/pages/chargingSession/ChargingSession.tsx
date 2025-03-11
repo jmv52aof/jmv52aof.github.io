@@ -3,7 +3,7 @@ import commonStyles from '@common/styles.module.scss'
 import arrowImage from '@assets/images/arrow-left.svg'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
-import ChargingSession from '@features/chargingSession/CharginSession'
+import ChargingSession from '@features/chargingSession/ChargingSession'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const chargingSession: ChargingSessionDto = {

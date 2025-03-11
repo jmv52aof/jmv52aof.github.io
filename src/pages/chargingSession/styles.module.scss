@@ -1,13 +1,11 @@
 .page__content {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
-	flex-grow: 1;
+	margin-bottom: 32px;
 }
 
 .content__header {
-	width: 100%;
 	height: 40px;
 	display: flex;
 	align-items: center;
