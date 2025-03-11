@@ -1,6 +1,5 @@
 import styles from './styles/card.module.scss'
 import pathImage from '@assets/images/path.svg'
-import ratingImage from '@assets/images/rating-star.svg'
 import { StationDto } from '@common/types/stations'
 import Connector from './components/connector/Connector'
 import StationMarker from '@components/ui/stationMarker/StationMarker'
@@ -53,12 +52,6 @@ export default function StationCard(props: Readonly<Props>) {
 								isLast={index === connectorsToRender.length - 1}
 							/>
 						))}
-					</div>
-				</div>
-				<div className={styles.body__rating}>
-					<div className={styles.rating__content}>
-						<img src={ratingImage} alt='rating' />
-						<p className={styles.content__text}>{props.station.rating}</p>
 					</div>
 				</div>
 			</div>

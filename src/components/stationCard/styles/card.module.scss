@@ -95,26 +95,6 @@
 	flex-grow: 1;
 }
 
-.body__rating {
-	display: flex;
-	flex-direction: column;
-	justify-content: end;
-	flex-grow: 0.5;
-}
-
-.rating__content {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: end;
-
-	img {
-		width: 18px;
-		height: 18px;
-		margin-right: 3px;
-	}
-}
-
 .content__text {
 	margin: 2px;
 }
