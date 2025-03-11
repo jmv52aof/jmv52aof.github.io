@@ -2,41 +2,43 @@ import React, { useState, useEffect } from 'react';
 import Popup from '../../components/popup/Popup';
 import styles from './styles.module.scss';
 
-interface PopUpWrapperProps {
+type Props = {
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const PopUpWrapper: React.FC<PopUpWrapperProps> = ({ children, isOpen, onClose }) => {
+const PopupWrapper: React.FC<Props> = (
+    props: Readonly<Props>,
+) => {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
-        if (isOpen) {
+        if (props.isOpen) {
             setIsActive(true);
             document.body.style.overflow = 'hidden';
         } else {
             setIsActive(false);
             document.body.style.overflow = 'unset';
       }
-    }, [isOpen]);
+    }, [props.isOpen]);
 
     const handleClose = () => {
         setIsActive(false);
         setTimeout(() => {
-            onClose();
-        }, 300);
+            props.onClose();
+        }, 500);
     };
 
     return (
-        <Popup onClose={handleClose}>
-            <div className={`${styles.popup__overlay} ${isActive ? styles.active : ''}`}>
-                <div className={styles.popup__content}>
-                    {children}
+        <div className={`${styles.popupWrapper__overlay} ${isActive ? styles.active : ''}`}>
+            <div className={styles.popupWrapper__contentWrapper}>
+                <div className={`${styles.popupWrapper__content} ${isActive ? styles.active : ''}`}>
+                    <Popup onClose={handleClose} children={props.children}></Popup>
                 </div>
             </div>
-        </Popup>
+        </div>
     );
 };
 
-export default PopUpWrapper;
+export default PopupWrapper;

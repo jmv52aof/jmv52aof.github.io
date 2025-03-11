@@ -3,23 +3,26 @@ import { useSwipeable } from 'react-swipeable';
 import styles from './styles.module.scss';
 
 type Props = {
-	children: React.JSX.Element,
+	children: React.ReactNode,
 	onClose: Function,
 }
 
-export default function EmptyDataNotification(
+const Popup: React.FC<Props> = (
 	props: Readonly<Props>,
-): React.JSX.Element {
+) => {
     const handlers = useSwipeable({
         onSwipedDown: () => props.onClose(),
         trackMouse: true,
     });
 
 	return (
-        <div className={''} onClick={() => props.onClose()}>
-            <div className={''} {...handlers} onClick={(e) => e.stopPropagation()}>
+        <div onClick={() => props.onClose()}>
+            <div className={styles.popup__content} {...handlers} onClick={(e) => e.stopPropagation()}>
+                <div className={styles.popup__topLine}></div>
                 {props.children}
             </div>
         </div>
 	)
 }
+
+export default Popup;
