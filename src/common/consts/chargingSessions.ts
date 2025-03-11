@@ -7,7 +7,7 @@ export namespace ChargingSessionStatuses {
 	export const INVALID: ChargingSessionStatus = 'Невалидна'
 }
 
-export const CHARGING_SESSION_COLORS: Record<
+export const CHARGING_SESSION_STATUS_HAS_COLOR: Record<
 	ChargingSessionStatus,
 	ColorTemplate
 > = {

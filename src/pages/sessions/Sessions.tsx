@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react'
 /**
  * Страница с зарядными сессиями
  */
-export default function SessiosPage(): React.JSX.Element {
+export default function SessionsPage(): React.JSX.Element {
 	const [loading, setLoading] = useState(true)
 	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
 		[]
@@ -36,7 +36,7 @@ export default function SessiosPage(): React.JSX.Element {
 				station_address: 'г. Киров, ул. Дзержинского, 110',
 				evse_uid: '1',
 				connector_id: '1',
-				standard: 'Type 1',
+				standard: 'CCS2',
 				format: 'Кабель',
 				power_type: 'AC',
 				max_electric_power: 36,
@@ -48,15 +48,15 @@ export default function SessiosPage(): React.JSX.Element {
 				month: 2,
 				day: 7,
 				hours: 13,
-				minutes: 20,
+				minutes: 2,
 				seconds: 48,
 			},
 			end_date: {
 				year: 2025,
 				month: 2,
 				day: 7,
-				hours: 15,
-				minutes: 8,
+				hours: 14,
+				minutes: 50,
 				seconds: 48,
 			},
 			max_power: 36,
@@ -75,7 +75,7 @@ export default function SessiosPage(): React.JSX.Element {
 				station_address: 'г. Киров, ул. Дзержинского, 110',
 				evse_uid: '1',
 				connector_id: '1',
-				standard: 'Type 1',
+				standard: 'CCS2',
 				format: 'Кабель',
 				power_type: 'AC',
 				max_electric_power: 36,
@@ -87,15 +87,15 @@ export default function SessiosPage(): React.JSX.Element {
 				month: 2,
 				day: 7,
 				hours: 13,
-				minutes: 20,
+				minutes: 2,
 				seconds: 48,
 			},
 			end_date: {
 				year: 2025,
 				month: 2,
 				day: 7,
-				hours: 15,
-				minutes: 8,
+				hours: 14,
+				minutes: 50,
 				seconds: 48,
 			},
 			max_power: 36,
@@ -126,7 +126,7 @@ export default function SessiosPage(): React.JSX.Element {
 				month: 2,
 				day: 5,
 				hours: 13,
-				minutes: 20,
+				minutes: 2,
 				seconds: 48,
 			},
 			end_date: {
@@ -165,7 +165,7 @@ export default function SessiosPage(): React.JSX.Element {
 				month: 2,
 				day: 5,
 				hours: 13,
-				minutes: 20,
+				minutes: 2,
 				seconds: 48,
 			},
 			end_date: {
@@ -204,7 +204,7 @@ export default function SessiosPage(): React.JSX.Element {
 				month: 1,
 				day: 15,
 				hours: 13,
-				minutes: 20,
+				minutes: 2,
 				seconds: 48,
 			},
 			end_date: {
@@ -230,19 +230,23 @@ export default function SessiosPage(): React.JSX.Element {
 	const createSessionItems = (offset: number, limit: number) => {
 		const dates = Object.keys(groupedSessions)
 		const slicedDates = dates.slice(offset, offset + limit)
-		const items = slicedDates.flatMap(date => [
-			<div key={`date-${date}`} className={styles.sessionsMap__date}>
-				<p className={styles.date__text}>{date}</p>
-			</div>,
-			...groupedSessions[date].map(session => (
-				<ContentBlockLayout
-					key={session.id}
-					className={styles.sessionCard}
-				>
-					<SessionCard session={session} />
-				</ContentBlockLayout>
-			)),
-		])
+		const items = slicedDates.flatMap(date => {
+			const [day, month, year] = date.split(' ')
+
+			return [
+				<div key={`date-${date}`} className={styles.sessionsMap__date}>
+					<p className={styles.date__text}>{`${day} ${month}`} </p>
+				</div>,
+				...groupedSessions[date].map(session => (
+					<ContentBlockLayout
+						key={session.id}
+						className={styles.sessionCard}
+					>
+						<SessionCard session={session} />
+					</ContentBlockLayout>
+				)),
+			]
+		})
 		return items
 	}
 
@@ -250,13 +254,13 @@ export default function SessiosPage(): React.JSX.Element {
 		offset: number,
 		limit: number
 	): Promise<React.JSX.Element[]> => {
-		return new Promise(resolve => {
+		return new Promise<React.JSX.Element[]>(resolve => {
 			setTimeout(() => {
-				resolve(createSessionItems(offset, limit))
+				const chunk = createSessionItems(offset, limit)
+				resolve(chunk)
 			}, 1000)
-		}).then(newData => {
+		}).finally(() => {
 			setLoading(false)
-			return newData
 		})
 	}
 
@@ -265,6 +269,23 @@ export default function SessiosPage(): React.JSX.Element {
 			setListLayoutItems(initialData)
 		})
 	}, [])
+
+	const totalSessionsCount = Object.keys(groupedSessions).length
+
+	const onDataLoad = () => {
+		if (
+			listLayoutItems.length > 0 &&
+			listLayoutItems.length < totalSessionsCount
+		) {
+			const nextOffset = listLayoutItems.length
+			getData(nextOffset, 15).then(newData => {
+				if (newData && newData.length > 0) {
+					console.log(newData)
+					setListLayoutItems(prevItems => [...prevItems, ...newData])
+				}
+			})
+		}
+	}
 
 	return (
 		<div className={styles.sessionsPage}>
@@ -286,6 +307,7 @@ export default function SessiosPage(): React.JSX.Element {
 					items={listLayoutItems}
 					loading={loading}
 					getData={getData}
+					onDataLoad={onDataLoad}
 				/>
 			</div>
 		</div>

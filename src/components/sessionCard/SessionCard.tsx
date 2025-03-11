@@ -2,13 +2,15 @@ import styles from './styles/sessionCard.module.scss'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import SessionConnector from './components/sessionConnector/SessionConnector'
 import Status from '@components/ui/status/Status'
-import { CHARGING_SESSION_COLORS } from '@common/consts/chargingSessions'
-import ProfileButton from './components/profileButton/ProfileButton'
+import { CHARGING_SESSION_STATUS_HAS_COLOR } from '@common/consts/chargingSessions'
 import { useNavigate } from 'react-router'
 import { SESSION_PROFILE_ENDPOINT } from '@common/consts/endpoints'
 import { STATION_PROFILE_ENDPOINT } from '@common/consts/endpoints'
 import GradientButton from '@components/ui/gradientButton/GradientButton'
 import SessionValues from './components/sessionValues/SessionValues'
+import Button from '@components/ui/filtersButton/FiltersButton'
+import profileImage from '@assets/images/square-share-line.svg'
+import arrowRightImage from '@assets/images/arrow-right.svg'
 
 type Props = {
 	session: ChargingSessionDto
@@ -21,11 +23,11 @@ export default function SessionCard(props: Props): React.JSX.Element {
 	const nav = useNavigate()
 
 	const onSessionClick = () => {
-		nav(SESSION_PROFILE_ENDPOINT)
+		nav(SESSION_PROFILE_ENDPOINT + props.session.id)
 	}
 
 	const onStationClick = () => {
-		nav(STATION_PROFILE_ENDPOINT)
+		nav(STATION_PROFILE_ENDPOINT + props.session.connector_info.station_id)
 	}
 
 	return (
@@ -54,18 +56,21 @@ export default function SessionCard(props: Props): React.JSX.Element {
 								textSize='medium'
 								text={props.session.status}
 								color={
-									CHARGING_SESSION_COLORS[
+									CHARGING_SESSION_STATUS_HAS_COLOR[
 										props.session.status
 									]
 								}
 							/>
 						</div>
 						<div className={styles.station__button}>
-							<ProfileButton
+							<Button
 								onClick={
 									isCharging ? onSessionClick : onStationClick
 								}
-								variant={isCharging ? 'arrow' : 'standard'}
+								variant='fill'
+								iconSrc={
+									isCharging ? arrowRightImage : profileImage
+								}
 							/>
 						</div>
 					</div>

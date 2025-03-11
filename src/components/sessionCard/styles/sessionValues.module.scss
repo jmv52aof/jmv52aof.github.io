@@ -17,10 +17,10 @@
 
 .chargingInfo__icon {
 	display: flex;
-	margin-right: 5px;
+	margin-right: 4px;
 	img {
-		width: 22px;
-		height: 16px;
+		width: 24px;
+		height: 24px;
 	}
 }
 
@@ -28,6 +28,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
+	margin-top: 5px;
+	margin-bottom: 4px;
 }
 
 .row__label {
@@ -60,10 +62,10 @@
 
 .session__icon {
 	display: flex;
-	margin-right: 6px;
+	margin-right: 4px;
 	img {
-		width: 20px;
-		height: 20px;
+		width: 24px;
+		height: 24px;
 	}
 }
 
@@ -105,6 +107,8 @@
 	flex-direction: column;
 	gap: 6px;
 	flex-grow: 1;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .activeSessionTexts__bateryInfo {

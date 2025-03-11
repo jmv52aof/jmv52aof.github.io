@@ -3,7 +3,12 @@ import { ChargingSessionDto } from '@common/types/chargingSessions'
 import batteryImage from '@assets/images/battery-charge.svg'
 import clockImage from '@assets/images/clock.svg'
 import paymentImage from '@assets/images/payment.svg'
-import { calculateDuration } from './lib/functions'
+import {
+	dateToTimestamp,
+	getTimesDifference,
+	timeToISOString,
+	timeToStringWithUnitsOfMeasurement,
+} from '@common/functions/date'
 
 type Props = {
 	sessionValues: ChargingSessionDto
@@ -11,6 +16,17 @@ type Props = {
 }
 
 export default function SessionValues(props: Props): React.JSX.Element {
+	const duration =
+		props.sessionValues.end_date === undefined
+			? getTimesDifference(
+					dateToTimestamp(new Date()),
+					props.sessionValues.start_date
+			  )
+			: getTimesDifference(
+					props.sessionValues.end_date,
+					props.sessionValues.start_date
+			  )
+
 	return (
 		<>
 			<div className={styles.horizontalSplit} />
@@ -89,17 +105,20 @@ export default function SessionValues(props: Props): React.JSX.Element {
 					<div className={styles.times__start}>
 						<p className={styles.row__label}>Старт:</p>
 						<p className={styles.row__value}>
-							{props.sessionValues.start_date.hours}:
-							{props.sessionValues.start_date.minutes}:
-							{props.sessionValues.start_date.seconds}
+							{timeToISOString(
+								props.sessionValues.start_date.hours,
+								props.sessionValues.start_date.minutes,
+								props.sessionValues.start_date.seconds
+							)}
 						</p>
 					</div>
 					<div className={styles.times__duration}>
 						<p className={styles.row__label}>Длительность:</p>
 						<p className={styles.row__value}>
-							{calculateDuration(
-								props.sessionValues.start_date,
-								props.sessionValues.end_date
+							{timeToStringWithUnitsOfMeasurement(
+								duration.hours,
+								duration.minutes,
+								duration.seconds
 							)}
 						</p>
 					</div>
@@ -120,7 +139,10 @@ export default function SessionValues(props: Props): React.JSX.Element {
 							<div className={styles.texts__amount}>
 								<p className={styles.row__label}>Сумма:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.total_cost} руб.
+									{props.sessionValues.total_cost}{' '}
+									{props.sessionValues.tariffs?.[0]
+										?.currency || 'руб'}
+									.
 								</p>
 							</div>
 							<div className={styles.texts__paymentMethod}>

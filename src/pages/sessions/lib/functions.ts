@@ -1,38 +1,30 @@
 import { ChargingSessionDto } from '@common/types/chargingSessions'
+import { timestampToDate } from '@common/functions/date'
 
 /**
- * Группировка и сортировка сессий по дате
+ * Функция группирует сессии по дате и сортирует их по убыванию (относительно временной метки).
+ *
+ * @param sessions - Массив сессий, каждая из которых содержит дату начала в формате Timestamp.
+ * @returns - Объект, где ключами являются строки с датами в формате "day mounth",
+ * а значениями — массивы сессий, отсортированные по убыванию даты начала сессии.
  */
-const formatDate = (day: number, month: number, year: number) => {
-	const date = new Date(year, month - 1, day)
-	return new Intl.DateTimeFormat('ru-RU', {
-		day: 'numeric',
-		month: 'long',
-	}).format(date)
-}
 
 export const groupSessionsByDate = (sessions: ChargingSessionDto[]) => {
 	const sortedSessions = [...sessions].sort((a, b) => {
-		const dateA = new Date(
-			a.start_date.year,
-			a.start_date.month - 1,
-			a.start_date.day
-		)
-		const dateB = new Date(
-			b.start_date.year,
-			b.start_date.month - 1,
-			b.start_date.day
-		)
+		const dateA = timestampToDate(a.start_date)
+		const dateB = timestampToDate(b.start_date)
 		return dateB.getTime() - dateA.getTime()
 	})
 
 	return sortedSessions.reduce<Record<string, ChargingSessionDto[]>>(
 		(acc, session) => {
-			const dateKey = formatDate(
-				session.start_date.day,
-				session.start_date.month,
-				session.start_date.year
-			)
+			const sessionDate = timestampToDate(session.start_date)
+			const dateKey = new Intl.DateTimeFormat('ru-RU', {
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric',
+			}).format(sessionDate)
+
 			if (!acc[dateKey]) {
 				acc[dateKey] = []
 			}

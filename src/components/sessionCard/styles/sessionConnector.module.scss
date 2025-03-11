@@ -1,7 +1,7 @@
 .connector {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	justify-content: space-between;
 }
 
 .connector__icon {
@@ -10,8 +10,8 @@
 	align-items: center;
 	justify-content: center;
 	img {
-		width: 65px;
-		height: 65px;
+		width: 60px;
+		height: 60px;
 	}
 }
 

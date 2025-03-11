@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router'
 import * as endpoints from '@common/consts/endpoints'
 import StationsPage from '@pages/stations/Stations'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
-import SessiosPage from '@pages/sessions/Sessions'
+import SessionsPage from '@pages/sessions/Sessions'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 
 export default function AppRouter(): React.JSX.Element {
@@ -22,7 +22,7 @@ export default function AppRouter(): React.JSX.Element {
 			/>
 			<Route
 				path={endpoints.SESSIONS_HISTORY_ENDPOINT}
-				element={<SessiosPage />}
+				element={<SessionsPage />}
 			/>
 			<Route path='*' element={<StationsPage />} />
 		</Routes>
