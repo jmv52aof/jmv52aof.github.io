@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
-import chargeStation from '@assets/images/chargeStation.svg'
 import styles from './styles.module.scss'
 import Button from '@components/ui/button/Button.tsx'
 import { Loader } from '@components/ui/loader/Loader.tsx'
 import arrowImage from '@assets/images/arrow-up.svg'
+import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification.tsx'
+import chargeStationImage from '@assets/images/charge-station.svg'
 
 type Props = {
 	items: React.JSX.Element[]
-	loading: boolean
+	loading?: boolean
 	getData: (offset: number, limit: number) => Promise<Object[]>
 	onDataLoad: (newData: Object[]) => void
 }
@@ -30,8 +31,6 @@ export default function ListLayout(props: Props): React.JSX.Element {
 	useEffect(() => {
 		fetchData()
 	}, [])
-
-	console.log(data)
 
 	const limit = LIST_LAYOUT_LIMIT
 
@@ -124,14 +123,10 @@ export default function ListLayout(props: Props): React.JSX.Element {
 			>
 				{dataIsLoading && props.items.length === 0 && <Loader />}
 				{!dataIsLoading && props.items.length === 0 && (
-					<div className={styles.listLayout__noData}>
-						<img src={chargeStation} alt='chargeStation' />
-						<p
-							className={`${styles.noData__text} ${styles.noData__text_position}`}
-						>
-							Здесь будут показаны зарядные станции
-						</p>
-					</div>
+					<EmptyDataNotification
+						text='Здесь будут показаны зарядные станции'
+						iconSrc={chargeStationImage}
+					/>
 				)}
 				{props.items.length > 0 && !props.loading && (
 					<div className={styles.list_noSelection}>
