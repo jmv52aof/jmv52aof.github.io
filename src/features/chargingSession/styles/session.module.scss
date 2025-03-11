@@ -1,0 +1,21 @@
+.buttonBlock {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+
+	button {
+		background: #f63255 !important;
+	}
+
+	button:hover {
+		background: #e02e4e !important;
+	}
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: 16px;
+}
