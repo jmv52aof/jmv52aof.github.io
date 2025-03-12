@@ -1,0 +1,42 @@
+$popup-offset: 5000px;
+
+.map {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.map__container {
+	height: 100%;
+}
+
+.map__loading {
+	z-index: 1;
+}
+
+.map__popUp {
+	position: absolute !important;
+	top: -$popup-offset !important;
+}
+
+.map__coordinates {
+	position: absolute;
+	left: 8px;
+	top: 8px;
+}
+
+.popUp__container {
+	position: absolute;
+	top: $popup-offset + 54px;
+	left: -35px;
+	animation: 0.1s fadeIn;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

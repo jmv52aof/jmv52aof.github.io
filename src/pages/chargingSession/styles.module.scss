@@ -1,0 +1,28 @@
+.page__content {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	margin-bottom: 32px;
+}
+
+.content__header {
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header__button {
+	flex: 0 0 auto;
+}
+
+.header__tittle {
+	flex-grow: 1;
+	text-align: center;
+	padding-right: 16px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #373435;
+}

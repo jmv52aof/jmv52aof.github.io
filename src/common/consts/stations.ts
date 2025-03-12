@@ -12,7 +12,7 @@ import chademoImage from '@assets/images/connectors/chademo.svg'
 import teslaImage from '@assets/images/connectors/tesla.svg'
 import unknownTypeImage from '@assets/images/connectors/unknown-type.png'
 import { StationStatus } from '@common/types/stations'
-import { ColorTemplate } from '@components/ui/status/lib/types'
+import { ColorTemplate } from '@common/types/status'
 
 export namespace StationStatuses {
 	export const AVAILABLE: StationStatus = 'Доступна'
@@ -38,8 +38,8 @@ export const CONNECTOR_STATUS_COLORS: Record<
 > = {
 	Доступен: 'green',
 	Занят: 'orange',
-	Отключен: 'red',
-	'Нет соединения': 'red',
+	Отключен: 'grey',
+	'Нет соединения': 'grey',
 	Недоступен: 'grey',
 }
 
@@ -59,6 +59,7 @@ export const DEFAULT_FILTERS: StationFilters = {
 	onlyAvailableStations: false,
 	minimalPower: 0,
 	isModified: false,
+	shouldUpdateStations: false,
 }
 
 export const STATION_STATUS_COLORS: Record<StationStatus, ColorTemplate> = {
