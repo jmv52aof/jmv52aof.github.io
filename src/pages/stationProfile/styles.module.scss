@@ -1,0 +1,118 @@
+.stationProfile__header {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10.5px;
+	margin-top: 32px;
+	margin-bottom: 12px;
+}
+
+.stationProfile__buttonBackward {
+	position: absolute;
+	top: 26px;
+	left: 12px;
+}
+.stationProfile__address {
+	margin: 0 8px 16px;
+}
+
+.addressBox__description {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.addressBox__description_text {
+	margin: 0;
+}
+
+.addressBox__distanceBox {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.stationProfile__description {
+	margin: 0 8px;
+	position: relative;
+}
+
+.stationProfile__lineSeparator {
+	margin: 0 8px;
+	height: 1px;
+	background-color: #e8e8ee;
+	border-radius: 50%;
+}
+
+.stationProfile__dailyOccupation,
+.stationProfile__support {
+	margin: 0 8px;
+}
+
+.title {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.text_subTitle {
+	margin-bottom: 6px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 120%;
+	color: #373435;
+	overflow: hidden;
+}
+
+.description__footer {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	margin: 4px 8px 8px 8px;
+}
+
+.text_collapsed {
+	max-height: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.text_expanded {
+	max-height: none;
+}
+
+.text_distance {
+	white-space: nowrap;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 8px;
+	line-height: 120%;
+	color: #8e949f;
+}
+
+.stationProfile__connectors {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 14px;
+	padding: 0 8px;
+}
+
+.stationProfile__support {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}

@@ -38,8 +38,8 @@ export const CONNECTOR_STATUS_COLORS: Record<
 > = {
 	Доступен: 'green',
 	Занят: 'orange',
-	Отключен: 'red',
-	'Нет соединения': 'red',
+	Отключен: 'grey',
+	'Нет соединения': 'grey',
 	Недоступен: 'grey',
 }
 
