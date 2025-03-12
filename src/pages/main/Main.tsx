@@ -14,6 +14,7 @@ import {
 	StationsFiltersPreviousPageQueries,
 } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
+import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
 
 /**
  * Главная страница с картой станций
@@ -63,6 +64,7 @@ export default function MainPage(): React.JSX.Element {
 							iconSrc={tuningImage}
 						/>
 					</div>
+					<ActiveSessionNotify />
 				</div>
 			)}
 			<StationsMap loading={loading} />

@@ -3,6 +3,7 @@ $transition-duration: 0.3s;
 .button {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-direction: row;
 	box-sizing: border-box;
 	white-space: nowrap;
