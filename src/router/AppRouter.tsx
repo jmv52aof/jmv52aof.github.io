@@ -5,6 +5,7 @@ import StationProfilePage from '@pages/stationProfile/StationProfile'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 import MainPage from '@pages/main/Main'
+import PaymentMethodPage from '@pages/paymentMethod/PaymentMethod'
 
 export default function AppRouter(): React.JSX.Element {
 	return (
@@ -24,6 +25,10 @@ export default function AppRouter(): React.JSX.Element {
 			<Route
 				path={`${endpoints.STATION_PROFILE_ENDPOINT}:id`}
 				element={<StationProfilePage />}
+			/>
+			<Route
+				path={endpoints.PAYMENT_METHOD_ENDPOINT}
+				element={<PaymentMethodPage />}
 			/>
 			<Route path='*' element={<MainPage />} />
 		</Routes>
