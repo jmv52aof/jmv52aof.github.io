@@ -83,3 +83,16 @@ export interface StationResponseDto {
 	metres_to_station?: number
 	occupation?: DailyOccupationResponseDto[]
 }
+
+export interface ConnectorInfoResponseDto {
+	station_id: string
+	station_name: string
+	station_address: string
+	/** Уникальный идентификатор EVSE */
+	evse_uid: string
+	connector_id: string
+	standard: ConnectorStandardResponse
+	format: ConnectorFormatResponse
+	power_type: ConnectorPowerTypeResponse
+	max_electric_power: number
+}

@@ -1,4 +1,14 @@
+import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { StationDto } from '@common/types/stations'
+import {
+	getChargingSessionById,
+	getChargingSessions,
+} from 'api/chargingSessions/api'
+import { convertChargingSessionResponseDto } from 'api/chargingSessions/lib/converters'
+import {
+	GetChargingSessionByIdRequestOptions,
+	GetChargingSessionsRequestOptions,
+} from 'api/chargingSessions/types/request'
 import { getStationById, getStations } from 'api/stations/api'
 import { convertResponseStationDto } from 'api/stations/lib/converters'
 import {
@@ -25,8 +35,32 @@ export const useApi = () => {
 		return undefined
 	}
 
+	const getChargingSessionsFromApi = async (
+		options: GetChargingSessionsRequestOptions
+	): Promise<ChargingSessionDto[]> => {
+		const response = await getChargingSessions({ ...options, token: undefined })
+		if (response.data)
+			return response.data.map(value =>
+				convertChargingSessionResponseDto(value)
+			)
+		return []
+	}
+
+	const getChargingSessionByIdFromApi = async (
+		options: GetChargingSessionByIdRequestOptions
+	): Promise<ChargingSessionDto | undefined> => {
+		const response = await getChargingSessionById({
+			...options,
+			token: undefined,
+		})
+		if (response.data) return convertChargingSessionResponseDto(response.data)
+		return undefined
+	}
+
 	return {
 		getStationsFromApi,
 		getStationByIdFromApi,
+		getChargingSessionsFromApi,
+		getChargingSessionByIdFromApi,
 	}
 }
