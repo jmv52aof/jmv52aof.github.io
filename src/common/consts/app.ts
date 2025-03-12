@@ -7,6 +7,7 @@ export const DEFAULT_ROOT_STATE: RootState = {
 		onlyAvailableStations: false,
 		minimalPower: 0,
 		isModified: false,
+		shouldUpdateStations: true,
 	},
 	stations: [],
 }

@@ -35,6 +35,9 @@ export default function ListLayout(props: Props): React.JSX.Element {
 	const limit = LIST_LAYOUT_LIMIT
 
 	const fetchData = () => {
+		/** Подгрузка данных отключена, т.к. сейчас все данные загружаются в карте */
+		if (props.items) return
+
 		setIsLoading(true)
 		props
 			.getData(offset, limit)
@@ -121,8 +124,10 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				onMouseLeave={handleMouseUp}
 				className={styles.listLayout__list}
 			>
-				{dataIsLoading && props.items.length === 0 && <Loader />}
-				{!dataIsLoading && props.items.length === 0 && (
+				{((dataIsLoading && props.items.length === 0) || props.loading) && (
+					<Loader />
+				)}
+				{!dataIsLoading && props.items.length === 0 && !props.loading && (
 					<EmptyDataNotification
 						text='Здесь будут показаны зарядные станции'
 						iconSrc={chargeStationImage}

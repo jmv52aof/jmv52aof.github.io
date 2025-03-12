@@ -1,4 +1,5 @@
-import { ColorTemplate, TextSize } from '../status/lib/types'
+import { ColorTemplate } from '@common/types/status'
+import { TextSize } from '../status/lib/types'
 import styles from './styles.module.scss'
 
 type Props = {

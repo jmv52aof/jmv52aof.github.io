@@ -7,6 +7,8 @@ import { RootStateContext } from 'contexts/RootStateContext'
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 
+	console.log(rootState)
+
 	return (
 		<RootStateContext.Provider
 			value={{
@@ -17,7 +19,14 @@ export default function App() {
 						stationFilters: filters,
 					}),
 				setStations: stations =>
-					setRootState({ ...rootState, stations: stations }),
+					setRootState({
+						...rootState,
+						stations: stations,
+						stationFilters: {
+							...rootState.stationFilters,
+							shouldUpdateStations: false,
+						},
+					}),
 			}}
 		>
 			<AppRouter />

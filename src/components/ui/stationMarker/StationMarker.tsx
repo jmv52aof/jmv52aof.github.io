@@ -1,19 +1,14 @@
 import styles from './styles.module.scss'
-import { STATION_STATUS_COLORS } from '@common/consts/stations'
 import electricRefuelingImage from '@assets/images/electric-refueling.svg'
-import { StationStatus } from '@common/types/stations'
+import { ColorTemplate } from '@common/types/status'
 
 type Props = {
-	status: StationStatus
+	color: ColorTemplate
 }
 
 export default function StationMarker(props: Readonly<Props>) {
 	return (
-		<div
-			className={`${styles.marker} ${
-				styles[`marker_${STATION_STATUS_COLORS[props.status]}`]
-			}`}
-		>
+		<div className={`${styles.marker} ${styles[`marker_${props.color}`]}`}>
 			<img src={electricRefuelingImage} alt='Station marker' />
 		</div>
 	)
