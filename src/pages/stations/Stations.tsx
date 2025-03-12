@@ -2,7 +2,10 @@ import styles from './styles.module.scss'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import arrowImage from '@assets/images/arrow-left.svg'
 import tuningImage from '@assets/images/tuning.svg'
-import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
+import {
+	STATION_PROFILE_ENDPOINT,
+	STATIONS_FILTERS_ENDPOINT,
+} from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import { useContext } from 'react'
@@ -10,6 +13,8 @@ import { RootStateContext } from 'contexts/RootStateContext'
 import { useStationsLoader } from './lib/hooks'
 import { createQueryString } from '@common/functions/strings'
 import {
+	StationProfilePageQueryArguments,
+	StationProfilePreviousPageQueries,
 	StationsFiltersPageQueryArguments,
 	StationsFiltersPreviousPageQueries,
 } from '@common/consts/pages'
@@ -40,6 +45,19 @@ export default function StationsPage(): React.JSX.Element {
 		)
 	}
 
+	const onStationClick = (id: string) => {
+		nav(
+			STATION_PROFILE_ENDPOINT +
+				id +
+				createQueryString([
+					{
+						key: StationProfilePageQueryArguments.PREVIOUS_PAGE,
+						value: StationProfilePreviousPageQueries.STATIONS_LIST,
+					},
+				])
+		)
+	}
+
 	return (
 		<div className={commonStyles.page}>
 			<div className={styles.stationsPage__header}>
@@ -64,7 +82,11 @@ export default function StationsPage(): React.JSX.Element {
 								key={index}
 								className={styles.stationsList__station}
 							>
-								<StationCard onClick={() => {}} station={value} showDistance />
+								<StationCard
+									onClick={() => onStationClick(value.id)}
+									station={value}
+									showDistance
+								/>
 							</ContentBlockLayout>
 						)
 					})}

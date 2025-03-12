@@ -17,6 +17,7 @@ import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import { useStationProfileQueryParser } from './lib/hooks'
 import { StationProfilePreviousPageQueries } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
+import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
 
 type Props = {
 	stations: StationDto
@@ -168,7 +169,7 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 			case StationProfilePreviousPageQueries.MAIN:
 				return '/'
 			case StationProfilePreviousPageQueries.STATIONS_LIST:
-				return SESSIONS_HISTORY_ENDPOINT
+				return STATIONS_LIST_ENDPOINT
 		}
 	}
 
