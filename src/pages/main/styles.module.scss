@@ -1,5 +1,27 @@
+.header,
+.footer {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+}
+
 .header {
+	top: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 10px;
+}
+
+.header__main {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
 }
 
 .footer {
+	bottom: 0;
 }

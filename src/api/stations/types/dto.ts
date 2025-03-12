@@ -81,7 +81,5 @@ export interface StationResponseDto {
 	images?: string[]
 	/** Сколько метров до станции от заданной точки геолокации */
 	metres_to_station?: number
-	/** Рейтинг станции: оценка от 1 до 5 */
-	rating?: number
 	occupation?: DailyOccupationResponseDto[]
 }

@@ -17,6 +17,7 @@ import ListLayout from '@layouts/listLayout/ListLayout'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import StationCard from '@components/stationCard/StationCard'
 import { StationDto } from '@common/types/stations'
+import commonStyles from '@common/styles.module.scss'
 
 /**
  * Страница со списком станций
@@ -25,7 +26,7 @@ export default function StationsPage(): React.JSX.Element {
 	const nav = useNavigate()
 	const { stations, setStations } = useContext(RootStateContext)
 
-	const { getByOffsetAndLimit } = useStationsLoader()
+	const { getByOffsetAndLimit, loading } = useStationsLoader()
 
 	const onFiltersClick = () => {
 		nav(
@@ -40,10 +41,10 @@ export default function StationsPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={styles.stationsPage}>
+		<div className={commonStyles.page}>
 			<div className={styles.stationsPage__header}>
 				<div className={styles.header__content}>
-					<ReturnButton onClick={() => {}} iconSrc={arrowImage} />
+					<ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />
 					<div className={styles.content__tittle}>
 						<span className={styles.content__text}>Список станций</span>
 					</div>
@@ -63,12 +64,13 @@ export default function StationsPage(): React.JSX.Element {
 								key={index}
 								className={styles.stationsList__station}
 							>
-								<StationCard onClick={() => {}} station={value} />
+								<StationCard onClick={() => {}} station={value} showDistance />
 							</ContentBlockLayout>
 						)
 					})}
 					getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
 					onDataLoad={data => setStations(data as StationDto[])}
+					loading={loading}
 				/>
 			</div>
 		</div>

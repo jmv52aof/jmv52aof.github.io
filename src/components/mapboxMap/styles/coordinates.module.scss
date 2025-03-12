@@ -1,0 +1,16 @@
+.coordinates {
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 4px 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.coordinates__text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  color: #8E949F;
+}

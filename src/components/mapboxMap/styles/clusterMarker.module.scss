@@ -1,0 +1,26 @@
+.marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #05A6BE;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  min-width: 36px;
+  min-height: 36px;
+  box-shadow: 0px 2px 4px 0px #02272B33;
+  transition: .2s;
+}
+
+.marker:hover {
+  background-color: #0F8FA2;
+  cursor: pointer;
+}
+
+.marker__text {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+}
