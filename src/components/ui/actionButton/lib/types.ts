@@ -1,1 +1,1 @@
-export type Variant = 'add' | 'remove'
+export type Variant = 'green' | 'red';

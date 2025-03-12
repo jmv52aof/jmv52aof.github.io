@@ -9,23 +9,18 @@ type Props = {
   disabled?: boolean;
 };
 
-export default function ActionButton({ text, onClick, variant, disabled }: Props): React.JSX.Element {
-  const buttonClassName =
-    variant === 'add'
-      ? styles.actionButton_add
-      : styles.actionButton_remove;
-
+export default function ActionButton(
+  props: Readonly<Props>,
+): React.JSX.Element {
   return (
-    <div className={styles.actionButton__container}>
-      <button
-        className={`${styles.actionButton} ${buttonClassName} ${
-          disabled ? styles.actionButton_disabled : ''
-        }`}
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {text}
-      </button>
-    </div>
+    <button
+      className={`${styles.actionButton} ${
+        styles[`actionButton_${props.variant}`]
+      } ${props.disabled ? styles.actionButton_disabled : ''}`}
+      onClick={props.onClick}
+      disabled={props.disabled}
+    >
+      {props.text}
+    </button>
   );
 }
