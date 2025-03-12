@@ -71,7 +71,7 @@ export interface ConnectorResponseDto {
 }
 
 export interface StationResponseDto {
-	id: string
+	id: number
 	name: string
 	address: string
 	status: StationStatusResponse

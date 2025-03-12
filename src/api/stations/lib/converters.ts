@@ -202,7 +202,7 @@ export const convertResponseStationDto = (
 	station: StationResponseDto
 ): StationDto => {
 	return {
-		id: station.id,
+		id: station.id + '',
 		name: station.name,
 		address: station.address,
 		status: convertStationStatusResponse(station.status),
