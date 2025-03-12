@@ -15,6 +15,7 @@ import {
 } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
+import Search from '@components/ui/search/Search'
 
 /**
  * Главная страница с картой станций
@@ -56,15 +57,15 @@ export default function MainPage(): React.JSX.Element {
 		<div>
 			{!loading && (
 				<div className={styles.header}>
-					<div className={styles.header__main}>
-						<div></div>
-						<FiltersButton
-							onClick={onFiltersClick}
-							variant='outlined'
-							iconSrc={tuningImage}
-						/>
+					<Search placeholder='Поиск' variant='shadow' disabled />
+					<FiltersButton
+						onClick={onFiltersClick}
+						variant='outlined'
+						iconSrc={tuningImage}
+					/>
+					<div className={styles.header__activeSession}>
+						<ActiveSessionNotify />
 					</div>
-					<ActiveSessionNotify />
 				</div>
 			)}
 			<StationsMap loading={loading} />
