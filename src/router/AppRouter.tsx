@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router'
 import * as endpoints from '@common/consts/endpoints'
 import StationsPage from '@pages/stations/Stations'
-import StationProfile from '@pages/stationProfile/StationProfile'
+import StationProfilePage from '@pages/stationProfile/StationProfile'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
 
 export default function AppRouter(): React.JSX.Element {
@@ -17,7 +17,7 @@ export default function AppRouter(): React.JSX.Element {
 			/>
 			<Route
 				path={endpoints.STATION_PROFILE_ENDPOINT}
-				element={<StationProfile />}
+				element={<StationProfilePage />}
 			/>
 			<Route path='*' element={<StationsPage />} />
 		</Routes>

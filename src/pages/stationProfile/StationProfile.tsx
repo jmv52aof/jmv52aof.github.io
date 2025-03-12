@@ -8,11 +8,11 @@ import Button from '@components/ui/button/Button.tsx'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import Connector from '@features/stationProfile/components/Connector'
 import DailyOccupation from '@components/dailyOccupation/DailyOccupation'
-import arrowUp from '@assets/images/arrow-up.svg'
-import arrowDown from '@assets/images/arrow-down.svg'
+import CollapseButton from '@components/ui/collapseButton/CollapseButton'
 import styles from './styles.module.scss'
+import commonStyles from '../../../src/common/styles.module.scss'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 type Props = {
 	stations: StationDto
@@ -125,25 +125,27 @@ const stationsData: StationDto = {
 	],
 }
 
-/**
- * Layout списка
- */
-export default function StationProfile(props: Props): React.JSX.Element {
-	const [isExpandedDescription, setIsExpandedDescription] = useState(false)
-	const descriptionText = stationsData.description || ''
+export default function StationProfilePage(props: Props): React.JSX.Element {
+	const [isExpandedDescription, setIsExpandedDescription] =
+		useState<boolean>(false)
+	const descriptionText = stationsData.description ?? ''
 
+	const descriptionIsLarge: boolean = useMemo(
+		() => descriptionText.length > 50,
+		[descriptionText]
+	)
 	const toggleDescription = () => {
 		setIsExpandedDescription(!isExpandedDescription)
 	}
 
-	const textToShow = () => {
-		if (!isExpandedDescription && descriptionText.length > 50) {
+	const getFormattedStationDescription = () => {
+		if (!isExpandedDescription && descriptionIsLarge) {
 			return descriptionText.slice(0, 50) + '...'
 		}
 		return descriptionText
 	}
 
-	const showButton = descriptionText.length > 50
+	const showButton = descriptionIsLarge
 
 	const distanceInKilometers = stationsData.metres_to_station / 1000
 
@@ -153,15 +155,16 @@ export default function StationProfile(props: Props): React.JSX.Element {
 	})
 
 	return (
-		<div>
-			<div className={styles.stationProfile__header}>
+		<div className={commonStyles.page}>
+			<div className={styles.stationProfile__buttonBackward}>
 				<Button variant='iconSmall' iconSrc={arrow} />
-				<p className={styles.text_title}> {stationsData.name}</p>
+			</div>
+			<div className={styles.stationProfile__header}>
+				<p className={styles.title}> {stationsData.name}</p>
 			</div>
 			<StationPhotos
 				imageSources={stationsData.images}
 				stationStatus={stationsData.status}
-				rating={stationsData.rating}
 			/>
 
 			<div className={styles.stationProfile__address}>
@@ -182,35 +185,31 @@ export default function StationProfile(props: Props): React.JSX.Element {
 			</div>
 
 			<div className={styles.stationProfile__description}>
+				<p className={styles.text_subTitle}>Описание</p>
 				<ContentBlockLayout>
 					<div>
-						<p className={styles.text_subTitle}>Описание</p>
 						<p
 							className={`${styles.text} ${
-								isExpandedDescription ? styles.expanded : styles.collapsed
+								isExpandedDescription
+									? styles.text_expanded
+									: styles.text_collapsed
 							}`}
 						>
-							{textToShow()}
+							{getFormattedStationDescription()}
 						</p>
 					</div>
 					{showButton && (
 						<div className={styles.description__footer}>
-							<button
-								className={`${styles.expandButton} ${styles.expandButton_text}`}
+							<CollapseButton
 								onClick={toggleDescription}
-							>
-								{isExpandedDescription ? 'Свернуть' : 'Развернуть'}
-								<img
-									src={isExpandedDescription ? arrowUp : arrowDown}
-									alt='arrow'
-								/>
-							</button>
+								isOpen={isExpandedDescription}
+							/>
 						</div>
 					)}
 				</ContentBlockLayout>
 			</div>
 
-			<div className={styles.line_separator}></div>
+			<div className={styles.stationProfile__lineSeparator}></div>
 
 			<div className={styles.stationProfile__connectors}>
 				{stationsData.connectors.map((connector, index) => (
@@ -226,14 +225,14 @@ export default function StationProfile(props: Props): React.JSX.Element {
 			<div className={styles.stationProfile__dailyOccupation}>
 				<p className={styles.text_subTitle}>График загруженности</p>
 				<ContentBlockLayout>
-					<DailyOccupation data={stationsData.occupation}></DailyOccupation>
+					<DailyOccupation data={stationsData.occupation} />
 				</ContentBlockLayout>
 			</div>
 			<div className={styles.stationProfile__support}>
-				<p className={styles.text_title}>
+				<p className={styles.title}>
 					Возникли проблемы со станцией? Свяжитесь с нами!
 				</p>
-				<Button variant='fill' text='Техподдержка'></Button>
+				<Button variant='fill' text='Техподдержка' />
 			</div>
 		</div>
 	)
