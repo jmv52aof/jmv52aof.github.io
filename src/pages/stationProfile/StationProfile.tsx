@@ -1,7 +1,6 @@
 import { StationDto } from '@common/types/stations'
 import img1 from '@assets/images/station/1.png'
 import img2 from '@assets/images/station/1.png'
-import arrow from '@assets/images/arrow-left.svg'
 import path from '@assets/images/path.svg'
 import StationPhotos from '@features/stationPhotos/StationPhotos'
 import Button from '@components/ui/button/Button.tsx'
@@ -13,6 +12,11 @@ import styles from './styles.module.scss'
 import commonStyles from '../../../src/common/styles.module.scss'
 import React from 'react'
 import { useState, useMemo } from 'react'
+import arrowImage from '@assets/images/arrow-left.svg'
+import ReturnButton from '@components/ui/returnButton/ReturnButton'
+import { useStationProfileQueryParser } from './lib/hooks'
+import { StationProfilePreviousPageQueries } from '@common/consts/pages'
+import { useNavigate } from 'react-router'
 
 type Props = {
 	stations: StationDto
@@ -126,8 +130,13 @@ const stationsData: StationDto = {
 }
 
 export default function StationProfilePage(props: Props): React.JSX.Element {
+	const nav = useNavigate()
+
+	const { pageQueries } = useStationProfileQueryParser()
+
 	const [isExpandedDescription, setIsExpandedDescription] =
 		useState<boolean>(false)
+
 	const descriptionText = stationsData.description ?? ''
 
 	const descriptionIsLarge: boolean = useMemo(
@@ -154,29 +163,41 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 		maximumFractionDigits: 2,
 	})
 
+	const getPreviousPageEndpoint = (): string | undefined => {
+		switch (pageQueries.prev_page) {
+			case StationProfilePreviousPageQueries.MAIN:
+				return '/'
+			case StationProfilePreviousPageQueries.STATIONS_LIST:
+				return SESSIONS_HISTORY_ENDPOINT
+		}
+	}
+
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.stationProfile__buttonBackward}>
-				<Button variant='iconSmall' iconSrc={arrow} />
+		<div className={`${commonStyles.page} ${styles.page}`}>
+			<div className={styles.page__header}>
+				<div className={styles.header__button}>
+					<ReturnButton
+						onClick={() => {
+							const endpoint = getPreviousPageEndpoint()
+							if (endpoint) nav(endpoint)
+						}}
+						iconSrc={arrowImage}
+					/>
+				</div>
+				<a className={styles.header__tittle}>{stationsData.name}</a>
 			</div>
-			<div className={styles.stationProfile__header}>
-				<p className={styles.title}> {stationsData.name}</p>
-			</div>
+
 			<StationPhotos
 				imageSources={stationsData.images}
 				stationStatus={stationsData.status}
 			/>
 
-			<div className={styles.stationProfile__address}>
-				<p className={styles.text_subTitle}>Адрес</p>
+			<div className={styles.page__block}>
+				<a className={styles.text_subTitle}>Адрес</a>
 				<ContentBlockLayout>
-					<div className={styles.addressBox__description}>
-						<p
-							className={`${styles.text} ${styles.addressBox__description_text}`}
-						>
-							{stationsData.address}
-						</p>
-						<div className={styles.addressBox__distanceBox}>
+					<div className={styles.block__content}>
+						<a className={styles.text}>{stationsData.address}</a>
+						<div className={styles.content__distance}>
 							<img src={path} alt='path' />
 							<p className={styles.text_distance}>{formattedDistance} км</p>
 						</div>
@@ -184,11 +205,11 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 				</ContentBlockLayout>
 			</div>
 
-			<div className={styles.stationProfile__description}>
-				<p className={styles.text_subTitle}>Описание</p>
+			<div className={styles.page__block}>
+				<a className={styles.text_subTitle}>Описание</a>
 				<ContentBlockLayout>
 					<div>
-						<p
+						<a
 							className={`${styles.text} ${
 								isExpandedDescription
 									? styles.text_expanded
@@ -196,7 +217,7 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 							}`}
 						>
 							{getFormattedStationDescription()}
-						</p>
+						</a>
 					</div>
 					{showButton && (
 						<div className={styles.description__footer}>
@@ -209,9 +230,9 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 				</ContentBlockLayout>
 			</div>
 
-			<div className={styles.stationProfile__lineSeparator}></div>
+			<div className={styles.page__lineSeparator}></div>
 
-			<div className={styles.stationProfile__connectors}>
+			<div className={styles.page__connectors}>
 				{stationsData.connectors.map((connector, index) => (
 					<Connector
 						key={index}
@@ -220,15 +241,16 @@ export default function StationProfilePage(props: Props): React.JSX.Element {
 					/>
 				))}
 			</div>
-			<div className={styles.line_separator}></div>
 
-			<div className={styles.stationProfile__dailyOccupation}>
+			<div className={styles.page__lineSeparator}></div>
+
+			<div className={styles.page__block}>
 				<p className={styles.text_subTitle}>График загруженности</p>
 				<ContentBlockLayout>
 					<DailyOccupation data={stationsData.occupation} />
 				</ContentBlockLayout>
 			</div>
-			<div className={styles.stationProfile__support}>
+			<div className={styles.page__support}>
 				<p className={styles.title}>
 					Возникли проблемы со станцией? Свяжитесь с нами!
 				</p>

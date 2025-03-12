@@ -5,6 +5,13 @@ import rightImage from '@assets/images/right.svg'
 import Button from '@components/ui/button/Button.tsx'
 import { StationDto } from '@common/types/stations.ts'
 import StationCard from '@components/stationCard/StationCard'
+import { useNavigate } from 'react-router'
+import { STATION_PROFILE_ENDPOINT } from '@common/consts/endpoints'
+import { createQueryString } from '@common/functions/strings'
+import {
+	StationProfilePageQueryArguments,
+	StationProfilePreviousPageQueries,
+} from '@common/consts/pages'
 
 type Props = {
 	station: StationDto
@@ -14,6 +21,8 @@ type Props = {
 export default function StationPopUp(
 	props: Readonly<Props>
 ): React.JSX.Element {
+	const nav = useNavigate()
+
 	const [currStationIndex, setCurrStationIndex] = useState<number>(0)
 
 	const otherStationsExists = (props.otherStations?.length ?? 0) > 0
@@ -21,6 +30,19 @@ export default function StationPopUp(
 	const station = otherStationsExists
 		? [props.station].concat(...(props.otherStations ?? []))[currStationIndex]
 		: props.station
+
+	const onClick = () => {
+		nav(
+			STATION_PROFILE_ENDPOINT +
+				station.id +
+				createQueryString([
+					{
+						key: StationProfilePageQueryArguments.PREVIOUS_PAGE,
+						value: StationProfilePreviousPageQueries.MAIN,
+					},
+				])
+		)
+	}
 
 	return (
 		<div className={styles.block}>
@@ -53,7 +75,7 @@ export default function StationPopUp(
 				</div>
 			</div>
 			<div className={styles.block__content}>
-				<StationCard onClick={() => {}} station={station} />
+				<StationCard onClick={onClick} station={station} />
 			</div>
 		</div>
 	)

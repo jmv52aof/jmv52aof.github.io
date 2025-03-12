@@ -22,7 +22,7 @@ export default function AppRouter(): React.JSX.Element {
 				element={<StationsPage />}
 			/>
 			<Route
-				path={endpoints.STATION_PROFILE_ENDPOINT}
+				path={`${endpoints.STATION_PROFILE_ENDPOINT}:id`}
 				element={<StationProfilePage />}
 			/>
 			<Route path='*' element={<MainPage />} />
