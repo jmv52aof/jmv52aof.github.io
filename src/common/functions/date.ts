@@ -48,25 +48,6 @@ export const dateToTimestamp = (date: Date): Timestamp => {
 }
 
 /**
- * Преобразует объект Timestamp в объект Date
- *
- * @param timestamp - Объект Timestamp, содержащий год, месяц, день, часы, минуты и секунды.
- * @returns - Объект Date, созданный на основе Timestamp.
- */
-export const timestampToDate = (timestamp: Timestamp): Date => {
-	return new Date(
-		Date.UTC(
-			timestamp.year,
-			timestamp.month - 1,
-			timestamp.day,
-			timestamp.hours,
-			timestamp.minutes,
-			timestamp.seconds
-		)
-	)
-}
-
-/**
  * Преобразует часы, минуты и секунды в строку в формате ISO 8601 (HH:MM:SS).
  *
  * @param hours - Количество часов.
