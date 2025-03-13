@@ -20,13 +20,7 @@ export default function Search(props: SearchProps): React.JSX.Element {
 
 	return (
 		<div className={styles.search}>
-			<img
-				className={`${styles.search__icon} ${
-					props.disabled ? styles.search__icon_disabled : ''
-				}`}
-				src={searchImage}
-				alt='Search'
-			/>
+			<img className={styles.search__icon} src={searchImage} alt='Search' />
 			<input
 				placeholder={props.placeholder}
 				className={`${styles.search__input} ${

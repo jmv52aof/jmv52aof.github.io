@@ -1,85 +1,60 @@
 import StationsMap from '@features/stationsMap/StationsMap'
 import styles from './styles.module.scss'
-import commonStyles from '@common/styles.module.scss'
 import ControlPanel from '@features/controlPanel/ControlPanel'
-import Status from '@components/ui/status/Status'
-import ListLayout from '@layouts/listLayout/ListLayout'
-import { useState, useEffect } from 'react'
+import FiltersButton from '@components/ui/filtersButton/FiltersButton'
+import tuningImage from '@assets/images/tuning.svg'
+import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
+import { createQueryString } from '@common/functions/strings'
+import {
+	StationsFiltersPageQueryArguments,
+	StationsFiltersPreviousPageQueries,
+} from '@common/consts/pages'
+import { useNavigate } from 'react-router'
+import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
+import Search from '@components/ui/search/Search'
+import { useStationsLoader } from './lib/hooks'
 
 /**
  * Главная страница с картой станций
  */
 export default function MainPage(): React.JSX.Element {
-	const [loading, setLoading] = useState(false)
-	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
-		[]
-	)
+	const nav = useNavigate()
 
-	const initialItems: React.JSX.Element[] = Array.from(
-		{ length: 50 },
-		(_, index) => {
-			const itemNumber = index + 1
-			return (
-				<Status
-					key={`status-${itemNumber}`}
-					text={String(itemNumber)}
-					textSize='small'
-					color='green'
-				/>
-			)
-		}
-	)
+	const { stationsLoading } = useStationsLoader()
 
-	const getData = (
-		offset: number,
-		limit: number
-	): Promise<React.JSX.Element[]> => {
-		return new Promise<React.JSX.Element[]>(resolve => {
-			setTimeout(() => {
-				const start = offset
-				const end = Math.min(offset + limit, initialItems.length)
-				const chunk = initialItems.slice(start, end)
-				resolve(chunk)
-			}, 1000)
-		}).finally(() => {
-			setLoading(false)
-		})
-	}
-
-	useEffect(() => {
-		getData(0, 20).then(initialData => {
-			setListLayoutItems(initialData)
-		})
-	}, [])
-
-	const onDataLoad = () => {
-		if (
-			listLayoutItems.length > 0 &&
-			listLayoutItems.length < initialItems.length
-		) {
-			const nextOffset = listLayoutItems.length
-			getData(nextOffset, 15).then(newData => {
-				if (newData && newData.length > 0) {
-					console.log(newData)
-					setListLayoutItems(prevItems => [...prevItems, ...newData])
-				}
-			})
-		}
+	const onFiltersClick = () => {
+		nav(
+			STATIONS_FILTERS_ENDPOINT +
+				createQueryString([
+					{
+						key: StationsFiltersPageQueryArguments.PREVIOUS_PAGE,
+						value: StationsFiltersPreviousPageQueries.MAIN,
+					},
+				])
+		)
 	}
 
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.header}></div>
-			<ListLayout
-				items={listLayoutItems}
-				loading={loading}
-				getData={getData}
-				onDataLoad={onDataLoad}
-			/>
-			<StationsMap />
-			<div className={styles.footer}>
-				<ControlPanel />
-			</div>
+		<div>
+			{!stationsLoading && (
+				<div className={styles.header}>
+					<Search placeholder='Поиск' variant='shadow' disabled />
+					<FiltersButton
+						onClick={onFiltersClick}
+						variant='outlined'
+						iconSrc={tuningImage}
+					/>
+					<div className={styles.header__activeSession}>
+						<ActiveSessionNotify />
+					</div>
+				</div>
+			)}
+			<StationsMap loading={stationsLoading} />
+			{!stationsLoading && (
+				<div className={styles.footer}>
+					<ControlPanel />
+				</div>
+			)}
 		</div>
 	)
 }

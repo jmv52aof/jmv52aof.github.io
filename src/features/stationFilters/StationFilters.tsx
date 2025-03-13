@@ -48,11 +48,12 @@ export default function StationFiltersFeature(): React.JSX.Element {
 		setStationFilters({
 			...stationFilters,
 			isModified: false,
+			shouldUpdateStations: true,
 		})
 	}
 
 	const resetFilters = () => {
-		setStationFilters({ ...DEFAULT_FILTERS })
+		setStationFilters({ ...DEFAULT_FILTERS, shouldUpdateStations: true })
 	}
 
 	return (

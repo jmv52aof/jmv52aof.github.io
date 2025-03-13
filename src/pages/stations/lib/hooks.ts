@@ -1,28 +1,31 @@
-import { GET_DATA_LIMIT } from '@common/consts/app'
-import { StationStatuses } from '@common/consts/stations'
+import { createGetStationsRequestOptions } from '@common/functions/stations'
 import { useApi } from '@common/hooks/api'
 import { RootStateContext } from 'contexts/RootStateContext'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 export const useStationsLoader = () => {
 	const { getStationsFromApi } = useApi()
-	const { stationFilters } = useContext(RootStateContext)
+	const { stationFilters, setStations } = useContext(RootStateContext)
 
-	const getRequestOptions = () => {
-		return {
-			minElectricPower: stationFilters.minimalPower,
-			standards: stationFilters.connectors,
-			stationStatus: stationFilters.onlyAvailableStations
-				? StationStatuses.AVAILABLE
-				: undefined,
-			limit: GET_DATA_LIMIT,
+	const [loading, setLoading] = useState<boolean>(true)
+
+	useEffect(() => {
+		if (!stationFilters.shouldUpdateStations) {
+			setLoading(false)
+			return
 		}
-	}
+
+		getStationsFromApi(createGetStationsRequestOptions(stationFilters))
+			.then(res => {
+				setStations(res)
+			})
+			.finally(() => setLoading(false))
+	}, [])
 
 	/** Получение станций по заданным параметрам отступа и лимита */
 	const getByOffsetAndLimit = (offset: number, limit: number) => {
 		return getStationsFromApi({
-			...getRequestOptions(),
+			...createGetStationsRequestOptions(stationFilters),
 			offset: offset,
 			limit: limit,
 		})
@@ -30,5 +33,6 @@ export const useStationsLoader = () => {
 
 	return {
 		getByOffsetAndLimit,
+		loading,
 	}
 }

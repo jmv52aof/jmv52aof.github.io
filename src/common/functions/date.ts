@@ -14,15 +14,20 @@ const formatTimeNumber = (timeNumber: number): string => {
 }
 
 /**
- * Функция создает объект Date на основе переданных значений часов, минут и секунд.
+ * Функция создает объект Date на основе переданного Timestamp.
  *
- * @param timestamp - Объект, содержащий поля hours, minutes и seconds.
- * @returns - Объект Date с установленными часами, минутами и секундами.
+ * @param timestamp - Объект Timestamp, который необходимо преобразовать.
+ * @returns - Объект Date, преобразованный из Timestamp.
  */
-const timeToDate = (timestamp: Timestamp): Date => {
-	const date = new Date()
-	date.setHours(timestamp.hours, timestamp.minutes, timestamp.seconds)
-	return date
+export const timestampToDate = (timestamp: Timestamp): Date => {
+	return new Date(
+		timestamp.year,
+		timestamp.month - 1,
+		timestamp.day,
+		timestamp.hours,
+		timestamp.minutes,
+		timestamp.seconds
+	)
 }
 
 /**
@@ -109,8 +114,8 @@ export const getTimesDifference = (
 	reduced: Timestamp,
 	subtracted: Timestamp
 ): Timestamp => {
-	const reducedTime = timeToDate(reduced).getTime()
-	const subtractedTime = timeToDate(subtracted).getTime()
+	const reducedTime = timestampToDate(reduced).getTime()
+	const subtractedTime = timestampToDate(subtracted).getTime()
 	return dateToTimestamp(
 		new Date(
 			reducedTime < subtractedTime
@@ -118,4 +123,19 @@ export const getTimesDifference = (
 				: reducedTime - subtractedTime
 		)
 	)
+}
+
+/**
+ * Преобразует строку с датой к `Timestamp`
+ * @param date - дата в виде строки
+ * @param isUtc - указывает на UTC таймзону. Если `true`, то к итоговому времени будет прибавлено 3 часа для достижения таймзоны МСК
+ * @returns объект `Timestamp`
+ */
+export const dateStringToTimestamp = (
+	date: string,
+	isUtc?: boolean
+): Timestamp => {
+	const inDate = new Date(date)
+	if (isUtc) inDate.setHours(inDate.getHours() + 3)
+	return dateToTimestamp(inDate)
 }

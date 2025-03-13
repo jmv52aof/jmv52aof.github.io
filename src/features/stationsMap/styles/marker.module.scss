@@ -1,0 +1,64 @@
+.marker,
+.groupMarker {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 100%;
+	border: 1px solid #ffffff;
+	box-shadow: 0px 2px 4px 0px #02272b33;
+	transition: 0.2s;
+}
+
+.marker {
+	width: 32px;
+	height: 32px;
+}
+
+.groupMarker {
+	width: 36px;
+	height: 36px;
+	background-color: #05a6be;
+	border-width: 3px;
+}
+
+.marker:hover {
+	cursor: pointer;
+}
+
+.groupMarker:hover {
+	cursor: pointer;
+	background-color: #0f8fa2;
+}
+
+.green {
+	background-color: #27ae60;
+}
+
+.green:hover {
+	background-color: #27ae60;
+}
+
+.orange {
+	background-color: #f89520;
+}
+
+.orange:hover {
+	background-color: #f89520;
+}
+
+.gray {
+	background-color: #8e949f;
+}
+
+.gray:hover {
+	background-color: #8e949f;
+}
+
+.groupMarker__counter {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16.8px;
+	color: #fff;
+}

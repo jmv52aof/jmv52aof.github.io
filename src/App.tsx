@@ -17,7 +17,14 @@ export default function App() {
 						stationFilters: filters,
 					}),
 				setStations: stations =>
-					setRootState({ ...rootState, stations: stations }),
+					setRootState({
+						...rootState,
+						stations: stations,
+						stationFilters: {
+							...rootState.stationFilters,
+							shouldUpdateStations: false,
+						},
+					}),
 			}}
 		>
 			<AppRouter />

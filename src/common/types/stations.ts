@@ -25,6 +25,7 @@ export type StationFilters = {
 	onlyAvailableStations: boolean
 	minimalPower: number
 	isModified: boolean
+	shouldUpdateStations?: boolean
 }
 
 export type ConnectorFormat = 'Розетка' | 'Кабель'
