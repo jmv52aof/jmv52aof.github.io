@@ -1,5 +1,5 @@
 import { ChargingSessionStatus } from '@common/types/chargingSessions'
-import { ColorTemplate } from '@components/ui/status/lib/types'
+import { ColorTemplate } from '@common/types/status'
 
 export namespace ChargingSessionStatuses {
 	export const CHARGING: ChargingSessionStatus = 'Зарядка'
@@ -13,5 +13,5 @@ export const CHARGING_SESSION_STATUS_HAS_COLOR: Record<
 > = {
 	Зарядка: 'green',
 	Невалидна: 'red',
-	Завершена: 'grey',
+	Завершена: 'gray',
 }

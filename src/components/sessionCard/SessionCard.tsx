@@ -81,7 +81,12 @@ export default function SessionCard(props: Props): React.JSX.Element {
 				sessionValues={props.session}
 			/>
 			{isUnpaid && (
-				<GradientButton onClick={() => {}} gradientTemplate='orange' />
+				<div className={styles.stationCard__gradientButton}>
+					<GradientButton
+						onClick={() => {}}
+						gradientTemplate='orange'
+					/>{' '}
+				</div>
 			)}
 		</div>
 	)

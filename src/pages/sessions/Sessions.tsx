@@ -240,7 +240,7 @@ export default function SessionsPage(): React.JSX.Element {
 				...groupedSessions[date].map(session => (
 					<ContentBlockLayout
 						key={session.id}
-						className={styles.sessionCard}
+						className={styles.main__sessionCard}
 					>
 						<SessionCard session={session} />
 					</ContentBlockLayout>
