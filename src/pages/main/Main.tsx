@@ -1,10 +1,6 @@
 import StationsMap from '@features/stationsMap/StationsMap'
 import styles from './styles.module.scss'
 import ControlPanel from '@features/controlPanel/ControlPanel'
-import { useContext, useEffect, useState } from 'react'
-import { RootStateContext } from 'contexts/RootStateContext'
-import { useApi } from '@common/hooks/api'
-import { createGetStationsRequestOptions } from '@common/functions/stations'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
 import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
@@ -15,6 +11,8 @@ import {
 } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
+import Search from '@components/ui/search/Search'
+import { useStationsLoader } from './lib/hooks'
 
 /**
  * Главная страница с картой станций
@@ -22,23 +20,7 @@ import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNo
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
 
-	const { setStations, stationFilters } = useContext(RootStateContext)
-	const { getStationsFromApi } = useApi()
-
-	const [loading, setLoading] = useState<boolean>(true)
-
-	useEffect(() => {
-		if (!stationFilters.shouldUpdateStations) {
-			setLoading(false)
-			return
-		}
-
-		getStationsFromApi(createGetStationsRequestOptions(stationFilters))
-			.then(res => {
-				setStations(res)
-			})
-			.finally(() => setLoading(false))
-	}, [stationFilters])
+	const { stationsLoading } = useStationsLoader()
 
 	const onFiltersClick = () => {
 		nav(
@@ -54,21 +36,21 @@ export default function MainPage(): React.JSX.Element {
 
 	return (
 		<div>
-			{!loading && (
+			{!stationsLoading && (
 				<div className={styles.header}>
-					<div className={styles.header__main}>
-						<div></div>
-						<FiltersButton
-							onClick={onFiltersClick}
-							variant='outlined'
-							iconSrc={tuningImage}
-						/>
+					<Search placeholder='Поиск' variant='shadow' disabled />
+					<FiltersButton
+						onClick={onFiltersClick}
+						variant='outlined'
+						iconSrc={tuningImage}
+					/>
+					<div className={styles.header__activeSession}>
+						<ActiveSessionNotify />
 					</div>
-					<ActiveSessionNotify />
 				</div>
 			)}
-			<StationsMap loading={loading} />
-			{!loading && (
+			<StationsMap loading={stationsLoading} />
+			{!stationsLoading && (
 				<div className={styles.footer}>
 					<ControlPanel />
 				</div>

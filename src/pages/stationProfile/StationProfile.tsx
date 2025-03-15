@@ -69,8 +69,6 @@ export default function StationProfilePage(): React.JSX.Element {
 		}
 	}
 
-	console.log(station)
-
 	return (
 		<div className={`${commonStyles.page} ${styles.page}`}>
 			<div className={styles.page__header}>

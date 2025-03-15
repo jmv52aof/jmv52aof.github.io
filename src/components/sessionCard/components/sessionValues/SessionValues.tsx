@@ -1,0 +1,162 @@
+import styles from '../../styles/sessionValues.module.scss'
+import { ChargingSessionDto } from '@common/types/chargingSessions'
+import batteryImage from '@assets/images/battery-charge.svg'
+import clockImage from '@assets/images/clock.svg'
+import paymentImage from '@assets/images/payment.svg'
+import {
+	dateToTimestamp,
+	getTimesDifference,
+	timeToISOString,
+	timeToStringWithUnitsOfMeasurement,
+} from '@common/functions/date'
+
+type Props = {
+	sessionValues: ChargingSessionDto
+	isActive: boolean
+}
+
+export default function SessionValues(props: Props): React.JSX.Element {
+	const duration =
+		props.sessionValues.end_date === undefined
+			? getTimesDifference(
+					dateToTimestamp(new Date()),
+					props.sessionValues.start_date
+			  )
+			: getTimesDifference(
+					props.sessionValues.end_date,
+					props.sessionValues.start_date
+			  )
+
+	return (
+		<>
+			<div className={styles.horizontalSplit} />
+			<div className={styles.sessionCard__chargingInfo}>
+				<div className={styles.chargingInfo__icon}>
+					<img
+						src={batteryImage}
+						alt={'batteryImage'}
+						className={styles.chargingInfo__icon}
+					/>
+				</div>
+				{props.isActive ? (
+					<div className={styles.chargingInfo__activeSessionTexts}>
+						<div className={styles.activeSessionTexts__bateryInfo}>
+							<div className={styles.bateryInfo__row}>
+								<p className={styles.row__label}>Заряжено:</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.charged_kwh} кВт
+								</p>
+							</div>
+							<div className={styles.bateryInfo__row}>
+								<p className={styles.row__label}>
+									Процент батареи:
+								</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.battery_percentage}%
+								</p>
+							</div>
+						</div>
+						<div className={styles.activeSessionTexts__powerInfo}>
+							<div className={styles.powerInfo__row}>
+								<p className={styles.row__label}>Мощность:</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.current_power} кВт
+								</p>
+							</div>
+						</div>
+					</div>
+				) : (
+					<div className={styles.chargingInfo__texts}>
+						<div className={styles.texts__row}>
+							<p className={styles.row__label}>Заряжено:</p>
+							<p className={styles.row__value}>
+								{props.sessionValues.charged_kwh} кВт*ч
+							</p>
+						</div>
+						<div className={styles.texts__row}>
+							<p className={styles.row__label}>
+								Максимальная мощность:
+							</p>
+							<p className={styles.row__value}>
+								{props.sessionValues.max_power} кВт
+							</p>
+						</div>
+						<div className={styles.texts__row}>
+							<p className={styles.row__label}>
+								Минимальная мощность:
+							</p>
+							<p className={styles.row__value}>
+								{props.sessionValues.min_power} кВт
+							</p>
+						</div>
+					</div>
+				)}
+			</div>
+			<div className={styles.horizontalSplit} />
+			<div className={styles.sessionCard__session}>
+				<div className={styles.session__icon}>
+					<img
+						src={clockImage}
+						alt={'clockImage'}
+						className={styles.session__icon}
+					/>
+				</div>
+				<div className={styles.session__times}>
+					<div className={styles.times__start}>
+						<p className={styles.row__label}>Старт:</p>
+						<p className={styles.row__value}>
+							{timeToISOString(
+								props.sessionValues.start_date.hours,
+								props.sessionValues.start_date.minutes,
+								props.sessionValues.start_date.seconds
+							)}
+						</p>
+					</div>
+					<div className={styles.times__duration}>
+						<p className={styles.row__label}>Длительность:</p>
+						<p className={styles.row__value}>
+							{timeToStringWithUnitsOfMeasurement(
+								duration.hours,
+								duration.minutes,
+								duration.seconds
+							)}
+						</p>
+					</div>
+				</div>
+			</div>
+			{!props.isActive && (
+				<>
+					<div className={styles.horizontalSplit} />
+					<div className={styles.sessionCard__payment}>
+						<div className={styles.payment__icon}>
+							<img
+								src={paymentImage}
+								alt='paymentImage'
+								className={styles.payment__icon}
+							/>
+						</div>
+						<div className={styles.payment__texts}>
+							<div className={styles.texts__amount}>
+								<p className={styles.row__label}>Сумма:</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.total_cost}{' '}
+									{props.sessionValues.tariffs?.[0]
+										?.currency || 'руб'}
+									.
+								</p>
+							</div>
+							<div className={styles.texts__paymentMethod}>
+								<p className={styles.row__label}>
+									Способ оплаты:
+								</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.payment_method}
+								</p>
+							</div>
+						</div>
+					</div>
+				</>
+			)}
+		</>
+	)
+}

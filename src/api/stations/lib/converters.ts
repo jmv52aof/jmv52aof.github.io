@@ -1,6 +1,7 @@
 import {
 	ConnectorDto,
 	ConnectorFormat,
+	ConnectorInfoDto,
 	ConnectorPowerType,
 	ConnectorStandard,
 	ConnectorStatus,
@@ -11,6 +12,7 @@ import {
 } from '@common/types/stations'
 import {
 	ConnectorFormatResponse,
+	ConnectorInfoResponseDto,
 	ConnectorPowerTypeResponse,
 	ConnectorResponseDto,
 	ConnectorStandardResponse,
@@ -156,16 +158,6 @@ const convertGeolocationResponseDto = (
 	}
 }
 
-const convertConnectorTariffResponseDto = (
-	tariff: ConnectorTariffResponseDto
-): ConnectorTariffDto => {
-	return {
-		type: convertTariffTypeResponse(tariff.type),
-		price: tariff.price,
-		currency: convertTariffCurrencyResponse(tariff.currency),
-	}
-}
-
 const convertDailyOccupationResponseDto = (
 	occupation: DailyOccupationResponseDto
 ): DailyOccupationDto => {
@@ -176,7 +168,7 @@ const convertDailyOccupationResponseDto = (
 }
 
 /** Преобразование серверной модели коннектора к dto */
-const convertConnectorResponseDto = (
+export const convertConnectorResponseDto = (
 	connector: ConnectorResponseDto
 ): ConnectorDto => {
 	return {
@@ -194,6 +186,16 @@ const convertConnectorResponseDto = (
 					convertConnectorTariffResponseDto(tariff)
 			  )
 			: [],
+	}
+}
+
+export const convertConnectorTariffResponseDto = (
+	tariff: ConnectorTariffResponseDto
+): ConnectorTariffDto => {
+	return {
+		type: convertTariffTypeResponse(tariff.type),
+		price: tariff.price,
+		currency: convertTariffCurrencyResponse(tariff.currency),
 	}
 }
 
@@ -260,5 +262,21 @@ export const convertConnectorStandard = (
 			return 'TYPE_2'
 		default:
 			return 'OTHER'
+	}
+}
+
+export const convertConnectorInfoResponseDto = (
+	connectorInfo: ConnectorInfoResponseDto
+): ConnectorInfoDto => {
+	return {
+		station_id: connectorInfo.station_id,
+		station_name: connectorInfo.station_name,
+		station_address: connectorInfo.station_address,
+		evse_uid: connectorInfo.evse_uid,
+		connector_id: connectorInfo.connector_id,
+		standard: convertConnectorStandardResponse(connectorInfo.standard),
+		format: convertConnectorFormatResponse(connectorInfo.format),
+		power_type: convertConnectorPowerTypeResponse(connectorInfo.power_type),
+		max_electric_power: connectorInfo.max_electric_power,
 	}
 }

@@ -7,8 +7,6 @@ import { RootStateContext } from 'contexts/RootStateContext'
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 
-	console.log(rootState)
-
 	return (
 		<RootStateContext.Provider
 			value={{

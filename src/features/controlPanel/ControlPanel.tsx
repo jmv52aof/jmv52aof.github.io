@@ -6,7 +6,10 @@ import paymentMethodImage from '@assets/images/menu/payment-method.svg'
 import rfidCardImage from '@assets/images/menu/rfid-card.svg'
 import supportImage from '@assets/images/menu/support.svg'
 import { useNavigate } from 'react-router'
-import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
+import {
+	SESSIONS_HISTORY_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
 
 /**
  * Панель управления, содержащая основные функции (кнопки) приложения:
@@ -25,7 +28,10 @@ export default function ControlPanel(): React.JSX.Element {
 				iconSrc={stationsImage}
 				onClick={() => nav(STATIONS_LIST_ENDPOINT)}
 			/>
-			<ControlButton iconSrc={chargingSessionsImage} onClick={() => {}} />
+			<ControlButton
+				iconSrc={chargingSessionsImage}
+				onClick={() => nav(SESSIONS_HISTORY_ENDPOINT)}
+			/>
 			<ControlButton iconSrc={paymentMethodImage} onClick={() => {}} />
 			<ControlButton iconSrc={rfidCardImage} onClick={() => {}} />
 			<ControlButton iconSrc={supportImage} onClick={() => {}} />
