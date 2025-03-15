@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 120px;
   width: 100%;
+  gap: 4px;
 }
 
 .info__title {
@@ -12,9 +12,8 @@
   font-size: 24px;
   line-height: 120%;
   color: #373435;
-  margin-bottom: 4px;
+  margin: 0;
   text-align: center;
-  overflow-wrap: break-word;
   hyphens: auto;
   max-width: 280px;
 }
@@ -22,7 +21,7 @@
 .info__icon {
   width: 40px;
   height: 40px;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .info__text {
@@ -32,7 +31,6 @@
   line-height: 120%;
   color: #8e949f;
   text-align: center;
-  width: 100%;
 }
 
 .info__text_paymentMethod {

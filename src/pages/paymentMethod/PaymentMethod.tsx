@@ -4,11 +4,12 @@ import ReturnButton from '@components/ui/returnButton/ReturnButton';
 import ActionButton from '@components/ui/actionButton/ActionButton';
 import arrowImage from '@assets/images/arrow-left.svg';
 import commonStyles from '@common/styles.module.scss';
-import PaymentMethodFeature from '@features/paymentMethod/PaymentMethod';
+import PaymentMethod from '@features/paymentMethod/PaymentMethod';
+import { useNavigate } from 'react-router';
 
 export default function PaymentMethodPage(): React.JSX.Element {
+  const nav = useNavigate();
   // Временная заглушка
-  const isPaymentMethodBound = false;
   const paymentMethod = 'СБП Т-Банк';
 
   return (
@@ -16,27 +17,26 @@ export default function PaymentMethodPage(): React.JSX.Element {
       <div className={styles.page__content}>
         <div className={styles.content__header}>
           <div className={styles.header__button}>
-            <ReturnButton onClick={() => {}} iconSrc={arrowImage} />
+            <ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />
           </div>
           <a className={styles.header__tittle}>Способ оплаты</a>
         </div>
 
-        <PaymentMethodFeature
-          isBound={isPaymentMethodBound}
-          paymentMethod={paymentMethod}
-        />
+        <div className={styles.content__main}>
+          <PaymentMethod paymentMethod={paymentMethod} />
+        </div>
 
         <div className={styles.content__actionButton}>
           <ActionButton
             text={
-              isPaymentMethodBound
+              paymentMethod
                 ? 'Удалить способ оплаты'
                 : 'Привязать способ оплаты'
             }
-            variant={isPaymentMethodBound ? 'red' : 'green'}
+            variant={paymentMethod ? 'red' : 'green'}
             onClick={() => {
               console.log(
-                isPaymentMethodBound
+                paymentMethod
                   ? 'Удалить способ оплаты'
                   : 'Привязать способ оплаты',
               );
