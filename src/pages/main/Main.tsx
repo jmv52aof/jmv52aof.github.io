@@ -13,14 +13,32 @@ import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
 import Search from '@components/ui/search/Search'
 import { useStationsLoader } from './lib/hooks'
+import { useContext, useEffect } from 'react'
+import { RootStateContext } from 'contexts/RootStateContext'
 
 /**
  * Главная страница с картой станций
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-
+	const {setPosition} = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
+
+	useEffect(() => {
+		const geo = navigator.geolocation;
+	
+		if (!geo) {
+		  return
+		}
+
+		const watcher = geo.watchPosition((position) => {
+			setPosition({
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude
+			})
+		})
+		return () => geo.clearWatch(watcher)
+	}, [])
 
 	const onFiltersClick = () => {
 		nav(
