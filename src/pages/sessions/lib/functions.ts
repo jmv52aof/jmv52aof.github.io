@@ -16,21 +16,29 @@ export const groupSessionsByDate = (sessions: ChargingSessionDto[]) => {
 		return dateB.getTime() - dateA.getTime()
 	})
 
-	return sortedSessions.reduce<Record<string, ChargingSessionDto[]>>(
-		(acc, session) => {
-			const sessionDate = timestampToDate(session.start_date)
-			const dateKey = new Intl.DateTimeFormat('ru-RU', {
-				day: 'numeric',
-				month: 'long',
-				year: 'numeric',
-			}).format(sessionDate)
+	const groupedSessions = sortedSessions.reduce<
+		Record<string, ChargingSessionDto[]>
+	>((acc, session) => {
+		const sessionDate = timestampToDate(session.start_date)
+		const dateKey = new Intl.DateTimeFormat('ru-RU', {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric',
+		}).format(sessionDate)
 
-			if (!acc[dateKey]) {
-				acc[dateKey] = []
-			}
-			acc[dateKey].push(session)
-			return acc
-		},
-		{}
-	)
+		if (!acc[dateKey]) {
+			acc[dateKey] = []
+		}
+		acc[dateKey].push(session)
+
+		return acc
+	}, {})
+
+	Object.keys(groupedSessions).forEach(dateKey => {
+		groupedSessions[dateKey].sort((a, b) =>
+			a.status === 'Зарядка' ? -1 : 1
+		)
+	})
+
+	return groupedSessions
 }

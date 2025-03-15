@@ -56,6 +56,10 @@
 	}
 }
 
+.main__sessionCard:has(*button:hover) {
+	border: 1px solid transparent !important;
+}
+
 .main__sessionsMap {
 	display: flex;
 	flex-direction: column;

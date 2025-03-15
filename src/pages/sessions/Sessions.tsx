@@ -158,7 +158,7 @@ export default function SessionsPage(): React.JSX.Element {
 				power_type: 'AC',
 				max_electric_power: 36,
 			},
-			status: 'Невалидна',
+			status: 'Зарядка',
 			charged_kwh: 22,
 			start_date: {
 				year: 2025,
