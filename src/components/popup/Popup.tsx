@@ -4,7 +4,8 @@ import styles from './styles.module.scss';
 
 type Props = {
 	children: React.ReactNode,
-	onClose: Function,
+	onClose: () => void,
+    isActive: Boolean,
 }
 
 const Popup: React.FC<Props> = (
@@ -16,9 +17,9 @@ const Popup: React.FC<Props> = (
     });
 
 	return (
-        <div onClick={() => props.onClose()}>
+        <div className={`${styles.popup} ${props.isActive ? styles.active : ''}`}>
             <div className={styles.popup__content} {...handlers} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.popup__topLine}></div>
+                <div className={styles.content__topLine}></div>
                 {props.children}
             </div>
         </div>

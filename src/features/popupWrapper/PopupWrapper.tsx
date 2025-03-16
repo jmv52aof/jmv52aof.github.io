@@ -32,10 +32,8 @@ const PopupWrapper: React.FC<Props> = (
 
     return (
         <div className={`${styles.popupWrapper__overlay} ${isActive ? styles.active : ''}`}>
-            <div className={styles.popupWrapper__contentWrapper}>
-                <div className={`${styles.popupWrapper__content} ${isActive ? styles.active : ''}`}>
-                    <Popup onClose={handleClose} children={props.children}></Popup>
-                </div>
+            <div className={styles.overlay__contentWrapper}>
+                <Popup onClose={handleClose} children={props.children} isActive={isActive}></Popup>
             </div>
         </div>
     );
