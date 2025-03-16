@@ -14,7 +14,7 @@ import { RootStateContext } from 'contexts/RootStateContext'
 import Slider from '@components/ui/slider/Slider'
 
 export default function SessionFiltersFeature(): React.JSX.Element {
-	const { stationFilters, setStationFilters } = useContext(RootStateContext)
+	const { sessionFilters, setSessionFilters } = useContext(RootStateContext)
 	const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
 	const [isResetSnackbarVisible, setIsResetSnackbarVisible] = useState(false)
 
@@ -22,26 +22,26 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 		connector: ConnectorStandard,
 		enabled: boolean
 	) => {
-		setStationFilters({
-			...stationFilters,
+		setSessionFilters({
+			...sessionFilters,
 			connectors: enabled
-				? [...stationFilters.connectors, connector]
-				: stationFilters.connectors.filter(item => item !== connector),
+				? [...sessionFilters.connectors, connector]
+				: sessionFilters.connectors.filter(item => item !== connector),
 			isModified: true,
 		})
 	}
 
 	const handleSwitchChange = (enabled: boolean) => {
-		setStationFilters({
-			...stationFilters,
-			onlyAvailableStations: enabled,
+		setSessionFilters({
+			...sessionFilters,
+			onlyAvailableSessions: enabled,
 			isModified: true,
 		})
 	}
 
 	const handleSliderChange = (value: number) => {
-		setStationFilters({
-			...stationFilters,
+		setSessionFilters({
+			...sessionFilters,
 			minimalPower: value * 1000,
 			isModified: true,
 		})
@@ -49,30 +49,30 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 
 	const applyFilters = () => {
 		setIsSnackbarVisible(true)
-		setStationFilters({
-			...stationFilters,
+		setSessionFilters({
+			...sessionFilters,
 			isModified: false,
-			shouldUpdateStations: true,
+			shouldUpdateSession: true,
 		})
 	}
 
 	const resetFilters = () => {
 		setIsResetSnackbarVisible(true)
-		setStationFilters({ ...DEFAULT_FILTERS, shouldUpdateStations: true })
+		setSessionFilters({ ...DEFAULT_FILTERS, shouldUpdateSession: true })
 	}
 
 	return (
-		<div className={styles.stationFilters}>
+		<div className={styles.sessionFilters}>
 			<ContentBlockLayout>
-				<div className={styles.stationFilters__onlyAvailable}>
+				<div className={styles.sessionFilters__onlyAvailable}>
 					<p className={styles.onlyAvailable__text}>Только платные</p>
 					<Switch
 						onChange={handleSwitchChange}
-						enabled={stationFilters.onlyAvailableStations}
+						enabled={sessionFilters.onlyAvailableSessions}
 					/>
 				</div>
 			</ContentBlockLayout>
-			<div className={styles.stationFilters__minimalPower}>
+			<div className={styles.sessionFilters__minimalPower}>
 				<span className={styles.minimalPower__text}>
 					Минимальная длительность, часы
 				</span>
@@ -87,11 +87,11 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 							'8': 8,
 							'>12': 12,
 						}}
-						current={stationFilters.minimalPower / 1000}
+						current={sessionFilters.minimalPower / 1000}
 					/>
 				</ContentBlockLayout>
 			</div>
-			<div className={styles.stationFilters__connectors}>
+			<div className={styles.sessionFilters__connectors}>
 				<div className={styles.connectors__tittle}>
 					<span className={styles.tittle__text}>Коннекторы</span>
 				</div>
@@ -100,17 +100,17 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('Type 1', enabled)}
 							connector={'Type 1' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('Type 1')}
+							enabled={sessionFilters.connectors.includes('Type 1')}
 						/>
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('Type 2', enabled)}
 							connector={'Type 2' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('Type 2')}
+							enabled={sessionFilters.connectors.includes('Type 2')}
 						/>
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('CCS1', enabled)}
 							connector={'CCS1' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('CCS1')}
+							enabled={sessionFilters.connectors.includes('CCS1')}
 						/>
 					</div>
 				</ContentBlockLayout>
@@ -119,17 +119,17 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('CCS2', enabled)}
 							connector={'CCS2' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('CCS2')}
+							enabled={sessionFilters.connectors.includes('CCS2')}
 						/>
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('GB/T (AC)', enabled)}
 							connector={'GB/T (AC)' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('GB/T (AC)')}
+							enabled={sessionFilters.connectors.includes('GB/T (AC)')}
 						/>
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('GB/T (DC)', enabled)}
 							connector={'GB/T (DC)' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('GB/T (DC)')}
+							enabled={sessionFilters.connectors.includes('GB/T (DC)')}
 						/>
 					</div>
 				</ContentBlockLayout>
@@ -138,12 +138,12 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('CHAdeMO', enabled)}
 							connector={'CHAdeMO' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('CHAdeMO')}
+							enabled={sessionFilters.connectors.includes('CHAdeMO')}
 						/>
 						<ConnectorCard
 							onChange={enabled => handleConnectorChange('Tesla', enabled)}
 							connector={'Tesla' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes('Tesla')}
+							enabled={sessionFilters.connectors.includes('Tesla')}
 						/>
 					</div>
 				</ContentBlockLayout>
@@ -158,10 +158,10 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 					<Snackbar variant='success' text='Фильтры сброшены' />
 				</div>
 			)}
-			<div className={styles.stationFilters__footer}>
+			<div className={styles.sessionFilters__footer}>
 				<ResetFiltersButton
 					onClick={resetFilters}
-					disabled={isFiltersDefault(stationFilters)}
+					disabled={isFiltersDefault(sessionFilters)}
 					iconSrc={refreshImageActive}
 					text='Сбросить фильтры'
 				/>
@@ -169,7 +169,7 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 					onClick={applyFilters}
 					variant='fill'
 					text='Применить'
-					disabled={!stationFilters.isModified}
+					disabled={!sessionFilters.isModified}
 				/>
 			</div>
 		</div>

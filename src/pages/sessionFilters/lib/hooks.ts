@@ -1,20 +1,20 @@
-import { StationsFiltersPageQueryArguments } from '@common/consts/pages'
+import { SessionsFiltersPageQueryArguments } from '@common/consts/pages'
 import {
-	StationsFiltersPageQuery,
-	StationsFiltersPreviousPageQuery,
+	SessionsFiltersPageQuery,
+	SessionsFiltersPreviousPageQuery,
 } from '@common/types/pages'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
 
 /** Хук предоставляет доступ к query аргументам URL страницы */
-export const useStationsFiltersQueryParser = () => {
+export const useSessionsFiltersQueryParser = () => {
 	const [searchParams] = useSearchParams()
-	const [pageQueries, setPageQueries] = useState<StationsFiltersPageQuery>({})
+	const [pageQueries, setPageQueries] = useState<SessionsFiltersPageQuery>({})
 
 	useEffect(() => {
 		const prevPage = searchParams.get(
-			StationsFiltersPageQueryArguments.PREVIOUS_PAGE
-		) as StationsFiltersPreviousPageQuery | undefined
+			SessionsFiltersPageQueryArguments.PREVIOUS_PAGE
+		) as SessionsFiltersPreviousPageQuery | undefined
 
 		setPageQueries({ prev_page: prevPage })
 	}, [searchParams])

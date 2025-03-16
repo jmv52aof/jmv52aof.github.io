@@ -5,6 +5,8 @@ import {
 	StationProfileQueryArgument,
 	StationsFiltersPageQueryArgument,
 	StationsFiltersPreviousPageQuery,
+	SessionsFiltersPageQueryArgument,
+	SessionsFiltersPreviousPageQuery,
 } from '@common/types/pages'
 
 /** Фильтры станций */
@@ -15,6 +17,16 @@ export namespace StationsFiltersPageQueryArguments {
 export namespace StationsFiltersPreviousPageQueries {
 	export const MAIN: StationsFiltersPreviousPageQuery = 'main'
 	export const STATIONS_LIST: StationsFiltersPreviousPageQuery = 'stations_list'
+}
+
+/** Фильтры сессий */
+export namespace SessionsFiltersPageQueryArguments {
+	export const PREVIOUS_PAGE: SessionsFiltersPageQueryArgument = 'prev_page'
+}
+
+export namespace SessionsFiltersPreviousPageQueries {
+	export const MAIN: SessionsFiltersPreviousPageQuery = 'main'
+	export const SESSIONS_LIST: SessionsFiltersPreviousPageQuery = 'sessions_list'
 }
 
 /** Зарядная сессия */

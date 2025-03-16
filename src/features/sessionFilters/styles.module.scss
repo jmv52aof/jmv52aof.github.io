@@ -1,4 +1,4 @@
-.stationFilters {
+.sessionFilters {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -6,7 +6,7 @@
 	flex-grow: 1;
 }
 
-.stationFilters__onlyAvailable {
+.sessionFilters__onlyAvailable {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -22,7 +22,7 @@
 	margin: 0;
 }
 
-.stationFilters__minimalPower {
+.sessionFilters__minimalPower {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -40,7 +40,7 @@
 	color: #373435;
 }
 
-.stationFilters__connectors {
+.sessionFilters__connectors {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -70,7 +70,7 @@
 	justify-content: space-around;
 }
 
-.stationFilters__footer {
+.sessionFilters__footer {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -86,8 +86,8 @@
 	top: 16px;
 	right: 0;
 	left: 0;
-	width: 100%; /* Занимает 100% ширины родительского элемента */
-	padding: 0 8px; /* Добавляет внутренние отступы по 8px слева и справа */
+	width: 100%;
+	padding: 0 8px;
 	background-color: #fff;
-	box-sizing: border-box; /* Включает padding и border в расчет ширины элемента */
+	box-sizing: border-box;
 }
