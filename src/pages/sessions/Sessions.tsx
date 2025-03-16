@@ -10,7 +10,8 @@ import { SESSIONS_HISTORY_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { groupSessionsByDate } from './lib/functions'
 import ListLayout from '@layouts/listLayout/ListLayout'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { RootStateContext } from 'contexts/RootStateContext'
 
 /**
  * Страница с зарядными сессиями
@@ -20,7 +21,7 @@ export default function SessionsPage(): React.JSX.Element {
 	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
 		[]
 	)
-
+	const {isInitTelegramSdk} = useContext(RootStateContext)
 	const nav = useNavigate()
 
 	const onSessionsFiltersClick = () => {
@@ -291,7 +292,8 @@ export default function SessionsPage(): React.JSX.Element {
 		<div className={styles.sessionsPage}>
 			<div className={styles.sessionsPage__header}>
 				<div className={styles.header__content}>
-					<ReturnButton onClick={() => {}} iconSrc={arrowImage} />
+					{(!isInitTelegramSdk || import.meta.env.DEV) && 
+						<ReturnButton onClick={() => {}} iconSrc={arrowImage} />}
 					<div className={styles.content__tittle}>
 						<p className={styles.content__text}>Зарядные сессии</p>
 					</div>

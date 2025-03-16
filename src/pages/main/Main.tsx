@@ -21,12 +21,13 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const {setPosition} = useContext(RootStateContext)
+	const {position, setPosition} = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
+		if (position !== undefined)
+			return
 		const geo = navigator.geolocation;
-	
 		if (!geo) {
 		  return
 		}
@@ -36,6 +37,8 @@ export default function MainPage(): React.JSX.Element {
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude
 			})
+		}, () => {
+			setPosition(null)
 		})
 		return () => geo.clearWatch(watcher)
 	}, [])

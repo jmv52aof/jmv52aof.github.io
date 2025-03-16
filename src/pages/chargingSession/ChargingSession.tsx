@@ -8,10 +8,12 @@ import { useChargingSessionQueryParser } from './lib/hooks'
 import { ChargingSessionPreviousPageQueries } from '@common/consts/pages'
 import { SESSIONS_HISTORY_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
+import { useContext } from 'react'
+import { RootStateContext } from 'contexts/RootStateContext'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
-
+	const {isInitTelegramSdk} = useContext(RootStateContext)
 	const { pageQueries } = useChargingSessionQueryParser()
 
 	const getPreviousPageEndpoint = (): string | undefined => {
@@ -76,7 +78,7 @@ export default function ChargingSessionPage(): React.JSX.Element {
 		<div className={commonStyles.page}>
 			<div className={styles.page__content}>
 				<div className={styles.content__header}>
-					<div className={styles.header__button}>
+					{(!isInitTelegramSdk || import.meta.env.DEV) && <div className={styles.header__button}>
 						<ReturnButton
 							onClick={() => {
 								const endpoint = getPreviousPageEndpoint()
@@ -84,7 +86,7 @@ export default function ChargingSessionPage(): React.JSX.Element {
 							}}
 							iconSrc={arrowImage}
 						/>
-					</div>
+					</div>}
 					<a className={styles.header__tittle}>Зарядная сессия</a>
 				</div>
 				<ChargingSession chargingSession={chargingSession} />

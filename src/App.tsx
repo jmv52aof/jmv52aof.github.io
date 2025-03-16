@@ -15,11 +15,28 @@ if (import.meta.env.DEV)
 	initializeMockEnvironment()
 
 export default function App() {
-	init();
-  	if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
+
+	try {
+		if (rootState.isInitTelegramSdk === undefined) {
+			init()
+			setRootState({
+				...rootState,
+				isInitTelegramSdk: true
+			})
+		}
+	}
+	catch(e) {
+		console.error('Ошибка инициализации teleram sdk:', e)
+		setRootState({
+			...rootState,
+			isInitTelegramSdk: false
+		})
+	}
+	
+  	if (rootState.isInitTelegramSdk && !miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
 	useEffect(() => {
-		if (!backButton.isMounted()) backButton.mount()	
+		if (rootState.isInitTelegramSdk && !backButton.isMounted()) backButton.mount()	
 	}, [])
 	return (
 		<RootStateContext.Provider
@@ -43,10 +60,10 @@ export default function App() {
 					setRootState({
 						...rootState,
 						position: position
-					})
+					}),
 			}}
 		>
-			<BackButton />
+			{rootState.isInitTelegramSdk && <BackButton />}
 			<AppRouter />
 		</RootStateContext.Provider>
 	)

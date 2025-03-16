@@ -7,7 +7,7 @@ import DailyOccupation from '@components/dailyOccupation/DailyOccupation'
 import CollapseButton from '@components/ui/collapseButton/CollapseButton'
 import styles from './styles.module.scss'
 import commonStyles from '../../../src/common/styles.module.scss'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useMemo } from 'react'
 import arrowImage from '@assets/images/arrow-left.svg'
 import ReturnButton from '@components/ui/returnButton/ReturnButton'
@@ -17,9 +17,11 @@ import { useNavigate } from 'react-router'
 import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
 import { Loader } from '@components/ui/loader/Loader'
 import NotFoundPage from '@pages/notFound/NotFound'
+import { RootStateContext } from 'contexts/RootStateContext'
 
 export default function StationProfilePage(): React.JSX.Element {
 	const nav = useNavigate()
+	const {isInitTelegramSdk} = useContext(RootStateContext)
 
 	const { pageQueries } = useStationProfileQueryParser()
 	const { loading, station } = useStationLoader()
@@ -72,7 +74,7 @@ export default function StationProfilePage(): React.JSX.Element {
 	return (
 		<div className={`${commonStyles.page} ${styles.page}`}>
 			<div className={styles.page__header}>
-				<div className={styles.header__button}>
+				{(!isInitTelegramSdk || import.meta.env.DEV) && <div className={styles.header__button}>
 					<ReturnButton
 						onClick={() => {
 							const endpoint = getPreviousPageEndpoint()
@@ -80,7 +82,7 @@ export default function StationProfilePage(): React.JSX.Element {
 						}}
 						iconSrc={arrowImage}
 					/>
-				</div>
+				</div>}
 				<a className={styles.header__tittle}>{station.name}</a>
 			</div>
 

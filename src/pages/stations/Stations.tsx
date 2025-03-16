@@ -29,7 +29,7 @@ import commonStyles from '@common/styles.module.scss'
  */
 export default function StationsPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { stations, setStations } = useContext(RootStateContext)
+	const { stations, setStations, isInitTelegramSdk } = useContext(RootStateContext)
 
 	const { getByOffsetAndLimit, loading } = useStationsLoader()
 
@@ -62,7 +62,8 @@ export default function StationsPage(): React.JSX.Element {
 		<div className={commonStyles.page}>
 			<div className={styles.stationsPage__header}>
 				<div className={styles.header__content}>
-					<ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />
+					{(!isInitTelegramSdk || import.meta.env.DEV) && 
+						<ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />}
 					<div className={styles.content__tittle}>
 						<span className={styles.content__text}>Список станций</span>
 					</div>
