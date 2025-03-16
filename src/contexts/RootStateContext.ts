@@ -6,4 +6,5 @@ export const RootStateContext = createContext<IRootStateContext>({
 	...DEFAULT_ROOT_STATE,
 	setStationFilters: () => {},
 	setStations: () => {},
+	setPosition: () => {}
 })

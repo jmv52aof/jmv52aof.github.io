@@ -39,6 +39,11 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
+				setPosition: position => 
+					setRootState({
+						...rootState,
+						position: position
+					})
 			}}
 		>
 			<BackButton />
