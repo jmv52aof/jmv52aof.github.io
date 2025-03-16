@@ -11,6 +11,7 @@ type Props = {
 export default function GradientButton(props: Props) {
 	return (
 		<button
+			data-gradient-button='true'
 			onClick={props.onClick}
 			className={`${styles.gradientButton} ${
 				styles[props.gradientTemplate]

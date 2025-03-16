@@ -13,8 +13,10 @@
 
 	padding: 8px 12px;
 	border-radius: 8px;
+}
 
-	&:hover > .button__arrowIcon {
+.gradientButton:hover {
+	.button__arrowIcon {
 		background: #f89520;
 	}
 }

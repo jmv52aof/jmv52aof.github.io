@@ -54,10 +54,10 @@
 	&:hover {
 		border: 1px solid #8e949f;
 	}
-}
 
-.main__sessionCard:has(*button:hover) {
-	border: 1px solid transparent !important;
+	&:has([data-gradient-button='true']:hover) {
+		border: 1px solid transparent !important;
+	}
 }
 
 .main__sessionsMap {
