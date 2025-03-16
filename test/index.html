@@ -1,0 +1,24 @@
+<body>
+    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+    <script>
+        const tg = window.Telegram.WebApp;
+        const initData = window.Telegram.WebApp.initData;
+        const newSpan = document.createElement('span');
+        newSpan.textContent = initData;
+        document.body.appendChild(newSpan);
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+        const buttonToCopy = document.createElement('button');
+        buttonToCopy.textContent = 'Copy to Clipboard';
+        buttonToCopy.addEventListener('click', () => {
+            copyToClipboard(initData);
+        });
+        document.body.appendChild(buttonToCopy);
+    </script>
+</body>
