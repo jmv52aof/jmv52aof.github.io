@@ -1,0 +1,12 @@
+.popup__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popup__topLine {
+    margin-bottom: 30px;
+    width: 10%;
+    height: 3px;
+    background-color: #C8CED8;
+}
