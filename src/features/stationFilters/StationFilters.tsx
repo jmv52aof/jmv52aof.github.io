@@ -11,22 +11,11 @@ import { isFiltersDefault } from './lib/functions'
 import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import Slider from '@components/ui/slider/Slider'
-import Snackbar from '@components/snackbar/Snackbar'
-import { useState } from 'react'
+import { useSnackbar } from '@common/hooks/snackbar'
 
 export default function StationFiltersFeature(): React.JSX.Element {
 	const { stationFilters, setStationFilters } = useContext(RootStateContext)
-	const [isSnackbarVisible, setSnackbarVisible] = useState(false)
-	const [snackbarText, setSnackbarText] = useState('')
-
-	const handleSnackbar = (message: string) => {
-		setSnackbarText(message)
-		setSnackbarVisible(true)
-
-		setTimeout(() => {
-			setSnackbarVisible(false)
-		}, 2500)
-	}
+	const { snackbar, showSnackbar } = useSnackbar('success', '')
 
 	const handleConnectorChange = (
 		connector: ConnectorStandard,
@@ -63,23 +52,21 @@ export default function StationFiltersFeature(): React.JSX.Element {
 			isModified: false,
 			shouldUpdateStations: true,
 		})
-		handleSnackbar('Фильтры применены')
+		showSnackbar('success', 'Фильтры применены')
 	}
 
 	const resetFilters = () => {
 		setStationFilters({ ...DEFAULT_FILTERS, shouldUpdateStations: true })
-		handleSnackbar('Фильтры сброшены')
+		showSnackbar('success', 'Фильтры сброшены')
 	}
 
 	return (
 		<div className={styles.stationFilters}>
-			{isSnackbarVisible && (
-				<div
-					className={`${styles.stationFilters__snackBar} ${styles.show}`}
-				>
-					<Snackbar variant='success' text={snackbarText} />
-				</div>
-			)}
+			<div
+				className={`${styles.stationFilters__snackBar} ${styles.show}`}
+			>
+				{snackbar}
+			</div>
 			<ContentBlockLayout>
 				<div className={styles.stationFilters__onlyAvailable}>
 					<p className={styles.onlyAvailable__text}>

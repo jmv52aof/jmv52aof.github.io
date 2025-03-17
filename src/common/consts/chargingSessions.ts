@@ -13,5 +13,5 @@ export const CHARGING_SESSION_STATUS_HAS_COLOR: Record<
 > = {
 	Зарядка: 'green',
 	Невалидна: 'red',
-	Завершена: 'gray',
+	Завершена: 'grey',
 }
