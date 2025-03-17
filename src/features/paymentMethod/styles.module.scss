@@ -1,0 +1,42 @@
+.content__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 4px;
+}
+
+.info__title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  color: #373435;
+  margin: 0;
+  text-align: center;
+  hyphens: auto;
+  max-width: 280px;
+}
+
+.info__icon {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+
+.info__text {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 120%;
+  color: #8e949f;
+  text-align: center;
+}
+
+.info__text_paymentMethod {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  color: #05a6be;
+  margin: 0;
+}
