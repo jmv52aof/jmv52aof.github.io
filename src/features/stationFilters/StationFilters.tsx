@@ -82,6 +82,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
 							'75': 75,
 							'>100': 100,
 						}}
+						orderedItemKeys={['3', '18', '35', '50', '75', '>100']}
 						current={stationFilters.minimalPower / 1000}
 					/>
 				</ContentBlockLayout>
