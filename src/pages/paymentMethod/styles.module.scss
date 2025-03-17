@@ -1,12 +1,4 @@
-.page__content {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	height: 100%;
-	position: relative;
-}
-
-.content__main {
+.page__main {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -14,8 +6,7 @@
 	width: 100%;
 }
 
-.content__actionButton {
+.page__actionButton {
 	margin-top: auto;
-	margin-bottom: 50px;
-	padding: 0 2px;
+	margin-bottom: 24px;
 }

@@ -13,30 +13,24 @@ export default function PaymentMethodPage(): React.JSX.Element {
 
 	return (
 		<div className={commonStyles.page}>
-			<div className={styles.page__content}>
-				<PageHeader onReturn={() => nav('/')} title='Способ оплаты' />
-
-				<div className={styles.content__main}>
-					<PaymentMethod paymentMethod={paymentMethod} />
-				</div>
-
-				<div className={styles.content__actionButton}>
-					<ActionButton
-						text={
+			<PageHeader onReturn={() => nav('/')} title='Способ оплаты' />
+			<div className={styles.page__main}>
+				<PaymentMethod paymentMethod={paymentMethod} />
+			</div>
+			<div className={styles.page__actionButton}>
+				<ActionButton
+					text={
+						paymentMethod ? 'Удалить способ оплаты' : 'Привязать способ оплаты'
+					}
+					variant={paymentMethod ? 'red' : 'green'}
+					onClick={() => {
+						console.log(
 							paymentMethod
 								? 'Удалить способ оплаты'
 								: 'Привязать способ оплаты'
-						}
-						variant={paymentMethod ? 'red' : 'green'}
-						onClick={() => {
-							console.log(
-								paymentMethod
-									? 'Удалить способ оплаты'
-									: 'Привязать способ оплаты'
-							)
-						}}
-					/>
-				</div>
+						)
+					}}
+				/>
 			</div>
 		</div>
 	)

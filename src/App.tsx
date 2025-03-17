@@ -4,23 +4,22 @@ import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
 import { initializeMockEnvironment } from '@common/functions/telegram'
-import {
-	backButton,
-	init,
-	miniApp,	
-} from '@telegram-apps/sdk-react';
+import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import BackButton from '@components/ui/backButton/BackButton'
 
-if (import.meta.env.DEV) 
-	initializeMockEnvironment()
+if (import.meta.env.DEV) initializeMockEnvironment()
 
 export default function App() {
-	init();
-  	if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
+	init()
+
+	if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
+
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
+
 	useEffect(() => {
-		if (!backButton.isMounted()) backButton.mount()	
+		if (!backButton.isMounted()) backButton.mount()
 	}, [])
+
 	return (
 		<RootStateContext.Provider
 			value={{
@@ -39,11 +38,12 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
-				setPosition: position => 
+				setPosition: position =>
 					setRootState({
 						...rootState,
-						position: position
-					})
+						position: position,
+					}),
+				setRfidCard: card => setRootState({ ...rootState, rfidCard: card }),
 			}}
 		>
 			<BackButton />

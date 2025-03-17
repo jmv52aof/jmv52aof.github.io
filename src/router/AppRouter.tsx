@@ -7,6 +7,7 @@ import SessionsPage from '@pages/sessions/Sessions'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 import MainPage from '@pages/main/Main'
 import PaymentMethodPage from '@pages/paymentMethod/PaymentMethod'
+import RfidCardPage from '@pages/rfidCard/RfidCard'
 
 export default function AppRouter(): React.JSX.Element {
 	return (
@@ -15,15 +16,15 @@ export default function AppRouter(): React.JSX.Element {
 				path={endpoints.STATIONS_FILTERS_ENDPOINT}
 				element={<StationsFiltersPage />}
 			/>
-      <Route
+			<Route
 				path={endpoints.STATIONS_LIST_ENDPOINT}
 				element={<StationsPage />}
 			/>
-      <Route
+			<Route
 				path={`${endpoints.STATION_PROFILE_ENDPOINT}:id`}
 				element={<StationProfilePage />}
 			/>
-      <Route
+			<Route
 				path={endpoints.SESSIONS_HISTORY_ENDPOINT}
 				element={<SessionsPage />}
 			/>
@@ -35,6 +36,7 @@ export default function AppRouter(): React.JSX.Element {
 				path={endpoints.PAYMENT_METHOD_ENDPOINT}
 				element={<PaymentMethodPage />}
 			/>
+			<Route path={endpoints.RFID_CARD_ENDPOINT} element={<RfidCardPage />} />
 			<Route path='*' element={<MainPage />} />
 		</Routes>
 	)
