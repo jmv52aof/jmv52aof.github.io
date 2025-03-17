@@ -3,9 +3,12 @@ import { useState } from 'react'
 import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
+import { useSnackbar } from '@common/hooks/snackbar'
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
+	const { snackbarText, snackbarVariant, isVisible, showSnackbar } =
+		useSnackbar('success', '')
 
 	return (
 		<RootStateContext.Provider
@@ -25,6 +28,10 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
+				snackbarText,
+				snackbarVariant,
+				isSnackbarVisible: isVisible,
+				showSnackbar,
 			}}
 		>
 			<AppRouter />

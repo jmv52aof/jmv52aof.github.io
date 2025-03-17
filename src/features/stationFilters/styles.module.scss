@@ -9,7 +9,7 @@ $timeout: 2s;
 	flex-grow: 1;
 }
 
-.stationFilters__snackBar {
+.stationFilters__snackbar {
 	display: flex;
 	z-index: 9999;
 	position: fixed;
@@ -24,7 +24,7 @@ $timeout: 2s;
 	transition: opacity $transition-duration ease, top $transition-duration ease;
 }
 
-.stationFilters__snackBar.show {
+.stationFilters__snackbar.show {
 	visibility: visible;
 	opacity: 1;
 	top: 15px;

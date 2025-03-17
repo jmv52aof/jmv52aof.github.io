@@ -6,4 +6,8 @@ export const RootStateContext = createContext<IRootStateContext>({
 	...DEFAULT_ROOT_STATE,
 	setStationFilters: () => {},
 	setStations: () => {},
+	snackbarText: '',
+	snackbarVariant: 'success',
+	isSnackbarVisible: false,
+	showSnackbar: () => {},
 })
