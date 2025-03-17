@@ -63,7 +63,9 @@ export const convertChargingSessionResponseDto = (
 			: undefined,
 		total_cost: session.total_cost,
 		payment_method: session.payment_method,
-		payment_status: convertPaymentStatusResponse(session.payment_status),
+		payment_status: session.payment_status
+			? convertPaymentStatusResponse(session.payment_status)
+			: undefined,
 		battery_percentage: session.battery_percentage,
 	}
 }

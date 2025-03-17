@@ -2,12 +2,14 @@ import { RequestQuery } from '@common/types/requests'
 import {
 	GetChargingSessionByIdRequestOptions,
 	GetChargingSessionsRequestOptions,
+	StopChargingSessionRequestOptions,
 } from './types/request'
 import { convertChargingSessionStatus } from './lib/converters'
 import { convertConnectorStandard } from 'api/stations/lib/converters'
 import {
 	GetChargingSessionByIdResponse,
 	GetChargingSessionsResponse,
+	StopChargingSessionResponse,
 } from './types/response'
 import { sendRequest } from '@common/functions/requests'
 import { CHARGING_SESSIONS_URL } from '@common/consts/urls'
@@ -67,6 +69,19 @@ export const getChargingSessionById = async (
 	return sendRequest({
 		url: CHARGING_SESSIONS_URL + options.id,
 		method: 'GET',
+		token: options.token,
+	})
+}
+
+/**
+ * Остановка активной зарядки по id
+ */
+export const stopChargingSession = async (
+	options: StopChargingSessionRequestOptions
+): Promise<StopChargingSessionResponse> => {
+	return sendRequest({
+		url: CHARGING_SESSIONS_URL + options.id + '/stop/',
+		method: 'POST',
 		token: options.token,
 	})
 }

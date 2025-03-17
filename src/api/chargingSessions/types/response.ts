@@ -10,3 +10,7 @@ export interface GetChargingSessionByIdResponse {
 	data?: ChargingSessionResponseDto
 	error?: ResponseError
 }
+
+export interface StopChargingSessionResponse {
+	error?: ResponseError
+}
