@@ -1,0 +1,32 @@
+.header {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+}
+
+.header__left,
+.header__right {
+	z-index: 2;
+}
+
+.header__title {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0 50px;
+	z-index: 1;
+}
+
+.title__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #373435;
+}

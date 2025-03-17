@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import ActionButton from '@components/ui/actionButton/ActionButton'
-import arrowImage from '@assets/images/arrow-left.svg'
 import commonStyles from '@common/styles.module.scss'
 import PaymentMethod from '@features/paymentMethod/PaymentMethod'
 import { useNavigate } from 'react-router'
+import PageHeader from '@features/header/Header'
 
 export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
@@ -15,12 +14,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	return (
 		<div className={commonStyles.page}>
 			<div className={styles.page__content}>
-				<div className={styles.content__header}>
-					<div className={styles.header__button}>
-						<ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />
-					</div>
-					<a className={styles.header__tittle}>Способ оплаты</a>
-				</div>
+				<PageHeader onReturn={() => nav('/')} title='Способ оплаты' />
 
 				<div className={styles.content__main}>
 					<PaymentMethod paymentMethod={paymentMethod} />
