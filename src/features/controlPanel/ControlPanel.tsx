@@ -42,7 +42,12 @@ export default function ControlPanel(): React.JSX.Element {
 				iconSrc={rfidCardImage}
 				onClick={() => nav(RFID_CARD_ENDPOINT)}
 			/>
-			<ControlButton iconSrc={supportImage} onClick={() => {}} />
+			<ControlButton
+				iconSrc={supportImage}
+				onClick={() =>
+					window.location.replace(import.meta.env.VITE_TELEGRAM_SUPPORT_URL)
+				}
+			/>
 		</div>
 	)
 }

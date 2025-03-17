@@ -150,7 +150,13 @@ export default function StationProfilePage(): React.JSX.Element {
 				<p className={styles.title}>
 					Возникли проблемы со станцией? Свяжитесь с нами!
 				</p>
-				<Button variant='fill' text='Техподдержка' onClick={() => {}} />
+				<Button
+					variant='fill'
+					text='Техподдержка'
+					onClick={() =>
+						window.location.replace(import.meta.env.VITE_TELEGRAM_SUPPORT_URL)
+					}
+				/>
 			</div>
 		</div>
 	)
