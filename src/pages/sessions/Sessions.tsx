@@ -1,6 +1,4 @@
 import styles from './styles.module.scss'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
-import arrowImage from '@assets/images/arrow-left.svg'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
@@ -10,8 +8,8 @@ import { SESSIONS_HISTORY_FILTERS_ENDPOINT } from '@common/consts/endpoints'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { groupSessionsByDate } from './lib/functions'
 import ListLayout from '@layouts/listLayout/ListLayout'
-import { useState, useEffect, useContext } from 'react'
-import { RootStateContext } from 'contexts/RootStateContext'
+import { useState, useEffect } from 'react'
+import PageHeader from '@features/header/Header'
 
 /**
  * Страница с зарядными сессиями
@@ -21,7 +19,6 @@ export default function SessionsPage(): React.JSX.Element {
 	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
 		[]
 	)
-	const {isInitTelegramSdk} = useContext(RootStateContext)
 	const nav = useNavigate()
 
 	const onSessionsFiltersClick = () => {
@@ -239,10 +236,7 @@ export default function SessionsPage(): React.JSX.Element {
 					<p className={styles.date__text}>{`${day} ${month}`} </p>
 				</div>,
 				...groupedSessions[date].map(session => (
-					<ContentBlockLayout
-						key={session.id}
-						className={styles.sessionCard}
-					>
+					<ContentBlockLayout key={session.id} className={styles.sessionCard}>
 						<SessionCard session={session} />
 					</ContentBlockLayout>
 				)),
@@ -290,20 +284,17 @@ export default function SessionsPage(): React.JSX.Element {
 
 	return (
 		<div className={styles.sessionsPage}>
-			<div className={styles.sessionsPage__header}>
-				<div className={styles.header__content}>
-					{(!isInitTelegramSdk || import.meta.env.DEV) && 
-						<ReturnButton onClick={() => {}} iconSrc={arrowImage} />}
-					<div className={styles.content__tittle}>
-						<p className={styles.content__text}>Зарядные сессии</p>
-					</div>
+			<PageHeader
+				onReturn={() => {}}
+				title='Зарядные сессии'
+				content={
 					<FiltersButton
 						iconSrc={tuningImage}
 						onClick={onSessionsFiltersClick}
 						variant='fill'
 					/>
-				</div>
-			</div>
+				}
+			/>
 			<div className={styles.sessionsPage__main}>
 				<ListLayout
 					items={listLayoutItems}

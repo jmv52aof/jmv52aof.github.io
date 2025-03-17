@@ -1,21 +1,17 @@
 import styles from './styles.module.scss'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
-import arrowImage from '@assets/images/arrow-left.svg'
 import StationFiltersFeature from '@features/stationFilters/StationFilters'
 import commonStyles from '@common/styles.module.scss'
 import { useStationsFiltersQueryParser } from './lib/hooks'
 import { useNavigate } from 'react-router'
 import { StationsFiltersPreviousPageQueries } from '@common/consts/pages'
 import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
-import { useContext } from 'react'
-import { RootStateContext } from 'contexts/RootStateContext'
+import PageHeader from '@features/header/Header'
 
 /**
  * Страница с фильтрами
  */
 export default function StationsFiltersPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const {isInitTelegramSdk} = useContext(RootStateContext)
 
 	const { pageQueries } = useStationsFiltersQueryParser()
 
@@ -31,18 +27,13 @@ export default function StationsFiltersPage(): React.JSX.Element {
 	return (
 		<div className={commonStyles.page}>
 			<div className={styles.page__content}>
-				<div className={styles.content__header}>
-					{(!isInitTelegramSdk || import.meta.env.DEV) && <div className={styles.header__button}>
-						<ReturnButton
-							onClick={() => {
-								const endpoint = getPreviousPageEndpoint()
-								if (endpoint) nav(endpoint)
-							}}
-							iconSrc={arrowImage}
-						/>
-					</div>}
-					<a className={styles.header__tittle}>Фильтры</a>
-				</div>
+				<PageHeader
+					onReturn={() => {
+						const endpoint = getPreviousPageEndpoint()
+						if (endpoint) nav(endpoint)
+					}}
+					title='Фильтры'
+				/>
 				<StationFiltersFeature />
 			</div>
 		</div>
