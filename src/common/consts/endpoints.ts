@@ -11,6 +11,7 @@ export const SESSION_PROFILE_ENDPOINT = '/charging-session/'
 
 /** Эндпоинты RFID карты */
 export const RFID_CARD_ENDPOINT = '/rfid-card/'
+export const ADD_RFID_CARD_ENDPOINT = RFID_CARD_ENDPOINT + 'add/'
 
 /** Эндпоинты для настройки оплаты */
 export const PAYMENT_METHOD_ENDPOINT = '/payment-method/'

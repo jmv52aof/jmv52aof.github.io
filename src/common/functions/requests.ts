@@ -46,7 +46,11 @@ export async function sendRequest(
 
 		return {
 			data: jsonResponse?.error ? undefined : jsonResponse,
-			error: jsonResponse?.error,
+			error: {
+				status: jsonResponse?.status,
+				error: jsonResponse?.error,
+				message: jsonResponse?.message,
+			},
 		}
 	} catch (err) {
 		return {

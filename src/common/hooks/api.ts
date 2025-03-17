@@ -1,4 +1,5 @@
 import { ChargingSessionDto } from '@common/types/chargingSessions'
+import { ResponseError } from '@common/types/requests'
 import { RfidCardDto } from '@common/types/rfidCards'
 import { StationDto } from '@common/types/stations'
 import { authorizationTelegramUser } from 'api/auth/api'
@@ -115,8 +116,9 @@ export const useApi = () => {
 
 	const attachRfidCardFromApi = async (
 		options: AttachRfidCardRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await attachRfidCard({ ...options, token: undefined })
+		return response.error
 	}
 
 	const detachRfidCardFromApi = async (

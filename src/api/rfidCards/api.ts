@@ -35,7 +35,7 @@ export const attachRfidCard = async (
 			createQueryString([
 				{ key: 'visualCardNumber', value: options.visualCardNumber },
 			]),
-		method: 'POST',
+		method: 'PUT',
 		token: options.token,
 	})
 }

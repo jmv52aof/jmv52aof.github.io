@@ -6,11 +6,18 @@ import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import PageLayout from '@layouts/pageLayout/PageLayout'
 import RfidCard from '@features/rfidCard/RfidCard'
+import { ADD_RFID_CARD_ENDPOINT } from '@common/consts/endpoints'
 
 export default function RfidCardPage(): React.JSX.Element {
 	const nav = useNavigate()
 	const { rfidCard } = useContext(RootStateContext)
 	const { loading } = useRfidCardLoader()
+
+	const onClickHandler = () => {
+		if (!rfidCard) {
+			nav(ADD_RFID_CARD_ENDPOINT)
+		}
+	}
 
 	return (
 		<PageLayout
@@ -30,7 +37,7 @@ export default function RfidCardPage(): React.JSX.Element {
 			<ActionButton
 				text={rfidCard ? 'Удалить карту' : 'Привязать карту'}
 				variant={rfidCard ? 'red' : 'green'}
-				onClick={() => {}}
+				onClick={onClickHandler}
 			/>
 		</PageLayout>
 	)
