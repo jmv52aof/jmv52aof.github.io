@@ -100,8 +100,9 @@ export const useApi = () => {
 
 	const stopChargingSessionFromApi = async (
 		options: StopChargingSessionRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await stopChargingSession({ ...options, token: undefined })
+		return response.error
 	}
 
 	/** Модуль RFID карт */
@@ -123,25 +124,28 @@ export const useApi = () => {
 
 	const detachRfidCardFromApi = async (
 		options: DetachRfidCardRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await detachRfidCard({ ...options, token: undefined })
+		return response.error
 	}
 
 	/** Модуль оплаты */
 
 	const retryPaymentForChargingSessionFromApi = async (
 		options: RetryPaymentForChargingSessionRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await retryPaymentForChargingSession({
 			...options,
 			token: undefined,
 		})
+		return response.error
 	}
 
 	const createPaymentMethodFromApi = async (
 		options: CreatePaymentMethodRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await createPaymentMethod({ ...options, token: undefined })
+		return response.error
 	}
 
 	const getPaymentMethodFromApi = async (
@@ -162,8 +166,9 @@ export const useApi = () => {
 
 	const deletePaymentMethodFromApi = async (
 		options: DeletePaymentMethodRequestOptions
-	): Promise<void> => {
+	): Promise<ResponseError | undefined> => {
 		const response = await deletePaymentMethod({ ...options, token: undefined })
+		return response.error
 	}
 
 	return {
