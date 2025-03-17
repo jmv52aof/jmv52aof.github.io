@@ -18,7 +18,6 @@ const useRfidCardAddHandler = () => {
 		setLoading(true)
 		return attachRfidCardFromApi({ visualCardNumber: form.visualNumber })
 			.then(res => {
-				console.log(res)
 				return res?.message
 			})
 			.finally(() => setLoading(false))

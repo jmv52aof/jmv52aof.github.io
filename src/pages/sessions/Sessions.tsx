@@ -276,7 +276,6 @@ export default function SessionsPage(): React.JSX.Element {
 			const nextOffset = listLayoutItems.length
 			getData(nextOffset, 15).then(newData => {
 				if (newData && newData.length > 0) {
-					console.log(newData)
 					setListLayoutItems(prevItems => [...prevItems, ...newData])
 				}
 			})
