@@ -18,22 +18,24 @@
 }
 
 .actionButton_green {
-	background: #27ae60;
+	background-color: #27ae60;
 }
 
 .actionButton_green:hover {
-	background: #259c57;
+	background-color: #259c57;
 }
 
 .actionButton_red {
-	background: #f63255;
+	background-color: #f63255;
 }
 
 .actionButton_red:hover {
-	background: #e02e4e;
+	background-color: #e02e4e;
 }
 
 .actionButton_disabled {
-	opacity: 0.5;
+	background-color: #f7f7f7 !important;
+	color: #c8ced8 !important;
+	box-shadow: none !important;
 	cursor: default;
 }
