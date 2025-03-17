@@ -1,1 +1,1 @@
-export const LIST_LAYOUT_LIMIT: number = 3
+export const LIST_HEIGHT_REDUCTION = 113
