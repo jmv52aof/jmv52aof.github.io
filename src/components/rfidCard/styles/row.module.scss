@@ -1,0 +1,22 @@
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.row__first,
+.row__second {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 120%;
+}
+
+.row__first {
+	width: 85px;
+	color: #8e949f;
+}
+
+.row__second {
+	color: #373435;
+}

@@ -1,0 +1,41 @@
+.card {
+	padding: 16px !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 180px;
+}
+
+.card__header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.header__left {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.left__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 120%;
+	color: #373435;
+}
+
+.left__icon {
+	width: 24px;
+	height: 24px;
+	filter: brightness(0) saturate(100%) invert(15%) sepia(1%) saturate(1835%)
+		hue-rotate(289deg) brightness(101%) contrast(84%);
+}
+
+.card__content {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}

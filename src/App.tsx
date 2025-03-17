@@ -4,15 +4,10 @@ import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
 import { initializeMockEnvironment } from '@common/functions/telegram'
-import {
-	backButton,
-	init,
-	miniApp,	
-} from '@telegram-apps/sdk-react';
+import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import BackButton from '@components/ui/backButton/BackButton'
 
-if (import.meta.env.DEV) 
-	initializeMockEnvironment()
+if (import.meta.env.DEV) initializeMockEnvironment()
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
@@ -38,6 +33,7 @@ export default function App() {
 	useEffect(() => {
 		if (rootState.isInitTelegramSdk && !backButton.isMounted()) backButton.mount()	
 	}, [])
+
 	return (
 		<RootStateContext.Provider
 			value={{
@@ -56,7 +52,7 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
-				setPosition: position => 
+				setPosition: position =>
 					setRootState({
 						...rootState,
 						position: position

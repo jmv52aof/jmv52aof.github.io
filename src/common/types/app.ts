@@ -1,4 +1,5 @@
 import { Position } from './position'
+import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
 
 /**
@@ -11,6 +12,7 @@ export type RootState = {
 	stations: StationDto[]
 	position?: Position | null
 	isInitTelegramSdk?: boolean
+	rfidCard?: RfidCardDto
 }
 
 export interface IRootStateContext extends RootState {
