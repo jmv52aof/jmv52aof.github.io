@@ -6,7 +6,6 @@ import Connector from '@features/stationProfile/components/Connector'
 import DailyOccupation from '@components/dailyOccupation/DailyOccupation'
 import CollapseButton from '@components/ui/collapseButton/CollapseButton'
 import styles from './styles.module.scss'
-import commonStyles from '../../../src/common/styles.module.scss'
 import React from 'react'
 import { useState, useMemo } from 'react'
 import { useStationLoader, useStationProfileQueryParser } from './lib/hooks'
@@ -15,7 +14,7 @@ import { useNavigate } from 'react-router'
 import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
 import { Loader } from '@components/ui/loader/Loader'
 import NotFoundPage from '@pages/notFound/NotFound'
-import PageHeader from '@features/header/Header'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 export default function StationProfilePage(): React.JSX.Element {
 	const nav = useNavigate()
@@ -72,15 +71,14 @@ export default function StationProfilePage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={`${commonStyles.page} ${styles.page}`}>
-			<PageHeader
-				onReturn={() => {
-					const endpoint = getPreviousPageEndpoint()
-					if (endpoint) nav(endpoint)
-				}}
-				title={station.name}
-			/>
-
+		<PageLayout
+			onReturn={() => {
+				const endpoint = getPreviousPageEndpoint()
+				if (endpoint) nav(endpoint)
+			}}
+			title={station.name}
+			className={styles.page}
+		>
 			{station.images && 0 !== station.images.length && (
 				<StationPhotos
 					imageSources={station.images}
@@ -96,7 +94,7 @@ export default function StationProfilePage(): React.JSX.Element {
 						{getDistance() && (
 							<div className={styles.content__distance}>
 								<img src={path} alt='path' />
-								<p className={styles.text_distance}>{getDistance()} км</p>
+								<a className={styles.text_distance}>{getDistance()} км</a>
 							</div>
 						)}
 					</div>
@@ -141,15 +139,16 @@ export default function StationProfilePage(): React.JSX.Element {
 			<div className={styles.page__lineSeparator}></div>
 
 			<div className={styles.page__block}>
-				<p className={styles.text_subTitle}>График загруженности</p>
+				<a className={styles.text_subTitle}>График загруженности</a>
 				<ContentBlockLayout>
 					<DailyOccupation data={station.occupation} />
 				</ContentBlockLayout>
 			</div>
 			<div className={styles.page__support}>
-				<p className={styles.title}>
-					Возникли проблемы со станцией? Свяжитесь с нами!
-				</p>
+				<a className={styles.title}>
+					Возникли проблемы со станцией? <br />
+					Свяжитесь с нами!
+				</a>
 				<Button
 					variant='fill'
 					text='Техподдержка'
@@ -158,6 +157,6 @@ export default function StationProfilePage(): React.JSX.Element {
 					}
 				/>
 			</div>
-		</div>
+		</PageLayout>
 	)
 }

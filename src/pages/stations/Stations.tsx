@@ -20,8 +20,7 @@ import ListLayout from '@layouts/listLayout/ListLayout'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import StationCard from '@components/stationCard/StationCard'
 import { StationDto } from '@common/types/stations'
-import commonStyles from '@common/styles.module.scss'
-import PageHeader from '@features/header/Header'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 /**
  * Страница со списком станций
@@ -58,42 +57,36 @@ export default function StationsPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.stationsPage__header}>
-				<PageHeader
-					onReturn={() => nav('/')}
-					title='Список станций'
-					content={
-						<FiltersButton
-							iconSrc={tuningImage}
-							onClick={onFiltersClick}
-							variant='fill'
-						/>
-					}
+		<PageLayout
+			onReturn={() => nav('/')}
+			title='Список станций'
+			headerContent={
+				<FiltersButton
+					iconSrc={tuningImage}
+					onClick={onFiltersClick}
+					variant='fill'
 				/>
-				{/* <Search variant='outlined' placeholder='Название станции' /> */}
-			</div>
-			<div className={styles.stationsPage__stationList}>
-				<ListLayout
-					items={stations.map((value, index) => {
-						return (
-							<ContentBlockLayout
-								key={index}
-								className={styles.stationsList__station}
-							>
-								<StationCard
-									onClick={() => onStationClick(value.id)}
-									station={value}
-									showDistance
-								/>
-							</ContentBlockLayout>
-						)
-					})}
-					getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
-					onDataLoad={data => setStations(data as StationDto[])}
-					loading={loading}
-				/>
-			</div>
-		</div>
+			}
+		>
+			<ListLayout
+				items={stations.map((value, index) => {
+					return (
+						<ContentBlockLayout
+							key={index}
+							className={styles.stationsList__station}
+						>
+							<StationCard
+								onClick={() => onStationClick(value.id)}
+								station={value}
+								showDistance
+							/>
+						</ContentBlockLayout>
+					)
+				})}
+				getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
+				onDataLoad={data => setStations(data as StationDto[])}
+				loading={loading}
+			/>
+		</PageLayout>
 	)
 }

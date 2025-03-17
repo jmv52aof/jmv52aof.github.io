@@ -1,12 +1,10 @@
-import styles from './styles.module.scss'
-import commonStyles from '@common/styles.module.scss'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import ChargingSession from '@features/chargingSession/ChargingSession'
 import { useChargingSessionQueryParser } from './lib/hooks'
 import { ChargingSessionPreviousPageQueries } from '@common/consts/pages'
 import { SESSIONS_HISTORY_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
-import PageHeader from '@features/header/Header'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
@@ -72,17 +70,14 @@ export default function ChargingSessionPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.page__content}>
-				<PageHeader
-					onReturn={() => {
-						const endpoint = getPreviousPageEndpoint()
-						if (endpoint) nav(endpoint)
-					}}
-					title='Зарядная сессия'
-				/>
-				<ChargingSession chargingSession={chargingSession} />
-			</div>
-		</div>
+		<PageLayout
+			onReturn={() => {
+				const endpoint = getPreviousPageEndpoint()
+				if (endpoint) nav(endpoint)
+			}}
+			title='Зарядная сессия'
+		>
+			<ChargingSession chargingSession={chargingSession} />
+		</PageLayout>
 	)
 }

@@ -9,11 +9,12 @@ type Props = {
 	children: React.ReactNode
 	headerContent?: React.ReactNode
 	loading?: boolean
+	className?: string
 }
 
 export default function PageLayout(props: Readonly<Props>): React.JSX.Element {
 	return (
-		<div className={commonStyles.page}>
+		<div className={`${commonStyles.page} ${props.className}`}>
 			<PageHeader
 				onReturn={props.onReturn}
 				title={props.title}

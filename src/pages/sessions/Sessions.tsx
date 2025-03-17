@@ -9,7 +9,7 @@ import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { groupSessionsByDate } from './lib/functions'
 import ListLayout from '@layouts/listLayout/ListLayout'
 import { useState, useEffect } from 'react'
-import PageHeader from '@features/header/Header'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 /**
  * Страница с зарядными сессиями
@@ -284,26 +284,23 @@ export default function SessionsPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={styles.sessionsPage}>
-			<PageHeader
-				onReturn={() => {}}
-				title='Зарядные сессии'
-				content={
-					<FiltersButton
-						iconSrc={tuningImage}
-						onClick={onSessionsFiltersClick}
-						variant='fill'
-					/>
-				}
-			/>
-			<div className={styles.sessionsPage__main}>
-				<ListLayout
-					items={listLayoutItems}
-					loading={loading}
-					getData={getData}
-					onDataLoad={onDataLoad}
+		<PageLayout
+			onReturn={() => {}}
+			title='Зарядные сессии'
+			headerContent={
+				<FiltersButton
+					iconSrc={tuningImage}
+					onClick={onSessionsFiltersClick}
+					variant='fill'
 				/>
-			</div>
-		</div>
+			}
+		>
+			<ListLayout
+				items={listLayoutItems}
+				loading={loading}
+				getData={getData}
+				onDataLoad={onDataLoad}
+			/>
+		</PageLayout>
 	)
 }
