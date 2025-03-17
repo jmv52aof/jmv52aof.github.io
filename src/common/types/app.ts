@@ -2,6 +2,7 @@ import { Position } from './position'
 import { StationDto, StationFilters } from './stations'
 
 /**
+ * Поле isInitTelegramSdk = undefined - когда telegram sdk ещё не инициализировано
  * Поле position = undefined - когда оно не инициализировано
  * Поле position = null - когда пользователь отказал в доступе к геолокации или произошла ошибка во время получения геолокации
  */

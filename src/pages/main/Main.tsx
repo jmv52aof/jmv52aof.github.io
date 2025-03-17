@@ -25,12 +25,10 @@ export default function MainPage(): React.JSX.Element {
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
-		if (position !== undefined)
+		const geo = navigator.geolocation
+		
+		if (position !== undefined || !geo)
 			return
-		const geo = navigator.geolocation;
-		if (!geo) {
-			return
-		}
 
 		const watcher = geo.watchPosition(position => {
 			setPosition({
