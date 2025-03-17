@@ -1,9 +1,9 @@
-import { DEFAULT_FILTERS } from '@common/consts/stations'
-import { StationFilters } from '@common/types/stations'
+import { DEFAULT_FILTERS } from '@common/consts/chargingSessions'
+import { SessionFilters } from '@common/types/chargingSessions'
 
-export const isFiltersDefault = (filters: StationFilters) =>
+export const isFiltersDefault = (filters: SessionFilters) =>
 	filters.connectors.length === DEFAULT_FILTERS.connectors.length &&
 	filters.connectors.every(item => DEFAULT_FILTERS.connectors.includes(item)) &&
-	filters.onlyAvailableStations === DEFAULT_FILTERS.onlyAvailableStations &&
+	filters.onlyAvailableSessions === DEFAULT_FILTERS.onlyAvailableSessions &&
 	filters.minimalPower === DEFAULT_FILTERS.minimalPower &&
 	filters.isModified === DEFAULT_FILTERS.isModified

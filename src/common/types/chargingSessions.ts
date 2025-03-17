@@ -6,6 +6,17 @@ export type ChargingSessionStatus = 'Зарядка' | 'Завершена' | '�
 
 export type PaymentStatus = 'Оплачено' | 'Неоплачено'
 
+export type ConnectorStandard =
+	| 'CHAdeMO'
+	| 'GB/T (AC)'
+	| 'GB/T (DC)'
+	| 'Type 1'
+	| 'Type 2'
+	| 'CCS1'
+	| 'CCS2'
+	| 'Tesla'
+	| 'Другой'
+
 export interface ChargingSessionDto {
 	id: string
 	connector_info: ConnectorInfoDto
@@ -30,4 +41,12 @@ export interface ChargingSessionDto {
 	payment_status?: PaymentStatus
 	/** Процент заряда батареи авто */
 	battery_percentage?: number
+}
+
+export type SessionFilters = {
+	connectors: ConnectorStandard[]
+	onlyAvailableSessions: boolean
+	minimalPower: number
+	isModified: boolean
+	shouldUpdateSessions?: boolean
 }

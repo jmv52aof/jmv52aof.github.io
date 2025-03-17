@@ -6,8 +6,8 @@ import refreshImageActive from '@assets/images/refresh-icon-active.svg'
 import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
 import Snackbar from '@components/snackbar/Snackbar'
-import { ConnectorStandard } from '@common/types/stations'
-import { DEFAULT_FILTERS } from '@common/consts/stations'
+import { ConnectorStandard } from '@common/types/chargingSessions'
+import { DEFAULT_FILTERS } from '@common/consts/chargingSessions'
 import { isFiltersDefault } from './lib/functions'
 import { useContext, useState } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
@@ -22,6 +22,7 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 		connector: ConnectorStandard,
 		enabled: boolean
 	) => {
+		console.log('setSessionFilters:', setSessionFilters)
 		setSessionFilters({
 			...sessionFilters,
 			connectors: enabled
@@ -52,13 +53,13 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 		setSessionFilters({
 			...sessionFilters,
 			isModified: false,
-			shouldUpdateSession: true,
+			shouldUpdateSessions: true,
 		})
 	}
 
 	const resetFilters = () => {
 		setIsResetSnackbarVisible(true)
-		setSessionFilters({ ...DEFAULT_FILTERS, shouldUpdateSession: true })
+		setSessionFilters({ ...DEFAULT_FILTERS, shouldUpdateSessions: true })
 	}
 
 	return (
