@@ -10,7 +10,7 @@ type Props = {
 /**
  * Компонент отображения статуса привязки способа оплаты
  */
-export default function PaymentMethodFeature(
+export default function PaymentMethod(
   props: Readonly<Props>,
 ): React.JSX.Element {
   const isBound = !!props.paymentMethod;
