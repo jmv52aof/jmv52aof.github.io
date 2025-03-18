@@ -48,9 +48,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 								</p>
 							</div>
 							<div className={styles.bateryInfo__row}>
-								<p className={styles.row__label}>
-									Процент батареи:
-								</p>
+								<p className={styles.row__label}>Процент батареи:</p>
 								<p className={styles.row__value}>
 									{props.sessionValues.battery_percentage}%
 								</p>
@@ -74,17 +72,13 @@ export default function SessionValues(props: Props): React.JSX.Element {
 							</p>
 						</div>
 						<div className={styles.texts__row}>
-							<p className={styles.row__label}>
-								Максимальная мощность:
-							</p>
+							<p className={styles.row__label}>Максимальная мощность:</p>
 							<p className={styles.row__value}>
 								{props.sessionValues.max_power} кВт
 							</p>
 						</div>
 						<div className={styles.texts__row}>
-							<p className={styles.row__label}>
-								Минимальная мощность:
-							</p>
+							<p className={styles.row__label}>Минимальная мощность:</p>
 							<p className={styles.row__value}>
 								{props.sessionValues.min_power} кВт
 							</p>
@@ -140,19 +134,17 @@ export default function SessionValues(props: Props): React.JSX.Element {
 								<p className={styles.row__label}>Сумма:</p>
 								<p className={styles.row__value}>
 									{props.sessionValues.total_cost}{' '}
-									{props.sessionValues.tariffs?.[0]
-										?.currency || 'руб'}
-									.
+									{props.sessionValues.tariffs?.[0]?.currency || 'руб'}.
 								</p>
 							</div>
-							<div className={styles.texts__paymentMethod}>
-								<p className={styles.row__label}>
-									Способ оплаты:
-								</p>
-								<p className={styles.row__value}>
-									{props.sessionValues.payment_method}
-								</p>
-							</div>
+							{props.sessionValues.payment_method && (
+								<div className={styles.texts__paymentMethod}>
+									<p className={styles.row__label}>Способ оплаты:</p>
+									<p className={styles.row__value}>
+										{props.sessionValues.payment_method}
+									</p>
+								</div>
+							)}
 						</div>
 					</div>
 				</>

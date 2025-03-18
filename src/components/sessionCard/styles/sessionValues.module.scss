@@ -41,6 +41,7 @@
 	color: #373435;
 	margin: 0;
 	margin-right: 4px;
+	white-space: nowrap;
 }
 
 .row__value {
@@ -51,6 +52,9 @@
 	vertical-align: middle;
 	margin: 0;
 	color: #05a6be;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .sessionCard__session,
@@ -83,7 +87,7 @@
 .bateryInfo__row {
 	display: flex;
 	flex-direction: row;
-	min-width: 130px;
+	width: 50%;
 }
 
 .payment__icon {
