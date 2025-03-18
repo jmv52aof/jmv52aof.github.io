@@ -1,0 +1,24 @@
+$animationSpeed: 0.5s;
+
+.popupWrapper__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity $animationSpeed ease, visibility $animationSpeed ease;
+}
+  
+.popupWrapper__overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay__contentWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}

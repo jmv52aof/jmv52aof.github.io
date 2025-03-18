@@ -1,17 +1,13 @@
-import styles from './styles.module.scss'
-import commonStyles from '@common/styles.module.scss'
-import arrowImage from '@assets/images/arrow-left.svg'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
 import ChargingSession from '@features/chargingSession/ChargingSession'
 import { useChargingSessionQueryParser } from './lib/hooks'
 import { ChargingSessionPreviousPageQueries } from '@common/consts/pages'
 import { SESSIONS_HISTORY_ENDPOINT } from '@common/consts/endpoints'
 import { useNavigate } from 'react-router'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
-
 	const { pageQueries } = useChargingSessionQueryParser()
 
 	const getPreviousPageEndpoint = (): string | undefined => {
@@ -73,22 +69,14 @@ export default function ChargingSessionPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.page__content}>
-				<div className={styles.content__header}>
-					<div className={styles.header__button}>
-						<ReturnButton
-							onClick={() => {
-								const endpoint = getPreviousPageEndpoint()
-								if (endpoint) nav(endpoint)
-							}}
-							iconSrc={arrowImage}
-						/>
-					</div>
-					<a className={styles.header__tittle}>Зарядная сессия</a>
-				</div>
-				<ChargingSession chargingSession={chargingSession} />
-			</div>
-		</div>
+		<PageLayout
+			onReturn={() => {
+				const endpoint = getPreviousPageEndpoint()
+				if (endpoint) nav(endpoint)
+			}}
+			title='Зарядная сессия'
+		>
+			<ChargingSession chargingSession={chargingSession} />
+		</PageLayout>
 	)
 }

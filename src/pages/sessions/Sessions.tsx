@@ -1,6 +1,4 @@
 import styles from './styles.module.scss'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
-import arrowImage from '@assets/images/arrow-left.svg'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
@@ -11,6 +9,7 @@ import { ChargingSessionDto } from '@common/types/chargingSessions'
 import { groupSessionsByDate } from './lib/functions'
 import ListLayout from '@layouts/listLayout/ListLayout'
 import { useState, useEffect } from 'react'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 /**
  * Страница с зарядными сессиями
@@ -20,7 +19,6 @@ export default function SessionsPage(): React.JSX.Element {
 	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
 		[]
 	)
-
 	const nav = useNavigate()
 
 	const onSessionsFiltersClick = () => {
@@ -280,7 +278,6 @@ export default function SessionsPage(): React.JSX.Element {
 			const nextOffset = listLayoutItems.length
 			getData(nextOffset, 15).then(newData => {
 				if (newData && newData.length > 0) {
-					console.log(newData)
 					setListLayoutItems(prevItems => [...prevItems, ...newData])
 				}
 			})
@@ -288,28 +285,23 @@ export default function SessionsPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={styles.sessionsPage}>
-			<div className={styles.sessionsPage__header}>
-				<div className={styles.header__content}>
-					<ReturnButton onClick={() => {}} iconSrc={arrowImage} />
-					<div className={styles.content__tittle}>
-						<p className={styles.content__text}>Зарядные сессии</p>
-					</div>
-					<FiltersButton
-						iconSrc={tuningImage}
-						onClick={onSessionsFiltersClick}
-						variant='fill'
-					/>
-				</div>
-			</div>
-			<div className={styles.sessionsPage__main}>
-				<ListLayout
-					items={listLayoutItems}
-					loading={loading}
-					getData={getData}
-					onDataLoad={onDataLoad}
+		<PageLayout
+			onReturn={() => {}}
+			title='Зарядные сессии'
+			headerContent={
+				<FiltersButton
+					iconSrc={tuningImage}
+					onClick={onSessionsFiltersClick}
+					variant='fill'
 				/>
-			</div>
-		</div>
+			}
+		>
+			<ListLayout
+				items={listLayoutItems}
+				loading={loading}
+				getData={getData}
+				onDataLoad={onDataLoad}
+			/>
+		</PageLayout>
 	)
 }

@@ -10,4 +10,6 @@ export const RootStateContext = createContext<IRootStateContext>({
 	snackbarVariant: 'success',
 	isSnackbarVisible: false,
 	showSnackbar: () => {},
+	setPosition: _ => {},
+	setRfidCard: _ => {},
 })

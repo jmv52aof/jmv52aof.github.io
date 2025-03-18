@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { LIST_LAYOUT_LIMIT } from './lib/consts.ts'
 import styles from './styles.module.scss'
 import Button from '@components/ui/button/Button.tsx'
 import { Loader } from '@components/ui/loader/Loader.tsx'
 import arrowImage from '@assets/images/arrow-up.svg'
 import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification.tsx'
 import chargeStationImage from '@assets/images/charge-station.svg'
+import { useWindowSizes } from '@common/hooks/window.ts'
+import { GET_DATA_LIMIT } from '@common/consts/app.ts'
+import { LIST_HEIGHT_REDUCTION } from './lib/consts'
 
 type Props = {
 	items: React.JSX.Element[]
@@ -18,6 +20,8 @@ type Props = {
  * Layout списка
  */
 export default function ListLayout(props: Props): React.JSX.Element {
+	const { windowSizes } = useWindowSizes()
+
 	const [offset, setOffset] = useState(0)
 	const [dataIsLoading, setIsLoading] = useState(false)
 	const [hasMoreData, setHasMoreData] = useState(true)
@@ -32,7 +36,7 @@ export default function ListLayout(props: Props): React.JSX.Element {
 		fetchData()
 	}, [])
 
-	const limit = LIST_LAYOUT_LIMIT
+	const limit = GET_DATA_LIMIT
 
 	const fetchData = () => {
 		/** Подгрузка данных отключена, т.к. сейчас все данные загружаются в карте */
@@ -123,6 +127,9 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				onMouseUp={handleMouseUp}
 				onMouseLeave={handleMouseUp}
 				className={styles.listLayout__list}
+				style={{
+					height: windowSizes.height - LIST_HEIGHT_REDUCTION + 'px',
+				}}
 			>
 				{((dataIsLoading && props.items.length === 0) || props.loading) && (
 					<Loader />

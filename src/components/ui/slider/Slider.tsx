@@ -3,11 +3,17 @@ import styles from './styles.module.scss'
 
 interface Props {
 	items: { [key: number | string]: number },
+	orderedItemKeys: Array<number|string>,
 	onChange: (value: number) => void,
 	current?: number,
 }
 
-const Slider: React.FC<Props> = ({ items, onChange, current }) => {
+const Slider: React.FC<Props> = ({ items, onChange, current, orderedItemKeys }) => {
+	if (JSON.stringify(Object.keys(items).slice(0).sort()) != JSON.stringify(orderedItemKeys.slice(0).sort()))
+	{
+		throw new Error('Items keys does not equal to orderedItemKeys, check you parameters');
+	}
+
 	const [pointOffset, setPointOffset] = useState<number>(0);
 	const [selectedIndex, setSelectedIndex] = useState<number>(0);
 	const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -16,7 +22,7 @@ const Slider: React.FC<Props> = ({ items, onChange, current }) => {
 	const sliderLegendRef = useRef<HTMLDivElement>(null);
 	const pointerRef = useRef<HTMLDivElement>(null);
 
-	const keys = useMemo(() => Object.keys(items), [items]);
+	const keys = useMemo(() => orderedItemKeys, [orderedItemKeys]);
 
 	useEffect(() => {
 		if (undefined !== current) {

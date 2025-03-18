@@ -10,26 +10,6 @@
 	margin: 0 auto;
 }
 
-.sessionsPage__header {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-}
-
-.header__content {
-	width: 100%;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.content__tittle {
-	text-align: center;
-}
-
-.content__text,
 .date__text {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;

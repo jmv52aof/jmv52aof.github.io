@@ -13,6 +13,7 @@ $transition-duration: 0.3s;
 	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
 	transition: $transition-duration;
+	padding: 0;
 
 	img {
 		width: 24px;

@@ -1,0 +1,15 @@
+.number {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	min-width: 100px;
+}
+
+.number__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 120%;
+	color: #373435;
+}

@@ -7,8 +7,8 @@ type Props = {
 
 export function Loader(props: Props): React.JSX.Element {
 	return (
-		<div className={`${styles.loader} ${props.className}`}>
-			<CircularProgress />
+		<div className={styles.loader}>
+			<CircularProgress className={props.className} />
 		</div>
 	)
 }

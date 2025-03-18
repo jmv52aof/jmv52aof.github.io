@@ -1,6 +1,4 @@
 import styles from './styles.module.scss'
-import ReturnButton from '@components/ui/returnButton/ReturnButton'
-import arrowImage from '@assets/images/arrow-left.svg'
 import tuningImage from '@assets/images/tuning.svg'
 import {
 	STATION_PROFILE_ENDPOINT,
@@ -22,7 +20,7 @@ import ListLayout from '@layouts/listLayout/ListLayout'
 import ContentBlockLayout from '@layouts/contentBlockLayout/contentBlockLayout'
 import StationCard from '@components/stationCard/StationCard'
 import { StationDto } from '@common/types/stations'
-import commonStyles from '@common/styles.module.scss'
+import PageLayout from '@layouts/pageLayout/PageLayout'
 
 /**
  * Страница со списком станций
@@ -59,42 +57,36 @@ export default function StationsPage(): React.JSX.Element {
 	}
 
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.stationsPage__header}>
-				<div className={styles.header__content}>
-					<ReturnButton onClick={() => nav('/')} iconSrc={arrowImage} />
-					<div className={styles.content__tittle}>
-						<span className={styles.content__text}>Список станций</span>
-					</div>
-					<FiltersButton
-						iconSrc={tuningImage}
-						onClick={onFiltersClick}
-						variant='fill'
-					/>
-				</div>
-				{/* <Search variant='outlined' placeholder='Название станции' /> */}
-			</div>
-			<div className={styles.stationsPage__stationList}>
-				<ListLayout
-					items={stations.map((value, index) => {
-						return (
-							<ContentBlockLayout
-								key={index}
-								className={styles.stationsList__station}
-							>
-								<StationCard
-									onClick={() => onStationClick(value.id)}
-									station={value}
-									showDistance
-								/>
-							</ContentBlockLayout>
-						)
-					})}
-					getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
-					onDataLoad={data => setStations(data as StationDto[])}
-					loading={loading}
+		<PageLayout
+			onReturn={() => nav('/')}
+			title='Список станций'
+			headerContent={
+				<FiltersButton
+					iconSrc={tuningImage}
+					onClick={onFiltersClick}
+					variant='fill'
 				/>
-			</div>
-		</div>
+			}
+		>
+			<ListLayout
+				items={stations.map((value, index) => {
+					return (
+						<ContentBlockLayout
+							key={index}
+							className={styles.stationsList__station}
+						>
+							<StationCard
+								onClick={() => onStationClick(value.id)}
+								station={value}
+								showDistance
+							/>
+						</ContentBlockLayout>
+					)
+				})}
+				getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
+				onDataLoad={data => setStations(data as StationDto[])}
+				loading={loading}
+			/>
+		</PageLayout>
 	)
 }

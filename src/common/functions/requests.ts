@@ -39,12 +39,18 @@ export async function sendRequest(
 
 		let jsonResponse = undefined
 		try {
-			jsonResponse = await response.json()
+			jsonResponse = await (options.responseIsString
+				? response.text()
+				: response.json())
 		} catch (err) {}
 
 		return {
 			data: jsonResponse?.error ? undefined : jsonResponse,
-			error: jsonResponse?.error,
+			error: {
+				status: jsonResponse?.status,
+				error: jsonResponse?.error,
+				message: jsonResponse?.message,
+			},
 		}
 	} catch (err) {
 		return {

@@ -13,6 +13,8 @@ export type RequestOptions = {
 	isFiles?: boolean
 	/** Если запрос следует выполнить в фоне браузера при его закрытии, то выставить `true` */
 	keepalive?: boolean
+	/** Указывает на строку в ответе вместо привычного формата JSON */
+	responseIsString?: boolean
 }
 
 export type ResponseError = {
