@@ -43,6 +43,17 @@ const getQueryArgumentsForStations = (
 	return query
 }
 
+const getQueryArgumentsForStation = (
+	options: GetStationByIdRequestOptions
+): RequestQuery[] => {
+	const query: RequestQuery[] = []
+	if (undefined !== options.latitude)
+		query.push({ key: 'latitude', value: options.latitude })
+	if (undefined !== options.longitude)
+		query.push({ key: 'longitude', value: options.longitude })
+	return query
+}
+
 /**
  * Получение всех станций
  */
@@ -64,7 +75,10 @@ export const getStationById = async (
 	options: GetStationByIdRequestOptions
 ): Promise<GetStationByIdResponse> => {
 	return sendRequest({
-		url: STATIONS_URL + options.id,
+		url:
+			STATIONS_URL +
+			options.id +
+			createQueryString(getQueryArgumentsForStation(options)),
 		method: 'GET',
 		token: options.token,
 	})

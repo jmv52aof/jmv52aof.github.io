@@ -5,7 +5,8 @@ import {
 	StationProfilePreviousPageQuery,
 } from '@common/types/pages'
 import { StationDto } from '@common/types/stations'
-import { useEffect, useState } from 'react'
+import { RootStateContext } from '@contexts/RootStateContext'
+import { useContext, useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router'
 
 /** Хук предоставляет доступ к query аргументам URL страницы */
@@ -35,6 +36,7 @@ export const useStationProfileQueryParser = () => {
 /** Хук предоставляет загрузку станции по id из URL */
 export const useStationLoader = () => {
 	const { id } = useParams()
+	const { position } = useContext(RootStateContext)
 	const { getStationByIdFromApi } = useApi()
 
 	const [station, setStation] = useState<StationDto | undefined>()
@@ -42,7 +44,11 @@ export const useStationLoader = () => {
 
 	useEffect(() => {
 		if (id !== undefined) {
-			getStationByIdFromApi({ id: id })
+			getStationByIdFromApi({
+				id: id,
+				latitude: position?.latitude.toString(),
+				longitude: position?.longitude.toString(),
+			})
 				.then(res => {
 					if (res) setStation(res)
 				})

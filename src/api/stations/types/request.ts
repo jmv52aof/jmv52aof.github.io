@@ -18,4 +18,6 @@ export interface GetStationsRequestOptions
 export interface GetStationByIdRequestOptions
 	extends AuthorizationRequestOptions {
 	id: string
+	latitude?: string
+	longitude?: string
 }
