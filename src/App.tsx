@@ -21,7 +21,7 @@ export default function App() {
 			const initData = window.Telegram.WebApp.initData as string
 			authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
 				if (!token) return
-				sessionStorage.setItem('token', token)
+				sessionStorage.setItem('user-jwt-token', token)
 			})
 		}
 	} catch (e) {
