@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Variant } from '@components/snackbar/lib/types'
+import { Variant } from '@common/types/snackbar'
 import SnackbarLayout from '@layouts/snackbarLayout/SnackbarLayout'
 import { SnackbarState } from '@common/types/snackbar'
 
@@ -18,14 +18,17 @@ export function useSnackbar() {
 		}, 3000)
 	}
 
-	const snackbar = snackbarState.isVisible ? (
-		<SnackbarLayout
-			variant={snackbarState.variant ?? 'success'}
-			text={snackbarState.text ?? ''}
-		/>
-	) : (
-		<></>
-	)
+	const snackbar =
+		snackbarState.isVisible &&
+		snackbarState.variant &&
+		snackbarState.text ? (
+			<SnackbarLayout
+				variant={snackbarState.variant}
+				text={snackbarState.text}
+			/>
+		) : (
+			<></>
+		)
 
 	return { showSnackbar, snackbar }
 }

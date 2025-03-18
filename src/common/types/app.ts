@@ -1,7 +1,7 @@
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
-import { Variant } from '@components/snackbar/lib/types'
+import { Variant } from './snackbar'
 
 /**
  * Поле isInitTelegramSdk = undefined - когда telegram sdk ещё не инициализировано
