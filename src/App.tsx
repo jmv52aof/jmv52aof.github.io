@@ -60,6 +60,11 @@ export default function App() {
 						},
 					}),
 				showSnackbar,
+				setRfidCard: card => setRootState({ ...rootState, rfidCard: card }),
+				setActiveChargingSession: session =>
+					setRootState({ ...rootState, activeChargingSession: session }),
+				setPaymentMethod: method =>
+					setRootState({ ...rootState, paymentMethod: method }),
 				setPosition: position =>
 					setRootState({
 						...rootState,

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 
 export const useStationsLoader = () => {
 	const { getStationsFromApi } = useApi()
-	const { stationFilters, setStations } = useContext(RootStateContext)
+	const { stationFilters, setStations, position } = useContext(RootStateContext)
 
 	const [loading, setLoading] = useState<boolean>(true)
 
@@ -15,7 +15,9 @@ export const useStationsLoader = () => {
 			return
 		}
 
-		getStationsFromApi(createGetStationsRequestOptions(stationFilters))
+		getStationsFromApi(
+			createGetStationsRequestOptions(stationFilters, position)
+		)
 			.then(res => {
 				setStations(res)
 			})

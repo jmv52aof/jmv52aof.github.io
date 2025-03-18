@@ -38,14 +38,15 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 	return (
 		<>
 			<ChargingSessionActivePower
-				power={props.chargingSession.charged_kwh}
-				maxPower={props.chargingSession.connector_info.max_electric_power}
+				power={props.chargingSession.current_power ?? 0}
+				maxPower={props.chargingSession.connector_info.max_electric_power ?? 0}
 			/>
 			<div className={styles.buttonBlock}>
 				<Button variant='fill' onClick={onComplete} text='Завершить' />
 			</div>
 			<div className={styles.info}>
 				<ChargingSessionConnectorInfo
+					sessionId={props.chargingSession.id}
 					connectorInfo={props.chargingSession.connector_info}
 					tariffs={props.chargingSession.tariffs}
 				/>
@@ -59,10 +60,9 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 						},
 						{
 							description: 'Процент батареи:',
-							value:
-								props.chargingSession.battery_percentage !== undefined
-									? `${props.chargingSession.battery_percentage} %`
-									: '',
+							value: !!props.chargingSession.battery_percentage
+								? `${props.chargingSession.battery_percentage} %`
+								: '',
 							checkVisible: checkVisible,
 						},
 					]}
@@ -89,40 +89,37 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 						},
 					]}
 				/>
-				{props.chargingSession.current_power !== undefined && (
+				{!!props.chargingSession.current_power && (
 					<ContentBlock
 						title={'Мощность: '}
 						iconSrc={lightingIcon}
 						items={[
 							{
 								description: 'Максимальная:',
-								value:
-									props.chargingSession.max_power !== undefined
-										? `${props.chargingSession.max_power} кВт`
-										: '',
+								value: !!props.chargingSession.max_power
+									? `${props.chargingSession.max_power} кВт`
+									: '',
 								checkVisible: checkVisible,
 							},
 							{
 								description: 'Минимальная:',
-								value:
-									props.chargingSession.min_power !== undefined
-										? `${props.chargingSession.min_power} кВт`
-										: '',
+								value: !!props.chargingSession.min_power
+									? `${props.chargingSession.min_power} кВт`
+									: '',
 								checkVisible: checkVisible,
 							},
 							{
 								description: 'Текущая:',
-								value:
-									props.chargingSession.current_power !== undefined
-										? `${props.chargingSession.current_power} кВт`
-										: '',
+								value: !!props.chargingSession.current_power
+									? `${props.chargingSession.current_power} кВт`
+									: '',
 								checkVisible: checkVisible,
 							},
 							{
 								description: 'Средняя:',
 								value:
-									props.chargingSession.min_power !== undefined &&
-									props.chargingSession.max_power !== undefined
+									!!props.chargingSession.min_power &&
+									!!props.chargingSession.max_power
 										? `${
 												(props.chargingSession.max_power +
 													props.chargingSession.min_power) /

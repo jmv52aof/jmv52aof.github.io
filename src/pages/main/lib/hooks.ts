@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 
 /** Хук загружает все станции для отображения на карте в общее состояние */
 export const useStationsLoader = () => {
-	const { setStations, stationFilters } = useContext(RootStateContext)
+	const { setStations, stationFilters, position } = useContext(RootStateContext)
 	const { getStationsFromApi } = useApi()
 
 	const [loading, setLoading] = useState<boolean>(true)
@@ -16,7 +16,9 @@ export const useStationsLoader = () => {
 			return
 		}
 
-		getStationsFromApi(createGetStationsRequestOptions(stationFilters))
+		getStationsFromApi(
+			createGetStationsRequestOptions(stationFilters, position)
+		)
 			.then(res => {
 				setStations(res)
 			})

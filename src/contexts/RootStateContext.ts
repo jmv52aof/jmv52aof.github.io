@@ -9,4 +9,5 @@ export const RootStateContext = createContext<IRootStateContext>({
 	showSnackbar: () => {},
 	setPosition: _ => {},
 	setRfidCard: _ => {},
+	setActiveChargingSession: _ => {},
 })
