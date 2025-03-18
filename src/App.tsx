@@ -7,28 +7,46 @@ import { useSnackbar } from '@common/hooks/snackbar'
 import { initializeMockEnvironment } from '@common/functions/telegram'
 import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import BackButton from '@components/ui/backButton/BackButton'
+import { useApi } from '@common/hooks/api'
 
 if (import.meta.env.DEV) initializeMockEnvironment()
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
+	const { authorizationTelegramUserFromApi } = useApi()
 
-	try {
-		if (rootState.isInitTelegramSdk === undefined) {
-			init()
+	useEffect(() => {
+		try {
+			const webAppData = window.Telegram.WebApp
+			if (!sessionStorage.getItem('user-jwt-token')) {
+				const initData = webAppData.initData as string
+				authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
+					if (!token) return
+					sessionStorage.setItem('token', token)
+				})
+			}
+		} catch (e) {
+			console.error('Ошибка авторизации: ', e)
+		}
+
+		try {
+			if (rootState.isInitTelegramSdk === undefined) {
+				init()
+				setRootState({
+					...rootState,
+					isInitTelegramSdk: true,
+				})
+			}
+		} catch (e) {
+			console.error('Ошибка инициализации teleram sdk: ', e)
 			setRootState({
 				...rootState,
-				isInitTelegramSdk: true,
+				isInitTelegramSdk: false,
 			})
 		}
-	} catch (e) {
-		console.error('Ошибка инициализации teleram sdk:', e)
-		setRootState({
-			...rootState,
-			isInitTelegramSdk: false,
-		})
-	}
+	}, [])
+
 
 	if (
 		rootState.isInitTelegramSdk &&
