@@ -1,57 +1,9 @@
-$transition-duration: 0.5s;
-$timeout: 2s;
-
 .stationFilters {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 	flex-grow: 1;
-}
-
-.stationFilters__snackbar {
-	display: flex;
-	z-index: 9999;
-	position: fixed;
-	top: 15px;
-	left: 8px;
-	right: 8px;
-	background-color: #ffffff;
-	border-radius: 8px;
-	visibility: hidden;
-	opacity: 0;
-	top: -100px;
-	transition: opacity $transition-duration ease, top $transition-duration ease;
-}
-
-.stationFilters__snackbar.show {
-	visibility: visible;
-	opacity: 1;
-	top: 15px;
-	animation: fadein $transition-duration,
-		fadeout $transition-duration $timeout forwards;
-}
-
-@keyframes fadein {
-	from {
-		top: -100px;
-		opacity: 0;
-	}
-	to {
-		top: 15px;
-		opacity: 1;
-	}
-}
-
-@keyframes fadeout {
-	from {
-		top: 15px;
-		opacity: 1;
-	}
-	to {
-		top: -100px;
-		opacity: 0;
-	}
 }
 
 .stationFilters__onlyAvailable {

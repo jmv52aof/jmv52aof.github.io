@@ -12,29 +12,33 @@ if (import.meta.env.DEV) initializeMockEnvironment()
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
-	const { snackbarText, snackbarVariant, isVisible, showSnackbar } =
-		useSnackbar('success', '')
+	const { snackbar, showSnackbar } = useSnackbar()
 
 	try {
 		if (rootState.isInitTelegramSdk === undefined) {
 			init()
 			setRootState({
 				...rootState,
-				isInitTelegramSdk: true
+				isInitTelegramSdk: true,
 			})
 		}
-	}
-	catch(e) {
+	} catch (e) {
 		console.error('Ошибка инициализации teleram sdk:', e)
 		setRootState({
 			...rootState,
-			isInitTelegramSdk: false
+			isInitTelegramSdk: false,
 		})
 	}
-	
-  	if (rootState.isInitTelegramSdk && !miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
+
+	if (
+		rootState.isInitTelegramSdk &&
+		!miniApp.isMounting &&
+		!miniApp.isMounted()
+	)
+		miniApp.mount()
 	useEffect(() => {
-		if (rootState.isInitTelegramSdk && !backButton.isMounted()) backButton.mount()	
+		if (rootState.isInitTelegramSdk && !backButton.isMounted())
+			backButton.mount()
 	}, [])
 
 	return (
@@ -55,18 +59,16 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
-				snackbarText,
-				snackbarVariant,
-				isSnackbarVisible: isVisible,
 				showSnackbar,
 				setPosition: position =>
 					setRootState({
 						...rootState,
-						position: position
+						position: position,
 					}),
 			}}
 		>
 			{rootState.isInitTelegramSdk && <BackButton />}
+			{snackbar}
 			<AppRouter />
 		</RootStateContext.Provider>
 	)

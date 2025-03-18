@@ -19,10 +19,7 @@ export type RootState = {
 export interface IRootStateContext extends RootState {
 	setStationFilters: (filters: StationFilters) => void
 	setStations: (stations: StationDto[]) => void
-	snackbarText: string
-	snackbarVariant: Variant
-	isSnackbarVisible: boolean
-	showSnackbar: (type: Variant, message: string) => void
+	showSnackbar: (type: Variant, text: string) => void
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void
 }

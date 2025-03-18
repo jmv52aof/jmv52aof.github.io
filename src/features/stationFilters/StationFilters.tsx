@@ -11,17 +11,10 @@ import { isFiltersDefault } from './lib/functions'
 import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import Slider from '@components/ui/slider/Slider'
-import Snackbar from '@components/snackbar/Snackbar'
 
 export default function StationFiltersFeature(): React.JSX.Element {
-	const {
-		stationFilters,
-		setStationFilters,
-		showSnackbar,
-		snackbarText,
-		snackbarVariant,
-		isSnackbarVisible,
-	} = useContext(RootStateContext)
+	const { stationFilters, setStationFilters, showSnackbar } =
+		useContext(RootStateContext)
 
 	const handleConnectorChange = (
 		connector: ConnectorStandard,
@@ -68,15 +61,6 @@ export default function StationFiltersFeature(): React.JSX.Element {
 
 	return (
 		<div className={styles.stationFilters}>
-			<div
-				className={`${styles.stationFilters__snackbar} ${
-					isSnackbarVisible ? styles.show : ''
-				}`}
-			>
-				{isSnackbarVisible && (
-					<Snackbar variant={snackbarVariant} text={snackbarText} />
-				)}
-			</div>
 			<ContentBlockLayout>
 				<div className={styles.stationFilters__onlyAvailable}>
 					<p className={styles.onlyAvailable__text}>

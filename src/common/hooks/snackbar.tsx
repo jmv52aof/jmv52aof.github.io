@@ -1,21 +1,31 @@
 import { useState } from 'react'
 import { Variant } from '@components/snackbar/lib/types'
+import SnackbarLayout from '@layouts/snackbarLayout/SnackbarLayout'
+import { SnackbarState } from '@common/types/snackbar'
 
-export function useSnackbar(initialVariant: Variant, initialText: string) {
-	const [isVisible, setIsVisible] = useState(false)
-	const [snackbarText, setSnackbarText] = useState(initialText)
-	const [snackbarVariant, setSnackbarVariant] =
-		useState<Variant>(initialVariant)
+export function useSnackbar() {
+	const [snackbarState, setSnackbarState] = useState<SnackbarState>({
+		text: undefined,
+		variant: undefined,
+		isVisible: false,
+	})
 
-	const showSnackbar = (type: Variant = initialVariant, message: string) => {
-		setSnackbarVariant(type)
-		setSnackbarText(message)
-		setIsVisible(true)
+	const showSnackbar = (variant: Variant, text: string) => {
+		setSnackbarState({ text, variant, isVisible: true })
 
 		setTimeout(() => {
-			setIsVisible(false)
-		}, 2500)
+			setSnackbarState(prev => ({ ...prev, isVisible: false }))
+		}, 3000)
 	}
 
-	return { snackbarText, snackbarVariant, isVisible, showSnackbar }
+	const snackbar = snackbarState.isVisible ? (
+		<SnackbarLayout
+			variant={snackbarState.variant ?? 'success'}
+			text={snackbarState.text ?? ''}
+		/>
+	) : (
+		<></>
+	)
+
+	return { showSnackbar, snackbar }
 }

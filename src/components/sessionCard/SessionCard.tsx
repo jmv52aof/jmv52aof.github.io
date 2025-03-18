@@ -85,7 +85,7 @@ export default function SessionCard(props: Props): React.JSX.Element {
 					<GradientButton
 						onClick={() => {}}
 						gradientTemplate='orange'
-					/>{' '}
+					/>
 				</div>
 			)}
 		</div>
