@@ -45,7 +45,8 @@ import {
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
-	const token = import.meta.env.VITE_API_TOKEN
+	const token = sessionStorage.getItem('user-jwt-token')
+
 	/** Модуль авторизации */
 
 	const authorizationTelegramUserFromApi = async (
