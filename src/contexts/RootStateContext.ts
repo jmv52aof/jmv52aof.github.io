@@ -4,10 +4,13 @@ import { IRootStateContext } from '@common/types/app'
 
 export const RootStateContext = createContext<IRootStateContext>({
 	...DEFAULT_ROOT_STATE,
-	setStationFilters: () => {},
-	setStations: () => {},
-	showSnackbar: () => {},
+	setStationFilters: _ => {},
+	setStations: _ => {},
+	setSessionFilters: _ => {},
+	setSessions: _ => {},
+	showSnackbar: _ => {},
 	setPosition: _ => {},
 	setRfidCard: _ => {},
 	setActiveChargingSession: _ => {},
+	setPaymentMethod: _ => {},
 })

@@ -13,6 +13,7 @@ import { StationProfilePreviousPageQueries } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
 import {
 	SESSION_PROFILE_ENDPOINT,
+	SESSIONS_HISTORY_ENDPOINT,
 	STATIONS_LIST_ENDPOINT,
 } from '@common/consts/endpoints'
 import { Loader } from '@components/ui/loader/Loader'
@@ -73,6 +74,8 @@ export default function StationProfilePage(): React.JSX.Element {
 					SESSION_PROFILE_ENDPOINT +
 					(pageQueries.from_charging_session_id ?? '')
 				)
+			case StationProfilePreviousPageQueries.SESSIONS_LIST:
+				return SESSIONS_HISTORY_ENDPOINT
 		}
 		return '/'
 	}

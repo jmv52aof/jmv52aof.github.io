@@ -3,6 +3,7 @@ import * as endpoints from '@common/consts/endpoints'
 import StationsPage from '@pages/stations/Stations'
 import StationProfilePage from '@pages/stationProfile/StationProfile'
 import StationsFiltersPage from '@pages/stationsFilters/Filters'
+import SessionsFiltersPage from '@pages/sessionFilters/sessionsFilters'
 import SessionsPage from '@pages/sessions/Sessions'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 import MainPage from '@pages/main/Main'
@@ -16,6 +17,10 @@ export default function AppRouter(): React.JSX.Element {
 			<Route
 				path={endpoints.STATIONS_FILTERS_ENDPOINT}
 				element={<StationsFiltersPage />}
+			/>
+			<Route
+				path={endpoints.SESSIONS_HISTORY_FILTERS_ENDPOINT}
+				element={<SessionsFiltersPage />}
 			/>
 			<Route
 				path={endpoints.STATIONS_LIST_ENDPOINT}
