@@ -31,9 +31,9 @@ export interface ChargingSessionDto {
 	battery_percentage?: number
 }
 
-export type onlyPaidSessions = {
+export type SessionFilters = {
 	connectors: ConnectorStandard[]
-	onlyAvailableSessions: boolean
+	onlyPaidSessions: boolean
 	durationInHours: number
 	isModified: boolean
 	shouldUpdateSessions?: boolean

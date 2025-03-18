@@ -5,7 +5,6 @@ import ResetFiltersButton from '@components/ui/resetFiltersButton/ResetFiltersBu
 import refreshImageActive from '@assets/images/refresh-icon-active.svg'
 import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
-import Snackbar from '@components/snackbar/Snackbar'
 import SnackbarLayout from '@layouts/snackbarLayout/SnackbarLayout'
 import { ConnectorStandard } from '@common/types/chargingSessions'
 import { DEFAULT_FILTERS } from '@common/consts/chargingSessions'
@@ -36,7 +35,7 @@ export default function SessionFilters(): React.JSX.Element {
 	const handleSwitchChange = (enabled: boolean) => {
 		setSessionFilters({
 			...sessionFilters,
-			onlyAvailableSessions: enabled,
+			onlyPaidSessions: enabled,
 			isModified: true,
 		})
 	}
@@ -70,7 +69,7 @@ export default function SessionFilters(): React.JSX.Element {
 					<p className={styles.onlyPaid__text}>Только платные</p>
 					<Switch
 						onChange={handleSwitchChange}
-						enabled={sessionFilters.onlyAvailableSessions}
+						enabled={sessionFilters.onlyPaidSessions}
 					/>
 				</div>
 			</ContentBlockLayout>
@@ -152,14 +151,16 @@ export default function SessionFilters(): React.JSX.Element {
 				</ContentBlockLayout>
 			</div>
 			{isSnackbarVisible && (
-				<SnackbarLayout variant='success' text='Фильтры применены'>
-					<Snackbar variant='success' text='Фильтры применены' />
-				</SnackbarLayout>
+				<SnackbarLayout
+					variant='success'
+					text='Фильтры применены'
+				></SnackbarLayout>
 			)}
 			{isResetSnackbarVisible && (
-				<SnackbarLayout variant='success' text='Фильтры сброшены'>
-					<Snackbar variant='success' text='Фильтры сброшены' />
-				</SnackbarLayout>
+				<SnackbarLayout
+					variant='success'
+					text='Фильтры сброшены'
+				></SnackbarLayout>
 			)}
 			<div className={styles.sessionFilters__footer}>
 				<ResetFiltersButton

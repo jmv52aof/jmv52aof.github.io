@@ -12,14 +12,14 @@ export const DEFAULT_ROOT_STATE: RootState = {
 	stations: [],
 	sessionFilters: {
 		connectors: [...CONNECTORS],
-		onlyAvailableSessions: false,
+		onlyPaidSessions: false,
 		durationInHours: 0,
 		isModified: false,
 		shouldUpdateSessions: true,
 	},
 	sessions: [],
 	position: undefined,
-	isInitTelegramSdk: undefined
+	isInitTelegramSdk: undefined,
 }
 
 export const GET_DATA_LIMIT = 15

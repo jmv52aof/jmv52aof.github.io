@@ -17,8 +17,6 @@ export namespace StationsFiltersPreviousPageQueries {
 	export const STATIONS_LIST: StationsFiltersPreviousPageQuery = 'stations_list'
 }
 
-/** Фильтры сессий */
-
 /** Зарядная сессия */
 export namespace ChargingSessionPageQueryArguments {
 	export const PREVIOUS_PAGE: ChargingSessionQueryArgument = 'prev_page'
