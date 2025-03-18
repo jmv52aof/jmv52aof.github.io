@@ -70,7 +70,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 						<div className={styles.texts__row}>
 							<p className={styles.row__label}>Заряжено:</p>
 							<p className={styles.row__value}>
-								{props.sessionValues.charged_kwh} кВт*ч
+								{props.sessionValues.charged_kwh} кВт·ч
 							</p>
 						</div>
 						<div className={styles.texts__row}>

@@ -1,1 +1,1 @@
-export type ColorTemplate = 'green' | 'orange' | 'red' | 'gray'
+export type ColorTemplate = 'green' | 'orange' | 'red' | 'grey'

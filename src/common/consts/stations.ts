@@ -38,9 +38,9 @@ export const CONNECTOR_STATUS_COLORS: Record<
 > = {
 	Доступен: 'green',
 	Занят: 'orange',
-	Отключен: 'gray',
-	'Нет соединения': 'gray',
-	Недоступен: 'gray',
+	Отключен: 'grey',
+	'Нет соединения': 'grey',
+	Недоступен: 'grey',
 }
 
 export const CONNECTORS: ConnectorStandard[] = [
@@ -65,7 +65,7 @@ export const DEFAULT_FILTERS: StationFilters = {
 export const STATION_STATUS_COLORS: Record<StationStatus, ColorTemplate> = {
 	Доступна: 'green',
 	Занята: 'orange',
-	'Не работает': 'gray',
+	'Не работает': 'grey',
 }
 
 export const DECIMAL_IN_MAX_POWER = 2

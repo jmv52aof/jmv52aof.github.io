@@ -1,4 +1,4 @@
-.button {
+.gradientButton {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -9,9 +9,16 @@
 	background: none;
 	outline: none;
 	border: none;
+	width: 100%;
 
 	padding: 8px 12px;
 	border-radius: 8px;
+}
+
+.gradientButton:hover {
+	.button__arrowIcon {
+		background: #f89520;
+	}
 }
 
 .orange {
@@ -35,13 +42,13 @@
 	}
 }
 
-.alert__messege {
+.alert__message {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-.messege__text {
+.message__text {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
 	font-size: 12px;
@@ -58,6 +65,7 @@
 	border-radius: 100%;
 	background-color: #373435;
 	aspect-ratio: 1/1;
+	transition: background-color 0.3s;
 
 	img {
 		width: 16px;

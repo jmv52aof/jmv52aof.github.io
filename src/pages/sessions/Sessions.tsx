@@ -156,7 +156,7 @@ export default function SessionsPage(): React.JSX.Element {
 				power_type: 'AC',
 				max_electric_power: 36,
 			},
-			status: 'Невалидна',
+			status: 'Зарядка',
 			charged_kwh: 22,
 			start_date: {
 				year: 2025,
@@ -236,7 +236,10 @@ export default function SessionsPage(): React.JSX.Element {
 					<p className={styles.date__text}>{`${day} ${month}`} </p>
 				</div>,
 				...groupedSessions[date].map(session => (
-					<ContentBlockLayout key={session.id} className={styles.sessionCard}>
+					<ContentBlockLayout
+						key={session.id}
+						className={styles.main__sessionCard}
+					>
 						<SessionCard session={session} />
 					</ContentBlockLayout>
 				)),

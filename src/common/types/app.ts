@@ -2,6 +2,7 @@ import { ChargingSessionDto } from './chargingSessions'
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
+import { Variant } from './snackbar'
 
 /**
  * Поле isInitTelegramSdk = undefined - когда telegram sdk ещё не инициализировано
@@ -21,6 +22,7 @@ export type RootState = {
 export interface IRootStateContext extends RootState {
 	setStationFilters: (filters: StationFilters) => void
 	setStations: (stations: StationDto[]) => void
+	showSnackbar: (type: Variant, text: string) => void
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void
 	setActiveChargingSession: (session?: ChargingSessionDto) => void
