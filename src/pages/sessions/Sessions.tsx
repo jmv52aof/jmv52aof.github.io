@@ -283,7 +283,7 @@ export default function SessionsPage(): React.JSX.Element {
 
 	return (
 		<PageLayout
-			onReturn={() => {}}
+			onReturn={() => nav('/')}
 			title='Зарядные сессии'
 			headerContent={
 				<FiltersButton
