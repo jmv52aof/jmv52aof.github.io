@@ -8,12 +8,13 @@ import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import NotFoundPage from '@pages/notFound/NotFound'
 import { useActiveChargingSessionUpdater } from '@common/hooks/chargingSessions'
+import { ChargingSessionDto } from '@common/types/chargingSessions'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
 	const { pageQueries } = useChargingSessionQueryParser()
 	const { activeChargingSession } = useContext(RootStateContext)
-	useActiveChargingSessionUpdater()
+	const { initialized } = useActiveChargingSessionUpdater()
 
 	const getPreviousPageEndpoint = (): string => {
 		switch (pageQueries.prev_page) {
@@ -23,17 +24,17 @@ export default function ChargingSessionPage(): React.JSX.Element {
 		return '/'
 	}
 
-	if (!activeChargingSession) return <NotFoundPage />
+	if (!activeChargingSession && initialized) return <NotFoundPage />
 
 	return (
 		<PageLayout
-			onReturn={() => {
-				const endpoint = getPreviousPageEndpoint()
-				if (endpoint) nav(endpoint)
-			}}
+			onReturn={() => nav(getPreviousPageEndpoint())}
 			title='Зарядная сессия'
+			loading={!initialized}
 		>
-			<ChargingSession chargingSession={activeChargingSession} />
+			<ChargingSession
+				chargingSession={activeChargingSession as ChargingSessionDto}
+			/>
 		</PageLayout>
 	)
 }

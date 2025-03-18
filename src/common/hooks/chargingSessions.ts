@@ -11,6 +11,9 @@ export const useActiveChargingSessionUpdater = () => {
 	const { getChargingSessionByIdFromApi, getChargingSessionsFromApi } = useApi()
 
 	const [loading, setLoading] = useState<boolean>(false)
+	const [initialized, setInitialized] = useState<boolean>(
+		!!activeChargingSession
+	)
 
 	/** Инициализация активной сессии */
 	const loadSession = () => {
@@ -22,7 +25,10 @@ export const useActiveChargingSessionUpdater = () => {
 			.then(res => {
 				if (res.length > 0) setActiveChargingSession(res[0])
 			})
-			.finally(() => setLoading(false))
+			.finally(() => {
+				setLoading(false)
+				setInitialized(true)
+			})
 	}
 
 	/** Обновление активной сессии */
@@ -37,7 +43,10 @@ export const useActiveChargingSessionUpdater = () => {
 					ChargingSessionStatuses.INVALID === res?.status ? res : undefined
 				)
 			})
-			.finally(() => setLoading(false))
+			.finally(() => {
+				setLoading(false)
+				setInitialized(true)
+			})
 	}
 
 	const { activate } = useInterval(
@@ -55,4 +64,8 @@ export const useActiveChargingSessionUpdater = () => {
 		//activate()
 		loadSession()
 	}, [])
+
+	return {
+		initialized,
+	}
 }

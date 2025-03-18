@@ -60,6 +60,8 @@ export default function App() {
 				setRfidCard: card => setRootState({ ...rootState, rfidCard: card }),
 				setActiveChargingSession: session =>
 					setRootState({ ...rootState, activeChargingSession: session }),
+				setPaymentMethod: method =>
+					setRootState({ ...rootState, paymentMethod: method }),
 				setPosition: position =>
 					setRootState({
 						...rootState,

@@ -17,5 +17,5 @@ export interface GetStationsRequestOptions
 
 export interface GetStationByIdRequestOptions
 	extends AuthorizationRequestOptions {
-	id: number
+	id: string
 }

@@ -15,6 +15,7 @@ export type RootState = {
 	isInitTelegramSdk?: boolean
 	rfidCard?: RfidCardDto
 	activeChargingSession?: ChargingSessionDto
+	paymentMethod?: string
 }
 
 export interface IRootStateContext extends RootState {
@@ -23,4 +24,5 @@ export interface IRootStateContext extends RootState {
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void
 	setActiveChargingSession: (session?: ChargingSessionDto) => void
+	setPaymentMethod: (method?: string) => void
 }
