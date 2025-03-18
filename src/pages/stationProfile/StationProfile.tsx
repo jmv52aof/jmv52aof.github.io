@@ -9,12 +9,19 @@ import styles from './styles.module.scss'
 import React from 'react'
 import { useState, useMemo } from 'react'
 import { useStationLoader, useStationProfileQueryParser } from './lib/hooks'
-import { StationProfilePreviousPageQueries } from '@common/consts/pages'
+import {
+	StationProfilePageQueryArguments,
+	StationProfilePreviousPageQueries,
+} from '@common/consts/pages'
 import { useNavigate } from 'react-router'
-import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
+import {
+	SESSION_PROFILE_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
 import { Loader } from '@components/ui/loader/Loader'
 import NotFoundPage from '@pages/notFound/NotFound'
 import PageLayout from '@layouts/pageLayout/PageLayout'
+import { createQueryString } from '@common/functions/strings'
 
 export default function StationProfilePage(): React.JSX.Element {
 	const nav = useNavigate()
@@ -67,6 +74,16 @@ export default function StationProfilePage(): React.JSX.Element {
 				return '/'
 			case StationProfilePreviousPageQueries.STATIONS_LIST:
 				return STATIONS_LIST_ENDPOINT
+			case StationProfilePreviousPageQueries.ACTIVE_SESSION:
+				return (
+					SESSION_PROFILE_ENDPOINT +
+					createQueryString([
+						{
+							key: StationProfilePageQueryArguments.FROM_CHARGING_SESSION_ID,
+							value: pageQueries.from_charging_session_id ?? '',
+						},
+					])
+				)
 		}
 	}
 

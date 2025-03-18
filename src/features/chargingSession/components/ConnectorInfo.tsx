@@ -7,8 +7,16 @@ import squareShareLineIcon from '@assets/images/square-share-line.svg'
 import walletIcon from '@assets/images/wallet.svg'
 import Button from '@components/ui/button/Button'
 import { TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT } from '@common/consts/tariffs'
+import { useNavigate } from 'react-router'
+import { STATION_PROFILE_ENDPOINT } from '@common/consts/endpoints'
+import { createQueryString } from '@common/functions/strings'
+import {
+	StationProfilePageQueryArguments,
+	StationProfilePreviousPageQueries,
+} from '@common/consts/pages'
 
 interface Props {
+	sessionId: string
 	connectorInfo: ConnectorInfoDto
 	tariffs?: ConnectorTariffDto[]
 }
@@ -16,9 +24,7 @@ interface Props {
 export default function ChargingSessionConnectorInfo(
 	props: Props
 ): React.JSX.Element {
-	const onClick = () => {
-		//TODO
-	}
+	const nav = useNavigate()
 
 	return (
 		<ContentBlockLayout className={styles.content}>
@@ -42,24 +48,43 @@ export default function ChargingSessionConnectorInfo(
 					</div>
 					<Button
 						variant='icon'
-						onClick={onClick}
+						onClick={() =>
+							nav(
+								STATION_PROFILE_ENDPOINT +
+									props.connectorInfo.station_id +
+									createQueryString([
+										{
+											key: StationProfilePageQueryArguments.PREVIOUS_PAGE,
+											value: StationProfilePreviousPageQueries.ACTIVE_SESSION,
+										},
+										{
+											key: StationProfilePageQueryArguments.FROM_CHARGING_SESSION_ID,
+											value: props.sessionId,
+										},
+									])
+							)
+						}
 						iconSrc={squareShareLineIcon}
 					/>
 				</div>
-				<div className={styles.details__tariffs}>
-					<p className={styles.tariffs__title}>
-						<img src={walletIcon} /> Используемые тарифы:
-					</p>
-					<div className={styles.tariffs__data}>
-						{props.tariffs?.map((item, index) => {
-							return (
-								<p key={index} className={styles.data__item}>{`${item.price} ${
-									item.currency
-								}/${TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]}`}</p>
-							)
-						})}
+				{!!props.tariffs?.length && (
+					<div className={styles.details__tariffs}>
+						<p className={styles.tariffs__title}>
+							<img src={walletIcon} /> Используемые тарифы:
+						</p>
+						<div className={styles.tariffs__data}>
+							{props.tariffs.map((item, index) => {
+								return (
+									<p key={index} className={styles.data__item}>{`${
+										item.price
+									} ${item.currency}/${
+										TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]
+									}`}</p>
+								)
+							})}
+						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</ContentBlockLayout>
 	)

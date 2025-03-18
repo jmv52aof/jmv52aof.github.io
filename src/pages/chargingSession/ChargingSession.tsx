@@ -15,13 +15,12 @@ export default function ChargingSessionPage(): React.JSX.Element {
 	const { activeChargingSession } = useContext(RootStateContext)
 	useActiveChargingSessionUpdater()
 
-	const getPreviousPageEndpoint = (): string | undefined => {
+	const getPreviousPageEndpoint = (): string => {
 		switch (pageQueries.prev_page) {
-			case ChargingSessionPreviousPageQueries.MAIN:
-				return '/'
 			case ChargingSessionPreviousPageQueries.SESSIONS_LIST:
 				return SESSIONS_HISTORY_ENDPOINT
 		}
+		return '/'
 	}
 
 	if (!activeChargingSession) return <NotFoundPage />

@@ -52,6 +52,7 @@ export const useActiveChargingSessionUpdater = () => {
 	)
 
 	useEffect(() => {
-		activate()
+		//activate()
+		loadSession()
 	}, [])
 }

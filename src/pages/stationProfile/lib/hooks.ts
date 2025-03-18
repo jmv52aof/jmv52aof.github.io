@@ -13,12 +13,24 @@ export const useStationProfileQueryParser = () => {
 	const [searchParams] = useSearchParams()
 	const [pageQueries, setPageQueries] = useState<StationProfilePageQuery>({})
 
+	console.log(
+		searchParams.forEach((value, key) => {
+			console.log(key, value)
+		})
+	)
+
 	useEffect(() => {
 		const prevPage = searchParams.get(
 			StationProfilePageQueryArguments.PREVIOUS_PAGE
 		) as StationProfilePreviousPageQuery | undefined
+		const fromChargingSessionId = searchParams.get(
+			StationProfilePageQueryArguments.FROM_CHARGING_SESSION_ID
+		) as string | undefined
 
-		setPageQueries({ prev_page: prevPage })
+		setPageQueries({
+			prev_page: prevPage,
+			from_charging_session_id: fromChargingSessionId,
+		})
 	}, [searchParams])
 
 	return {
