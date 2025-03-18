@@ -70,7 +70,7 @@ export default function App() {
 						sessions: sessions,
 						sessionFilters: {
 							...rootState.sessionFilters,
-							shouldUpdateSession: false,
+							shouldUpdateSessions: false,
 						},
 					}),
 				showSnackbar,

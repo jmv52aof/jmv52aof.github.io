@@ -19,9 +19,7 @@ export function useSnackbar() {
 	}
 
 	const snackbar =
-		snackbarState.isVisible &&
-		snackbarState.variant &&
-		snackbarState.text ? (
+		snackbarState.isVisible && snackbarState.variant && snackbarState.text ? (
 			<SnackbarLayout
 				variant={snackbarState.variant}
 				text={snackbarState.text}

@@ -5,24 +5,21 @@ import ResetFiltersButton from '@components/ui/resetFiltersButton/ResetFiltersBu
 import refreshImageActive from '@assets/images/refresh-icon-active.svg'
 import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
-import SnackbarLayout from '@layouts/snackbarLayout/SnackbarLayout'
-import { ConnectorStandard } from '@common/types/chargingSessions'
 import { DEFAULT_FILTERS } from '@common/consts/chargingSessions'
 import { isFiltersDefault } from './lib/functions'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import Slider from '@components/ui/slider/Slider'
+import { ConnectorStandard } from '@common/types/stations'
 
 export default function SessionFilters(): React.JSX.Element {
-	const { sessionFilters, setSessionFilters } = useContext(RootStateContext)
-	const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
-	const [isResetSnackbarVisible, setIsResetSnackbarVisible] = useState(false)
+	const { sessionFilters, setSessionFilters, showSnackbar } =
+		useContext(RootStateContext)
 
 	const handleConnectorChange = (
 		connector: ConnectorStandard,
 		enabled: boolean
 	) => {
-		console.log('setSessionFilters:', setSessionFilters)
 		setSessionFilters({
 			...sessionFilters,
 			connectors: enabled
@@ -49,7 +46,7 @@ export default function SessionFilters(): React.JSX.Element {
 	}
 
 	const applyFilters = () => {
-		setIsSnackbarVisible(true)
+		showSnackbar('success', 'Фильтры применены')
 		setSessionFilters({
 			...sessionFilters,
 			isModified: false,
@@ -58,7 +55,7 @@ export default function SessionFilters(): React.JSX.Element {
 	}
 
 	const resetFilters = () => {
-		setIsResetSnackbarVisible(true)
+		showSnackbar('success', 'Фильтры сброшены')
 		setSessionFilters({ ...DEFAULT_FILTERS, shouldUpdateSessions: true })
 	}
 
@@ -150,18 +147,6 @@ export default function SessionFilters(): React.JSX.Element {
 					</div>
 				</ContentBlockLayout>
 			</div>
-			{isSnackbarVisible && (
-				<SnackbarLayout
-					variant='success'
-					text='Фильтры применены'
-				></SnackbarLayout>
-			)}
-			{isResetSnackbarVisible && (
-				<SnackbarLayout
-					variant='success'
-					text='Фильтры сброшены'
-				></SnackbarLayout>
-			)}
 			<div className={styles.sessionFilters__footer}>
 				<ResetFiltersButton
 					onClick={resetFilters}

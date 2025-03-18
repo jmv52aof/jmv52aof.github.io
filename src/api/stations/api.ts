@@ -11,6 +11,7 @@ import {
 	convertConnectorStandard,
 	convertStationStatus,
 } from './lib/converters'
+import { CONNECTORS } from '@common/consts/stations'
 
 const getQueryArgumentsForStations = (
 	options: GetStationsRequestOptions
@@ -29,13 +30,16 @@ const getQueryArgumentsForStations = (
 		})
 	if (undefined !== options.minElectricPower)
 		query.push({ key: 'minElectricPower', value: options.minElectricPower })
-	if (options.standards?.length)
+	if (options.standards?.length) {
+		const standards =
+			options.standards.length === CONNECTORS.length
+				? options.standards.concat('Другой')
+				: options.standards
 		query.push({
 			key: 'standards',
-			value: options.standards
-				.map(value => convertConnectorStandard(value))
-				.join(','),
+			value: standards.map(value => convertConnectorStandard(value)).join(','),
 		})
+	}
 	if (undefined !== options.limit)
 		query.push({ key: 'limit', value: options.limit })
 	if (undefined !== options.offset)
