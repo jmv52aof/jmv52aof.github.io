@@ -18,3 +18,8 @@ export interface GetChargingSessionByIdRequestOptions
 	extends AuthorizationRequestOptions {
 	id: number
 }
+
+export interface StopChargingSessionRequestOptions
+	extends AuthorizationRequestOptions {
+	id: string
+}

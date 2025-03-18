@@ -7,6 +7,9 @@ import SessionsFiltersPage from '@pages/sessionFilters/sessionsFilters'
 import SessionsPage from '@pages/sessions/Sessions'
 import ChargingSessionPage from '@pages/chargingSession/ChargingSession'
 import MainPage from '@pages/main/Main'
+import PaymentMethodPage from '@pages/paymentMethod/PaymentMethod'
+import RfidCardPage from '@pages/rfidCard/RfidCard'
+import AddRfidCardPage from '@pages/addRfidCard/AddRfidCard'
 
 export default function AppRouter(): React.JSX.Element {
 	return (
@@ -34,6 +37,15 @@ export default function AppRouter(): React.JSX.Element {
 			<Route
 				path={`${endpoints.SESSION_PROFILE_ENDPOINT}:id`}
 				element={<ChargingSessionPage />}
+			/>
+			<Route
+				path={endpoints.PAYMENT_METHOD_ENDPOINT}
+				element={<PaymentMethodPage />}
+			/>
+			<Route path={endpoints.RFID_CARD_ENDPOINT} element={<RfidCardPage />} />
+			<Route
+				path={endpoints.ADD_RFID_CARD_ENDPOINT}
+				element={<AddRfidCardPage />}
 			/>
 			<Route path='*' element={<MainPage />} />
 		</Routes>

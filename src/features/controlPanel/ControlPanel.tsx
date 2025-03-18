@@ -7,6 +7,8 @@ import rfidCardImage from '@assets/images/menu/rfid-card.svg'
 import supportImage from '@assets/images/menu/support.svg'
 import { useNavigate } from 'react-router'
 import {
+	PAYMENT_METHOD_ENDPOINT,
+	RFID_CARD_ENDPOINT,
 	SESSIONS_HISTORY_ENDPOINT,
 	STATIONS_LIST_ENDPOINT,
 } from '@common/consts/endpoints'
@@ -32,9 +34,20 @@ export default function ControlPanel(): React.JSX.Element {
 				iconSrc={chargingSessionsImage}
 				onClick={() => nav(SESSIONS_HISTORY_ENDPOINT)}
 			/>
-			<ControlButton iconSrc={paymentMethodImage} onClick={() => {}} />
-			<ControlButton iconSrc={rfidCardImage} onClick={() => {}} />
-			<ControlButton iconSrc={supportImage} onClick={() => {}} />
+			<ControlButton
+				iconSrc={paymentMethodImage}
+				onClick={() => nav(PAYMENT_METHOD_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={rfidCardImage}
+				onClick={() => nav(RFID_CARD_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={supportImage}
+				onClick={() =>
+					window.location.replace(import.meta.env.VITE_TELEGRAM_SUPPORT_URL)
+				}
+			/>
 		</div>
 	)
 }

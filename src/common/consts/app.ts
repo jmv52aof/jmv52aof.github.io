@@ -19,6 +19,8 @@ export const DEFAULT_ROOT_STATE: RootState = {
 		shouldUpdateSessions: true,
 	},
 	sessions: [],
+	position: undefined,
+	isInitTelegramSdk: undefined
 }
 
-export const GET_DATA_LIMIT = 4
+export const GET_DATA_LIMIT = 15

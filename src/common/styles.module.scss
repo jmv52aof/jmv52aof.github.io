@@ -5,7 +5,9 @@
 	min-height: 100vh;
 	box-sizing: border-box;
 	padding: 8px;
+	padding-bottom: 32px;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
+	overflow: hidden;
 }

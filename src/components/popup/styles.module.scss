@@ -1,0 +1,33 @@
+$animationSpeed: 0.5s;
+
+.popup {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0px 4px 10px 0px #02272B1A;
+    transform: translateY(100%);
+    transition: transform $animationSpeed ease;
+}
+  
+.popup.active {
+    width: 100%;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.popup__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 20px 30px 20px;
+}
+
+.content__topLine {
+    margin-bottom: 30px;
+    width: 20%;
+    height: 3px;
+    background-color: #C8CED8;
+}
