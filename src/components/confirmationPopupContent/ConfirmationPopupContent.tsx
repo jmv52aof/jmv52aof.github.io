@@ -19,20 +19,20 @@ export default function ConfirmationPopupContent(
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<ResponseError | null>(null);
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     setIsLoading(true);
-    try {
-      const result = await props.onConfirm();
-      if (result) {
-        setError(result);
-      } else {
-        props.onClose();
-      }
-    } catch (err) {
-      setError(err as ResponseError);
-    } finally {
-      setIsLoading(false);
-    }
+    props
+      .onConfirm()
+      .then((res) => {
+        if (!res) {
+          props.onClose();
+        } else {
+          setError(res);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   if (isLoading) {
@@ -44,31 +44,27 @@ export default function ConfirmationPopupContent(
     );
   }
 
-  if (error) {
-    return (
-      <div className={styles.content}>
-        <p className={styles.title}>
-          {props.errorTitle || 'Произошла непредвиденная ошибка'}
-        </p>
-        {props.description && (
-          <p className={styles.description}>{props.description}</p>
-        )}
-        <img src={errorIcon} alt='Error' className={styles.icon} />
-        <Button variant='fill' onClick={props.onClose} text='Техподдержка' />
-      </div>
-    );
-  }
-
   return (
     <div className={styles.content}>
-      <p className={styles.title}>{props.title}</p>
+      <p className={styles.title}>
+        {error
+          ? props.errorTitle || 'Произошла непредвиденная ошибка'
+          : props.title}
+      </p>
       {props.description && (
         <p className={styles.description}>{props.description}</p>
       )}
-      <div className={styles.buttons}>
-        <Button variant='text' onClick={props.onClose} text='Отменить' />
-        <Button variant='fill' onClick={handleConfirm} text='Подтвердить' />
-      </div>
+      {error ? (
+        <>
+          <img src={errorIcon} alt='Error' className={styles.icon} />
+          <Button variant='fill' onClick={props.onClose} text='Техподдержка' />
+        </>
+      ) : (
+        <div className={styles.buttons}>
+          <Button variant='text' onClick={props.onClose} text='Отменить' />
+          <Button variant='fill' onClick={handleConfirm} text='Подтвердить' />
+        </div>
+      )}
     </div>
   );
 }
