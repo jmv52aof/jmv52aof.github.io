@@ -24,12 +24,14 @@
 
 		"baseUrl": "./src",
 		"paths": {
+			"@api/*": ["api/*"],
 			"@assets/*": ["assets/*"],
 			"@common/*": ["common/*"],
 			"@components/*": ["components/*"],
 			"@features/*": ["features/*"],
 			"@pages/*": ["pages/*"],
-			"@layouts/*": ["layouts/*"]
+			"@layouts/*": ["layouts/*"],
+			"@contexts/*": ["contexts/*"]
 		}
 	},
 	"include": ["src"]

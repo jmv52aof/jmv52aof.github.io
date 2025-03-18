@@ -8,9 +8,17 @@ import {
 	ChargingSessionPageQueryArguments,
 	ChargingSessionPreviousPageQueries,
 } from '@common/consts/pages'
+import { useContext } from 'react'
+import { RootStateContext } from '@contexts/RootStateContext'
+import { useActiveChargingSessionUpdater } from '@common/hooks/chargingSessions'
 
 export default function ActiveSessionNotify(): React.JSX.Element {
 	const nav = useNavigate()
+
+	const { activeChargingSession } = useContext(RootStateContext)
+	useActiveChargingSessionUpdater()
+
+	if (!activeChargingSession) return <></>
 
 	return (
 		<div className={styles.notify}>
@@ -18,7 +26,7 @@ export default function ActiveSessionNotify(): React.JSX.Element {
 				onClick={() =>
 					nav(
 						SESSION_PROFILE_ENDPOINT +
-							'1' +
+							activeChargingSession.id +
 							createQueryString([
 								{
 									key: ChargingSessionPageQueryArguments.PREVIOUS_PAGE,

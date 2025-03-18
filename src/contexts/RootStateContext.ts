@@ -8,4 +8,5 @@ export const RootStateContext = createContext<IRootStateContext>({
 	setStations: _ => {},
 	setPosition: _ => {},
 	setRfidCard: _ => {},
+	setActiveChargingSession: _ => {},
 })

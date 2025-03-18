@@ -1,3 +1,4 @@
+import { ChargingSessionDto } from './chargingSessions'
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
@@ -13,6 +14,7 @@ export type RootState = {
 	position?: Position | null
 	isInitTelegramSdk?: boolean
 	rfidCard?: RfidCardDto
+	activeChargingSession?: ChargingSessionDto
 }
 
 export interface IRootStateContext extends RootState {
@@ -20,4 +22,5 @@ export interface IRootStateContext extends RootState {
 	setStations: (stations: StationDto[]) => void
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void
+	setActiveChargingSession: (session?: ChargingSessionDto) => void
 }
