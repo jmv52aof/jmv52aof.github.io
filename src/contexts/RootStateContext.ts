@@ -4,6 +4,7 @@ import { IRootStateContext } from '@common/types/app'
 
 export const RootStateContext = createContext<IRootStateContext>({
 	...DEFAULT_ROOT_STATE,
+	setToken: _ => {},
 	setStationFilters: _ => {},
 	setStations: _ => {},
 	setSessionFilters: _ => {},

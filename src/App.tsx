@@ -17,11 +17,14 @@ export default function App() {
 	const { authorizationTelegramUserFromApi } = useApi()
 
 	try {
-		if (!sessionStorage.getItem('user-jwt-token')) {
+		if (!rootState.token) {
 			const initData = window.Telegram.WebApp.initData as string
 			authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
 				if (!token) return
-				sessionStorage.setItem('token', token)
+				setRootState({
+					...rootState,
+					token: token,
+				})
 			})
 		}
 	} catch (e) {
@@ -83,7 +86,7 @@ export default function App() {
 					setRootState({
 						...rootState,
 						position: position,
-					}),
+					})
 			}}
 		>
 			{rootState.isInitTelegramSdk && <BackButton />}

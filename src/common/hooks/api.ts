@@ -42,10 +42,12 @@ import {
 	GetStationByIdRequestOptions,
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
+import { RootStateContext } from 'contexts/RootStateContext'
+import { useContext } from 'react'
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
-	const token = sessionStorage.getItem('user-jwt-token')
+	const { token } = useContext(RootStateContext)
 
 	/** Модуль авторизации */
 
@@ -153,6 +155,7 @@ export const useApi = () => {
 	const getPaymentMethodFromApi = async (
 		options: GetPaymentMethodRequestOptions
 	): Promise<string | undefined> => {
+		console.log(token)
 		const response = await getPaymentMethod({ ...options, token: token })
 		if (undefined !== response.data) return response.data
 		return undefined
