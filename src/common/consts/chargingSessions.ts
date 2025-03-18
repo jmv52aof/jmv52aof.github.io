@@ -1,5 +1,5 @@
 import { ChargingSessionStatus } from '@common/types/chargingSessions'
-import { ColorTemplate } from '@components/ui/status/lib/types'
+import { ColorTemplate } from '@common/types/status'
 
 export namespace ChargingSessionStatuses {
 	export const CHARGING: ChargingSessionStatus = 'Зарядка'

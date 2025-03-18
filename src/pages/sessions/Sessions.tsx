@@ -229,7 +229,7 @@ export default function SessionsPage(): React.JSX.Element {
 		const dates = Object.keys(groupedSessions)
 		const slicedDates = dates.slice(offset, offset + limit)
 		const items = slicedDates.flatMap(date => {
-			const [day, month, year] = date.split(' ')
+			const [day, month, _] = date.split(' ')
 
 			return [
 				<div key={`date-${date}`} className={styles.sessionsMap__date}>
