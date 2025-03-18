@@ -59,6 +59,20 @@ export default function App() {
 							shouldUpdateStations: false,
 						},
 					}),
+				setSessionFilters: filters =>
+					setRootState({
+						...rootState,
+						sessionFilters: filters,
+					}),
+				setSessions: sessions =>
+					setRootState({
+						...rootState,
+						sessions: sessions,
+						sessionFilters: {
+							...rootState.sessionFilters,
+							shouldUpdateSession: false,
+						},
+					}),
 				showSnackbar,
 				setRfidCard: card => setRootState({ ...rootState, rfidCard: card }),
 				setActiveChargingSession: session =>
