@@ -16,37 +16,33 @@ export default function App() {
 	const { snackbar, showSnackbar } = useSnackbar()
 	const { authorizationTelegramUserFromApi } = useApi()
 
-	useEffect(() => {
-		try {
-			const webAppData = window.Telegram.WebApp
-			if (!sessionStorage.getItem('user-jwt-token')) {
-				const initData = webAppData.initData as string
-				authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
-					if (!token) return
-					sessionStorage.setItem('token', token)
-				})
-			}
-		} catch (e) {
-			console.error('Ошибка авторизации: ', e)
-		}
-
-		try {
-			if (rootState.isInitTelegramSdk === undefined) {
-				init()
-				setRootState({
-					...rootState,
-					isInitTelegramSdk: true,
-				})
-			}
-		} catch (e) {
-			console.error('Ошибка инициализации teleram sdk: ', e)
-			setRootState({
-				...rootState,
-				isInitTelegramSdk: false,
+	try {
+		if (!sessionStorage.getItem('user-jwt-token')) {
+			const initData = window.Telegram.WebApp.initData as string
+			authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
+				if (!token) return
+				sessionStorage.setItem('token', token)
 			})
 		}
-	}, [])
+	} catch (e) {
+		console.error('Ошибка авторизации: ', e)
+	}
 
+	try {
+		if (rootState.isInitTelegramSdk === undefined) {
+			init()
+			setRootState({
+				...rootState,
+				isInitTelegramSdk: true,
+			})
+		}
+	} catch (e) {
+		console.error('Ошибка инициализации teleram sdk: ', e)
+		setRootState({
+			...rootState,
+			isInitTelegramSdk: false,
+		})
+	}
 
 	if (
 		rootState.isInitTelegramSdk &&
