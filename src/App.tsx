@@ -17,21 +17,26 @@ export default function App() {
 			init()
 			setRootState({
 				...rootState,
-				isInitTelegramSdk: true
+				isInitTelegramSdk: true,
 			})
 		}
-	}
-	catch(e) {
+	} catch (e) {
 		console.error('Ошибка инициализации teleram sdk:', e)
 		setRootState({
 			...rootState,
-			isInitTelegramSdk: false
+			isInitTelegramSdk: false,
 		})
 	}
-	
-  	if (rootState.isInitTelegramSdk && !miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
+
+	if (
+		rootState.isInitTelegramSdk &&
+		!miniApp.isMounting &&
+		!miniApp.isMounted()
+	)
+		miniApp.mount()
 	useEffect(() => {
-		if (rootState.isInitTelegramSdk && !backButton.isMounted()) backButton.mount()	
+		if (rootState.isInitTelegramSdk && !backButton.isMounted())
+			backButton.mount()
 	}, [])
 
 	return (
@@ -65,10 +70,11 @@ export default function App() {
 							...rootState.sessionFilters,
 							shouldUpdateSession: false,
 						},
+					}),
 				setPosition: position =>
 					setRootState({
 						...rootState,
-						position: position
+						position: position,
 					}),
 			}}
 		>

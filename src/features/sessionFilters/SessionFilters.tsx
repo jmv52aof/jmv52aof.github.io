@@ -6,6 +6,7 @@ import refreshImageActive from '@assets/images/refresh-icon-active.svg'
 import Button from '@components/ui/button/Button'
 import Switch from '@components/ui/switch/Switch'
 import Snackbar from '@components/snackbar/Snackbar'
+import SnackbarLayout from '@layouts/snackbarLayout/SnackbarLayout'
 import { ConnectorStandard } from '@common/types/chargingSessions'
 import { DEFAULT_FILTERS } from '@common/consts/chargingSessions'
 import { isFiltersDefault } from './lib/functions'
@@ -13,7 +14,7 @@ import { useContext, useState } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 import Slider from '@components/ui/slider/Slider'
 
-export default function SessionFiltersFeature(): React.JSX.Element {
+export default function SessionFilters(): React.JSX.Element {
 	const { sessionFilters, setSessionFilters } = useContext(RootStateContext)
 	const [isSnackbarVisible, setIsSnackbarVisible] = useState(false)
 	const [isResetSnackbarVisible, setIsResetSnackbarVisible] = useState(false)
@@ -43,7 +44,7 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 	const handleSliderChange = (value: number) => {
 		setSessionFilters({
 			...sessionFilters,
-			minimalPower: value * 1000,
+			durationInHours: value,
 			isModified: true,
 		})
 	}
@@ -65,36 +66,37 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 	return (
 		<div className={styles.sessionFilters}>
 			<ContentBlockLayout>
-				<div className={styles.sessionFilters__onlyAvailable}>
-					<p className={styles.onlyAvailable__text}>Только платные</p>
+				<div className={styles.sessionFilters__onlyPaid}>
+					<p className={styles.onlyPaid__text}>Только платные</p>
 					<Switch
 						onChange={handleSwitchChange}
 						enabled={sessionFilters.onlyAvailableSessions}
 					/>
 				</div>
 			</ContentBlockLayout>
-			<div className={styles.sessionFilters__minimalPower}>
-				<span className={styles.minimalPower__text}>
+			<div className={styles.sessionFilters__minimalDuration}>
+				<span className={styles.minimalDuration__text}>
 					Минимальная длительность, часы
 				</span>
 				<ContentBlockLayout>
 					<Slider
 						onChange={value => handleSliderChange(value)}
+						orderedItemKeys={['<1', '2', '3', '5', '8', '>12']}
 						items={{
-							'1': 1,
+							'<1': 0,
 							'2': 2,
 							'3': 3,
 							'5': 5,
 							'8': 8,
 							'>12': 12,
 						}}
-						current={sessionFilters.minimalPower / 1000}
+						current={sessionFilters.durationInHours}
 					/>
 				</ContentBlockLayout>
 			</div>
 			<div className={styles.sessionFilters__connectors}>
 				<div className={styles.connectors__tittle}>
-					<span className={styles.tittle__text}>Коннекторы</span>
+					<a className={styles.tittle__text}>Коннекторы</a>
 				</div>
 				<ContentBlockLayout>
 					<div className={styles.connectors__row}>
@@ -150,14 +152,14 @@ export default function SessionFiltersFeature(): React.JSX.Element {
 				</ContentBlockLayout>
 			</div>
 			{isSnackbarVisible && (
-				<div className={styles.popUp__snackBar}>
+				<SnackbarLayout variant='success' text='Фильтры применены'>
 					<Snackbar variant='success' text='Фильтры применены' />
-				</div>
+				</SnackbarLayout>
 			)}
 			{isResetSnackbarVisible && (
-				<div className={styles.popUp__snackBar}>
+				<SnackbarLayout variant='success' text='Фильтры сброшены'>
 					<Snackbar variant='success' text='Фильтры сброшены' />
-				</div>
+				</SnackbarLayout>
 			)}
 			<div className={styles.sessionFilters__footer}>
 				<ResetFiltersButton

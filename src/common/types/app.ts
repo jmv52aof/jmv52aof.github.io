@@ -1,7 +1,7 @@
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
-import { ChargingSessionDto, SessionFilters } from './chargingSessions'
+import { ChargingSessionDto, onlyPaidSessions } from './chargingSessions'
 
 /**
  * Поле isInitTelegramSdk = undefined - когда telegram sdk ещё не инициализировано
@@ -11,7 +11,7 @@ import { ChargingSessionDto, SessionFilters } from './chargingSessions'
 export type RootState = {
 	stationFilters: StationFilters
 	stations: StationDto[]
-	sessionFilters: SessionFilters
+	sessionFilters: onlyPaidSessions
 	sessions: ChargingSessionDto[]
 	position?: Position | null
 	isInitTelegramSdk?: boolean
@@ -21,7 +21,7 @@ export type RootState = {
 export interface IRootStateContext extends RootState {
 	setStationFilters: (filters: StationFilters) => void
 	setStations: (stations: StationDto[]) => void
-	setSessionFilters: (filters: SessionFilters) => void
+	setSessionFilters: (filters: onlyPaidSessions) => void
 	setSessions: (sessions: ChargingSessionDto[]) => void
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void

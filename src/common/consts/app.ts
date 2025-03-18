@@ -1,5 +1,4 @@
 import { CONNECTORS } from '@common/consts/stations'
-import { CONNECTORS_SESSION } from '@common/consts/chargingSessions'
 import { RootState } from '@common/types/app'
 
 export const DEFAULT_ROOT_STATE: RootState = {
@@ -12,9 +11,9 @@ export const DEFAULT_ROOT_STATE: RootState = {
 	},
 	stations: [],
 	sessionFilters: {
-		connectors: [...CONNECTORS_SESSION],
+		connectors: [...CONNECTORS],
 		onlyAvailableSessions: false,
-		minimalPower: 0,
+		durationInHours: 0,
 		isModified: false,
 		shouldUpdateSessions: true,
 	},

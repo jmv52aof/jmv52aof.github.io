@@ -19,7 +19,7 @@ export default function AppRouter(): React.JSX.Element {
 				element={<StationsFiltersPage />}
 			/>
 			<Route
-				path={endpoints.SESSIONS_FILTERS_ENDPOINT}
+				path={endpoints.SESSIONS_HISTORY_FILTERS_ENDPOINT}
 				element={<SessionsFiltersPage />}
 			/>
 			<Route

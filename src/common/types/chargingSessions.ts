@@ -1,21 +1,9 @@
 import { Timestamp } from './date'
-import { ConnectorInfoDto } from './stations'
+import { ConnectorInfoDto, ConnectorStandard } from './stations'
 import { ConnectorTariffDto } from './tariffs'
-
 export type ChargingSessionStatus = 'Зарядка' | 'Завершена' | 'Невалидна'
 
 export type PaymentStatus = 'Оплачено' | 'Неоплачено'
-
-export type ConnectorStandard =
-	| 'CHAdeMO'
-	| 'GB/T (AC)'
-	| 'GB/T (DC)'
-	| 'Type 1'
-	| 'Type 2'
-	| 'CCS1'
-	| 'CCS2'
-	| 'Tesla'
-	| 'Другой'
 
 export interface ChargingSessionDto {
 	id: string
@@ -43,10 +31,10 @@ export interface ChargingSessionDto {
 	battery_percentage?: number
 }
 
-export type SessionFilters = {
+export type onlyPaidSessions = {
 	connectors: ConnectorStandard[]
 	onlyAvailableSessions: boolean
-	minimalPower: number
+	durationInHours: number
 	isModified: boolean
 	shouldUpdateSessions?: boolean
 }
