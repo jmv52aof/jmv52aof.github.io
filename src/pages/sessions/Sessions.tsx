@@ -19,7 +19,6 @@ export default function SessionsPage(): React.JSX.Element {
 	const [listLayoutItems, setListLayoutItems] = useState<React.JSX.Element[]>(
 		[]
 	)
-
 	const nav = useNavigate()
 
 	const onSessionsFiltersClick = () => {

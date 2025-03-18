@@ -8,7 +8,6 @@ import PageLayout from '@layouts/pageLayout/PageLayout'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
-
 	const { pageQueries } = useChargingSessionQueryParser()
 
 	const getPreviousPageEndpoint = (): string | undefined => {

@@ -21,21 +21,22 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { setPosition } = useContext(RootStateContext)
+	const {position, setPosition} = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
 		const geo = navigator.geolocation
-
-		if (!geo) {
+		
+		if (position !== undefined || !geo)
 			return
-		}
 
 		const watcher = geo.watchPosition(position => {
 			setPosition({
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,
 			})
+		}, () => {
+			setPosition(null)
 		})
 		return () => geo.clearWatch(watcher)
 	}, [])

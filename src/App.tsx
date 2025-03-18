@@ -10,14 +10,28 @@ import BackButton from '@components/ui/backButton/BackButton'
 if (import.meta.env.DEV) initializeMockEnvironment()
 
 export default function App() {
-	init()
-
-	if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
-
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 
+	try {
+		if (rootState.isInitTelegramSdk === undefined) {
+			init()
+			setRootState({
+				...rootState,
+				isInitTelegramSdk: true
+			})
+		}
+	}
+	catch(e) {
+		console.error('Ошибка инициализации teleram sdk:', e)
+		setRootState({
+			...rootState,
+			isInitTelegramSdk: false
+		})
+	}
+	
+  	if (rootState.isInitTelegramSdk && !miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
 	useEffect(() => {
-		if (!backButton.isMounted()) backButton.mount()
+		if (rootState.isInitTelegramSdk && !backButton.isMounted()) backButton.mount()	
 	}, [])
 
 	return (
@@ -41,12 +55,11 @@ export default function App() {
 				setPosition: position =>
 					setRootState({
 						...rootState,
-						position: position,
+						position: position
 					}),
-				setRfidCard: card => setRootState({ ...rootState, rfidCard: card }),
 			}}
 		>
-			<BackButton />
+			{rootState.isInitTelegramSdk && <BackButton />}
 			<AppRouter />
 		</RootStateContext.Provider>
 	)
