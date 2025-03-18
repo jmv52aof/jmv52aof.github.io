@@ -11,6 +11,7 @@ import { Variant } from './snackbar'
  * Поле position = null - когда пользователь отказал в доступе к геолокации или произошла ошибка во время получения геолокации
  */
 export type RootState = {
+	token: string | null
 	stationFilters: StationFilters
 	stations: StationDto[]
 	sessionFilters: SessionFilters
@@ -23,6 +24,7 @@ export type RootState = {
 }
 
 export interface IRootStateContext extends RootState {
+	setToken: (token: string) => void
 	setStationFilters: (filters: StationFilters) => void
 	setStations: (stations: StationDto[]) => void
 	setSessionFilters: (filters: SessionFilters) => void

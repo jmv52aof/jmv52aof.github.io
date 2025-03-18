@@ -42,6 +42,8 @@ import {
 	GetStationByIdRequestOptions,
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
+import { RootStateContext } from 'contexts/RootStateContext'
+import { useContext } from 'react'
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
@@ -93,7 +95,7 @@ export const useApi = () => {
 	): Promise<ChargingSessionDto | undefined> => {
 		const response = await getChargingSessionById({
 			...options,
-			token: token,
+			token: sessionStorage.getItem('user-jwt-token'),
 		})
 		if (response.data) return convertChargingSessionResponseDto(response.data)
 		return undefined
