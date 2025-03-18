@@ -19,4 +19,5 @@ export interface IRootStateContext extends RootState {
 	setStationFilters: (filters: StationFilters) => void
 	setStations: (stations: StationDto[]) => void
 	setPosition: (position: Position | null) => void
+	setRfidCard: (card?: RfidCardDto) => void
 }
