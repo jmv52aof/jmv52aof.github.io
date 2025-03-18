@@ -42,8 +42,6 @@ import {
 	GetStationByIdRequestOptions,
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
-import { RootStateContext } from 'contexts/RootStateContext'
-import { useContext } from 'react'
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
