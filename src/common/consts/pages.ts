@@ -30,9 +30,13 @@ export namespace ChargingSessionPreviousPageQueries {
 /** Профиль станции */
 export namespace StationProfilePageQueryArguments {
 	export const PREVIOUS_PAGE: StationProfileQueryArgument = 'prev_page'
+	export const FROM_CHARGING_SESSION_ID: StationProfileQueryArgument =
+		'from_charging_session_id'
 }
 
 export namespace StationProfilePreviousPageQueries {
 	export const MAIN: StationProfilePreviousPageQuery = 'main'
 	export const STATIONS_LIST: StationProfilePreviousPageQuery = 'stations_list'
+	export const ACTIVE_SESSION: StationProfilePreviousPageQuery =
+		'active_session'
 }

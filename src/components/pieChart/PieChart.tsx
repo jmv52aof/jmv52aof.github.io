@@ -14,8 +14,8 @@ import {
 
 interface Props {
 	colorTemplate: CircleColorTemplate
-	power: number
-	maxPower: number
+	value: number
+	maxValue: number
 	className?: string
 }
 
@@ -27,7 +27,7 @@ export default function PieChart(props: Props): React.JSX.Element {
 					<Pie
 						data={[
 							{
-								value: props.maxPower,
+								value: props.maxValue,
 							},
 						]}
 						dataKey='value'
@@ -40,7 +40,7 @@ export default function PieChart(props: Props): React.JSX.Element {
 					<Pie
 						data={[
 							{
-								value: props.power,
+								value: props.value,
 							},
 						]}
 						dataKey='value'
@@ -52,7 +52,7 @@ export default function PieChart(props: Props): React.JSX.Element {
 						stroke='none'
 						endAngle={
 							MIN_ANGLE +
-							((MAX_ANGLE - MIN_ANGLE) * props.power) / props.maxPower
+							((MAX_ANGLE - MIN_ANGLE) * props.value) / props.maxValue
 						}
 					/>
 				</RechartsPieChart>

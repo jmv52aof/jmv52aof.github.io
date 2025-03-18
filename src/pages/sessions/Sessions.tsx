@@ -156,7 +156,7 @@ export default function SessionsPage(): React.JSX.Element {
 				power_type: 'AC',
 				max_electric_power: 36,
 			},
-			status: 'Невалидна',
+			status: 'Зарядка',
 			charged_kwh: 22,
 			start_date: {
 				year: 2025,
@@ -229,14 +229,17 @@ export default function SessionsPage(): React.JSX.Element {
 		const dates = Object.keys(groupedSessions)
 		const slicedDates = dates.slice(offset, offset + limit)
 		const items = slicedDates.flatMap(date => {
-			const [day, month, year] = date.split(' ')
+			const [day, month, _] = date.split(' ')
 
 			return [
 				<div key={`date-${date}`} className={styles.sessionsMap__date}>
 					<p className={styles.date__text}>{`${day} ${month}`} </p>
 				</div>,
 				...groupedSessions[date].map(session => (
-					<ContentBlockLayout key={session.id} className={styles.sessionCard}>
+					<ContentBlockLayout
+						key={session.id}
+						className={styles.main__sessionCard}
+					>
 						<SessionCard session={session} />
 					</ContentBlockLayout>
 				)),
@@ -283,7 +286,7 @@ export default function SessionsPage(): React.JSX.Element {
 
 	return (
 		<PageLayout
-			onReturn={() => {}}
+			onReturn={() => nav('/')}
 			title='Зарядные сессии'
 			headerContent={
 				<FiltersButton

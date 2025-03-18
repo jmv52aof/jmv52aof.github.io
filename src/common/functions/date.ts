@@ -78,9 +78,11 @@ export const timeToStringWithUnitsOfMeasurement = (
 	minutes: number,
 	seconds: number
 ): string => {
-	return `${hours === 0 ? '' : `${hours}ч`} ${
+	const result = `${hours === 0 ? '' : `${hours}ч`} ${
 		minutes === 0 ? '' : `${minutes}м`
 	} ${seconds === 0 ? '' : `${seconds}сек`}`
+
+	return result.trim().length > 0 ? result : '0сек'
 }
 
 /**

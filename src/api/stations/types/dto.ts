@@ -94,5 +94,5 @@ export interface ConnectorInfoResponseDto {
 	standard: ConnectorStandardResponse
 	format: ConnectorFormatResponse
 	power_type: ConnectorPowerTypeResponse
-	max_electric_power: number
+	max_electric_power?: number
 }

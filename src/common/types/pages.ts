@@ -26,10 +26,16 @@ export type ChargingSessionPageQuery = {
 }
 
 /** Профиль станции */
-export type StationProfileQueryArgument = 'prev_page'
+export type StationProfileQueryArgument =
+	| 'prev_page'
+	| 'from_charging_session_id'
 
-export type StationProfilePreviousPageQuery = 'main' | 'stations_list'
+export type StationProfilePreviousPageQuery =
+	| 'main'
+	| 'stations_list'
+	| 'active_session'
 
 export type StationProfilePageQuery = {
 	prev_page?: StationProfilePreviousPageQuery
+	from_charging_session_id?: string
 }

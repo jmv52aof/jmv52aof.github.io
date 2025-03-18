@@ -9,7 +9,7 @@ type Props = {
 export default function StationMarkerOnMap(props: Props): React.JSX.Element {
 	return (
 		<div className={`${styles.marker} ${styles[props.color]}`}>
-			<StationMarker status={props.color} />
+			<StationMarker color={props.color} />
 		</div>
 	)
 }

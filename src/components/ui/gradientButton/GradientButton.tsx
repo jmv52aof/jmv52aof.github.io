@@ -11,13 +11,16 @@ type Props = {
 export default function GradientButton(props: Props) {
 	return (
 		<button
+			data-gradient-button='true'
 			onClick={props.onClick}
-			className={`${styles.button} ${styles[props.gradientTemplate]}`}
+			className={`${styles.gradientButton} ${
+				styles[props.gradientTemplate]
+			}`}
 		>
 			<div className={styles.button__alert}>
 				<img className={styles.alert__icon} src={alertImage} />
-				<div className={styles.alert__messege}>
-					<p className={styles.messege__text}>Сессия не оплачена</p>
+				<div className={styles.alert__message}>
+					<p className={styles.message__text}>Сессия не оплачена</p>
 				</div>
 			</div>
 			<img className={styles.button__arrowIcon} src={arrowImage} />

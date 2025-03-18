@@ -19,8 +19,8 @@ export default function ChargingSessionActivePower(
 				)}
 			</div>
 			<PieChart
-				power={props.power}
-				maxPower={props.maxPower}
+				value={props.power}
+				maxValue={props.maxPower}
 				colorTemplate='blue'
 				className={styles.power__pieChart}
 			/>

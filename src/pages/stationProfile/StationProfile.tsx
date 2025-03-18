@@ -11,7 +11,10 @@ import { useState, useMemo } from 'react'
 import { useStationLoader, useStationProfileQueryParser } from './lib/hooks'
 import { StationProfilePreviousPageQueries } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
-import { STATIONS_LIST_ENDPOINT } from '@common/consts/endpoints'
+import {
+	SESSION_PROFILE_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
 import { Loader } from '@components/ui/loader/Loader'
 import NotFoundPage from '@pages/notFound/NotFound'
 import PageLayout from '@layouts/pageLayout/PageLayout'
@@ -61,21 +64,22 @@ export default function StationProfilePage(): React.JSX.Element {
 		})
 	}
 
-	const getPreviousPageEndpoint = (): string | undefined => {
+	const getPreviousPageEndpoint = (): string => {
 		switch (pageQueries.prev_page) {
-			case StationProfilePreviousPageQueries.MAIN:
-				return '/'
 			case StationProfilePreviousPageQueries.STATIONS_LIST:
 				return STATIONS_LIST_ENDPOINT
+			case StationProfilePreviousPageQueries.ACTIVE_SESSION:
+				return (
+					SESSION_PROFILE_ENDPOINT +
+					(pageQueries.from_charging_session_id ?? '')
+				)
 		}
+		return '/'
 	}
 
 	return (
 		<PageLayout
-			onReturn={() => {
-				const endpoint = getPreviousPageEndpoint()
-				if (endpoint) nav(endpoint)
-			}}
+			onReturn={() => nav(getPreviousPageEndpoint())}
 			title={station.name}
 			className={styles.page}
 		>

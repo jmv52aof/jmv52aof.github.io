@@ -1,10 +1,11 @@
 import { StationProfilePageQueryArguments } from '@common/consts/pages'
+import { useApi } from '@common/hooks/api'
 import {
 	StationProfilePageQuery,
 	StationProfilePreviousPageQuery,
 } from '@common/types/pages'
 import { StationDto } from '@common/types/stations'
-import { RootStateContext } from 'contexts/RootStateContext'
+import { RootStateContext } from '@contexts/RootStateContext'
 import { useContext, useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router'
 
@@ -17,8 +18,14 @@ export const useStationProfileQueryParser = () => {
 		const prevPage = searchParams.get(
 			StationProfilePageQueryArguments.PREVIOUS_PAGE
 		) as StationProfilePreviousPageQuery | undefined
+		const fromChargingSessionId = searchParams.get(
+			StationProfilePageQueryArguments.FROM_CHARGING_SESSION_ID
+		) as string | undefined
 
-		setPageQueries({ prev_page: prevPage })
+		setPageQueries({
+			prev_page: prevPage,
+			from_charging_session_id: fromChargingSessionId,
+		})
 	}, [searchParams])
 
 	return {
@@ -29,15 +36,23 @@ export const useStationProfileQueryParser = () => {
 /** Хук предоставляет загрузку станции по id из URL */
 export const useStationLoader = () => {
 	const { id } = useParams()
-	const { stations } = useContext(RootStateContext)
+	const { position } = useContext(RootStateContext)
+	const { getStationByIdFromApi } = useApi()
 
 	const [station, setStation] = useState<StationDto | undefined>()
 	const [loading, setLoading] = useState<boolean>(true)
 
 	useEffect(() => {
 		if (id !== undefined) {
-			setStation(stations.find(value => value.id === id))
-			setLoading(false)
+			getStationByIdFromApi({
+				id: id,
+				latitude: position?.latitude.toString(),
+				longitude: position?.longitude.toString(),
+			})
+				.then(res => {
+					if (res) setStation(res)
+				})
+				.finally(() => setLoading(false))
 		}
 	}, [id])
 

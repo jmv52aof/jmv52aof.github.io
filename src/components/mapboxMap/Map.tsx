@@ -105,6 +105,7 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 
 	useEffect(() => {
 		const index = new Supercluster({ radius: 40, maxZoom: maxZoom - 2 })
+		//@ts-ignore
 		index.load(points)
 		const newClusters = index.getClusters([-180, -85, 180, 85], viewState.zoom)
 
@@ -114,6 +115,7 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 			setPopUp(null)
 		}
 
+		//@ts-ignore
 		setClusters(newClusters)
 	}, [points, viewState.zoom, maxZoom])
 
