@@ -25,6 +25,7 @@ export type StationProfilePreviousPageQuery =
 	| 'main'
 	| 'stations_list'
 	| 'active_session'
+	| 'sessions_list'
 
 export type StationProfilePageQuery = {
 	prev_page?: StationProfilePreviousPageQuery

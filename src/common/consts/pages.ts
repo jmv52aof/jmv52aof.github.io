@@ -39,4 +39,5 @@ export namespace StationProfilePreviousPageQueries {
 	export const STATIONS_LIST: StationProfilePreviousPageQuery = 'stations_list'
 	export const ACTIVE_SESSION: StationProfilePreviousPageQuery =
 		'active_session'
+	export const SESSIONS_LIST: StationProfilePreviousPageQuery = 'sessions_list'
 }
