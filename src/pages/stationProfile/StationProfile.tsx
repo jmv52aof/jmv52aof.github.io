@@ -9,10 +9,7 @@ import styles from './styles.module.scss'
 import React from 'react'
 import { useState, useMemo } from 'react'
 import { useStationLoader, useStationProfileQueryParser } from './lib/hooks'
-import {
-	StationProfilePageQueryArguments,
-	StationProfilePreviousPageQueries,
-} from '@common/consts/pages'
+import { StationProfilePreviousPageQueries } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
 import {
 	SESSION_PROFILE_ENDPOINT,
@@ -21,7 +18,6 @@ import {
 import { Loader } from '@components/ui/loader/Loader'
 import NotFoundPage from '@pages/notFound/NotFound'
 import PageLayout from '@layouts/pageLayout/PageLayout'
-import { createQueryString } from '@common/functions/strings'
 
 export default function StationProfilePage(): React.JSX.Element {
 	const nav = useNavigate()
@@ -68,31 +64,22 @@ export default function StationProfilePage(): React.JSX.Element {
 		})
 	}
 
-	const getPreviousPageEndpoint = (): string | undefined => {
+	const getPreviousPageEndpoint = (): string => {
 		switch (pageQueries.prev_page) {
-			case StationProfilePreviousPageQueries.MAIN:
-				return '/'
 			case StationProfilePreviousPageQueries.STATIONS_LIST:
 				return STATIONS_LIST_ENDPOINT
 			case StationProfilePreviousPageQueries.ACTIVE_SESSION:
 				return (
 					SESSION_PROFILE_ENDPOINT +
-					createQueryString([
-						{
-							key: StationProfilePageQueryArguments.FROM_CHARGING_SESSION_ID,
-							value: pageQueries.from_charging_session_id ?? '',
-						},
-					])
+					(pageQueries.from_charging_session_id ?? '')
 				)
 		}
+		return '/'
 	}
 
 	return (
 		<PageLayout
-			onReturn={() => {
-				const endpoint = getPreviousPageEndpoint()
-				if (endpoint) nav(endpoint)
-			}}
+			onReturn={() => nav(getPreviousPageEndpoint())}
 			title={station.name}
 			className={styles.page}
 		>
