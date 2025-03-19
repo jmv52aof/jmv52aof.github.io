@@ -19,13 +19,10 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
 
 	const createNewPaymentMethod = async () => {
-		const newPaymentMethod = await createPaymentMethodFromApi({});
-		if (newPaymentMethod && newPaymentMethod.error)
-		{
-			return newPaymentMethod;
-		}
+		await createPaymentMethodFromApi({});
 
-		const paymentUrl = await getPaymentUrlFromApi({});
+		let paymentUrl = await getPaymentUrlFromApi({});
+		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl;
 		window.open(paymentUrl, "_blank", "noopener,noreferrer");
 	};
 
