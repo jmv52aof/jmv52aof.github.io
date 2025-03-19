@@ -21,8 +21,10 @@ const Popup: React.FC<Props> = (props: Readonly<Props>) => {
         {...handlers}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.content__topLine}></div>
-        {props.children}
+        <div className={styles.contentWrapper}>
+          <div className={styles.content__topLine}></div>
+          <div className={styles.contentContainer}>{props.children}</div>
+        </div>
       </div>
     </div>
   );
