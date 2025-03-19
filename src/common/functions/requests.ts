@@ -40,7 +40,13 @@ export async function sendRequest(
 		let jsonResponse = undefined
 		try {
 			jsonResponse = await response.json()
-		} catch (err) {}
+		} catch (err) {
+			if (options.responseIsString) {
+				return {
+					data: await response.text(),
+				}
+			}
+		}
 
 		if (!jsonResponse) return {}
 
