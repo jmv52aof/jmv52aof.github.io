@@ -1,1 +1,1 @@
-export const LIST_HEIGHT_REDUCTION = 113
+export const LIST_HEIGHT_REDUCTION = 178

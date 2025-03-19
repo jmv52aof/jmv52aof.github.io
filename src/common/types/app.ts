@@ -2,7 +2,7 @@ import { ChargingSessionDto } from './chargingSessions'
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
-import { ChargingSessionDto, SessionFilters } from './chargingSessions'
+import { SessionFilters } from './chargingSessions'
 import { Variant } from './snackbar'
 
 /**

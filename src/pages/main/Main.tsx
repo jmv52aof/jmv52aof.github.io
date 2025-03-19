@@ -3,11 +3,15 @@ import styles from './styles.module.scss'
 import ControlPanel from '@features/controlPanel/ControlPanel'
 import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
-import { STATIONS_FILTERS_ENDPOINT } from '@common/consts/endpoints'
+import {
+	STATIONS_FILTERS_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
 import { createQueryString } from '@common/functions/strings'
 import {
 	StationsFiltersPageQueryArguments,
 	StationsFiltersPreviousPageQueries,
+	StationsListPageQueryArguments,
 } from '@common/consts/pages'
 import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
@@ -21,7 +25,7 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { position, setPosition } = useContext(RootStateContext)
+	const { position, setPosition, stationFilters } = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
@@ -55,11 +59,25 @@ export default function MainPage(): React.JSX.Element {
 		)
 	}
 
+	const onSearchClick = () => {
+		nav(
+			STATIONS_LIST_ENDPOINT +
+				createQueryString([
+					{ key: StationsListPageQueryArguments.SEARCH_FOCUSED, value: 'true' },
+				])
+		)
+	}
+
 	return (
 		<div>
 			{!stationsLoading && (
 				<div className={styles.header}>
-					<Search placeholder='Поиск' variant='shadow' disabled />
+					<Search
+						placeholder='Поиск'
+						variant='shadow'
+						onClick={onSearchClick}
+						value={stationFilters.partOfName}
+					/>
 					<FiltersButton
 						onClick={onFiltersClick}
 						variant='outlined'

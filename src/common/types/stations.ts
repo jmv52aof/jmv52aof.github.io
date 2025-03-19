@@ -25,6 +25,7 @@ export type StationFilters = {
 	onlyAvailableStations: boolean
 	minimalPower: number
 	isModified: boolean
+	partOfName: string
 	shouldUpdateStations?: boolean
 }
 

@@ -40,3 +40,10 @@ export type StationProfilePageQuery = {
 	prev_page?: StationProfilePreviousPageQuery
 	from_charging_session_id?: string
 }
+
+/** Список станций */
+export type StationsListQueryArgument = 'search_focused'
+
+export type StationsListPageQuery = {
+	search_focused?: boolean
+}
