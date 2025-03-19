@@ -28,7 +28,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 
 		let paymentUrl = await getPaymentUrlFromApi({})
 		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl
-		window.open(paymentUrl, '', 'noopener,noreferrer')
+		window.location.replace(paymentUrl)
 	}
 
 	const doDeletePaymentMethod = async () => {
