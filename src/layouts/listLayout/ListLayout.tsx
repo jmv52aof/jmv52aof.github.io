@@ -17,6 +17,7 @@ type Props = {
 	onDataLoad: (newData: Object[]) => void
 	fullHeight?: boolean
 	emptyListNotify: React.ReactNode
+	disable?: boolean
 }
 
 /**
@@ -42,8 +43,7 @@ export default function ListLayout(props: Props): React.JSX.Element {
 	const limit = GET_DATA_LIMIT
 
 	const fetchData = () => {
-		/** Подгрузка данных отключена, т.к. сейчас все данные загружаются в карте */
-		if (props.items) return
+		if (props.disable) return
 
 		setIsLoading(true)
 		props

@@ -75,6 +75,8 @@ export default function SessionsPage(): React.JSX.Element {
 		return items
 	}
 
+	console.log(sessions.length)
+
 	const onPopupClose = () => {
 		setPopup({
 			isOpen: false,
@@ -123,10 +125,11 @@ export default function SessionsPage(): React.JSX.Element {
 				items={createSessionItems(sessions)}
 				loading={loading}
 				getData={async (offset, limit) => {
-					const data = await getByOffsetAndLimit(offset, limit)
-					return createSessionItems(data)
+					return await getByOffsetAndLimit(offset, limit)
 				}}
-				onDataLoad={data => setSessions(data as ChargingSessionDto[])}
+				onDataLoad={data => {
+					setSessions(data as ChargingSessionDto[])
+				}}
 				fullHeight
 				emptyListNotify={
 					<EmptyDataNotification

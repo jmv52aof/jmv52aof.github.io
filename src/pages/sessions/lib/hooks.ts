@@ -1,3 +1,4 @@
+import { GET_DATA_LIMIT } from '@common/consts/app'
 import { createGetChargingSessionsRequestOptions } from '@common/functions/chargingSessions'
 import { useApi } from '@common/hooks/api'
 import { RootStateContext } from '@contexts/RootStateContext'
@@ -15,9 +16,10 @@ export const useChargingSessionsLoader = () => {
 			return
 		}
 
-		getChargingSessionsFromApi(
-			createGetChargingSessionsRequestOptions(sessionFilters)
-		)
+		getChargingSessionsFromApi({
+			...createGetChargingSessionsRequestOptions(sessionFilters),
+			limit: GET_DATA_LIMIT,
+		})
 			.then(res => {
 				setSessions(res)
 			})

@@ -102,6 +102,7 @@ export default function StationsPage(): React.JSX.Element {
 					}}
 				/>
 				<ListLayout
+					disable
 					items={stations.map((value, index) => {
 						return (
 							<ContentBlockLayout

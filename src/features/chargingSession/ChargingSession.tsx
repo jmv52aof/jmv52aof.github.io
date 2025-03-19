@@ -72,7 +72,9 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 
 			<ChargingSessionActivePower
 				power={props.chargingSession.current_power ?? 0}
-				maxPower={props.chargingSession.connector_info.max_electric_power ?? 0}
+				maxPower={
+					(props.chargingSession.connector_info.max_electric_power ?? 0) / 1000
+				}
 			/>
 			<div className={styles.buttonBlock}>
 				<Button
@@ -157,11 +159,11 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 								value:
 									!!props.chargingSession.min_power &&
 									!!props.chargingSession.max_power
-										? `${
-												((props.chargingSession.max_power +
+										? `${(
+												(props.chargingSession.max_power +
 													props.chargingSession.min_power) /
-												2).toFixed(2)
-										  } кВт`
+												2
+										  ).toFixed(2)} кВт`
 										: '',
 								checkVisible: checkVisible,
 							},
