@@ -19,12 +19,28 @@
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	gap: 5px;
+	gap: 8px;
 }
 
 .content__icon {
 	width: 36px;
 	height: 36px;
+}
+
+.icon_animation {
+	animation: scaleAnimation 1s infinite ease-in-out;
+}
+
+@keyframes scaleAnimation {
+	0% {
+	  transform: scale(1);
+	}
+	50% {
+	  transform: scale(1.5);
+	}
+	100% {
+	  transform: scale(1);
+	}
 }
 
 .content__text {
