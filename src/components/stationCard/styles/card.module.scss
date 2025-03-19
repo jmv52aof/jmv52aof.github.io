@@ -1,0 +1,99 @@
+.stationCard {
+	border-radius: 8px;
+	border-width: 1px;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	background: #ffffff;
+	gap: 12px;
+}
+
+.stationCard__header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header__mainInfo {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.path__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+.mainInfo__texts {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.texts__name,
+.content__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #373435;
+}
+
+.texts__name {
+	margin: 0;
+}
+
+.texts__description,
+.path__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 18px;
+	margin: 0;
+	color: #8e949f;
+}
+
+.path__text {
+	text-align: right;
+	white-space: nowrap;
+	min-width: 38px;
+}
+
+.content__path {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2px;
+}
+
+.stationCard__body {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.body__connectorsList {
+	display: flex;
+	flex-grow: 1;
+}
+
+.connectorsList {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	flex-grow: 1;
+}
+
+.content__text {
+	margin: 2px;
+}

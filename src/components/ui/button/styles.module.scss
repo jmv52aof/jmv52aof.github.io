@@ -3,6 +3,7 @@ $transition-duration: 0.3s;
 .button {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-direction: row;
 	box-sizing: border-box;
 	white-space: nowrap;
@@ -12,6 +13,7 @@ $transition-duration: 0.3s;
 	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
 	transition: $transition-duration;
+	padding: 0;
 
 	img {
 		width: 24px;
@@ -48,6 +50,8 @@ $transition-duration: 0.3s;
 }
 
 .text {
+	font-size: 16px;
+	line-height: 24px;
 	color: #8e949f;
 	img {
 		width: 0;
@@ -56,8 +60,8 @@ $transition-duration: 0.3s;
 }
 
 .textWithIcon {
-	font-size: 12px;
-	line-height: 120%;
+	font-size: 14px;
+	line-height: 16px;
 	gap: 4px;
 	color: #017598;
 	img {
@@ -74,7 +78,7 @@ $transition-duration: 0.3s;
 .fillWithIcon {
 	padding: 8px 24px;
 	border-radius: 8px;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 400;
 	line-height: 24px;
 	gap: 12px;

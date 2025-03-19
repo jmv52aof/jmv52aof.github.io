@@ -1,40 +1,99 @@
 import StationsMap from '@features/stationsMap/StationsMap'
 import styles from './styles.module.scss'
-import commonStyles from '@common/styles.module.scss'
 import ControlPanel from '@features/controlPanel/ControlPanel'
-import Button from '@components/ui/button/Button'
-import Switch from '@components/ui/switch/Switch'
-import Status from '@components/ui/status/Status'
-import CustomCarousel from '@components/ui/carousel/Carousel'
-import StationPhotos from '@features/stationPhotos/StationPhotos'
+import FiltersButton from '@components/ui/filtersButton/FiltersButton'
 import tuningImage from '@assets/images/tuning.svg'
-
-import station1 from "../../assets/images/station/station1.png";
-import station2 from "../../assets/images/station/station2.png";
-import station3 from "../../assets/images/station/station3.png";
-
+import {
+	STATIONS_FILTERS_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
+import { createQueryString } from '@common/functions/strings'
+import {
+	StationsFiltersPageQueryArguments,
+	StationsFiltersPreviousPageQueries,
+	StationsListPageQueryArguments,
+} from '@common/consts/pages'
+import { useNavigate } from 'react-router'
+import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
+import Search from '@components/ui/search/Search'
+import { useStationsLoader } from './lib/hooks'
+import { useContext, useEffect } from 'react'
+import { RootStateContext } from 'contexts/RootStateContext'
 
 /**
  * Главная страница с картой станций
-*/
+ */
 export default function MainPage(): React.JSX.Element {
-	
-	const images = [station1, station2, station3];
-	
+	const nav = useNavigate()
+	const { position, setPosition, stationFilters } = useContext(RootStateContext)
+	const { stationsLoading } = useStationsLoader()
+
+	useEffect(() => {
+		const geo = navigator.geolocation
+
+		if (position !== undefined || !geo) return
+
+		const watcher = geo.watchPosition(
+			position => {
+				setPosition({
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+				})
+			},
+			() => {
+				setPosition(null)
+			}
+		)
+		return () => geo.clearWatch(watcher)
+	}, [])
+
+	const onFiltersClick = () => {
+		nav(
+			STATIONS_FILTERS_ENDPOINT +
+				createQueryString([
+					{
+						key: StationsFiltersPageQueryArguments.PREVIOUS_PAGE,
+						value: StationsFiltersPreviousPageQueries.MAIN,
+					},
+				])
+		)
+	}
+
+	const onSearchClick = () => {
+		nav(
+			STATIONS_LIST_ENDPOINT +
+				createQueryString([
+					{ key: StationsListPageQueryArguments.SEARCH_FOCUSED, value: 'true' },
+				])
+		)
+	}
+
 	return (
-		<div className={commonStyles.page}>
-			<div className={styles.header}>
-				<Button iconSrc={tuningImage} onClick={() => {}} variant='icon' />
-				<Switch onChange={enabled => {}} />
-				<Status textSize='small' color='green' text='Доступен' />
-				<Status textSize='medium' color='orange' text='Занят' />
-				<Status textSize='medium' color='red' text='Нет соединения' />
-				<Status textSize='large' color='grey' text='Невалидна' />
-			</div>
-			<StationsMap />
-			<div className={styles.footer}>
-				<ControlPanel />
-			</div>
+		<div>
+			{!stationsLoading && (
+				<div className={styles.header}>
+					<Search
+						placeholder='Поиск'
+						variant='shadow'
+						onClick={onSearchClick}
+						value={stationFilters.partOfName}
+					/>
+					<FiltersButton
+						onClick={onFiltersClick}
+						variant='outlined'
+						iconSrc={tuningImage}
+					/>
+					<div className={styles.header__activeSession}>
+						<ActiveSessionNotify />
+					</div>
+				</div>
+			)}
+			<StationsMap loading={stationsLoading} />
+			{!stationsLoading && (
+				<div className={styles.footer}>
+					<ControlPanel />
+				</div>
+			)}
 		</div>
 	)
 }

@@ -1,0 +1,19 @@
+.page {
+	position: fixed !important;
+	gap: 16px !important;
+}
+
+.page__stationsList {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.stationsList__station {
+	border: 1px solid transparent;
+	transition: border 0.3s;
+
+	&:hover {
+		border: 1px solid #8e949f;
+	}
+}

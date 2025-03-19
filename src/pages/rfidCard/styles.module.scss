@@ -1,0 +1,10 @@
+.page__content_withCard,
+.page__content_withoutCard {
+	flex: 1;
+}
+
+.page__content_withoutCard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

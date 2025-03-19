@@ -1,0 +1,17 @@
+.listLayout__list {
+	overflow-y: auto;
+}
+
+.list__item {
+	margin-bottom: 12px;
+}
+
+.listLayout__blockButton {
+	position: absolute;
+	bottom: 16px;
+	right: 8px;
+}
+
+.list_noSelection {
+	user-select: none;
+}

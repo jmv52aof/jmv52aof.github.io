@@ -1,0 +1,17 @@
+.expandButton {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	border: none;
+	outline: none;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.expandButton_text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 24px;
+	color: #373435;
+}

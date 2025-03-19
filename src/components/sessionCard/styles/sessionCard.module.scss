@@ -1,0 +1,79 @@
+.sessionCard {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	background: #ffffff;
+	gap: 5px;
+}
+
+.sessionCard__header,
+.header__content {
+	display: flex;
+	flex-direction: row;
+}
+
+.sessionCard__header {
+	margin-bottom: 6px;
+}
+
+.header__content {
+	flex-grow: 1;
+}
+
+.content__connector {
+	display: flex;
+	margin-right: 16px;
+}
+
+.content__station {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-grow: 1;
+}
+
+.station__mainInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.mainInfo__texts {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.texts__name {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	vertical-align: middle;
+	color: #373435;
+	margin: 0;
+}
+
+.texts__address {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	margin: 0;
+	vertical-align: middle;
+	color: #8e949f;
+}
+
+.station__button {
+	padding: 0px !important;
+
+	img {
+		width: 17px !important;
+		height: 17px !important;
+	}
+}
+
+.sessionCard__gradientButton {
+	display: flex;
+	margin-top: 10px;
+}

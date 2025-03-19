@@ -1,57 +1,51 @@
 .card {
-    padding: 10px 6px 6px 6px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    border: 1px solid #C8CED8;
-    cursor: pointer;
-    transition: border 0.3s ease-in-out;
+	padding: 10px 4px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 16px;
+	border: 1.5px solid #c8ced8;
+	cursor: pointer;
+	transition: 0.3s;
 
-    &:hover {
-        border: 1px solid #8E949F;
-    }
+	&:hover {
+		border-color: #8e949f;
+	}
 }
 
 .card_enabled {
-    border: 1px solid #17C3B9 !important;
+	border-color: #27ae60 !important;
+	background-color: rgb(39, 174, 96, 0.1);
 }
 
 .card_disabled {
-    opacity: 0.5;
-    cursor: default;
+	opacity: 0.5;
+	cursor: default;
 }
 
 .card__content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
 .content__icon {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-    img {
-        width: 60px;
-        height: 60px;
-    }
+	img {
+		width: 75px;
+		height: 75px;
+	}
 }
 
-.content__title {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    text-align: center;
-}
-
-.title__text {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    color: #373435;
+.content__text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #373435;
+	text-align: center;
 }

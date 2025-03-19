@@ -1,6 +1,10 @@
-export type TariffType = 'ENERGY' | 'FLAT' | 'TIME' | 'PARKING_TIME'
+export type TariffType =
+	| 'Энергия'
+	| 'Начало зарядки'
+	| 'Длительность'
+	| 'Длительность парковки'
 
-export type TariffCurrency = 'RUB'
+export type TariffCurrency = 'руб'
 
 export interface ConnectorTariffDto {
 	type: TariffType

@@ -1,3 +1,18 @@
+import ControlButton from '@components/ui/controlButton/ControlButton'
+import styles from './styles.module.scss'
+import stationsImage from '@assets/images/menu/stations.svg'
+import chargingSessionsImage from '@assets/images/menu/charging-sessions.svg'
+import paymentMethodImage from '@assets/images/menu/payment-method.svg'
+import rfidCardImage from '@assets/images/menu/rfid-card.svg'
+import supportImage from '@assets/images/menu/support.svg'
+import { useNavigate } from 'react-router'
+import {
+	PAYMENT_METHOD_ENDPOINT,
+	RFID_CARD_ENDPOINT,
+	SESSIONS_HISTORY_ENDPOINT,
+	STATIONS_LIST_ENDPOINT,
+} from '@common/consts/endpoints'
+
 /**
  * Панель управления, содержащая основные функции (кнопки) приложения:
  * 1) Список станций
@@ -7,5 +22,32 @@
  * 5) Техподдержка
  */
 export default function ControlPanel(): React.JSX.Element {
-	return <div></div>
+	const nav = useNavigate()
+
+	return (
+		<div className={styles.panel}>
+			<ControlButton
+				iconSrc={stationsImage}
+				onClick={() => nav(STATIONS_LIST_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={chargingSessionsImage}
+				onClick={() => nav(SESSIONS_HISTORY_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={paymentMethodImage}
+				onClick={() => nav(PAYMENT_METHOD_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={rfidCardImage}
+				onClick={() => nav(RFID_CARD_ENDPOINT)}
+			/>
+			<ControlButton
+				iconSrc={supportImage}
+				onClick={() =>
+					window.location.replace(import.meta.env.VITE_TELEGRAM_SUPPORT_URL)
+				}
+			/>
+		</div>
+	)
 }

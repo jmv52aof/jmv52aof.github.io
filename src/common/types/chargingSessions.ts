@@ -1,7 +1,6 @@
 import { Timestamp } from './date'
-import { ConnectorInfoDto } from './stations'
+import { ConnectorInfoDto, ConnectorStandard } from './stations'
 import { ConnectorTariffDto } from './tariffs'
-
 export type ChargingSessionStatus = 'Зарядка' | 'Завершена' | 'Невалидна'
 
 export type PaymentStatus = 'Оплачено' | 'Неоплачено'
@@ -30,4 +29,12 @@ export interface ChargingSessionDto {
 	payment_status?: PaymentStatus
 	/** Процент заряда батареи авто */
 	battery_percentage?: number
+}
+
+export type SessionFilters = {
+	connectors: ConnectorStandard[]
+	onlyPaidSessions: boolean
+	durationInHours: number
+	isModified: boolean
+	shouldUpdateSessions?: boolean
 }

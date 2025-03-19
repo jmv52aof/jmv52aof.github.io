@@ -1,5 +1,5 @@
 import { DEFAULT_FILTERS } from "@common/consts/stations";
-import { StationFilters } from "./types";
+import { StationFilters } from "@common/types/stations";
 
 export const isFiltersDefault = (filters: StationFilters) =>
     filters.connectors.length === DEFAULT_FILTERS.connectors.length &&

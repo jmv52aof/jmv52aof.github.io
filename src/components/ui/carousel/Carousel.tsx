@@ -41,8 +41,8 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
 					src={src}
 					alt={`Slide ${index}`}
 					className={styles.item__image}
-					draggable={false} //
-					onDragStart={e => e.preventDefault()} //
+					draggable={false}
+					onDragStart={e => e.preventDefault()}
 				/>
 			))}
 		</Carousel>
