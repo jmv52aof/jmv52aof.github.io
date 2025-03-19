@@ -42,6 +42,8 @@ export async function sendRequest(
 			jsonResponse = await response.json()
 		} catch (err) {}
 
+		if (!jsonResponse) return {}
+
 		const isError = 'error' in jsonResponse
 
 		return {

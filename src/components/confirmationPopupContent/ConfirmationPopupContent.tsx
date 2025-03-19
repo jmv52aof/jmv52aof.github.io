@@ -60,7 +60,7 @@ export default function ConfirmationPopupContent(
 			</p>
 			{(undefined !== props.description || error) && (
 				<p className={styles.description}>
-					{props.description ?? error?.message}
+					{error ? error.message : props.description}
 				</p>
 			)}
 			{error ? (
