@@ -18,13 +18,15 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
 		},
 	}
 
+	const shouldShowDots = props.imageSources.length > 1
+
 	return (
 		<Carousel
 			responsive={responsive}
 			infinite={false}
 			autoPlay={false}
 			arrows={true}
-			showDots={true}
+			showDots={shouldShowDots}
 			swipeable={true}
 			draggable={true}
 			containerClass={styles.carousel}
@@ -39,8 +41,8 @@ export default function CustomCarousel(props: Props): React.JSX.Element {
 					src={src}
 					alt={`Slide ${index}`}
 					className={styles.item__image}
-					draggable={false} //
-					onDragStart={e => e.preventDefault()} //
+					draggable={false}
+					onDragStart={e => e.preventDefault()}
 				/>
 			))}
 		</Carousel>
