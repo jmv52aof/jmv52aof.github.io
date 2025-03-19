@@ -73,6 +73,7 @@ export default function SessionsPage(): React.JSX.Element {
 					return createSessionItems(data)
 				}}
 				onDataLoad={data => setSessions(data as ChargingSessionDto[])}
+				fullHeight
 			/>
 		</PageLayout>
 	)
