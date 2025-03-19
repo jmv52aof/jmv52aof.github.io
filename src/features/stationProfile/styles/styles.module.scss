@@ -1,10 +1,19 @@
 .connector {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	border-radius: 16px;
 	overflow: hidden;
+	-webkit-box-shadow: 0px 2px 4px 0px #0000001a;
 	box-shadow: 0px 2px 4px 0px #0000001a;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding-bottom: 6px;
 }
@@ -42,15 +51,27 @@
 .connector__info {
 	margin-top: 12px;
 	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 0 12px;
 }
 
 .info__column {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	gap: 2px;
 }
@@ -65,14 +86,27 @@
 
 .connector__tariffsBlock {
 	height: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 }
 
 .tariffsBlock__tariffs {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
 	align-items: flex-start;
 	gap: 4px;
 }
@@ -80,13 +114,20 @@
 .tariffs__icon {
 	width: 20px;
 	height: 20px;
+	-webkit-filter: brightness(0) saturate(100%) invert(57%) sepia(66%)
+		saturate(4587%) hue-rotate(155deg) brightness(95%) contrast(96%);
 	filter: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(4587%)
 		hue-rotate(155deg) brightness(95%) contrast(96%);
 }
 
 .tariffs__list {
 	gap: 2px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 }
 

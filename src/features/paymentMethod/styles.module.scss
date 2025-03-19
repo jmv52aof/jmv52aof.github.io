@@ -1,42 +1,51 @@
 .content__info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 4px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 100%;
+	gap: 4px;
 }
 
 .info__title {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 120%;
-  color: #373435;
-  margin: 0;
-  text-align: center;
-  hyphens: auto;
-  max-width: 280px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 120%;
+	color: #373435;
+	margin: 0;
+	text-align: center;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	max-width: 280px;
 }
 
 .info__icon {
-  width: 40px;
-  height: 40px;
-  margin: 0;
+	width: 40px;
+	height: 40px;
+	margin: 0;
 }
 
 .info__text {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  line-height: 120%;
-  color: #8e949f;
-  text-align: center;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	line-height: 120%;
+	color: #8e949f;
+	text-align: center;
 }
 
 .info__text_paymentMethod {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 120%;
-  color: #05a6be;
-  margin: 0;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 120%;
+	color: #05a6be;
+	margin: 0;
 }
