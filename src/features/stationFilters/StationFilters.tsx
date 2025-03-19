@@ -55,7 +55,11 @@ export default function StationFiltersFeature(): React.JSX.Element {
 	}
 
 	const resetFilters = () => {
-		setStationFilters({ ...DEFAULT_FILTERS, shouldUpdateStations: true })
+		setStationFilters({
+			...DEFAULT_FILTERS,
+			partOfName: stationFilters.partOfName,
+			shouldUpdateStations: true,
+		})
 		showSnackbar('success', 'Фильтры сброшены')
 	}
 
@@ -63,9 +67,7 @@ export default function StationFiltersFeature(): React.JSX.Element {
 		<div className={styles.stationFilters}>
 			<ContentBlockLayout>
 				<div className={styles.stationFilters__onlyAvailable}>
-					<p className={styles.onlyAvailable__text}>
-						Только доступные
-					</p>
+					<p className={styles.onlyAvailable__text}>Только доступные</p>
 					<Switch
 						onChange={handleSwitchChange}
 						enabled={stationFilters.onlyAvailableStations}
@@ -99,27 +101,17 @@ export default function StationFiltersFeature(): React.JSX.Element {
 				<ContentBlockLayout>
 					<div className={styles.connectors__row}>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('Type 1', enabled)
-							}
+							onChange={enabled => handleConnectorChange('Type 1', enabled)}
 							connector={'Type 1' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'Type 1'
-							)}
+							enabled={stationFilters.connectors.includes('Type 1')}
 						/>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('Type 2', enabled)
-							}
+							onChange={enabled => handleConnectorChange('Type 2', enabled)}
 							connector={'Type 2' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'Type 2'
-							)}
+							enabled={stationFilters.connectors.includes('Type 2')}
 						/>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('CCS1', enabled)
-							}
+							onChange={enabled => handleConnectorChange('CCS1', enabled)}
 							connector={'CCS1' as ConnectorStandard}
 							enabled={stationFilters.connectors.includes('CCS1')}
 						/>
@@ -128,51 +120,33 @@ export default function StationFiltersFeature(): React.JSX.Element {
 				<ContentBlockLayout>
 					<div className={styles.connectors__row}>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('CCS2', enabled)
-							}
+							onChange={enabled => handleConnectorChange('CCS2', enabled)}
 							connector={'CCS2' as ConnectorStandard}
 							enabled={stationFilters.connectors.includes('CCS2')}
 						/>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('GB/T (AC)', enabled)
-							}
+							onChange={enabled => handleConnectorChange('GB/T (AC)', enabled)}
 							connector={'GB/T (AC)' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'GB/T (AC)'
-							)}
+							enabled={stationFilters.connectors.includes('GB/T (AC)')}
 						/>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('GB/T (DC)', enabled)
-							}
+							onChange={enabled => handleConnectorChange('GB/T (DC)', enabled)}
 							connector={'GB/T (DC)' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'GB/T (DC)'
-							)}
+							enabled={stationFilters.connectors.includes('GB/T (DC)')}
 						/>
 					</div>
 				</ContentBlockLayout>
 				<ContentBlockLayout>
 					<div className={styles.connectors__lastRow}>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('CHAdeMO', enabled)
-							}
+							onChange={enabled => handleConnectorChange('CHAdeMO', enabled)}
 							connector={'CHAdeMO' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'CHAdeMO'
-							)}
+							enabled={stationFilters.connectors.includes('CHAdeMO')}
 						/>
 						<ConnectorCard
-							onChange={enabled =>
-								handleConnectorChange('Tesla', enabled)
-							}
+							onChange={enabled => handleConnectorChange('Tesla', enabled)}
 							connector={'Tesla' as ConnectorStandard}
-							enabled={stationFilters.connectors.includes(
-								'Tesla'
-							)}
+							enabled={stationFilters.connectors.includes('Tesla')}
 						/>
 					</div>
 				</ContentBlockLayout>

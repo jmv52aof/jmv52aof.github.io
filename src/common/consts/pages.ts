@@ -5,6 +5,7 @@ import {
 	StationProfileQueryArgument,
 	StationsFiltersPageQueryArgument,
 	StationsFiltersPreviousPageQuery,
+	StationsListQueryArgument,
 } from '@common/types/pages'
 
 /** Фильтры станций */
@@ -40,4 +41,9 @@ export namespace StationProfilePreviousPageQueries {
 	export const ACTIVE_SESSION: StationProfilePreviousPageQuery =
 		'active_session'
 	export const SESSIONS_LIST: StationProfilePreviousPageQuery = 'sessions_list'
+}
+
+/** Список станций */
+export namespace StationsListPageQueryArguments {
+	export const SEARCH_FOCUSED: StationsListQueryArgument = 'search_focused'
 }

@@ -19,7 +19,7 @@ export default function ChargingSessionActivePower(
 					className={`${styles.content__icon} ${props.showAnimation ? styles.icon_animation : ''} `} 
 					src={lightingIcon} />				
 				{props.power !== 0 && (
-					<span className={styles.content__text}>{props.power} кВт</span>
+					<span className={styles.content__text}>{props.power.toFixed(2)} кВт</span>
 				)}
 			</div>
 			<PieChart

@@ -43,9 +43,16 @@ import {
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
 
+function getToken() {
+	if (import.meta.env.DEV) {
+		return import.meta.env.VITE_API_TOKEN
+	} else {
+		return sessionStorage.getItem('user-jwt-token')
+	}
+}
+
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
-	const token = import.meta.env.VITE_API_TOKEN
 	/** Модуль авторизации */
 
 	const authorizationTelegramUserFromApi = async (
@@ -61,7 +68,7 @@ export const useApi = () => {
 	const getStationsFromApi = async (
 		options: GetStationsRequestOptions
 	): Promise<StationDto[]> => {
-		const response = await getStations({ ...options, token: token })
+		const response = await getStations({ ...options, token: getToken() })
 		if (response.data)
 			return response.data.map(value => convertResponseStationDto(value))
 		return []
@@ -70,7 +77,7 @@ export const useApi = () => {
 	const getStationByIdFromApi = async (
 		options: GetStationByIdRequestOptions
 	): Promise<StationDto | undefined> => {
-		const response = await getStationById({ ...options, token: token })
+		const response = await getStationById({ ...options, token: getToken() })
 		if (response.data) return convertResponseStationDto(response.data)
 		return undefined
 	}
@@ -80,7 +87,10 @@ export const useApi = () => {
 	const getChargingSessionsFromApi = async (
 		options: GetChargingSessionsRequestOptions
 	): Promise<ChargingSessionDto[]> => {
-		const response = await getChargingSessions({ ...options, token: token })
+		const response = await getChargingSessions({
+			...options,
+			token: getToken(),
+		})
 		if (response.data)
 			return response.data.map(value =>
 				convertChargingSessionResponseDto(value)
@@ -93,8 +103,9 @@ export const useApi = () => {
 	): Promise<ChargingSessionDto | undefined> => {
 		const response = await getChargingSessionById({
 			...options,
-			token: token,
+			token: getToken(),
 		})
+		console.log(response.data)
 		if (response.data) return convertChargingSessionResponseDto(response.data)
 		return undefined
 	}
@@ -102,7 +113,10 @@ export const useApi = () => {
 	const stopChargingSessionFromApi = async (
 		options: StopChargingSessionRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await stopChargingSession({ ...options, token: token })
+		const response = await stopChargingSession({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 
@@ -111,7 +125,7 @@ export const useApi = () => {
 	const getRfidCardFromApi = async (
 		options: GetRfidCardRequestOptions
 	): Promise<RfidCardDto | undefined> => {
-		const response = await getRfidCard({ ...options, token: token })
+		const response = await getRfidCard({ ...options, token: getToken() })
 		if (response.data) return convertRfidCardResponseDto(response.data)
 		return undefined
 	}
@@ -119,14 +133,14 @@ export const useApi = () => {
 	const attachRfidCardFromApi = async (
 		options: AttachRfidCardRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await attachRfidCard({ ...options, token: token })
+		const response = await attachRfidCard({ ...options, token: getToken() })
 		return response.error
 	}
 
 	const detachRfidCardFromApi = async (
 		options: DetachRfidCardRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await detachRfidCard({ ...options, token: token })
+		const response = await detachRfidCard({ ...options, token: getToken() })
 		return response.error
 	}
 
@@ -137,7 +151,7 @@ export const useApi = () => {
 	): Promise<ResponseError | undefined> => {
 		const response = await retryPaymentForChargingSession({
 			...options,
-			token: token,
+			token: getToken(),
 		})
 		return response.error
 	}
@@ -145,14 +159,17 @@ export const useApi = () => {
 	const createPaymentMethodFromApi = async (
 		options: CreatePaymentMethodRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await createPaymentMethod({ ...options, token: token })
+		const response = await createPaymentMethod({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 
 	const getPaymentMethodFromApi = async (
 		options: GetPaymentMethodRequestOptions
 	): Promise<string | undefined> => {
-		const response = await getPaymentMethod({ ...options, token: token })
+		const response = await getPaymentMethod({ ...options, token: getToken() })
 		if (undefined !== response.data) return response.data
 		return undefined
 	}
@@ -160,7 +177,7 @@ export const useApi = () => {
 	const getPaymentUrlFromApi = async (
 		options: GetPaymentUrlRequestOptions
 	): Promise<string | undefined> => {
-		const response = await getPaymentUrl({ ...options, token: token })
+		const response = await getPaymentUrl({ ...options, token: getToken() })
 		if (undefined !== response.data) return response.data
 		return undefined
 	}
@@ -168,7 +185,10 @@ export const useApi = () => {
 	const deletePaymentMethodFromApi = async (
 		options: DeletePaymentMethodRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await deletePaymentMethod({ ...options, token: token })
+		const response = await deletePaymentMethod({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 

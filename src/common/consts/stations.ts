@@ -59,6 +59,7 @@ export const DEFAULT_FILTERS: StationFilters = {
 	onlyAvailableStations: false,
 	minimalPower: 0,
 	isModified: false,
+	partOfName: '',
 	shouldUpdateStations: false,
 }
 

@@ -1,5 +1,7 @@
-import { ChargingSessionStatus } from '@common/types/chargingSessions'
-import SessionFilters from '@common/types/chargingSessions'
+import {
+	ChargingSessionStatus,
+	SessionFilters,
+} from '@common/types/chargingSessions'
 import { CONNECTORS } from '@common/consts/stations'
 import { ColorTemplate } from '@common/types/status'
 
@@ -21,7 +23,7 @@ export const CHARGING_SESSION_STATUS_HAS_COLOR: Record<
 export const DEFAULT_FILTERS: SessionFilters = {
 	connectors: [...CONNECTORS],
 	onlyPaidSessions: false,
-	minimalPower: 0,
+	durationInHours: 0,
 	isModified: false,
 	shouldUpdateSessions: false,
 }

@@ -3,17 +3,20 @@ import styles from './styles.module.scss'
 import Button from '@components/ui/button/Button.tsx'
 import { Loader } from '@components/ui/loader/Loader.tsx'
 import arrowImage from '@assets/images/arrow-up.svg'
-import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification.tsx'
-import chargeStationImage from '@assets/images/charge-station.svg'
 import { useWindowSizes } from '@common/hooks/window.ts'
 import { GET_DATA_LIMIT } from '@common/consts/app.ts'
-import { LIST_HEIGHT_REDUCTION } from './lib/consts'
+import {
+	LIST_HEIGHT_REDUCTION_DEFAULT,
+	LIST_HEIGHT_REDUCTION_FULL,
+} from './lib/consts'
 
 type Props = {
 	items: React.JSX.Element[]
 	loading?: boolean
 	getData: (offset: number, limit: number) => Promise<Object[]>
 	onDataLoad: (newData: Object[]) => void
+	fullHeight?: boolean
+	emptyListNotify: React.ReactNode
 }
 
 /**
@@ -117,6 +120,10 @@ export default function ListLayout(props: Props): React.JSX.Element {
 		setIsDragging(false)
 	}
 
+	const heightReduction = props.fullHeight
+		? LIST_HEIGHT_REDUCTION_FULL
+		: LIST_HEIGHT_REDUCTION_DEFAULT
+
 	return (
 		<div>
 			<div
@@ -128,18 +135,16 @@ export default function ListLayout(props: Props): React.JSX.Element {
 				onMouseLeave={handleMouseUp}
 				className={styles.listLayout__list}
 				style={{
-					height: windowSizes.height - LIST_HEIGHT_REDUCTION + 'px',
+					height: windowSizes.height - heightReduction + 'px',
 				}}
 			>
 				{((dataIsLoading && props.items.length === 0) || props.loading) && (
 					<Loader />
 				)}
-				{!dataIsLoading && props.items.length === 0 && !props.loading && (
-					<EmptyDataNotification
-						text='Здесь будут показаны зарядные станции'
-						iconSrc={chargeStationImage}
-					/>
-				)}
+				{!dataIsLoading &&
+					props.items.length === 0 &&
+					!props.loading &&
+					props.emptyListNotify}
 				{props.items.length > 0 && !props.loading && (
 					<div className={styles.list_noSelection}>
 						{props.items.map((item, index) => (

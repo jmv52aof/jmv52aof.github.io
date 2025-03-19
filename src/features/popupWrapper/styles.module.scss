@@ -1,24 +1,42 @@
 $animationSpeed: 0.5s;
 
 .popupWrapper__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity $animationSpeed ease, visibility $animationSpeed ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: opacity $animationSpeed ease,
+		visibility $animationSpeed ease;
+	-o-transition: opacity $animationSpeed ease, visibility $animationSpeed ease;
+	transition: opacity $animationSpeed ease, visibility $animationSpeed ease;
+	z-index: 500;
+	pointer-events: none;
 }
-  
+
 .popupWrapper__overlay.active {
-    opacity: 1;
-    visibility: visible;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
 }
 
 .overlay__contentWrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	pointer-events: none;
+}
+
+.popupWrapper__overlay.active .overlay__contentWrapper {
+	pointer-events: auto;
 }

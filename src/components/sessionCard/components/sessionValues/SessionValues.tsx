@@ -27,32 +27,32 @@ export default function SessionValues(props: Props): React.JSX.Element {
 					props.sessionValues.start_date
 			  )
 
+	const isDischarge = props.sessionValues.charged_kwh < 0
+	const chargedKwh = isDischarge
+		? props.sessionValues.charged_kwh * -1
+		: props.sessionValues.charged_kwh
 	return (
 		<>
 			<div className={styles.horizontalSplit} />
 			<div className={styles.sessionCard__chargingInfo}>
-				<div className={styles.chargingInfo__icon}>
-					<img
-						src={batteryImage}
-						alt={'batteryImage'}
-						className={styles.chargingInfo__icon}
-					/>
-				</div>
+				<img
+					src={batteryImage}
+					alt={'batteryImage'}
+					className={styles.chargingInfo__icon}
+				/>
 				{props.isActive ? (
 					<div className={styles.chargingInfo__activeSessionTexts}>
 						<div className={styles.activeSessionTexts__bateryInfo}>
 							<div className={styles.bateryInfo__row}>
-								<p className={styles.row__label}>Заряжено:</p>
-								<p className={styles.row__value}>
-									{props.sessionValues.charged_kwh} кВт
+								<p className={styles.row__label}>
+									{isDischarge ? 'Разряжено' : 'Заряжено'}:
 								</p>
+								<p className={styles.row__value}>{chargedKwh.toFixed(2)} кВт</p>
 							</div>
 							<div className={styles.bateryInfo__row}>
-								<p className={styles.row__label}>
-									Процент батареи:
-								</p>
+								<p className={styles.row__label}>Процент батареи:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.battery_percentage}%
+									{props.sessionValues.battery_percentage ? props.sessionValues.battery_percentage.toFixed(2) + '%' : '—'}
 								</p>
 							</div>
 						</div>
@@ -60,7 +60,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 							<div className={styles.powerInfo__row}>
 								<p className={styles.row__label}>Мощность:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.current_power} кВт
+									{props.sessionValues.current_power?.toFixed(2)} кВт
 								</p>
 							</div>
 						</div>
@@ -68,39 +68,37 @@ export default function SessionValues(props: Props): React.JSX.Element {
 				) : (
 					<div className={styles.chargingInfo__texts}>
 						<div className={styles.texts__row}>
-							<p className={styles.row__label}>Заряжено:</p>
-							<p className={styles.row__value}>
-								{props.sessionValues.charged_kwh} кВт·ч
-							</p>
-						</div>
-						<div className={styles.texts__row}>
 							<p className={styles.row__label}>
-								Максимальная мощность:
+								{isDischarge ? 'Разряжено' : 'Заряжено'}:
 							</p>
-							<p className={styles.row__value}>
-								{props.sessionValues.max_power} кВт
-							</p>
+							<p className={styles.row__value}>{chargedKwh.toFixed(2)} кВт·ч</p>
 						</div>
-						<div className={styles.texts__row}>
-							<p className={styles.row__label}>
-								Минимальная мощность:
-							</p>
-							<p className={styles.row__value}>
-								{props.sessionValues.min_power} кВт
-							</p>
-						</div>
+						{props.sessionValues.max_power !== undefined && (
+							<div className={styles.texts__row}>
+								<p className={styles.row__label}>Максимальная мощность:</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.max_power.toFixed(2)} кВт
+								</p>
+							</div>
+						)}
+						{props.sessionValues.min_power !== undefined && (
+							<div className={styles.texts__row}>
+								<p className={styles.row__label}>Минимальная мощность:</p>
+								<p className={styles.row__value}>
+									{props.sessionValues.min_power.toFixed(2)} кВт
+								</p>
+							</div>
+						)}
 					</div>
 				)}
 			</div>
 			<div className={styles.horizontalSplit} />
 			<div className={styles.sessionCard__session}>
-				<div className={styles.session__icon}>
-					<img
-						src={clockImage}
-						alt={'clockImage'}
-						className={styles.session__icon}
-					/>
-				</div>
+				<img
+					src={clockImage}
+					alt={'clockImage'}
+					className={styles.session__icon}
+				/>
 				<div className={styles.session__times}>
 					<div className={styles.times__start}>
 						<p className={styles.row__label}>Старт:</p>
@@ -128,31 +126,27 @@ export default function SessionValues(props: Props): React.JSX.Element {
 				<>
 					<div className={styles.horizontalSplit} />
 					<div className={styles.sessionCard__payment}>
-						<div className={styles.payment__icon}>
-							<img
-								src={paymentImage}
-								alt='paymentImage'
-								className={styles.payment__icon}
-							/>
-						</div>
+						<img
+							src={paymentImage}
+							alt='paymentImage'
+							className={styles.payment__icon}
+						/>
 						<div className={styles.payment__texts}>
 							<div className={styles.texts__amount}>
 								<p className={styles.row__label}>Сумма:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.total_cost}{' '}
-									{props.sessionValues.tariffs?.[0]
-										?.currency || 'руб'}
-									.
+									{props.sessionValues.total_cost?.toFixed(2)}{' '}
+									{props.sessionValues.tariffs?.[0]?.currency || 'руб'}.
 								</p>
 							</div>
-							<div className={styles.texts__paymentMethod}>
-								<p className={styles.row__label}>
-									Способ оплаты:
-								</p>
-								<p className={styles.row__value}>
-									{props.sessionValues.payment_method}
-								</p>
-							</div>
+							{props.sessionValues.payment_method && (
+								<div className={styles.texts__paymentMethod}>
+									<p className={styles.row__label}>Способ оплаты:</p>
+									<p className={styles.row__value}>
+										{props.sessionValues.payment_method}
+									</p>
+								</div>
+							)}
 						</div>
 					</div>
 				</>

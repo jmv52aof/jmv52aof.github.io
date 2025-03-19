@@ -22,6 +22,7 @@ export default function ActiveSessionNotify(): React.JSX.Element {
 
 	return (
 		<div className={styles.notify}>
+			<div className={styles.notify__blinkingCircle} />
 			<Button
 				onClick={() =>
 					nav(

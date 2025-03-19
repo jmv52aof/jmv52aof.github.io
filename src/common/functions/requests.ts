@@ -39,22 +39,30 @@ export async function sendRequest(
 
 		let jsonResponse = undefined
 		try {
-			jsonResponse = await (options.responseIsString
-				? response.text()
-				: response.json())
+			if (options.responseIsString && response.ok)
+				return {
+					data: await response.text(),
+				}
+
+			jsonResponse = await response.json()
 		} catch (err) {}
 
+		if (!jsonResponse) return {}
+
+		const isError = 'error' in jsonResponse
+
 		return {
-			data: jsonResponse?.error ? undefined : jsonResponse,
-			error: jsonResponse?.error
-				? {
-						status: jsonResponse?.status,
-						error: jsonResponse?.error,
-						message: jsonResponse?.message,
-				  }
+			data: isError ? undefined : jsonResponse,
+			error: isError
+				? ({
+						status: jsonResponse.status,
+						error: jsonResponse.error,
+						message: jsonResponse.message,
+				  } as ResponseError)
 				: undefined,
 		}
 	} catch (err) {
+		console.log('err: ', err)
 		return {
 			error: {
 				status: 500,

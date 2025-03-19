@@ -2,12 +2,12 @@ import mapboxgl from 'mapbox-gl'
 import React, { useEffect, useState } from 'react'
 import Supercluster from 'supercluster'
 import styles from './styles/map.module.scss'
-import { ClusterJSON, GeometryJSON, ViewState } from './lib/types.ts'
+import { ClusterJSON, GeometryJSON } from './lib/types.ts'
 import { createMapboxPoint } from './lib/functions.ts'
 import ClusterMarker from './components/ClusterMarker.tsx'
 import Coordinates from './components/Coordinates.tsx'
 import { Loader } from '@components/ui/loader/Loader.tsx'
-import { MarkerInfo, PointOnMap } from '@common/types/map.ts'
+import { MarkerInfo, PointOnMap, ViewState } from '@common/types/map.ts'
 import * as consts from './lib/consts.ts'
 import Map, { Marker, Popup } from 'react-map-gl/mapbox'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -31,6 +31,7 @@ type Props = {
 	maxZoom?: number
 	markers: MarkerInfo[]
 	getPopUp?: (point: PointOnMap) => React.JSX.Element
+	onChangeViewState?: (point: ViewState) => void
 	whenLoaded?: () => void
 	showLatAndLon?: boolean
 	fixedLatAndLon?: boolean
@@ -75,21 +76,8 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 				latitude: viewState.latitude,
 				longitude: viewState.longitude,
 			})
+		props.onChangeViewState?.({ ...viewState })
 	}, [viewState])
-
-	useEffect(() => {
-		if (props.viewCoordinates) {
-			setViewState({
-				...viewState,
-				latitude: props.viewCoordinates.latitude,
-				longitude: props.viewCoordinates.longitude,
-			})
-			setLatAndLon({
-				latitude: props.viewCoordinates.latitude,
-				longitude: props.viewCoordinates.longitude,
-			})
-		}
-	}, [props.viewCoordinates])
 
 	useEffect(() => {
 		if (props.loading !== undefined) setIsLoaded(!props.loading)
@@ -143,7 +131,7 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 	}
 
 	useEffect(() => {
-		if (isLoaded) return
+		if (isLoaded || props.viewCoordinates) return
 
 		const initialPoint = getInitialPoint()
 		setViewState({
@@ -206,7 +194,7 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 					}
 
 					const markerSize = props.useMarkerAutoSize
-						? `${10 + (pointCount / points.length) * 20}px`
+						? `${36 + (pointCount / points.length) * 10}px`
 						: 'auto'
 
 					return (

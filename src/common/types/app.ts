@@ -1,8 +1,9 @@
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
-import { ChargingSessionDto, SessionFilters } from './chargingSessions'
+import { SessionFilters } from './chargingSessions'
 import { Variant } from './snackbar'
+import { ViewState } from './map'
 
 /**
  * Поле isInitTelegramSdk = undefined - когда telegram sdk ещё не инициализировано
@@ -19,6 +20,7 @@ export type RootState = {
 	rfidCard?: RfidCardDto
 	activeChargingSession?: ChargingSessionDto
 	paymentMethod?: string
+	mapViewState?: ViewState
 }
 
 export interface IRootStateContext extends RootState {
@@ -31,4 +33,5 @@ export interface IRootStateContext extends RootState {
 	setRfidCard: (card?: RfidCardDto) => void
 	setActiveChargingSession: (session?: ChargingSessionDto) => void
 	setPaymentMethod: (method?: string) => void
+	setMapViewState: (viewState: ViewState) => void
 }

@@ -14,6 +14,7 @@ import {
 import { sendRequest } from '@common/functions/requests'
 import { CHARGING_SESSIONS_URL } from '@common/consts/urls'
 import { createQueryString } from '@common/functions/strings'
+import { CONNECTORS } from '@common/consts/stations'
 
 const getQueryArgumentsForChargingSessions = (
 	options: GetChargingSessionsRequestOptions
@@ -31,13 +32,16 @@ const getQueryArgumentsForChargingSessions = (
 			key: 'status',
 			value: convertChargingSessionStatus(options.status),
 		})
-	if (options.standards?.length)
+	if (options.standards?.length) {
+		const standards =
+			options.standards.length === CONNECTORS.length
+				? options.standards.concat('Другой')
+				: options.standards
 		query.push({
 			key: 'standards',
-			value: options.standards
-				.map(value => convertConnectorStandard(value))
-				.join(','),
+			value: standards.map(value => convertConnectorStandard(value)).join(','),
 		})
+	}
 	if (undefined !== options.limit)
 		query.push({ key: 'limit', value: options.limit })
 	if (undefined !== options.offset)

@@ -5,10 +5,9 @@ import { timestampToDate } from '@common/functions/date'
  * Функция группирует сессии по дате и сортирует их по убыванию (относительно временной метки).
  *
  * @param sessions - Массив сессий, каждая из которых содержит дату начала в формате Timestamp.
- * @returns - Объект, где ключами являются строки с датами в формате "day mounth",
+ * @returns - Объект, где ключами являются строки с датами в формате "day month",
  * а значениями — массивы сессий, отсортированные по убыванию даты начала сессии.
  */
-
 export const groupSessionsByDate = (sessions: ChargingSessionDto[]) => {
 	const sortedSessions = [...sessions].sort((a, b) => {
 		const dateA = timestampToDate(a.start_date)
@@ -35,9 +34,7 @@ export const groupSessionsByDate = (sessions: ChargingSessionDto[]) => {
 	}, {})
 
 	Object.keys(groupedSessions).forEach(dateKey => {
-		groupedSessions[dateKey].sort((a, b) =>
-			a.status === 'Зарядка' ? -1 : 1
-		)
+		groupedSessions[dateKey].sort((a, b) => (a.status === 'Зарядка' ? -1 : 1))
 	})
 
 	return groupedSessions
