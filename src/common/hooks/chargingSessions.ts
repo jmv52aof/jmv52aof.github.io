@@ -51,7 +51,6 @@ export const useActiveChargingSessionUpdater = () => {
 
 	const { activate } = useInterval(
 		() => {
-			console.log('interval action')
 			setLoading(true)
 			if (activeChargingSession) updateSession()
 			else loadSession()
@@ -61,8 +60,7 @@ export const useActiveChargingSessionUpdater = () => {
 	)
 
 	useEffect(() => {
-		//activate()
-		loadSession()
+		activate()
 	}, [])
 
 	return {
