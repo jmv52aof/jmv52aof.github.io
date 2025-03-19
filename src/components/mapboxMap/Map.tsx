@@ -194,7 +194,7 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 					}
 
 					const markerSize = props.useMarkerAutoSize
-						? `${10 + (pointCount / points.length) * 20}px`
+						? `${36 + (pointCount / points.length) * 10}px`
 						: 'auto'
 
 					return (

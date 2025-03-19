@@ -37,7 +37,7 @@ const PopupWrapper: React.FC<Props> = (props: Readonly<Props>) => {
 		>
 			<div className={styles.overlay__contentWrapper}>
 				<Popup onClose={handleClose} isActive={isActive}>
-					{props.children}
+					{isActive && props.children}
 				</Popup>
 			</div>
 		</div>

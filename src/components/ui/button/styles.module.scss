@@ -1,10 +1,20 @@
 $transition-duration: 0.3s;
 
 .button {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	white-space: nowrap;
 	background: none;
@@ -12,12 +22,16 @@ $transition-duration: 0.3s;
 	border: none;
 	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
+	-webkit-transition: $transition-duration;
+	-o-transition: $transition-duration;
 	transition: $transition-duration;
 	padding: 0;
 
 	img {
 		width: 24px;
 		height: 24px;
+		-webkit-transition: $transition-duration;
+		-o-transition: $transition-duration;
 		transition: $transition-duration;
 	}
 }
@@ -50,6 +64,8 @@ $transition-duration: 0.3s;
 }
 
 .text {
+	font-size: 16px;
+	line-height: 24px;
 	color: #8e949f;
 	img {
 		width: 0;
@@ -65,9 +81,14 @@ $transition-duration: 0.3s;
 	img {
 		width: 16px;
 		height: 16px;
+		-webkit-filter: brightness(0) saturate(100%) invert(29%) sepia(27%)
+			saturate(3708%) hue-rotate(165deg) brightness(103%) contrast(99%);
 		filter: brightness(0) saturate(100%) invert(29%) sepia(27%) saturate(3708%)
 			hue-rotate(165deg) brightness(103%) contrast(99%);
 	}
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: reverse;
+	-ms-flex-direction: row-reverse;
 	flex-direction: row-reverse;
 }
 
@@ -85,6 +106,8 @@ $transition-duration: 0.3s;
 .outlined,
 .iconSmall {
 	img {
+		-webkit-filter: brightness(0) saturate(100%) invert(18%) sepia(4%)
+			saturate(585%) hue-rotate(289deg) brightness(91%) contrast(87%);
 		filter: brightness(0) saturate(100%) invert(18%) sepia(4%) saturate(585%)
 			hue-rotate(289deg) brightness(91%) contrast(87%);
 	}
@@ -93,6 +116,8 @@ $transition-duration: 0.3s;
 .fillWithIcon,
 .icon {
 	img {
+		-webkit-filter: brightness(0) saturate(100%) invert(100%) sepia(100%)
+			saturate(0%) hue-rotate(323deg) brightness(102%) contrast(101%);
 		filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
 			hue-rotate(323deg) brightness(102%) contrast(101%);
 	}
@@ -122,6 +147,8 @@ $transition-duration: 0.3s;
 .textWithIcon:hover {
 	color: #045d78;
 	img {
+		-webkit-filter: brightness(0) saturate(100%) invert(24%) sepia(62%)
+			saturate(1903%) hue-rotate(167deg) brightness(90%) contrast(97%);
 		filter: brightness(0) saturate(100%) invert(24%) sepia(62%) saturate(1903%)
 			hue-rotate(167deg) brightness(90%) contrast(97%);
 	}
@@ -134,11 +161,16 @@ $transition-duration: 0.3s;
 .iconSmallDisabled,
 .textDisabled,
 .textWithIconDisabled {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 	pointer-events: none;
 	background-color: #f7f7f7 !important;
 	color: #c8ced8 !important;
 	img {
+		-webkit-filter: brightness(0) saturate(100%) invert(84%) sepia(4%)
+			saturate(471%) hue-rotate(179deg) brightness(103%) contrast(83%) !important;
 		filter: brightness(0) saturate(100%) invert(84%) sepia(4%) saturate(471%)
 			hue-rotate(179deg) brightness(103%) contrast(83%) !important;
 	}

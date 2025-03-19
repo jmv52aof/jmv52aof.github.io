@@ -1,9 +1,14 @@
-$pointer-size: 18px;
+$pointer-size: 24px;
 
 .sliderContainer {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
-	gap: 8px;
+	gap: 12px;
 	margin-top: calc($pointer-size / 2);
 }
 
@@ -23,17 +28,33 @@ $pointer-size: 18px;
 	background-color: #fff;
 	border-radius: 50%;
 	border: 1px solid #c8ced8;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	-webkit-box-shadow: 0px 4px 4px 0px #00000040;
 	box-shadow: 0px 4px 4px 0px #00000040;
 	z-index: 1;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+	-webkit-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
 	transition: all 0.5s ease-out;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
 .slider__legendContainer {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -41,6 +62,6 @@ $pointer-size: 18px;
 	font-family: 'Roboto', sans-serif;
 	color: #373435;
 	font-weight: 400;
-	font-size: 16px;
-	line-height: 18px;
+	font-size: 18px;
+	line-height: 24px;
 }

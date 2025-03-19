@@ -14,12 +14,26 @@ import {
 } from '@common/functions/date'
 import ChargingSessionActivePower from './components/ActivePower'
 import ChargingSessionConnectorInfo from './components/ConnectorInfo'
+import { useContext, useState } from 'react'
+import PopupWrapper from '@features/popupWrapper/PopupWrapper'
+import ConfirmationPopupContent from '@components/confirmationPopupContent/ConfirmationPopupContent'
+import { useApi } from '@common/hooks/api'
+import { useNavigate } from 'react-router'
+import { SESSIONS_HISTORY_ENDPOINT } from '@common/consts/endpoints'
+import { RootStateContext } from '@contexts/RootStateContext'
 
 interface Props {
 	chargingSession: ChargingSessionDto
 }
 
 export default function ChargingSession(props: Props): React.JSX.Element {
+	const nav = useNavigate()
+
+	const { showSnackbar } = useContext(RootStateContext)
+	const { stopChargingSessionFromApi } = useApi()
+
+	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
+
 	const duration =
 		props.chargingSession.end_date === undefined
 			? getTimesDifference(
@@ -31,18 +45,41 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 					props.chargingSession.start_date
 			  )
 
-	const onComplete = () => {
-		//TODO
-	}
-
 	return (
 		<>
+			<PopupWrapper isOpen={popupIsOpen} onClose={() => setPopupIsOpen(false)}>
+				<ConfirmationPopupContent
+					title={
+						<>
+							Хотите завершить <br /> зарядную сессию?
+						</>
+					}
+					errorTitle={
+						<>
+							Не удалось завершить <br /> зарядную сессию
+						</>
+					}
+					onConfirm={() =>
+						stopChargingSessionFromApi({ id: props.chargingSession.id })
+					}
+					onSuccess={() => {
+						nav(SESSIONS_HISTORY_ENDPOINT)
+						showSnackbar('success', 'Зарядка завершена')
+					}}
+					onClose={() => setPopupIsOpen(false)}
+				/>
+			</PopupWrapper>
+
 			<ChargingSessionActivePower
 				power={props.chargingSession.current_power ?? 0}
 				maxPower={props.chargingSession.connector_info.max_electric_power ?? 0}
 			/>
 			<div className={styles.buttonBlock}>
-				<Button variant='fill' onClick={onComplete} text='Завершить' />
+				<Button
+					variant='fill'
+					onClick={() => setPopupIsOpen(true)}
+					text='Завершить'
+				/>
 			</div>
 			<div className={styles.info}>
 				<ChargingSessionConnectorInfo

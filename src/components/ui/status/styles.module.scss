@@ -1,11 +1,24 @@
 .status {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
 	background: none;
 	outline: none;
 	border: none;
+
+	width: -webkit-fit-content;
+
+	width: -moz-fit-content;
 
 	width: fit-content;
 	padding: 4px 12px;

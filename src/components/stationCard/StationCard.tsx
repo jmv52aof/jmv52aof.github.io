@@ -23,6 +23,16 @@ export default function StationCard(props: Readonly<Props>) {
 			? props.station.connectors
 			: [props.station.connectors[0]]
 
+	const getDistance = (): string | undefined => {
+		if (!props.station.metres_to_station) return
+
+		const distanceInKilometers = props.station.metres_to_station / 1000
+		return distanceInKilometers.toLocaleString('ru-RU', {
+			minimumFractionDigits: 0,
+			maximumFractionDigits: 2,
+		})
+	}
+
 	return (
 		<div className={styles.stationCard} onClick={handleClick}>
 			<div className={styles.stationCard__header}>
@@ -33,17 +43,14 @@ export default function StationCard(props: Readonly<Props>) {
 						<p className={styles.texts__description}>{props.station.address}</p>
 					</div>
 				</div>
-				{undefined !== props.station.metres_to_station &&
-					props.showDistance && (
-						<div className={styles.content__path}>
-							<div className={styles.path__icon}>
-								<img src={pathImage} alt='path' />
-							</div>
-							<p className={styles.path__text}>
-								{props.station.metres_to_station} км
-							</p>
+				{getDistance() && props.showDistance && (
+					<div className={styles.content__path}>
+						<div className={styles.path__icon}>
+							<img src={pathImage} alt='path' />
 						</div>
-					)}
+						<p className={styles.path__text}>{getDistance()} км</p>
+					</div>
+				)}
 			</div>
 			<div className={styles.stationCard__body}>
 				<div className={styles.body__connectorsList}>

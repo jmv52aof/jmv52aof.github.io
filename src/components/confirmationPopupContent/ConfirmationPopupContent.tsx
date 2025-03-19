@@ -6,18 +6,24 @@ import errorIcon from '@assets/images/status/error.svg'
 import { ResponseError } from '@common/types/requests'
 
 type Props = {
-	title: string
+	title: string | React.ReactNode
 	description?: string
 	onConfirm: () => Promise<ResponseError | undefined>
+	onSuccess?: () => void
 	onClose: () => void
-	errorTitle?: string
+	errorTitle?: string | React.ReactNode
 }
 
 export default function ConfirmationPopupContent(
 	props: Props
 ): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState<ResponseError | null>(null)
+	const [error, setError] = useState<ResponseError | undefined>()
+
+	const onClose = () => {
+		props.onClose()
+		setError(undefined)
+	}
 
 	const handleConfirm = () => {
 		setIsLoading(true)
@@ -25,7 +31,8 @@ export default function ConfirmationPopupContent(
 			.onConfirm()
 			.then(res => {
 				if (!res) {
-					props.onClose()
+					onClose()
+					setTimeout(() => props.onSuccess?.(), 200)
 				} else {
 					setError(res)
 				}
@@ -53,7 +60,7 @@ export default function ConfirmationPopupContent(
 			</p>
 			{(undefined !== props.description || error) && (
 				<p className={styles.description}>
-					{props.description ?? error?.message}
+					{error ? error.message : props.description}
 				</p>
 			)}
 			{error ? (
@@ -69,7 +76,7 @@ export default function ConfirmationPopupContent(
 				</>
 			) : (
 				<div className={styles.buttons}>
-					<Button variant='text' onClick={props.onClose} text='Отменить' />
+					<Button variant='text' onClick={onClose} text='Отменить' />
 					<Button variant='fill' onClick={handleConfirm} text='Подтвердить' />
 				</div>
 			)}

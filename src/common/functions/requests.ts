@@ -39,8 +39,15 @@ export async function sendRequest(
 
 		let jsonResponse = undefined
 		try {
+			if (options.responseIsString && response.ok)
+				return {
+					data: await response.text(),
+				}
+
 			jsonResponse = await response.json()
 		} catch (err) {}
+
+		if (!jsonResponse) return {}
 
 		const isError = 'error' in jsonResponse
 
@@ -55,6 +62,7 @@ export async function sendRequest(
 				: undefined,
 		}
 	} catch (err) {
+		console.log('err: ', err)
 		return {
 			error: {
 				status: 500,

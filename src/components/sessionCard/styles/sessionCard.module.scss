@@ -1,5 +1,10 @@
 .sessionCard {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	cursor: pointer;
 	background: #ffffff;
@@ -8,7 +13,12 @@
 
 .sessionCard__header,
 .header__content {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
 }
 
@@ -17,29 +27,54 @@
 }
 
 .header__content {
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
 	flex-grow: 1;
 }
 
 .content__connector {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	margin-right: 16px;
 }
 
 .content__station {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
 	flex-grow: 1;
 }
 
 .station__mainInfo {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
 .mainInfo__texts {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	gap: 2px;
 }
@@ -47,8 +82,8 @@
 .texts__name {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
-	font-size: 12px;
-	line-height: 120%;
+	font-size: 16px;
+	line-height: 20px;
 	vertical-align: middle;
 	color: #373435;
 	margin: 0;
@@ -57,8 +92,8 @@
 .texts__address {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
-	font-size: 8px;
-	line-height: 120%;
+	font-size: 12px;
+	line-height: 16px;
 	margin: 0;
 	vertical-align: middle;
 	color: #8e949f;
@@ -74,6 +109,8 @@
 }
 
 .sessionCard__gradientButton {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	margin-top: 10px;
 }

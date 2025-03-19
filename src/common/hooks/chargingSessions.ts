@@ -20,7 +20,7 @@ export const useActiveChargingSessionUpdater = () => {
 		if (activeChargingSession) return
 
 		getChargingSessionsFromApi({
-			status: ChargingSessionStatuses.INVALID,
+			status: ChargingSessionStatuses.CHARGING,
 		})
 			.then(res => {
 				if (res.length > 0) setActiveChargingSession(res[0])
@@ -40,7 +40,7 @@ export const useActiveChargingSessionUpdater = () => {
 		})
 			.then(res => {
 				setActiveChargingSession(
-					ChargingSessionStatuses.INVALID === res?.status ? res : undefined
+					ChargingSessionStatuses.CHARGING === res?.status ? res : undefined
 				)
 			})
 			.finally(() => {
@@ -51,7 +51,6 @@ export const useActiveChargingSessionUpdater = () => {
 
 	const { activate } = useInterval(
 		() => {
-			console.log('interval action')
 			setLoading(true)
 			if (activeChargingSession) updateSession()
 			else loadSession()
@@ -61,8 +60,7 @@ export const useActiveChargingSessionUpdater = () => {
 	)
 
 	useEffect(() => {
-		//activate()
-		loadSession()
+		activate()
 	}, [])
 
 	return {
