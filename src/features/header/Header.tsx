@@ -19,7 +19,7 @@ type Props = {
 export default function PageHeader(props: Readonly<Props>): React.JSX.Element {
 	const { isInitTelegramSdk } = useContext(RootStateContext)
 
-	const showReturnButton = !isInitTelegramSdk && import.meta.env.DEV
+	const showReturnButton = !isInitTelegramSdk || import.meta.env.DEV
 
 	return (
 		<div className={styles.header}>
