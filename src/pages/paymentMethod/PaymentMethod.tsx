@@ -13,11 +13,35 @@ import { useApi } from '@common/hooks/api'
 export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
 
-	const { deletePaymentMethodFromApi } = useApi()
 	const { loading } = usePaymentMethodLoader()
 	const { paymentMethod, showSnackbar } = useContext(RootStateContext)
-
+	const { createPaymentMethodFromApi, getPaymentUrlFromApi, deletePaymentMethodFromApi } = useApi()
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
+
+	const createNewPaymentMethod = async () => {
+		const newPaymentMethod = await createPaymentMethodFromApi({});
+		if (newPaymentMethod && newPaymentMethod.error)
+		{
+			return newPaymentMethod;
+		}
+
+		const paymentUrl = await getPaymentUrlFromApi({});
+		window.open(paymentUrl, "_blank", "noopener,noreferrer");
+	};
+
+	const doDeletePaymentMethod = async () => {
+		const deletePaymentMethodResponse = await deletePaymentMethodFromApi({});
+		if (deletePaymentMethodResponse && deletePaymentMethodResponse.error)
+		{
+			return deletePaymentMethodResponse;
+		}
+	};
+
+	const processClickAction = () => {
+		paymentMethod && !paymentMethod.error
+			? setPopupIsOpen(true)
+			: createNewPaymentMethod();
+	};
 
 	return (
 		<PageLayout
@@ -37,23 +61,21 @@ export default function PaymentMethodPage(): React.JSX.Element {
 							Не удалось удалить <br /> способ оплаты
 						</>
 					}
-					onConfirm={() => deletePaymentMethodFromApi({})}
+					onConfirm={doDeletePaymentMethod}
 					onSuccess={() => showSnackbar('warning', 'Способ оплаты удалён')}
 					onClose={() => setPopupIsOpen(false)}
 				/>
 			</PopupWrapper>
 
 			<div className={styles.page__main}>
-				<PaymentMethod paymentMethod={paymentMethod} />
+				<PaymentMethod paymentMethod={paymentMethod && !paymentMethod.error ? paymentMethod : undefined} />
 			</div>
 			<ActionButton
 				text={
-					paymentMethod ? 'Удалить способ оплаты' : 'Привязать способ оплаты'
+					paymentMethod && !paymentMethod.error ? 'Удалить способ оплаты' : 'Привязать способ оплаты'
 				}
-				variant={paymentMethod ? 'red' : 'green'}
-				onClick={() => {
-					if (paymentMethod) setPopupIsOpen(true)
-				}}
+				variant={paymentMethod && !paymentMethod.error ? 'red' : 'green'}
+				onClick={processClickAction}
 			/>
 		</PageLayout>
 	)
