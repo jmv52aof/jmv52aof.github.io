@@ -72,9 +72,7 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 
 			<ChargingSessionActivePower
 				power={props.chargingSession.current_power ?? 0}
-				maxPower={
-					(props.chargingSession.connector_info.max_electric_power ?? 0) / 1000
-				}
+				maxPower={props.chargingSession.connector_info.max_electric_power ?? 0}
 			/>
 			<div className={styles.buttonBlock}>
 				<Button
@@ -95,12 +93,12 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 					items={[
 						{
 							description: 'Заряжено:',
-							value: `${props.chargingSession.charged_kwh} кВт·ч`,
+							value: `${props.chargingSession.charged_kwh.toFixed(2)} кВт·ч`,
 						},
 						{
 							description: 'Процент батареи:',
 							value: !!props.chargingSession.battery_percentage
-								? `${props.chargingSession.battery_percentage} %`
+								? `${props.chargingSession.battery_percentage.toFixed(2)} %`
 								: '',
 							checkVisible: checkVisible,
 						},
@@ -136,21 +134,21 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 							{
 								description: 'Максимальная:',
 								value: !!props.chargingSession.max_power
-									? `${props.chargingSession.max_power} кВт`
+									? `${props.chargingSession.max_power.toFixed(2)} кВт`
 									: '',
 								checkVisible: checkVisible,
 							},
 							{
 								description: 'Минимальная:',
 								value: !!props.chargingSession.min_power
-									? `${props.chargingSession.min_power} кВт`
+									? `${props.chargingSession.min_power.toFixed(2)} кВт`
 									: '',
 								checkVisible: checkVisible,
 							},
 							{
 								description: 'Текущая:',
 								value: !!props.chargingSession.current_power
-									? `${props.chargingSession.current_power} кВт`
+									? `${props.chargingSession.current_power.toFixed(2)} кВт`
 									: '',
 								checkVisible: checkVisible,
 							},
@@ -160,9 +158,9 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 									!!props.chargingSession.min_power &&
 									!!props.chargingSession.max_power
 										? `${
-												(props.chargingSession.max_power +
+												((props.chargingSession.max_power +
 													props.chargingSession.min_power) /
-												2
+												2).toFixed(2)
 										  } кВт`
 										: '',
 								checkVisible: checkVisible,
