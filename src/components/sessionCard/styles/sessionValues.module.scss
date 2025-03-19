@@ -11,11 +11,18 @@
 .powerInfo__row,
 .times__duration,
 .texts__paymentMethod {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
 }
 
 .chargingInfo__icon {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	margin-right: 8px;
 	width: 24px;
@@ -23,7 +30,12 @@
 }
 
 .chargingInfo__texts {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	gap: 6px;
 	margin-top: 5px;
@@ -51,18 +63,28 @@
 	margin: 0;
 	color: #05a6be;
 	white-space: nowrap;
+	-o-text-overflow: ellipsis;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
 .sessionCard__session,
 .sessionCard__payment {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 }
 
 .session__icon {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	margin-right: 8px;
 	width: 24px;
@@ -70,9 +92,18 @@
 }
 
 .session__times {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
 	flex-grow: 1;
 }
 
@@ -81,12 +112,19 @@
 .texts__amount,
 .texts__paymentMethod,
 .bateryInfo__row {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
 	width: 50%;
 }
 
 .payment__icon {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	margin-right: 8px;
 	width: 24px;
@@ -94,23 +132,46 @@
 }
 
 .payment__texts {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
 	flex-grow: 1;
 }
 
 .chargingInfo__activeSessionTexts {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 	gap: 6px;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
 	flex-grow: 1;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
 
 .activeSessionTexts__bateryInfo {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 }

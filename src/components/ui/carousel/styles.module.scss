@@ -8,25 +8,40 @@
 }
 
 :global(.react-multi-carousel-track) {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
 :global(.react-multi-carousel-list) {
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
 	display: flex !important;
 	position: relative !important;
+	-webkit-box-align: normal !important;
+	-ms-flex-align: normal !important;
 	align-items: normal !important;
 	width: 100% !important;
 }
 
 :global(.react-multi-carousel-item) {
 	width: 100% !important;
+	-webkit-box-flex: 0 !important;
+	-ms-flex: 0 0 100% !important;
 	flex: 0 0 100% !important;
 	aspect-ratio: 1 / 1;
 }
 
 .carousel__item {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 
 	width: 100%;
@@ -36,15 +51,25 @@
 .item__image {
 	width: 100%;
 	height: 100%;
+	-o-object-fit: cover;
 	object-fit: cover;
 	pointer-events: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
 :global(.react-multiple-carousel__arrow) {
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
 	display: flex !important;
 	top: 45%;
+	-webkit-box-align: center !important;
+	-ms-flex-align: center !important;
 	align-items: center !important;
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
 	justify-content: center !important;
 	width: 32px !important;
 	height: 32px !important;
@@ -71,8 +96,14 @@
 }
 
 :global(.react-multi-carousel-dot-list) {
+	display: -webkit-box !important;
+	display: -ms-flexbox !important;
 	display: flex !important;
+	-webkit-box-pack: center !important;
+	-ms-flex-pack: center !important;
 	justify-content: center !important;
+	-webkit-box-align: center !important;
+	-ms-flex-align: center !important;
 	align-items: center !important;
 	gap: 5px !important;
 	pointer-events: none !important;
@@ -88,7 +119,11 @@
 	border-radius: 50% !important;
 	border: 0.5px solid rgba(200, 206, 216, 1) !important;
 	background-color: #fff !important;
+	-webkit-transition: all 0.3s ease !important;
+	-o-transition: all 0.3s ease !important;
 	transition: all 0.3s ease !important;
+
+	-webkit-box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.15) !important;
 
 	box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.15) !important;
 }

@@ -1,16 +1,25 @@
 .button {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	width: 50px;
 	height: 50px;
 	border: none;
 	outline: none;
 	background-color: #fff;
+	-webkit-box-shadow: 0px 2px 4px 0px #0000001a;
 	box-shadow: 0px 2px 4px 0px #0000001a;
 	border-radius: 100%;
 	overflow: hidden;
 	cursor: pointer;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
 }
 

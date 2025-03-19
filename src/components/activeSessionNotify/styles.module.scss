@@ -20,7 +20,17 @@ $transition-duration: 0.8s;
 	background: #f63255;
 	border-radius: 100%;
 	aspect-ratio: 1/1;
+	-webkit-animation: blink $transition-duration infinite ease-in-out alternate;
 	animation: blink $transition-duration infinite ease-in-out alternate;
+}
+
+@-webkit-keyframes blink {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
 
 @keyframes blink {

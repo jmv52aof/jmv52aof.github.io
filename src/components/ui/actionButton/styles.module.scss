@@ -1,8 +1,10 @@
 .actionButton {
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 12px 24px;
 	border-radius: 8px;
+	-webkit-box-shadow: 0 2px 4px 0 #00000040;
 	box-shadow: 0 2px 4px 0 #00000040;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -11,9 +13,17 @@
 	color: #fff;
 	border: none;
 	cursor: pointer;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
 	height: 48px;
 }
@@ -37,6 +47,7 @@
 .actionButton_disabled {
 	background-color: #f7f7f7 !important;
 	color: #c8ced8 !important;
+	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 	cursor: default;
 }

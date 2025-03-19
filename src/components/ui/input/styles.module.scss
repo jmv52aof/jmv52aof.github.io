@@ -1,5 +1,10 @@
 .container {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 }
 
@@ -9,6 +14,7 @@
 
 .container__input input {
 	width: 100%;
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 8px;
 	border-radius: 8px;
@@ -21,6 +27,8 @@
 	line-height: 120%;
 	padding-top: 24px;
 	font-size: 14px;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
 }
 
@@ -31,8 +39,15 @@
 	font-size: 14px;
 	left: 8px;
 	top: 25px;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 	pointer-events: none;
 }
@@ -40,6 +55,16 @@
 .container__input input:focus,
 .container__input input:hover {
 	outline: 1px solid #017598;
+}
+
+.container__input input:not(:-moz-placeholder-shown) + label {
+	font-size: 12px;
+	top: 13px;
+}
+
+.container__input input:not(:-ms-input-placeholder) + label {
+	font-size: 12px;
+	top: 13px;
 }
 
 .container__input input:focus + label,

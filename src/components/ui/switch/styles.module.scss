@@ -1,49 +1,67 @@
 $transition-duration: 0.3s;
 
 .switch {
-    width: 36px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 2px;
-    border-radius: 11px;
-    cursor: pointer;
-    transition: background $transition-duration;
+	width: 36px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 2px;
+	border-radius: 11px;
+	cursor: pointer;
+	-webkit-transition: background $transition-duration;
+	-o-transition: background $transition-duration;
+	transition: background $transition-duration;
 
-    &.on {
-        background: #17c3b9;
+	&.on {
+		background: #17c3b9;
 
-        &:hover {
-            background: #13a69d;
-        }
+		&:hover {
+			background: #13a69d;
+		}
 
-        .switch__toggle {
-            transform: translateX(100%);
-        }
-    }
+		.switch__toggle {
+			-webkit-transform: translateX(100%);
+			-ms-transform: translateX(100%);
+			transform: translateX(100%);
+		}
+	}
 
-    &.off {
-        background: #8e949f;
+	&.off {
+		background: #8e949f;
 
-        &:hover {
-            background: #767d8a;
-        }
+		&:hover {
+			background: #767d8a;
+		}
 
-        .switch__toggle {
-            transform: translateX(0);
-        }
-    }
+		.switch__toggle {
+			-webkit-transform: translateX(0);
+			-ms-transform: translateX(0);
+			transform: translateX(0);
+		}
+	}
 
-    &.disabled {
-        cursor: default;
-        opacity: 0.5;
-    }
+	&.disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
 }
 
 .switch__toggle {
-    height: 18px;
-    aspect-ratio: 1;
-    border-radius: 100%;
-    background: #ffffff;
-    transition: transform $transition-duration ease-in-out;
+	height: 18px;
+	aspect-ratio: 1;
+	border-radius: 100%;
+	background: #ffffff;
+	-webkit-transition: -webkit-transform $transition-duration ease-in-out;
+	transition: -webkit-transform $transition-duration ease-in-out;
+	-o-transition: transform $transition-duration ease-in-out;
+	transition: transform $transition-duration ease-in-out;
+	transition: transform $transition-duration ease-in-out,
+		-webkit-transform $transition-duration ease-in-out;
 }
