@@ -14,7 +14,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
 
 	const { loading } = usePaymentMethodLoader()
-	const { paymentMethod, showSnackbar } = useContext(RootStateContext)
+	const { paymentMethod, setPaymentMethod, showSnackbar } = useContext(RootStateContext)
 	const { createPaymentMethodFromApi, getPaymentUrlFromApi, deletePaymentMethodFromApi } = useApi()
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
 
@@ -40,6 +40,11 @@ export default function PaymentMethodPage(): React.JSX.Element {
 			: createNewPaymentMethod();
 	};
 
+	const onPaymentMethodDeleted = async () => {
+		showSnackbar('warning', 'Способ оплаты удалён');
+		setPaymentMethod(undefined);
+	} 
+
 	return (
 		<PageLayout
 			onReturn={() => nav('/')}
@@ -59,7 +64,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 						</>
 					}
 					onConfirm={doDeletePaymentMethod}
-					onSuccess={() => showSnackbar('warning', 'Способ оплаты удалён')}
+					onSuccess={onPaymentMethodDeleted}
 					onClose={() => setPopupIsOpen(false)}
 				/>
 			</PopupWrapper>
