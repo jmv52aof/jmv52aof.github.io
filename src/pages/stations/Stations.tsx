@@ -22,6 +22,8 @@ import StationCard from '@components/stationCard/StationCard'
 import { StationDto } from '@common/types/stations'
 import PageLayout from '@layouts/pageLayout/PageLayout'
 import Search from '@components/ui/search/Search'
+import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification'
+import chargeStationImage from '@assets/images/charge-station.svg'
 
 /**
  * Страница со списком станций
@@ -117,6 +119,12 @@ export default function StationsPage(): React.JSX.Element {
 					getData={(offset, limit) => getByOffsetAndLimit(offset, limit)}
 					onDataLoad={data => setStations(data as StationDto[])}
 					loading={loading || undefined !== timerId}
+					emptyListNotify={
+						<EmptyDataNotification
+							text='Здесь будут показаны зарядные станции'
+							iconSrc={chargeStationImage}
+						/>
+					}
 				/>
 			</div>
 		</PageLayout>

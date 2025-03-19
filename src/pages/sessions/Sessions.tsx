@@ -12,6 +12,8 @@ import { useContext } from 'react'
 import PageLayout from '@layouts/pageLayout/PageLayout'
 import { useChargingSessionsLoader } from './lib/hooks'
 import { RootStateContext } from '@contexts/RootStateContext'
+import EmptyDataNotification from '@components/emptyDataNotification/EmptyDataNotification'
+import documentsImage from '@assets/images/documents.svg'
 
 /**
  * Страница с зарядными сессиями
@@ -74,6 +76,12 @@ export default function SessionsPage(): React.JSX.Element {
 				}}
 				onDataLoad={data => setSessions(data as ChargingSessionDto[])}
 				fullHeight
+				emptyListNotify={
+					<EmptyDataNotification
+						text='Здесь будут показаны ваши зарядные сессии'
+						iconSrc={documentsImage}
+					/>
+				}
 			/>
 		</PageLayout>
 	)
