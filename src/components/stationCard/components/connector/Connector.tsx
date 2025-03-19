@@ -25,7 +25,7 @@ export default function Connector(props: Readonly<Props>) {
 					<div className={styles.content__main}>
 						<p className={styles.main__standard}>{props.connector.standard}</p>
 						<p className={styles.main__power}>
-							{getMaxPowerForConnector(props.connector)} кВт
+							{parseFloat(getMaxPowerForConnector(props.connector).toFixed(2))} кВт
 						</p>
 					</div>
 					<div className={styles.content__additional}>
