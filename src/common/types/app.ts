@@ -1,4 +1,3 @@
-import { ChargingSessionDto } from './chargingSessions'
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
