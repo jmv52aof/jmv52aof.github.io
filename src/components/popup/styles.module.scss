@@ -1,33 +1,47 @@
 $animationSpeed: 0.5s;
 
 .popup {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    border-radius: 16px 16px 0 0;
-    box-shadow: 0px 4px 10px 0px #02272B1A;
-    transform: translateY(100%);
-    transition: transform $animationSpeed ease;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0px 4px 10px 0px #02272b1a;
+  transform: translateY(100%);
+  transition: transform $animationSpeed ease;
+  min-height: 180px;
+  display: flex;
 }
-  
+
 .popup.active {
-    width: 100%;
-    transform: translateY(0);
-    opacity: 1;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .popup__content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px 20px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 16px 8px;
+  width: 100%;
+}
+
+.contentWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .content__topLine {
-    margin-bottom: 30px;
-    width: 20%;
-    height: 3px;
-    background-color: #C8CED8;
+  margin-bottom: 16px;
+  width: 20%;
+  height: 3px;
+  background-color: #c8ced8;
 }
