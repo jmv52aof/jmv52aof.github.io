@@ -1,11 +1,25 @@
+$transition-duration: 0.5s;
+$animation-distance: -80px;
+
 .snackbarLayout {
-	position: absolute;
-	z-index: 500;
-	top: 16px;
-	left: 0;
-	width: 100%;
-	padding: 0 8px;
-	box-sizing: border-box;
-	display: flex;
-	justify-content: center;
+  position: fixed;
+  z-index: 500;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY($animation-distance);
+  transition: all $transition-duration cubic-bezier(0.61, 1, 0.88, 1);
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0.1s;
+  }
 }

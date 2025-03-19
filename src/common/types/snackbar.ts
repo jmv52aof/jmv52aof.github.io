@@ -1,7 +1,7 @@
 export type SnackbarState = {
-	text?: string
-	variant?: Variant
-	isVisible: boolean
-}
+  text?: string;
+  variant?: Variant;
+  isVisible: boolean;
+};
 
-export type Variant = 'success' | 'warning' | 'error'
+export type Variant = 'success' | 'warning' | 'error';
