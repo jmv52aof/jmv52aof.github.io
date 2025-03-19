@@ -53,7 +53,6 @@ function getToken() {
 
 /** Хук предоставляет доступ к серверному API */
 export const useApi = () => {
-
 	/** Модуль авторизации */
 
 	const authorizationTelegramUserFromApi = async (
@@ -88,7 +87,10 @@ export const useApi = () => {
 	const getChargingSessionsFromApi = async (
 		options: GetChargingSessionsRequestOptions
 	): Promise<ChargingSessionDto[]> => {
-		const response = await getChargingSessions({ ...options, token: getToken() })
+		const response = await getChargingSessions({
+			...options,
+			token: getToken(),
+		})
 		if (response.data)
 			return response.data.map(value =>
 				convertChargingSessionResponseDto(value)
@@ -103,6 +105,7 @@ export const useApi = () => {
 			...options,
 			token: getToken(),
 		})
+		console.log(response.data)
 		if (response.data) return convertChargingSessionResponseDto(response.data)
 		return undefined
 	}
@@ -110,7 +113,10 @@ export const useApi = () => {
 	const stopChargingSessionFromApi = async (
 		options: StopChargingSessionRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await stopChargingSession({ ...options, token: getToken() })
+		const response = await stopChargingSession({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 
@@ -153,7 +159,10 @@ export const useApi = () => {
 	const createPaymentMethodFromApi = async (
 		options: CreatePaymentMethodRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await createPaymentMethod({ ...options, token: getToken() })
+		const response = await createPaymentMethod({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 
@@ -176,7 +185,10 @@ export const useApi = () => {
 	const deletePaymentMethodFromApi = async (
 		options: DeletePaymentMethodRequestOptions
 	): Promise<ResponseError | undefined> => {
-		const response = await deletePaymentMethod({ ...options, token: getToken() })
+		const response = await deletePaymentMethod({
+			...options,
+			token: getToken(),
+		})
 		return response.error
 	}
 
