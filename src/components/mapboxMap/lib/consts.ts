@@ -8,4 +8,4 @@ export const DEFAULT_LATITUDE = 55
 
 /** Высота невидимой части карты из-за других компонентов на экране,
  * таких как управляющая панель */
-export const INVISIBLE_MAP_HEIGHT = 61
+export const INVISIBLE_MAP_HEIGHT = 74

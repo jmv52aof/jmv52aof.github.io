@@ -27,6 +27,11 @@ export default function SessionValues(props: Props): React.JSX.Element {
 					props.sessionValues.start_date
 			  )
 
+	const isDischarge = props.sessionValues.charged_kwh < 0
+	const chargedKwh = isDischarge
+		? props.sessionValues.charged_kwh * -1
+		: props.sessionValues.charged_kwh
+
 	return (
 		<>
 			<div className={styles.horizontalSplit} />
@@ -40,10 +45,10 @@ export default function SessionValues(props: Props): React.JSX.Element {
 					<div className={styles.chargingInfo__activeSessionTexts}>
 						<div className={styles.activeSessionTexts__bateryInfo}>
 							<div className={styles.bateryInfo__row}>
-								<p className={styles.row__label}>Заряжено:</p>
-								<p className={styles.row__value}>
-									{props.sessionValues.charged_kwh} кВт
+								<p className={styles.row__label}>
+									{isDischarge ? 'Разряжено' : 'Заряжено'}:
 								</p>
+								<p className={styles.row__value}>{chargedKwh} кВт</p>
 							</div>
 							<div className={styles.bateryInfo__row}>
 								<p className={styles.row__label}>Процент батареи:</p>
@@ -64,10 +69,10 @@ export default function SessionValues(props: Props): React.JSX.Element {
 				) : (
 					<div className={styles.chargingInfo__texts}>
 						<div className={styles.texts__row}>
-							<p className={styles.row__label}>Заряжено:</p>
-							<p className={styles.row__value}>
-								{props.sessionValues.charged_kwh} кВт·ч
+							<p className={styles.row__label}>
+								{isDischarge ? 'Разряжено' : 'Заряжено'}:
 							</p>
+							<p className={styles.row__value}>{chargedKwh} кВт·ч</p>
 						</div>
 						{props.sessionValues.max_power !== undefined && (
 							<div className={styles.texts__row}>

@@ -18,12 +18,14 @@ type Props = {
  */
 export default function PageHeader(props: Readonly<Props>): React.JSX.Element {
 	const { isInitTelegramSdk } = useContext(RootStateContext)
-	
+
 	return (
 		<div className={styles.header}>
-			{(!isInitTelegramSdk || import.meta.env.DEV) && <div className={styles.header__left}>
-				<ReturnButton onClick={props.onReturn} iconSrc={arrowImage} />
-			</div>}
+			{(!isInitTelegramSdk || import.meta.env.DEV) && (
+				<div className={styles.header__left}>
+					<ReturnButton onClick={props.onReturn} iconSrc={arrowImage} />
+				</div>
+			)}
 			<div className={styles.header__title}>
 				<a className={styles.title__text}>{props.title}</a>
 			</div>

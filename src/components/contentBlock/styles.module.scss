@@ -1,57 +1,58 @@
 .contentBlock {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }
 
 .contentBlock__title {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19.2px;
-    color: #373435;
-    margin: 0px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 24px;
+	color: #373435;
+	margin: 0px;
 }
 
 .contentBlock__content {
-    display: flex;
-    padding: 8px;
-    gap: 8px;
-    flex-direction: row;
-    width: 100%;
+	display: flex;
+	padding: 8px;
+	gap: 8px;
+	flex-direction: row;
+	width: 100%;
 }
 
 .content__items {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    row-gap: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	row-gap: 6px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
 
 .content__icon {
-    width: 24px;
-    height: 24px;
+	width: 24px;
+	height: 24px;
 }
 
 .items__item {
-    display: flex;
-    gap: 4px;
-    width: 50%;
+	display: flex;
+	gap: 4px;
+	width: 50%;
 }
 
-.item__text, .item__text_color {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    color: #373435;
-    margin: 0px;
+.item__text,
+.item__text_color {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 18px;
+	color: #373435;
+	margin: 0px;
 }
 
 .item__text_color {
-    color: #05A6BE;
+	color: #05a6be;
 }
