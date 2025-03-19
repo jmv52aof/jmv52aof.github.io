@@ -14,36 +14,40 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
 
 	const { loading } = usePaymentMethodLoader()
-	const { paymentMethod, setPaymentMethod, showSnackbar } = useContext(RootStateContext)
-	const { createPaymentMethodFromApi, getPaymentUrlFromApi, deletePaymentMethodFromApi } = useApi()
+	const { paymentMethod, setPaymentMethod, showSnackbar } =
+		useContext(RootStateContext)
+	const {
+		createPaymentMethodFromApi,
+		getPaymentUrlFromApi,
+		deletePaymentMethodFromApi,
+	} = useApi()
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
 
 	const createNewPaymentMethod = async () => {
-		await createPaymentMethodFromApi({});
+		await createPaymentMethodFromApi({})
 
-		let paymentUrl = await getPaymentUrlFromApi({});
-		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl;
-		window.open(paymentUrl, "_blank", "noopener,noreferrer");
-	};
+		let paymentUrl = await getPaymentUrlFromApi({})
+		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl
+		window.open(paymentUrl, '', 'noopener,noreferrer')
+	}
 
 	const doDeletePaymentMethod = async () => {
-		const deletePaymentMethodResponse = await deletePaymentMethodFromApi({});
-		if (deletePaymentMethodResponse && deletePaymentMethodResponse.error)
-		{
-			return deletePaymentMethodResponse;
+		const deletePaymentMethodResponse = await deletePaymentMethodFromApi({})
+		if (deletePaymentMethodResponse && deletePaymentMethodResponse.error) {
+			return deletePaymentMethodResponse
 		}
-	};
+	}
 
 	const processClickAction = () => {
 		paymentMethod && !paymentMethod.error
 			? setPopupIsOpen(true)
-			: createNewPaymentMethod();
-	};
+			: createNewPaymentMethod()
+	}
 
 	const onPaymentMethodDeleted = async () => {
-		showSnackbar('warning', 'Способ оплаты удалён');
-		setPaymentMethod(undefined);
-	} 
+		showSnackbar('warning', 'Способ оплаты удалён')
+		setPaymentMethod(undefined)
+	}
 
 	return (
 		<PageLayout
@@ -70,11 +74,17 @@ export default function PaymentMethodPage(): React.JSX.Element {
 			</PopupWrapper>
 
 			<div className={styles.page__main}>
-				<PaymentMethod paymentMethod={paymentMethod && !paymentMethod.error ? paymentMethod : undefined} />
+				<PaymentMethod
+					paymentMethod={
+						paymentMethod && !paymentMethod.error ? paymentMethod : undefined
+					}
+				/>
 			</div>
 			<ActionButton
 				text={
-					paymentMethod && !paymentMethod.error ? 'Удалить способ оплаты' : 'Привязать способ оплаты'
+					paymentMethod && !paymentMethod.error
+						? 'Удалить способ оплаты'
+						: 'Привязать способ оплаты'
 				}
 				variant={paymentMethod && !paymentMethod.error ? 'red' : 'green'}
 				onClick={processClickAction}
