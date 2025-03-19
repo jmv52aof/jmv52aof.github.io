@@ -5,7 +5,7 @@ import arrowImage from '@assets/images/arrow-right.svg'
 
 type Props = {
 	text: string
-	onClick: () => void
+	onClick?: () => void
 	gradientTemplate: GradientTemplate
 }
 

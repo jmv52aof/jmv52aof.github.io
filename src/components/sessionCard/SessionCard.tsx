@@ -21,6 +21,7 @@ import {
 
 type Props = {
 	session: ChargingSessionDto
+	onDebtClick?: () => void
 }
 
 export default function SessionCard(props: Props): React.JSX.Element {
@@ -93,7 +94,7 @@ export default function SessionCard(props: Props): React.JSX.Element {
 				<div className={styles.sessionCard__gradientButton}>
 					<GradientButton
 						text='Сессия не оплачена'
-						onClick={() => {}}
+						onClick={props.onDebtClick}
 						gradientTemplate='orange'
 					/>
 				</div>

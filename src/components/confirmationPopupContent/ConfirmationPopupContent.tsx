@@ -9,8 +9,9 @@ type Props = {
 	title: string | React.ReactNode
 	description?: string
 	onConfirm: () => Promise<ResponseError | undefined>
+	onSuccess?: () => void
 	onClose: () => void
-	errorTitle?: string
+	errorTitle?: string | React.ReactNode
 }
 
 export default function ConfirmationPopupContent(
@@ -31,6 +32,7 @@ export default function ConfirmationPopupContent(
 			.then(res => {
 				if (!res) {
 					onClose()
+					setTimeout(() => props.onSuccess?.(), 200)
 				} else {
 					setError(res)
 				}

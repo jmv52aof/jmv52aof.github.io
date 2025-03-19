@@ -54,17 +54,18 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 							Хотите завершить <br /> зарядную сессию?
 						</>
 					}
-					onConfirm={() =>
-						stopChargingSessionFromApi({ id: props.chargingSession.id }).then(
-							res => {
-								if (!res) {
-									nav(SESSIONS_HISTORY_ENDPOINT)
-									showSnackbar('success', 'Зарядка завершена')
-								}
-								return res
-							}
-						)
+					errorTitle={
+						<>
+							Не удалось завершить <br /> зарядную сессию
+						</>
 					}
+					onConfirm={() =>
+						stopChargingSessionFromApi({ id: props.chargingSession.id })
+					}
+					onSuccess={() => {
+						nav(SESSIONS_HISTORY_ENDPOINT)
+						showSnackbar('success', 'Зарядка завершена')
+					}}
 					onClose={() => setPopupIsOpen(false)}
 				/>
 			</PopupWrapper>
