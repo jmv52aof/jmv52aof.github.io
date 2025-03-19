@@ -5,7 +5,7 @@ import { RootStateContext } from '@contexts/RootStateContext'
 import { useContext, useEffect, useState } from 'react'
 
 /** Хук обновляет данные по активной сессий каждый фиксированный промежуток времени */
-export const useActiveChargingSessionUpdater = (sessionId?: string) => {
+export const useActiveChargingSessionUpdater = () => {
 	const { activeChargingSession, setActiveChargingSession } =
 		useContext(RootStateContext)
 	const { getChargingSessionByIdFromApi, getChargingSessionsFromApi } = useApi()
