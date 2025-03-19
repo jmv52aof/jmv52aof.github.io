@@ -53,13 +53,13 @@ export const useActiveChargingSessionUpdater = () => {
 		() => {
 			setLoading(true)
 			if (activeChargingSession) updateSession()
-			else loadSession()
 		},
 		10000,
 		[activeChargingSession, loading]
 	)
 
 	useEffect(() => {
+		loadSession()
 		activate()
 	}, [])
 
