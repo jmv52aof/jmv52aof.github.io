@@ -13,4 +13,5 @@ export const RootStateContext = createContext<IRootStateContext>({
 	setRfidCard: _ => {},
 	setActiveChargingSession: _ => {},
 	setPaymentMethod: _ => {},
+	setMapViewState: _ => {},
 })

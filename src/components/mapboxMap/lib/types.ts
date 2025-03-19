@@ -1,9 +1,3 @@
-type ViewState = {
-	zoom: number
-	longitude: number
-	latitude: number
-}
-
 type ClusterProperties = {
 	cluster: boolean
 	cluster_id: number
@@ -25,4 +19,4 @@ interface ClusterJSON extends GeometryJSON {
 	properties?: ClusterProperties
 }
 
-export { type ViewState, type ClusterJSON, type GeometryJSON }
+export { type ClusterJSON, type GeometryJSON }

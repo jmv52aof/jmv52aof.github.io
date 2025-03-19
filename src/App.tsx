@@ -18,11 +18,14 @@ export default function App() {
 
 	try {
 		if (!sessionStorage.getItem('user-jwt-token')) {
+			//@ts-ignore
 			const initData = window.Telegram.WebApp.initData as string
-			authorizationTelegramUserFromApi({userInitData: initData}).then(token => {
-				if (!token) return
-				sessionStorage.setItem('user-jwt-token', token)
-			})
+			authorizationTelegramUserFromApi({ userInitData: initData }).then(
+				token => {
+					if (!token) return
+					sessionStorage.setItem('user-jwt-token', token)
+				}
+			)
 		}
 	} catch (e) {
 		console.error('Ошибка авторизации: ', e)
@@ -98,6 +101,8 @@ export default function App() {
 						...rootState,
 						position: position,
 					}),
+				setMapViewState: viewState =>
+					setRootState({ ...rootState, mapViewState: viewState }),
 			}}
 		>
 			{rootState.isInitTelegramSdk && <BackButton />}

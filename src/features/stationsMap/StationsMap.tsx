@@ -17,7 +17,8 @@ type Props = {
  * Карта с отображением станций на ней
  */
 export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
-	const { stations } = useContext(RootStateContext)
+	const { stations, mapViewState, setMapViewState } =
+		useContext(RootStateContext)
 
 	const [markers, setMarkers] = useState<MarkerInfo[]>([])
 
@@ -45,6 +46,9 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 		<MapboxMap
 			useMarkerAutoSize
 			markers={markers}
+			startZoom={mapViewState?.zoom}
+			viewCoordinates={mapViewState}
+			onChangeViewState={v => setMapViewState(v)}
 			getPopUp={point => {
 				const marker = markers.find(
 					value =>
