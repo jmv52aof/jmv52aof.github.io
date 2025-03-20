@@ -3,6 +3,7 @@ import arrowImage from '@assets/images/arrow-left.svg'
 import styles from './styles.module.scss'
 import { useContext } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
+import BackButton from '@components/ui/backButton/BackButton'
 
 type Props = {
 	onReturn: () => void
@@ -22,18 +23,22 @@ export default function PageHeader(props: Readonly<Props>): React.JSX.Element {
 	const showReturnButton = !isInitTelegramSdk || import.meta.env.DEV
 
 	return (
-		<div className={styles.header}>
-			{showReturnButton ? (
-				<div className={styles.header__left}>
-					<ReturnButton onClick={props.onReturn} iconSrc={arrowImage} />
+		<>
+			{isInitTelegramSdk && <BackButton onReturn={props.onReturn}/>}
+			<div className={styles.header}>
+				{showReturnButton ? (
+					<div className={styles.header__left}>
+						<ReturnButton onClick={props.onReturn} iconSrc={arrowImage} />
+					</div>
+				) : (
+					<div></div>
+				)}
+				<div className={styles.header__title}>
+					<a className={styles.title__text}>{props.title}</a>
 				</div>
-			) : (
-				<div></div>
-			)}
-			<div className={styles.header__title}>
-				<a className={styles.title__text}>{props.title}</a>
+				<div className={styles.header__right}>{props.content}</div>
 			</div>
-			<div className={styles.header__right}>{props.content}</div>
-		</div>
+		</>
+		
 	)
 }
