@@ -6,7 +6,6 @@ import { RootStateContext } from 'contexts/RootStateContext'
 import { useSnackbar } from '@common/hooks/snackbar'
 import { initializeMockEnvironment } from '@common/functions/telegram'
 import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
-import BackButton from '@components/ui/backButton/BackButton'
 import { useApi } from '@common/hooks/api'
 
 if (import.meta.env.DEV) initializeMockEnvironment()
@@ -104,8 +103,7 @@ export default function App() {
 				setMapViewState: viewState =>
 					setRootState({ ...rootState, mapViewState: viewState }),
 			}}
-		>
-			{rootState.isInitTelegramSdk && <BackButton />}
+		>			
 			{snackbar}
 			<AppRouter />
 		</RootStateContext.Provider>

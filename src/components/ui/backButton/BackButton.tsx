@@ -1,32 +1,21 @@
 import { backButton } from "@telegram-apps/sdk-react"
 import { useEffect } from "react"
-import { useNavigate, useLocation } from "react-router"
 
+interface Props {
+    onReturn: () => void
+}
 
-export default function BackButton() {
-    const location = useLocation()
-    const navigate = useNavigate()
-  
+export default function BackButton(props: Props) {
     useEffect(() => {
-      function onClick() {
-        navigate(-1)
-      }
-      backButton.onClick(onClick)
-
-      return () => backButton.offClick(onClick)
-    }, [navigate])
-  
-    useEffect(() => {
-      if (location.pathname === '/') {
-        if (backButton.isSupported() && backButton.isMounted()) {            
+        if (backButton.isSupported() && backButton.isMounted()){
+            backButton.show()
+            backButton.onClick(props.onReturn)
+        }
+        return () => {
+            backButton.offClick(props.onReturn)
             backButton.hide()
         }
-      } else {
-        if (backButton.isSupported() && backButton.isMounted()) {
-            backButton.show()
-        }
-      }
-    }, [location])
-  
+    }, [props])
+    
     return null
 }
