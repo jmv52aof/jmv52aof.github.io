@@ -5,14 +5,14 @@ import { useContext, useEffect, useState } from 'react'
 
 /** Хук загружает все станции для отображения на карте в общее состояние */
 export const useStationsLoader = () => {
-	const { setStations, stationFilters, position, authPassed } =
+	const { setStations, stationFilters, position, authLoading } =
 		useContext(RootStateContext)
 	const { getStationsFromApi } = useApi()
 
 	const [loading, setLoading] = useState<boolean>(true)
 
 	useEffect(() => {
-		if (!authPassed) return
+		if (authLoading) return
 
 		if (!stationFilters.shouldUpdateStations) {
 			setLoading(false)
@@ -27,7 +27,7 @@ export const useStationsLoader = () => {
 				setStations(res)
 			})
 			.finally(() => setLoading(false))
-	}, [stationFilters, authPassed])
+	}, [stationFilters, authLoading])
 
 	return {
 		/** Имеет значение `true` когда данные загружаются, в противном случае - `false` */

@@ -34,5 +34,5 @@ export interface IRootStateContext extends RootState {
 	setActiveChargingSession: (session?: ChargingSessionDto) => void
 	setPaymentMethod: (method?: string) => void
 	setMapViewState: (viewState: ViewState) => void
-	authPassed: boolean
+	authLoading: boolean
 }
