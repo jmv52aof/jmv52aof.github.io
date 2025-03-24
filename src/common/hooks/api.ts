@@ -105,7 +105,6 @@ export const useApi = () => {
 			...options,
 			token: getToken(),
 		})
-		console.log(response.data)
 		if (response.data) return convertChargingSessionResponseDto(response.data)
 		return undefined
 	}
