@@ -20,6 +20,7 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 	const { stations, mapViewState, setMapViewState } =
 		useContext(RootStateContext)
 
+	const [loading, setLoading] = useState<boolean>(true)
 	const [markers, setMarkers] = useState<MarkerInfo[]>([])
 
 	useEffect(() => {
@@ -71,6 +72,7 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 					<></>
 				)
 			}}
+			whenLoaded={() => setLoading(false)}
 			getDefaultMarker={markerInfo => {
 				const sameMarkers = findSameMarkers(markerInfo)
 				if (sameMarkers.length) {
@@ -86,7 +88,7 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 				}
 				return <StationMarkerOnMap color={markerInfo.color as ColorTemplate} />
 			}}
-			loading={props.loading}
+			loading={props.loading || loading}
 		/>
 	)
 }
