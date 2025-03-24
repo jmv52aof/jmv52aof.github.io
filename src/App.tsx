@@ -13,21 +13,14 @@ export default function App() {
 	const { snackbar, showSnackbar } = useSnackbar()
 	const { authorizationTelegramUserFromApi } = useApi()
 
-	const [authLoading, setAuthLoading] = useState<boolean>(false)
-	const [authPassed, setAuthPassed] = useState<boolean>(false)
-
 	if (!sessionStorage.getItem('user-jwt-token') && !import.meta.env.DEV) {
 		//@ts-ignore
-		const initData = window.Telegram?.WebApp?.initData ?? undefined
-		setAuthLoading(true)
-		authorizationTelegramUserFromApi({ userInitData: initData })
-			.then(token => {
-				if (token) sessionStorage.setItem('user-jwt-token', token)
-			})
-			.finally(() => setAuthLoading(false))
-	} else if (import.meta.env.DEV && !authPassed) {
+		const initData = window.Telegram?.WebApp?.initData ?? ''
+		authorizationTelegramUserFromApi({ userInitData: initData }).then(token => {
+			if (token) sessionStorage.setItem('user-jwt-token', token)
+		})
+	} else if (import.meta.env.DEV) {
 		initializeMockEnvironment()
-		setAuthPassed(true)
 	}
 
 	try {
@@ -62,7 +55,6 @@ export default function App() {
 		<RootStateContext.Provider
 			value={{
 				...rootState,
-				authLoading: authLoading,
 				setStationFilters: filters =>
 					setRootState({
 						...rootState,
