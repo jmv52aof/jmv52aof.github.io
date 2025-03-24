@@ -48,7 +48,7 @@ export default function StationsPage(): React.JSX.Element {
 			setTimeout(() => {
 				updateStationsByName(stationFilters.partOfName)
 				setTimerId(undefined)
-			}, 2500)
+			}, 900)
 		)
 	}, [stationFilters.partOfName])
 
