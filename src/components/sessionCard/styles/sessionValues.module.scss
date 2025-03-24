@@ -203,7 +203,16 @@
 	.times__start,
 	.times__duration,
 	.texts__amount,
-	.texts__paymentMethod {
+	.texts__paymentMethod,
+	.bateryInfo__row {
 		width: auto;
+	}
+
+	.activeSessionTexts__bateryInfo {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		gap: 6px;
 	}
 }
