@@ -23,23 +23,23 @@ export default function App() {
 				}
 			)
 		} else if (import.meta.env.DEV) initializeMockEnvironment()
+	}, [])
 
-		try {
-			if (rootState.isInitTelegramSdk === undefined) {
-				init()
-				setRootState({
-					...rootState,
-					isInitTelegramSdk: true,
-				})
-			}
-		} catch (e) {
-			console.error('Ошибка инициализации telegram sdk: ', e)
+	try {
+		if (rootState.isInitTelegramSdk === undefined) {
+			init()
 			setRootState({
 				...rootState,
-				isInitTelegramSdk: false,
+				isInitTelegramSdk: true,
 			})
 		}
-	}, [])
+	} catch (e) {
+		console.error('Ошибка инициализации telegram sdk: ', e)
+		setRootState({
+			...rootState,
+			isInitTelegramSdk: false,
+		})
+	}
 
 	if (
 		rootState.isInitTelegramSdk &&
