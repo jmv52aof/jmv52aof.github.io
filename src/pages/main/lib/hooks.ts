@@ -16,6 +16,7 @@ export const useStationsLoader = () => {
 			return
 		}
 
+		setLoading(true)
 		getStationsFromApi(
 			createGetStationsRequestOptions(stationFilters, position)
 		)
