@@ -13,21 +13,19 @@ export default function App() {
 	const { snackbar, showSnackbar } = useSnackbar()
 	const { authorizationTelegramUserFromApi } = useApi()
 
-	const [authPassed, setAuthPassed] = useState<boolean>(false)
-
-	if (!authPassed) {
+	if (!rootState.authPassed) {
 		if (!sessionStorage.getItem('user-jwt-token') && !import.meta.env.DEV) {
 			//@ts-ignore
 			const initData: string = window.Telegram?.WebApp?.initData ?? ''
 			authorizationTelegramUserFromApi({ userInitData: initData }).then(
 				token => {
 					if (token) sessionStorage.setItem('user-jwt-token', token)
-					setAuthPassed(true)
+					setRootState({ ...rootState, authPassed: true })
 				}
 			)
 		} else if (import.meta.env.DEV) {
 			initializeMockEnvironment()
-			setAuthPassed(true)
+			setRootState({ ...rootState, authPassed: true })
 		}
 	}
 

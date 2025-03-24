@@ -1,7 +1,7 @@
 import { Position } from './position'
 import { RfidCardDto } from './rfidCards'
 import { StationDto, StationFilters } from './stations'
-import { SessionFilters } from './chargingSessions'
+import { ChargingSessionDto, SessionFilters } from './chargingSessions'
 import { Variant } from './snackbar'
 import { ViewState } from './map'
 
@@ -21,6 +21,7 @@ export type RootState = {
 	activeChargingSession?: ChargingSessionDto
 	paymentMethod?: string
 	mapViewState?: ViewState
+	authPassed?: boolean
 }
 
 export interface IRootStateContext extends RootState {
