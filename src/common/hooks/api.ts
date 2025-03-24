@@ -43,11 +43,11 @@ import {
 	GetStationsRequestOptions,
 } from 'api/stations/types/request'
 
-function getToken() {
+const getToken = (): string => {
 	if (import.meta.env.DEV) {
 		return import.meta.env.VITE_API_TOKEN
 	} else {
-		return sessionStorage.getItem('user-jwt-token')
+		return sessionStorage.getItem('user-jwt-token') ?? ''
 	}
 }
 

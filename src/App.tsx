@@ -8,54 +8,45 @@ import { initializeMockEnvironment } from '@common/functions/telegram'
 import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import { useApi } from '@common/hooks/api'
 
-if (import.meta.env.DEV) initializeMockEnvironment()
-
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
 	const { authorizationTelegramUserFromApi } = useApi()
 
-	try {
-		if (!sessionStorage.getItem('user-jwt-token')) {
+	useEffect(() => {
+		if (!sessionStorage.getItem('user-jwt-token') && !import.meta.env.DEV) {
 			//@ts-ignore
-			const initData = window.Telegram.WebApp.initData as string
+			const initData: string = window.Telegram?.WebApp?.initData ?? ''
 			authorizationTelegramUserFromApi({ userInitData: initData }).then(
 				token => {
-					if (!token) return
-					sessionStorage.setItem('user-jwt-token', token)
+					if (token) sessionStorage.setItem('user-jwt-token', token)
 				}
 			)
-		}
-	} catch (e) {
-		console.error('Ошибка авторизации: ', e)
-	}
+		} else if (import.meta.env.DEV) initializeMockEnvironment()
 
-	try {
-		if (rootState.isInitTelegramSdk === undefined) {
-			init()
+		try {
+			if (rootState.isInitTelegramSdk === undefined) {
+				init()
+				setRootState({
+					...rootState,
+					isInitTelegramSdk: true,
+				})
+			}
+		} catch (e) {
+			console.error('Ошибка инициализации telegram sdk: ', e)
 			setRootState({
 				...rootState,
-				isInitTelegramSdk: true,
+				isInitTelegramSdk: false,
 			})
 		}
-	} catch (e) {
-		console.error('Ошибка инициализации teleram sdk: ', e)
-		setRootState({
-			...rootState,
-			isInitTelegramSdk: false,
-		})
-	}
-
-	if (
-		rootState.isInitTelegramSdk &&
-		!miniApp.isMounting &&
-		!miniApp.isMounted()
-	)
-		miniApp.mount()
-	useEffect(() => {
-		if (rootState.isInitTelegramSdk && !backButton.isMounted())
-			backButton.mount()
 	}, [])
+
+	useEffect(() => {
+		if (!rootState.isInitTelegramSdk) return
+
+		if (!backButton.isMounted()) backButton.mount()
+		if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
+	}, [rootState.isInitTelegramSdk])
 
 	return (
 		<RootStateContext.Provider
@@ -103,7 +94,7 @@ export default function App() {
 				setMapViewState: viewState =>
 					setRootState({ ...rootState, mapViewState: viewState }),
 			}}
-		>			
+		>
 			{snackbar}
 			<AppRouter />
 		</RootStateContext.Provider>
