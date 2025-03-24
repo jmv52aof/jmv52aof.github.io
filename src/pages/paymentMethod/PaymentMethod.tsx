@@ -9,26 +9,29 @@ import { RootStateContext } from '@contexts/RootStateContext'
 import PopupWrapper from '@features/popupWrapper/PopupWrapper'
 import ConfirmationPopupContent from '@components/confirmationPopupContent/ConfirmationPopupContent'
 import { useApi } from '@common/hooks/api'
+import { Loader } from '@components/ui/loader/Loader'
 
 export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
 
 	const { loading } = usePaymentMethodLoader()
-	const { paymentMethod, setPaymentMethod, showSnackbar } =
-		useContext(RootStateContext)
+	const { paymentMethod, setPaymentMethod, showSnackbar } = useContext(RootStateContext)
 	const {
 		createPaymentMethodFromApi,
 		getPaymentUrlFromApi,
 		deletePaymentMethodFromApi,
 	} = useApi()
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const createNewPaymentMethod = async () => {
+		setIsLoading(true);
 		await createPaymentMethodFromApi({})
 
 		let paymentUrl = await getPaymentUrlFromApi({})
 		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl
 		window.location.replace(paymentUrl)
+		setIsLoading(false);
 	}
 
 	const doDeletePaymentMethod = async () => {
@@ -72,6 +75,9 @@ export default function PaymentMethodPage(): React.JSX.Element {
 					onClose={() => setPopupIsOpen(false)}
 				/>
 			</PopupWrapper>
+			<PopupWrapper isOpen={isLoading} onClose={() => {}}>
+				<Loader />
+			</PopupWrapper>
 
 			<div className={styles.page__main}>
 				<PaymentMethod
@@ -88,6 +94,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 				}
 				variant={paymentMethod && !paymentMethod.error ? 'red' : 'green'}
 				onClick={processClickAction}
+				disabled={isLoading}
 			/>
 		</PageLayout>
 	)
