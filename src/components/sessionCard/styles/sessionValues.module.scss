@@ -175,3 +175,35 @@
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
+
+@media (max-width: 420px) {
+	.sessionCard__session,
+	.sessionCard__payment {
+		-webkit-box-align: start;
+		-ms-flex-align: start;
+		align-items: flex-start;
+	}
+
+	.session__icon,
+	.payment__icon {
+		margin-top: 2px;
+	}
+
+	.session__times,
+	.payment__texts {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		gap: 6px;
+		margin-top: 5px;
+		margin-bottom: 4px;
+	}
+
+	.times__start,
+	.times__duration,
+	.texts__amount,
+	.texts__paymentMethod {
+		width: auto;
+	}
+}
