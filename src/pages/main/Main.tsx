@@ -89,11 +89,9 @@ export default function MainPage(): React.JSX.Element {
 				</div>
 			)}
 			<StationsMap loading={stationsLoading} />
-			{!stationsLoading && (
-				<div className={styles.footer}>
-					<ControlPanel />
-				</div>
-			)}
+			<div className={styles.footer}>
+				<ControlPanel />
+			</div>
 		</div>
 	)
 }
