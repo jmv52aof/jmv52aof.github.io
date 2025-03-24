@@ -56,12 +56,16 @@ export default function Connector(props: Props): React.JSX.Element {
 				<div className={styles.tariffsBlock__tariffs}>
 					<img src={wallet} alt='Wallet' className={styles.tariffs__icon} />
 					<div className={styles.tariffs__list}>
-						{props.info.tariffs.map((tariff, index) => (
-							<a key={index} className={styles.text_blue}>
-								{tariff.price} {tariff.currency}/
-								{TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[tariff.type]}
-							</a>
-						))}
+						{props.info.tariffs.map((tariff, index) => {
+							const unitOfMeasurement =
+								TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[tariff.type]
+							return (
+								<a key={index} className={styles.text_blue}>
+									{tariff.price} {tariff.currency}
+									{unitOfMeasurement ? '/' + unitOfMeasurement : ''}
+								</a>
+							)
+						})}
 					</div>
 				</div>
 			</div>

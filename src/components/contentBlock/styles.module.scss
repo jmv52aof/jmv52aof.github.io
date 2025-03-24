@@ -76,3 +76,9 @@
 .item__text_color {
 	color: #05a6be;
 }
+
+@media (max-width: 430px) {
+	.items__item {
+		width: 100%;
+	}
+}

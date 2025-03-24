@@ -74,11 +74,14 @@ export default function ChargingSessionConnectorInfo(
 						</p>
 						<div className={styles.tariffs__data}>
 							{props.tariffs.map((item, index) => {
+								const unitOfMeasurement =
+									TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]
+
 								return (
 									<p key={index} className={styles.data__item}>{`${
 										item.price
-									} ${item.currency}/${
-										TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]
+									} ${item.currency}${
+										unitOfMeasurement ? '/' + unitOfMeasurement : ''
 									}`}</p>
 								)
 							})}
