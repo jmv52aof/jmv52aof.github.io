@@ -55,7 +55,7 @@ export const useActiveChargingSessionUpdater = () => {
 			if (activeChargingSession) updateSession()
 			else loadSession()
 		},
-		10000,
+		5000,
 		[activeChargingSession, loading]
 	)
 
