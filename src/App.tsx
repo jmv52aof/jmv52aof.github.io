@@ -41,12 +41,17 @@ export default function App() {
 		}
 	}, [])
 
-	useEffect(() => {
-		if (!rootState.isInitTelegramSdk) return
+	if (
+		rootState.isInitTelegramSdk &&
+		!miniApp.isMounting &&
+		!miniApp.isMounted()
+	)
+		miniApp.mount()
 
-		if (!backButton.isMounted()) backButton.mount()
-		if (!miniApp.isMounting && !miniApp.isMounted()) miniApp.mount()
-	}, [rootState.isInitTelegramSdk])
+	useEffect(() => {
+		if (rootState.isInitTelegramSdk && !backButton.isMounted())
+			backButton.mount()
+	}, [])
 
 	return (
 		<RootStateContext.Provider
