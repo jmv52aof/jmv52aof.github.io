@@ -31,7 +31,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 		let paymentUrl = await getPaymentUrlFromApi({})
 		paymentUrl = paymentUrl ? JSON.parse(paymentUrl as string) : undefined
 		if (paymentUrl) {
-			window.Telegram.WebApp.openLink(paymentUrl, false);
+			window.Telegram.WebApp.openLink(paymentUrl, true);
 		} else {
 			showSnackbar('error', 'Не удалось создать способ оплаты')
 		}
