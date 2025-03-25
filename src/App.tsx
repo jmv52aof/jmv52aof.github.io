@@ -16,6 +16,8 @@ export default function App() {
 	window.addEventListener("online", function () {
 		showSnackbar('success', "Соединение восстановлено")
 	});
+
+	console.log(window.Telegram.WebApp.initData)
 	
 	return (
 		<RootStateContext.Provider
