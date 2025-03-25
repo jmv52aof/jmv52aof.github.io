@@ -65,8 +65,6 @@ export default function App() {
 					setRootState({ ...rootState, mapViewState: viewState }),
 				setLastStoppedChargingSessionId: id =>
 					setRootState({ ...rootState, lastStoppedChargingSessionId: id }),
-				setGeolocationRejected: rejected =>
-					setRootState({ ...rootState, geolocationRejected: rejected })
 			}}
 		>
 			{snackbar}

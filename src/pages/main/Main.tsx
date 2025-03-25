@@ -25,7 +25,7 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { position, setPosition, stationFilters, geolocationRejected, setGeolocationRejected } = useContext(RootStateContext)
+	const { position, setPosition, stationFilters } = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
@@ -34,23 +34,22 @@ export default function MainPage(): React.JSX.Element {
 	})
 
 	useEffect(() => {
-		if (geolocationRejected) return
-		setGeolocationRejected(true)
-
 		if (position !== undefined) return
-
 		const geo = navigator.geolocation
 		if (!geo) {
 			return
 		}
 
-		geo.getCurrentPosition(
+		const watcher = geo.watchPosition(
 			pos => {
 				const { latitude, longitude } = pos.coords
 				setPosition({ latitude: latitude, longitude: longitude })
-				setGeolocationRejected(false)
+			},
+			() => {
+				setPosition(null)
 			}
 		)
+		return () => geo.clearWatch(watcher)
 	}, [])
 
 	const onFiltersClick = () => {
