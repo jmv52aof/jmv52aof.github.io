@@ -24,7 +24,7 @@ export default function PageHeader(props: Readonly<Props>): React.JSX.Element {
 
 	return (
 		<>
-			{isInitTelegramSdk && <BackButton onReturn={props.onReturn}/>}
+			{<BackButton onReturn={props.onReturn}/>}
 			<div className={styles.header}>
 				{showReturnButton ? (
 					<div className={styles.header__left}>
