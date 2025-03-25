@@ -31,6 +31,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 	const chargedKwh = isDischarge
 		? props.sessionValues.charged_kwh * -1
 		: props.sessionValues.charged_kwh
+
 	return (
 		<>
 			<div className={styles.horizontalSplit} />
@@ -52,7 +53,9 @@ export default function SessionValues(props: Props): React.JSX.Element {
 							<div className={styles.bateryInfo__row}>
 								<p className={styles.row__label}>Процент батареи:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.battery_percentage ? props.sessionValues.battery_percentage.toFixed(2) + '%' : '—'}
+									{props.sessionValues.battery_percentage
+										? props.sessionValues.battery_percentage.toFixed(2) + '%'
+										: '—'}
 								</p>
 							</div>
 						</div>
@@ -122,7 +125,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 					</div>
 				</div>
 			</div>
-			{!props.isActive && (
+			{!props.sessionValues.total_cost !== undefined && (
 				<>
 					<div className={styles.horizontalSplit} />
 					<div className={styles.sessionCard__payment}>
@@ -135,8 +138,7 @@ export default function SessionValues(props: Props): React.JSX.Element {
 							<div className={styles.texts__amount}>
 								<p className={styles.row__label}>Сумма:</p>
 								<p className={styles.row__value}>
-									{props.sessionValues.total_cost?.toFixed(2)}{' '}
-									{props.sessionValues.tariffs?.[0]?.currency || 'руб'}.
+									{props.sessionValues.total_cost?.toFixed(2)} руб
 								</p>
 							</div>
 							{props.sessionValues.payment_method && (

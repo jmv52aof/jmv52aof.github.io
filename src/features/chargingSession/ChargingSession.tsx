@@ -5,6 +5,7 @@ import ContentBlock from '@components/contentBlock/ContentBlock'
 import lightingIcon from '@assets/images/lighting.svg'
 import batteryChargeIcon from '@assets/images/battery-charge.svg'
 import clockIcon from '@assets/images/clock.svg'
+import walletIcon from '@assets/images/wallet.svg'
 import { checkVisible } from './lib/functions'
 import {
 	dateToTimestamp,
@@ -170,6 +171,18 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 										  ).toFixed(2)} кВт`
 										: '',
 								checkVisible: checkVisible,
+							},
+						]}
+					/>
+				)}
+				{props.chargingSession.total_cost !== undefined && (
+					<ContentBlock
+						title={'Итоговая стоимость:'}
+						iconSrc={walletIcon}
+						items={[
+							{
+								description: 'Сумма:',
+								value: props.chargingSession.total_cost + ' руб',
 							},
 						]}
 					/>
