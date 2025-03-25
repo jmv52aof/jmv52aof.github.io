@@ -50,14 +50,14 @@ export default function SessionValues(props: Props): React.JSX.Element {
 								</p>
 								<p className={styles.row__value}>{chargedKwh.toFixed(2)} кВт</p>
 							</div>
-							<div className={styles.bateryInfo__row}>
-								<p className={styles.row__label}>Процент батареи:</p>
-								<p className={styles.row__value}>
-									{props.sessionValues.battery_percentage
-										? props.sessionValues.battery_percentage.toFixed(2) + '%'
-										: '—'}
-								</p>
-							</div>
+							{props.sessionValues.battery_percentage !== undefined && (
+								<div className={styles.bateryInfo__row}>
+									<p className={styles.row__label}>Процент батареи:</p>
+									<p className={styles.row__value}>
+										{props.sessionValues.battery_percentage?.toFixed(2)} %
+									</p>
+								</div>
+							)}
 						</div>
 						<div className={styles.activeSessionTexts__powerInfo}>
 							<div className={styles.powerInfo__row}>
