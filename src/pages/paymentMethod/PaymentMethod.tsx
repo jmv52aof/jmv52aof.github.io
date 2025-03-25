@@ -30,12 +30,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 
 		let paymentUrl = await getPaymentUrlFromApi({})
 		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl
-		if (paymentUrl) {
-			const link = document.createElement('a')
-			link.href = paymentUrl
-			link.target = '_blank'
-			link.click()
-		}
+		window.open(paymentUrl, '_blank')
 		setIsLoading(false);
 	}
 
