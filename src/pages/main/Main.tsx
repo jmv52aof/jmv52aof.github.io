@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
 import Search from '@components/ui/search/Search'
 import { useStationsLoader } from './lib/hooks'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 
 /**
@@ -27,6 +27,7 @@ export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
 	const { position, setPosition, stationFilters } = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
+	const [ geolocationRequestRejected, setGeolocationRequestRejected ] = useState<boolean>(false)
 
 	useEffect(() => {
 		// @ts-ignore
@@ -35,8 +36,11 @@ export default function MainPage(): React.JSX.Element {
 
 	useEffect(() => {
 		const geo = navigator.geolocation
-
-		if (position !== undefined || !geo) return
+		if (position !== undefined) return
+		if (!geo) {
+			setGeolocationRequestRejected(true)
+			return
+		}
 
 		const watcher = geo.watchPosition(
 			position => {

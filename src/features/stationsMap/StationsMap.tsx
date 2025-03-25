@@ -17,7 +17,7 @@ type Props = {
  * Карта с отображением станций на ней
  */
 export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
-	const { stations, mapViewState, setMapViewState } =
+	const { stations, mapViewState, setMapViewState, position } =
 		useContext(RootStateContext)
 
 	const [loading, setLoading] = useState<boolean>(true)
@@ -35,6 +35,16 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 			})
 		)
 	}, [stations])
+
+	useEffect(() => {
+		if (position) {
+			setMapViewState({
+				zoom: 17,
+				latitude: position.latitude,
+				longitude: position.longitude,
+			})
+		}
+	}, [position])
 
 	const findSameMarkers = (marker: MarkerInfo): MarkerInfo[] => {
 		const result: MarkerInfo[] = []
