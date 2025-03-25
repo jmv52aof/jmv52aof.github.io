@@ -29,7 +29,8 @@ interface Props {
 export default function ChargingSession(props: Props): React.JSX.Element {
 	const nav = useNavigate()
 
-	const { showSnackbar } = useContext(RootStateContext)
+	const { showSnackbar, setLastStoppedChargingSessionId } =
+		useContext(RootStateContext)
 	const { stopChargingSessionFromApi } = useApi()
 
 	const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
@@ -68,6 +69,7 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 							'success',
 							'Станция приняла запрос на завершение зарядки'
 						)
+						setLastStoppedChargingSessionId(props.chargingSession.id)
 					}}
 					onClose={() => setPopupIsOpen(false)}
 				/>

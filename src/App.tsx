@@ -94,6 +94,8 @@ export default function App() {
 					}),
 				setMapViewState: viewState =>
 					setRootState({ ...rootState, mapViewState: viewState }),
+				setLastStoppedChargingSessionId: id =>
+					setRootState({ ...rootState, lastStoppedChargingSessionId: id }),
 			}}
 		>
 			{snackbar}

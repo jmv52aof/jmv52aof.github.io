@@ -2,11 +2,13 @@ import { ChargingSessionStatuses } from '@common/consts/chargingSessions'
 import { useApi } from '@common/hooks/api'
 import { useInterval } from '@common/hooks/timer'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
-import { useEffect, useState } from 'react'
+import { RootStateContext } from '@contexts/RootStateContext'
+import { useContext, useEffect, useState } from 'react'
 
 /** Хук обновляет данные по активной сессий каждый фиксированный промежуток времени */
 export const useActiveChargingSessionUpdater = () => {
 	const { getChargingSessionByIdFromApi, getChargingSessionsFromApi } = useApi()
+	const { lastStoppedChargingSessionId } = useContext(RootStateContext)
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [activeSession, setActiveSession] = useState<
@@ -63,8 +65,11 @@ export const useActiveChargingSessionUpdater = () => {
 		activate()
 	}, [])
 
+	const sessionIsStopped =
+		activeSession && activeSession.id === lastStoppedChargingSessionId
+
 	return {
 		initialized,
-		activeSession,
+		activeSession: sessionIsStopped ? undefined : activeSession,
 	}
 }

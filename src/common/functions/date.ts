@@ -34,16 +34,16 @@ export const timestampToDate = (timestamp: Timestamp): Date => {
  * Преобразует объект Date в объект Timestamp
  *
  * @param date - Объект Date, который необходимо преобразовать.
- * @returns - Объект Timestamp, преобразованный из date.
+ * @returns Объект Timestamp, преобразованный из date.
  */
 export const dateToTimestamp = (date: Date): Timestamp => {
 	return {
-		year: date.getUTCFullYear(),
-		month: date.getUTCMonth() + 1,
-		day: date.getUTCDate(),
-		hours: date.getUTCHours(),
-		minutes: date.getUTCMinutes(),
-		seconds: date.getUTCSeconds(),
+		year: date.getFullYear(),
+		month: date.getMonth() + 1,
+		day: date.getDate(),
+		hours: date.getHours(),
+		minutes: date.getMinutes(),
+		seconds: date.getSeconds(),
 	}
 }
 
@@ -99,13 +99,20 @@ export const getTimesDifference = (
 ): Timestamp => {
 	const reducedTime = timestampToDate(reduced).getTime()
 	const subtractedTime = timestampToDate(subtracted).getTime()
-	return dateToTimestamp(
-		new Date(
-			reducedTime < subtractedTime
-				? subtractedTime - reducedTime
-				: reducedTime - subtractedTime
-		)
+	const result = new Date(
+		reducedTime < subtractedTime
+			? subtractedTime - reducedTime
+			: reducedTime - subtractedTime
 	)
+
+	return {
+		year: 0,
+		month: 0,
+		day: 0,
+		hours: result.getUTCHours(),
+		minutes: result.getUTCMinutes(),
+		seconds: result.getUTCSeconds(),
+	}
 }
 
 /**
@@ -121,4 +128,18 @@ export const dateStringToTimestamp = (
 	const inDate = new Date(date)
 	if (isUtc) inDate.setHours(inDate.getHours() + 3)
 	return dateToTimestamp(inDate)
+}
+
+/**
+ * Вычисляет разницу между двумя Timestamp в секундах. При любом порядке аргументов будет
+ * возвращено положительное число
+ * @returns разница между Timestamp в секундах
+ */
+export const getTimestampDifferenceInSeconds = (
+	reduced: Timestamp,
+	subtracted: Timestamp
+): number => {
+	const result =
+		timestampToDate(reduced).getTime() - timestampToDate(subtracted).getTime()
+	return (result > 0 ? result : result * -1) / 1000
 }

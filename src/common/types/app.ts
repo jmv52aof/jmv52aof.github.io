@@ -20,6 +20,7 @@ export type RootState = {
 	rfidCard?: RfidCardDto
 	paymentMethod?: string
 	mapViewState?: ViewState
+	lastStoppedChargingSessionId?: string
 }
 
 export interface IRootStateContext extends RootState {
@@ -32,4 +33,5 @@ export interface IRootStateContext extends RootState {
 	setRfidCard: (card?: RfidCardDto) => void
 	setPaymentMethod: (method?: string) => void
 	setMapViewState: (viewState: ViewState) => void
+	setLastStoppedChargingSessionId: (id?: string) => void
 }

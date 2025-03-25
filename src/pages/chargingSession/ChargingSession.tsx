@@ -2,16 +2,22 @@ import ChargingSession from '@features/chargingSession/ChargingSession'
 import { useChargingSessionQueryParser } from './lib/hooks'
 import { ChargingSessionPreviousPageQueries } from '@common/consts/pages'
 import { SESSIONS_HISTORY_ENDPOINT } from '@common/consts/endpoints'
-import { useNavigate } from 'react-router'
+import { Navigate, useNavigate } from 'react-router'
 import PageLayout from '@layouts/pageLayout/PageLayout'
-import NotFoundPage from '@pages/notFound/NotFound'
 import { useActiveChargingSessionUpdater } from '@common/hooks/chargingSessions'
 import { ChargingSessionDto } from '@common/types/chargingSessions'
+import { useContext, useEffect } from 'react'
+import { RootStateContext } from '@contexts/RootStateContext'
 
 export default function ChargingSessionPage(): React.JSX.Element {
 	const nav = useNavigate()
+	const { setLastStoppedChargingSessionId } = useContext(RootStateContext)
 	const { pageQueries } = useChargingSessionQueryParser()
 	const { initialized, activeSession } = useActiveChargingSessionUpdater()
+
+	useEffect(() => {
+		setLastStoppedChargingSessionId(undefined)
+	}, [])
 
 	const getPreviousPageEndpoint = (): string => {
 		switch (pageQueries.prev_page) {
@@ -21,7 +27,8 @@ export default function ChargingSessionPage(): React.JSX.Element {
 		return '/'
 	}
 
-	if (!activeSession && initialized) return <NotFoundPage />
+	if (!activeSession && initialized)
+		return <Navigate to={SESSIONS_HISTORY_ENDPOINT} replace />
 
 	return (
 		<PageLayout
