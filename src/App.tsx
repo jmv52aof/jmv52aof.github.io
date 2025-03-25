@@ -8,6 +8,8 @@ import { initializeMockEnvironment } from '@common/functions/telegram'
 // import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import { useApi } from '@common/hooks/api'
 
+let connectionStatus = true
+
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
@@ -19,6 +21,11 @@ export default function App() {
 	window.addEventListener("online", function () {
 		showSnackbar('success', "Соединение восстановлено")
 	});
+
+	fetch(import.meta.env.VITE_BACKEND_URL)
+		.catch(() => {
+			showSnackbar("error", "Не удалось подключиться к серверу!");
+		});
 
 	// try {
 	// 	if (rootState.isInitTelegramSdk === undefined) {
