@@ -4,11 +4,6 @@ import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
 import { useSnackbar } from '@common/hooks/snackbar'
-import { initializeMockEnvironment } from '@common/functions/telegram'
-// import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
-import { useApi } from '@common/hooks/api'
-
-let connectionStatus = true
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
@@ -21,43 +16,7 @@ export default function App() {
 	window.addEventListener("online", function () {
 		showSnackbar('success', "Соединение восстановлено")
 	});
-
-	fetch(import.meta.env.VITE_BACKEND_URL)
-		.catch(() => {
-			showSnackbar("error", "Не удалось подключиться к серверу!");
-		});
-
-	// try {
-	// 	if (rootState.isInitTelegramSdk === undefined) {
-	// 		console.log(window.Telegram?.WebApp)
-	// 		// init()
-	// 		console.log(window.Telegram?.WebApp)
-	// 		console.log()
-	// 		setRootState({
-	// 			...rootState,
-	// 			isInitTelegramSdk: true,
-	// 		})
-	// 	}
-	// } catch (e) {
-	// 	console.error('Ошибка инициализации telegram sdk: ', e)
-	// 	setRootState({
-	// 		...rootState,
-	// 		isInitTelegramSdk: false,
-	// 	})
-	// }
-
-	// if (
-	// 	rootState.isInitTelegramSdk &&
-	// 	!miniApp.isMounting &&
-	// 	!miniApp.isMounted()
-	// )
-	// 	miniApp.mount()
-
-	// useEffect(() => {
-	// 	if (rootState.isInitTelegramSdk && !backButton.isMounted())
-	// 		backButton.mount()
-	// }, [])
-
+	
 	return (
 		<RootStateContext.Provider
 			value={{
