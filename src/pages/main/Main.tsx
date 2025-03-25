@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router'
 import ActiveSessionNotify from '@components/activeSessionNotify/ActiveSessionNotify'
 import Search from '@components/ui/search/Search'
 import { useStationsLoader } from './lib/hooks'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
 
 /**
@@ -25,23 +25,31 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { position, setPosition, stationFilters } = useContext(RootStateContext)
+	const { position, setPosition, stationFilters, geolocationRejected, setGeolocationRejected } = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
-		const geo = navigator.geolocation
+		// @ts-ignore
+		window.Telegram.WebApp.BackButton.hide()
+	})
 
-		if (position !== undefined || !geo) return
+	useEffect(() => {
+		if (geolocationRejected) return
+		const geo = navigator.geolocation
+		if (position !== undefined) return
+		if (!geo) {
+			return
+		}
 
 		const watcher = geo.watchPosition(
-			position => {
-				setPosition({
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude,
-				})
+			pos => {
+				const { latitude, longitude } = pos.coords
+				setPosition({ latitude: latitude, longitude: longitude })
 			},
-			() => {
-				setPosition(null)
+			error => {
+				if (error.code === error.PERMISSION_DENIED) {
+					setGeolocationRejected(true)
+				}
 			}
 		)
 		return () => geo.clearWatch(watcher)

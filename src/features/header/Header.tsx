@@ -18,13 +18,10 @@ type Props = {
  * 3) Когда произошла ошибка при инициализации telegram sdk
  */
 export default function PageHeader(props: Readonly<Props>): React.JSX.Element {
-	const { isInitTelegramSdk } = useContext(RootStateContext)
-
-	const showReturnButton = !isInitTelegramSdk || import.meta.env.DEV
-
+	const showReturnButton = !!import.meta.env.DEV
 	return (
 		<>
-			{isInitTelegramSdk && <BackButton onReturn={props.onReturn}/>}
+			{<BackButton onReturn={props.onReturn}/>}
 			<div className={styles.header}>
 				{showReturnButton ? (
 					<div className={styles.header__left}>

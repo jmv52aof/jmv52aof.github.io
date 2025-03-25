@@ -1,4 +1,4 @@
-import { backButton } from "@telegram-apps/sdk-react"
+// import { backButton } from "@telegram-apps/sdk-react"
 import { useEffect } from "react"
 
 interface Props {
@@ -6,16 +6,8 @@ interface Props {
 }
 
 export default function BackButton(props: Props) {
-    useEffect(() => {
-        if (backButton.isSupported() && backButton.isMounted()){
-            backButton.show()
-            backButton.onClick(props.onReturn)
-        }
-        return () => {
-            backButton.offClick(props.onReturn)
-            backButton.hide()
-        }
-    }, [props])
-    
+    // @ts-ignore
+    window.Telegram.WebApp.BackButton.show()
+    window.Telegram.WebApp.onEvent("backButtonClicked", props.onReturn);
     return null
 }

@@ -4,52 +4,21 @@ import { RootState } from '@common/types/app'
 import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
 import { useSnackbar } from '@common/hooks/snackbar'
-import { initializeMockEnvironment } from '@common/functions/telegram'
-import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
-import { useApi } from '@common/hooks/api'
 
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
-	const { authorizationTelegramUserFromApi } = useApi()
 
-	if (!sessionStorage.getItem('user-jwt-token') && !import.meta.env.DEV) {
-		//@ts-ignore
-		const initData = window.Telegram?.WebApp?.initData ?? ''
-		authorizationTelegramUserFromApi({ userInitData: initData }).then(token => {
-			if (token) sessionStorage.setItem('user-jwt-token', token)
-		})
-	} else if (import.meta.env.DEV) {
-		initializeMockEnvironment()
-	}
+	window.addEventListener("offline", function () {
+		showSnackbar("error", "Потеряна связь с сервером!");
+	});
+  
+	window.addEventListener("online", function () {
+		showSnackbar('success', "Соединение восстановлено")
+	});
 
-	try {
-		if (rootState.isInitTelegramSdk === undefined) {
-			init()
-			setRootState({
-				...rootState,
-				isInitTelegramSdk: true,
-			})
-		}
-	} catch (e) {
-		console.error('Ошибка инициализации telegram sdk: ', e)
-		setRootState({
-			...rootState,
-			isInitTelegramSdk: false,
-		})
-	}
-
-	if (
-		rootState.isInitTelegramSdk &&
-		!miniApp.isMounting &&
-		!miniApp.isMounted()
-	)
-		miniApp.mount()
-
-	useEffect(() => {
-		if (rootState.isInitTelegramSdk && !backButton.isMounted())
-			backButton.mount()
-	}, [])
+	// @ts-ignore
+	window.Telegram.WebApp.lockOrientation()
 
 	return (
 		<RootStateContext.Provider
@@ -96,6 +65,8 @@ export default function App() {
 					setRootState({ ...rootState, mapViewState: viewState }),
 				setLastStoppedChargingSessionId: id =>
 					setRootState({ ...rootState, lastStoppedChargingSessionId: id }),
+				setGeolocationRejected: rejected =>
+					setRootState({ ...rootState, geolocationRejected: rejected })
 			}}
 		>
 			{snackbar}
