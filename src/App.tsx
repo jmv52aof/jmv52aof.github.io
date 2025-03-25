@@ -11,36 +11,25 @@ import { useApi } from '@common/hooks/api'
 export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
-	const { authorizationTelegramUserFromApi } = useApi()
 
-	if (!sessionStorage.getItem('user-jwt-token') && !import.meta.env.DEV) {
-		//@ts-ignore
-		const initData = window.Telegram?.WebApp?.initData ?? ''
-		authorizationTelegramUserFromApi({ userInitData: initData }).then(token => {
-			if (token) sessionStorage.setItem('user-jwt-token', token)
-		})
-	} else if (import.meta.env.DEV) {
-		initializeMockEnvironment()
-	}
-
-	try {
-		if (rootState.isInitTelegramSdk === undefined) {
-			console.log(window.Telegram?.WebApp)
-			// init()
-			console.log(window.Telegram?.WebApp)
-			console.log()
-			setRootState({
-				...rootState,
-				isInitTelegramSdk: true,
-			})
-		}
-	} catch (e) {
-		console.error('Ошибка инициализации telegram sdk: ', e)
-		setRootState({
-			...rootState,
-			isInitTelegramSdk: false,
-		})
-	}
+	// try {
+	// 	if (rootState.isInitTelegramSdk === undefined) {
+	// 		console.log(window.Telegram?.WebApp)
+	// 		// init()
+	// 		console.log(window.Telegram?.WebApp)
+	// 		console.log()
+	// 		setRootState({
+	// 			...rootState,
+	// 			isInitTelegramSdk: true,
+	// 		})
+	// 	}
+	// } catch (e) {
+	// 	console.error('Ошибка инициализации telegram sdk: ', e)
+	// 	setRootState({
+	// 		...rootState,
+	// 		isInitTelegramSdk: false,
+	// 	})
+	// }
 
 	// if (
 	// 	rootState.isInitTelegramSdk &&
