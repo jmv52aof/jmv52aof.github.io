@@ -21,6 +21,7 @@ export const DEFAULT_ROOT_STATE: RootState = {
 	sessions: [],
 	position: undefined,
 	isInitTelegramSdk: undefined,
+	geolocationRejected: false
 }
 
 export const GET_DATA_LIMIT = 15

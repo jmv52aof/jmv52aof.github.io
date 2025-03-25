@@ -25,9 +25,8 @@ import { RootStateContext } from 'contexts/RootStateContext'
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { position, setPosition, stationFilters } = useContext(RootStateContext)
+	const { position, setPosition, stationFilters, geolocationRejected, setGeolocationRejected } = useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
-	const [ geolocationRequestRejected, setGeolocationRequestRejected ] = useState<boolean>(false)
 
 	useEffect(() => {
 		// @ts-ignore
@@ -35,23 +34,22 @@ export default function MainPage(): React.JSX.Element {
 	})
 
 	useEffect(() => {
-		if (geolocationRequestRejected) return
+		if (geolocationRejected) return
 		const geo = navigator.geolocation
 		if (position !== undefined) return
 		if (!geo) {
-			setGeolocationRequestRejected(true)
 			return
 		}
 
 		const watcher = geo.watchPosition(
-			position => {
-				setPosition({
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude,
-				})
+			pos => {
+				const { latitude, longitude } = pos.coords
+				setPosition({ latitude: latitude, longitude: longitude })
 			},
-			() => {
-				setPosition(null)
+			error => {
+				if (error.code === error.PERMISSION_DENIED) {
+					setGeolocationRejected(true)
+				}
 			}
 		)
 		return () => geo.clearWatch(watcher)

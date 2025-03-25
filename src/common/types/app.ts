@@ -21,6 +21,7 @@ export type RootState = {
 	paymentMethod?: string
 	mapViewState?: ViewState
 	lastStoppedChargingSessionId?: string
+	geolocationRejected: boolean
 }
 
 export interface IRootStateContext extends RootState {
@@ -34,4 +35,5 @@ export interface IRootStateContext extends RootState {
 	setPaymentMethod: (method?: string) => void
 	setMapViewState: (viewState: ViewState) => void
 	setLastStoppedChargingSessionId: (id?: string) => void
+	setGeolocationRejected: (rejected: boolean) => void
 }
