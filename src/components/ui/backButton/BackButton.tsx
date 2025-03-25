@@ -7,6 +7,7 @@ interface Props {
 
 export default function BackButton(props: Props) {
     // @ts-ignore
+    window.Telegram.WebApp.BackButton.show()
     window.Telegram.WebApp.onEvent("backButtonClicked", props.onReturn);
     return null
 }
