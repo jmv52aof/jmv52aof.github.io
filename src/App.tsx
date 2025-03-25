@@ -17,8 +17,6 @@ export default function App() {
 		showSnackbar('success', "Соединение восстановлено")
 	});
 
-	console.log(window.Telegram.WebApp.initData)
-	
 	return (
 		<RootStateContext.Provider
 			value={{
