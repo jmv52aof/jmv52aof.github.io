@@ -5,7 +5,30 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Ensub Charge</title>
-		<script src="https://jmv52aof.github.io/telegram-web-app.js"></script>
+		<script>
+			(function() {
+			  var maxRetries = 64;
+			  var retryDelay = 250;
+			  var attempt = 0;
+			  var src = "https://jmv52aof.github.io/telegram-web-app.js";
+		
+			  function loadTelegramLib() {
+				var script = document.createElement('script');
+				script.src = src;
+				script.async = false;
+				script.onload = function() {};
+				script.onerror = function() {
+				  if (attempt < maxRetries) {
+					attempt++;
+					setTimeout(loadTelegramLib, retryDelay);
+				  }
+				};
+				document.head.appendChild(script);
+			  }
+		
+			  loadTelegramLib();
+			})();
+		  </script>
 		<script type="module" crossorigin src="/assets/index-BQKOj2JL.js"></script>
 		<link rel="stylesheet" crossorigin href="/assets/index-Ck45oY_L.css">
 	</head>
