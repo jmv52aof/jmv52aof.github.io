@@ -29,6 +29,11 @@ export default function MainPage(): React.JSX.Element {
 	const { stationsLoading } = useStationsLoader()
 
 	useEffect(() => {
+		// @ts-ignore
+		window.Telegram.WebApp.BackButton.hide()
+	})
+
+	useEffect(() => {
 		const geo = navigator.geolocation
 
 		if (position !== undefined || !geo) return
