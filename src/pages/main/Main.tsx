@@ -35,24 +35,22 @@ export default function MainPage(): React.JSX.Element {
 
 	useEffect(() => {
 		if (geolocationRejected) return
-		const geo = navigator.geolocation
+		setGeolocationRejected(true)
+
 		if (position !== undefined) return
+
+		const geo = navigator.geolocation
 		if (!geo) {
 			return
 		}
 
-		const watcher = geo.watchPosition(
+		geo.getCurrentPosition(
 			pos => {
 				const { latitude, longitude } = pos.coords
 				setPosition({ latitude: latitude, longitude: longitude })
-			},
-			error => {
-				if (error.code === error.PERMISSION_DENIED) {
-					setGeolocationRejected(true)
-				}
+				setGeolocationRejected(false)
 			}
 		)
-		return () => geo.clearWatch(watcher)
 	}, [])
 
 	const onFiltersClick = () => {
