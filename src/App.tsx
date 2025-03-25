@@ -5,7 +5,7 @@ import { DEFAULT_ROOT_STATE } from '@common/consts/app'
 import { RootStateContext } from 'contexts/RootStateContext'
 import { useSnackbar } from '@common/hooks/snackbar'
 import { initializeMockEnvironment } from '@common/functions/telegram'
-import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
+// import { backButton, init, miniApp } from '@telegram-apps/sdk-react'
 import { useApi } from '@common/hooks/api'
 
 export default function App() {
@@ -25,7 +25,10 @@ export default function App() {
 
 	try {
 		if (rootState.isInitTelegramSdk === undefined) {
-			init()
+			console.log(window.Telegram?.WebApp)
+			// init()
+			console.log(window.Telegram?.WebApp)
+			console.log()
 			setRootState({
 				...rootState,
 				isInitTelegramSdk: true,
@@ -39,17 +42,17 @@ export default function App() {
 		})
 	}
 
-	if (
-		rootState.isInitTelegramSdk &&
-		!miniApp.isMounting &&
-		!miniApp.isMounted()
-	)
-		miniApp.mount()
+	// if (
+	// 	rootState.isInitTelegramSdk &&
+	// 	!miniApp.isMounting &&
+	// 	!miniApp.isMounted()
+	// )
+	// 	miniApp.mount()
 
-	useEffect(() => {
-		if (rootState.isInitTelegramSdk && !backButton.isMounted())
-			backButton.mount()
-	}, [])
+	// useEffect(() => {
+	// 	if (rootState.isInitTelegramSdk && !backButton.isMounted())
+	// 		backButton.mount()
+	// }, [])
 
 	return (
 		<RootStateContext.Provider

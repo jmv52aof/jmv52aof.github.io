@@ -3,7 +3,7 @@ name: Сборка и деплой в Github Pages
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   tests:
