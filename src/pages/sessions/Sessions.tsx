@@ -75,8 +75,6 @@ export default function SessionsPage(): React.JSX.Element {
 		return items
 	}
 
-	console.log(sessions.length)
-
 	const onPopupClose = () => {
 		setPopup({
 			isOpen: false,

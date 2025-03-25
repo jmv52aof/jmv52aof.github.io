@@ -18,7 +18,6 @@ export type RootState = {
 	position?: Position | null
 	isInitTelegramSdk?: boolean
 	rfidCard?: RfidCardDto
-	activeChargingSession?: ChargingSessionDto
 	paymentMethod?: string
 	mapViewState?: ViewState
 }
@@ -31,7 +30,6 @@ export interface IRootStateContext extends RootState {
 	showSnackbar: (type: Variant, text: string) => void
 	setPosition: (position: Position | null) => void
 	setRfidCard: (card?: RfidCardDto) => void
-	setActiveChargingSession: (session?: ChargingSessionDto) => void
 	setPaymentMethod: (method?: string) => void
 	setMapViewState: (viewState: ViewState) => void
 }

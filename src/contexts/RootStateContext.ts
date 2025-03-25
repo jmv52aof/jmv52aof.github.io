@@ -11,7 +11,6 @@ export const RootStateContext = createContext<IRootStateContext>({
 	showSnackbar: _ => {},
 	setPosition: _ => {},
 	setRfidCard: _ => {},
-	setActiveChargingSession: _ => {},
 	setPaymentMethod: _ => {},
 	setMapViewState: _ => {},
 })
