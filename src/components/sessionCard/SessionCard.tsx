@@ -18,6 +18,8 @@ import {
 	StationProfilePageQueryArguments,
 	StationProfilePreviousPageQueries,
 } from '@common/consts/pages'
+import { useContext } from 'react'
+import { RootStateContext } from '@contexts/RootStateContext'
 
 type Props = {
 	session: ChargingSessionDto
@@ -25,6 +27,9 @@ type Props = {
 }
 
 export default function SessionCard(props: Props): React.JSX.Element {
+	const { lastStoppedChargingSessionId } = useContext(RootStateContext)
+
+	const isStoppedSession = props.session.id === lastStoppedChargingSessionId
 	const isCharging = props.session.status === 'Зарядка'
 	const isUnpaid = props.session.payment_status === 'Неоплачено'
 
@@ -81,9 +86,17 @@ export default function SessionCard(props: Props): React.JSX.Element {
 						</div>
 						<div className={styles.station__button}>
 							<Button
-								onClick={isCharging ? onSessionClick : onStationClick}
+								onClick={
+									isCharging && !isStoppedSession
+										? onSessionClick
+										: onStationClick
+								}
 								variant='fill'
-								iconSrc={isCharging ? arrowRightImage : profileImage}
+								iconSrc={
+									isCharging && !isStoppedSession
+										? arrowRightImage
+										: profileImage
+								}
 							/>
 						</div>
 					</div>
