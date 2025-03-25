@@ -12,6 +12,14 @@ export default function App() {
 	const [rootState, setRootState] = useState<RootState>(DEFAULT_ROOT_STATE)
 	const { snackbar, showSnackbar } = useSnackbar()
 
+	window.addEventListener("offline", function () {
+		showSnackbar("error", "Потеряна связь с сервером!");
+	});
+  
+	window.addEventListener("online", function () {
+		showSnackbar('success', "Соединение восстановлено")
+	});
+
 	// try {
 	// 	if (rootState.isInitTelegramSdk === undefined) {
 	// 		console.log(window.Telegram?.WebApp)
