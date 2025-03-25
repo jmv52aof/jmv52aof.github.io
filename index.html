@@ -9,9 +9,7 @@
 		<script>
 			if (!window.Telegram.WebApp.initData) {
 				window.Telegram.WebApp.showAlert('Не удалось войти в аккаунт! Пожалуйста, откройте приложение через бот')
-					.then(() => {
-						window.Telegram.WebApp.close();
-					});
+				window.Telegram.WebApp.close();
 			}
 			window.Telegram.WebApp.ready();
 		</script>
