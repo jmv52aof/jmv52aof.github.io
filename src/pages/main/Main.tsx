@@ -36,6 +36,7 @@ export default function MainPage(): React.JSX.Element {
 
 	useEffect(() => {
 		const geo = navigator.geolocation
+		if (geolocationRequestRejected) return
 		if (position !== undefined) return
 		if (!geo) {
 			setGeolocationRequestRejected(true)
