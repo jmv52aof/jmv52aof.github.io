@@ -29,8 +29,12 @@ export default function PaymentMethodPage(): React.JSX.Element {
 		await createPaymentMethodFromApi({})
 
 		let paymentUrl = await getPaymentUrlFromApi({})
-		paymentUrl = paymentUrl ? paymentUrl.replace(/["]/g, '') : paymentUrl
-		window.open(paymentUrl, '_blank')
+		paymentUrl = paymentUrl ? JSON.parse(paymentUrl as string) : undefined
+		if (paymentUrl) {
+			window.open(paymentUrl)
+		} else {
+			showSnackbar('error', 'Не удалось создать способ оплаты')
+		}
 		setIsLoading(false);
 	}
 
