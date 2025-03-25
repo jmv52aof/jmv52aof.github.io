@@ -77,9 +77,7 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 
 			<ChargingSessionActivePower
 				power={props.chargingSession.current_power ?? 0}
-				maxPower={
-					(props.chargingSession.connector_info.max_electric_power ?? 0) / 1000
-				}
+				maxPower={props.chargingSession.connector_info.max_electric_power ?? 0}
 				showAnimation
 			/>
 			<div className={styles.buttonBlock}>

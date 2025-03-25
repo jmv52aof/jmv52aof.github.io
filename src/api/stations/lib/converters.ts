@@ -279,6 +279,9 @@ export const convertConnectorInfoResponseDto = (
 		standard: convertConnectorStandardResponse(connectorInfo.standard),
 		format: convertConnectorFormatResponse(connectorInfo.format),
 		power_type: convertConnectorPowerTypeResponse(connectorInfo.power_type),
-		max_electric_power: connectorInfo.max_electric_power,
+		max_electric_power:
+			undefined !== connectorInfo.max_electric_power
+				? Number((connectorInfo.max_electric_power / 1000).toFixed(2))
+				: undefined,
 	}
 }
