@@ -17,6 +17,9 @@ export default function App() {
 		showSnackbar('success', "Соединение восстановлено")
 	});
 
+	// @ts-ignore
+	window.Telegram.WebApp.lockOrientation()
+
 	return (
 		<RootStateContext.Provider
 			value={{
