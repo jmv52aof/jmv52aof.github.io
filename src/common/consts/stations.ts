@@ -68,5 +68,3 @@ export const STATION_STATUS_COLORS: Record<StationStatus, ColorTemplate> = {
 	Занята: 'orange',
 	'Не работает': 'grey',
 }
-
-export const DECIMAL_IN_MAX_POWER = 2

@@ -5,7 +5,6 @@ import {
 	CONNECTOR_STATUS_COLORS,
 } from '@common/consts/stations'
 import { ConnectorDto } from '@common/types/stations'
-import { getMaxPowerForConnector } from '@common/functions/stations'
 
 type Props = {
 	connector: ConnectorDto
@@ -25,7 +24,7 @@ export default function Connector(props: Readonly<Props>) {
 					<div className={styles.content__main}>
 						<p className={styles.main__standard}>{props.connector.standard}</p>
 						<p className={styles.main__power}>
-							{parseFloat(getMaxPowerForConnector(props.connector).toFixed(2))} кВт
+							{props.connector.max_electric_power} кВт
 						</p>
 					</div>
 					<div className={styles.content__additional}>

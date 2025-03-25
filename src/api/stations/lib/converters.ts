@@ -180,7 +180,9 @@ export const convertConnectorResponseDto = (
 		power_type: convertConnectorPowerTypeResponse(connector.power_type),
 		max_voltage: connector.max_voltage,
 		max_amperage: connector.max_amperage,
-		max_electric_power: connector.max_electric_power,
+		max_electric_power: Number(
+			(connector.max_electric_power / 1000).toFixed(2)
+		),
 		tariffs: connector.tariffs
 			? connector.tariffs.map(tariff =>
 					convertConnectorTariffResponseDto(tariff)
