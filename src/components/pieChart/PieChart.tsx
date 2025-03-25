@@ -20,6 +20,11 @@ interface Props {
 }
 
 export default function PieChart(props: Props): React.JSX.Element {
+	let maxValue = props.maxValue
+	if (props.value === maxValue) {
+		maxValue = 0 === props.value ? 100 : props.value * 100
+	}
+
 	return (
 		<div className={`${styles.chart} ${props.className}`}>
 			<ResponsiveContainer width='100%' height='100%'>
@@ -27,7 +32,7 @@ export default function PieChart(props: Props): React.JSX.Element {
 					<Pie
 						data={[
 							{
-								value: props.maxValue,
+								value: maxValue,
 							},
 						]}
 						dataKey='value'

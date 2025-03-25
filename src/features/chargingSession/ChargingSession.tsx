@@ -64,7 +64,10 @@ export default function ChargingSession(props: Props): React.JSX.Element {
 					}
 					onSuccess={() => {
 						nav(SESSIONS_HISTORY_ENDPOINT)
-						showSnackbar('success', 'Зарядка завершена')
+						showSnackbar(
+							'success',
+							'Станция приняла запрос на завершение зарядки'
+						)
 					}}
 					onClose={() => setPopupIsOpen(false)}
 				/>
