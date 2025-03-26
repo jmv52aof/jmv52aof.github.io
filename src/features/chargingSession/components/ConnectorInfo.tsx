@@ -14,6 +14,8 @@ import {
 	StationProfilePageQueryArguments,
 	StationProfilePreviousPageQueries,
 } from '@common/consts/pages'
+import { useMemo } from 'react'
+import { TARIFF_TYPE_HAS_PRIORITY } from '../lib/consts'
 
 interface Props {
 	sessionId: string
@@ -25,6 +27,18 @@ export default function ChargingSessionConnectorInfo(
 	props: Props
 ): React.JSX.Element {
 	const nav = useNavigate()
+
+	const tariffs = useMemo(
+		() =>
+			(props.tariffs ?? []).sort((a, b) => {
+				const aPriority = TARIFF_TYPE_HAS_PRIORITY[a.type]
+				const bPriority = TARIFF_TYPE_HAS_PRIORITY[b.type]
+
+				if (aPriority === bPriority) return 0
+				return aPriority > bPriority ? -1 : 1
+			}),
+		[props.tariffs]
+	)
 
 	return (
 		<ContentBlockLayout className={styles.content}>
@@ -67,13 +81,13 @@ export default function ChargingSessionConnectorInfo(
 						iconSrc={squareShareLineIcon}
 					/>
 				</div>
-				{!!props.tariffs?.length && (
+				{tariffs.length > 0 && (
 					<div className={styles.details__tariffs}>
 						<p className={styles.tariffs__title}>
 							<img src={walletIcon} /> Используемые тарифы:
 						</p>
 						<div className={styles.tariffs__data}>
-							{props.tariffs.map((item, index) => {
+							{tariffs.map((item, index) => {
 								const unitOfMeasurement =
 									TARIFF_TYPE_HAS_UNIT_OF_MEASUREMENT[item.type]
 
