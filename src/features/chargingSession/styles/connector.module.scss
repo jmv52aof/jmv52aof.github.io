@@ -7,7 +7,7 @@
 	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row;
-	gap: 16px;
+	gap: 12px;
 	padding: 8px;
 }
 
@@ -26,6 +26,7 @@
 	-ms-flex-pack: center;
 	justify-content: center;
 	gap: 4px;
+	min-width: 80px;
 }
 
 .connector__icon {
@@ -34,7 +35,7 @@
 }
 
 .connector__type {
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 18px;
 }
 
@@ -52,6 +53,7 @@
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
+	gap: 8px;
 }
 
 .details__station {
