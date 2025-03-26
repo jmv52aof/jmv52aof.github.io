@@ -26,6 +26,7 @@ const Slider: React.FC<Props> = ({
 	const [pointOffset, setPointOffset] = useState<number>(0)
 	const [selectedIndex, setSelectedIndex] = useState<number>(0)
 	const [isDragging, setIsDragging] = useState<boolean>(false)
+	const [animationHidden, setAnimationHidden] = useState<boolean>(true)
 
 	const sliderRef = useRef<HTMLDivElement>(null)
 	const sliderLegendRef = useRef<HTMLDivElement>(null)
@@ -40,6 +41,12 @@ const Slider: React.FC<Props> = ({
 			setPointOffset((newIndex / (keys.length - 1)) * 100)
 		}
 	}, [current])
+
+	useEffect(() => {
+		setTimeout(() => {
+			setAnimationHidden(false)
+		}, 50)
+	}, [])
 
 	const handleMouseDown = (event: React.MouseEvent) => {
 		setIsDragging(true)
@@ -149,7 +156,9 @@ const Slider: React.FC<Props> = ({
 				onTouchStart={handleTouchStart}
 			>
 				<div
-					className={styles.slider__pointer}
+					className={`${styles.slider__pointer} ${
+						animationHidden ? '' : styles.slider__pointer_animation
+					}`}
 					style={{
 						left: `${pointOffset}%`,
 						transition: isDragging ? 'none' : undefined,
