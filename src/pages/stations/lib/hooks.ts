@@ -25,9 +25,7 @@ export const useStationsLoader = () => {
 	}
 
 	useEffect(() => {
-		if (!stationFilters.shouldUpdateStations) {
-			setLoading(false)
-		} else updateStationsByFilters()
+		updateStationsByFilters()
 	}, [])
 
 	/** Получение станций по заданным параметрам отступа и лимита */
