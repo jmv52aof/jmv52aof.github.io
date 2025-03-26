@@ -35,7 +35,7 @@ const getQueryArgumentsForChargingSessions = (
 	if (options.standards?.length) {
 		const standards =
 			options.standards.length === CONNECTORS.length
-				? options.standards.concat('Другой')
+				? options.standards.concat('Неизвестный')
 				: options.standards
 		query.push({
 			key: 'standards',

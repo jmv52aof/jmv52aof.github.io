@@ -18,7 +18,7 @@ export type ConnectorStandard =
 	| 'CCS1'
 	| 'CCS2'
 	| 'Tesla'
-	| 'Другой'
+	| 'Неизвестный'
 
 export type StationFilters = {
 	connectors: ConnectorStandard[]

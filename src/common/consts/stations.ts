@@ -29,7 +29,7 @@ export const CONNECTOR_HAS_ICON: Record<ConnectorStandard, string> = {
 	'GB/T (DC)': gbtDcImage,
 	CHAdeMO: chademoImage,
 	Tesla: teslaImage,
-	Другой: unknownTypeImage,
+	Неизвестный: unknownTypeImage,
 }
 
 export const CONNECTOR_STATUS_COLORS: Record<

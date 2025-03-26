@@ -88,7 +88,7 @@ const convertConnectorStandardResponse = (
 		case 'TYPE_2':
 			return 'Type 2'
 		default:
-			return 'Другой'
+			return 'Неизвестный'
 	}
 }
 

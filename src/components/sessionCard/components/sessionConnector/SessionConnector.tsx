@@ -17,7 +17,7 @@ export default function Connector(props: Readonly<Props>) {
 				/>
 			</div>
 			<div className={styles.connector__standard}>
-				<p className={styles.standard__text}>{props.connector.standard}</p>
+				<a className={styles.standard__text}>{props.connector.standard}</a>
 			</div>
 		</div>
 	)
