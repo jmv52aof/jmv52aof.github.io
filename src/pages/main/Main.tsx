@@ -19,14 +19,19 @@ import Search from '@components/ui/search/Search'
 import { useStationsLoader } from './lib/hooks'
 import { useContext, useEffect, useState } from 'react'
 import { RootStateContext } from 'contexts/RootStateContext'
+import Button from '@components/ui/button/Button'
+import mapArrowImage from '@assets/images/map-arrow.svg'
 
 /**
  * Главная страница с картой станций
  */
 export default function MainPage(): React.JSX.Element {
 	const nav = useNavigate()
-	const { position, setPosition, stationFilters } = useContext(RootStateContext)
+	const { position, setPosition, stationFilters, setMapViewState } =
+		useContext(RootStateContext)
 	const { stationsLoading } = useStationsLoader()
+
+	const [updatePositionOnMap, setUpdatePositionOnMap] = useState<boolean>(false)
 
 	useEffect(() => {
 		// @ts-ignore
@@ -93,7 +98,32 @@ export default function MainPage(): React.JSX.Element {
 					</div>
 				</div>
 			)}
-			<StationsMap loading={stationsLoading} />
+			{position && (
+				<div className={styles.positionButton}>
+					<Button
+						onClick={() => {
+							setMapViewState({
+								zoom: 17,
+								latitude: position.latitude,
+								longitude: position.longitude,
+							})
+							setUpdatePositionOnMap(true)
+						}}
+						variant='iconSmall'
+						iconSrc={mapArrowImage}
+					/>
+				</div>
+			)}
+			<StationsMap
+				loading={stationsLoading}
+				allowUpdateViewState={() => {
+					if (updatePositionOnMap) {
+						setUpdatePositionOnMap(false)
+						return true
+					}
+					return false
+				}}
+			/>
 			<div className={styles.footer}>
 				<ControlPanel />
 			</div>

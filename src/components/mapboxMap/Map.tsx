@@ -32,6 +32,7 @@ type Props = {
 	markers: MarkerInfo[]
 	getPopUp?: (point: PointOnMap) => React.JSX.Element
 	onChangeViewState?: (point: ViewState) => void
+	allowUpdateViewState?: () => boolean
 	whenLoaded?: () => void
 	showLatAndLon?: boolean
 	fixedLatAndLon?: boolean
@@ -69,6 +70,16 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 	useEffect(() => {
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN
 	}, [])
+
+	useEffect(() => {
+		if (props.allowUpdateViewState?.()) {
+			setViewState({
+				zoom: props.startZoom ?? viewState.zoom,
+				latitude: props.viewCoordinates?.latitude ?? viewState.latitude,
+				longitude: props.viewCoordinates?.longitude ?? viewState.longitude,
+			})
+		}
+	}, [props.startZoom, props.viewCoordinates])
 
 	useEffect(() => {
 		if (!props.fixedLatAndLon)

@@ -11,13 +11,14 @@ import StationMarkerOnMap from './components/StationMarker'
 
 type Props = {
 	loading?: boolean
+	allowUpdateViewState: () => boolean
 }
 
 /**
  * Карта с отображением станций на ней
  */
 export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
-	const { stations, mapViewState, setMapViewState, position } =
+	const { stations, mapViewState, setMapViewState } =
 		useContext(RootStateContext)
 
 	const [loading, setLoading] = useState<boolean>(true)
@@ -36,16 +37,6 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 		)
 	}, [stations])
 
-	useEffect(() => {
-		if (position) {
-			setMapViewState({
-				zoom: 17,
-				latitude: position.latitude,
-				longitude: position.longitude,
-			})
-		}
-	}, [position])
-
 	const findSameMarkers = (marker: MarkerInfo): MarkerInfo[] => {
 		const result: MarkerInfo[] = []
 		for (const m of markers)
@@ -59,6 +50,7 @@ export default function StationsMap(props: Readonly<Props>): React.JSX.Element {
 			markers={markers}
 			startZoom={mapViewState?.zoom}
 			viewCoordinates={mapViewState}
+			allowUpdateViewState={props.allowUpdateViewState}
 			onChangeViewState={v => setMapViewState(v)}
 			getPopUp={point => {
 				const marker = markers.find(
