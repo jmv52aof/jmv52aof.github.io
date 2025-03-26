@@ -11,6 +11,7 @@ import {
 	MIN_ANGLE,
 	ANIMATION_DURATION_IN_MS,
 } from './lib/consts'
+import { useEffect, useState } from 'react'
 
 interface Props {
 	colorTemplate: CircleColorTemplate
@@ -20,6 +21,16 @@ interface Props {
 }
 
 export default function PieChart(props: Props): React.JSX.Element {
+	const [endAngle, setEndAnge] = useState<number>(MIN_ANGLE)
+
+	useEffect(() => {
+		const newEndAngle =
+			MIN_ANGLE + ((MAX_ANGLE - MIN_ANGLE) * props.value) / props.maxValue
+		setTimeout(() => {
+			setEndAnge(newEndAngle)
+		}, 100)
+	}, [props.value, props.maxValue])
+
 	let maxValue = props.maxValue
 	if (props.value === maxValue) {
 		maxValue = 0 === props.value ? 100 : props.value * 100
@@ -55,10 +66,7 @@ export default function PieChart(props: Props): React.JSX.Element {
 						outerRadius={'100%'}
 						startAngle={MIN_ANGLE}
 						stroke='none'
-						endAngle={
-							MIN_ANGLE +
-							((MAX_ANGLE - MIN_ANGLE) * props.value) / props.maxValue
-						}
+						endAngle={endAngle}
 					/>
 				</RechartsPieChart>
 			</ResponsiveContainer>
