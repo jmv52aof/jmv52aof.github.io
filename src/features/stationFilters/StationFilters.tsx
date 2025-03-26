@@ -46,6 +46,8 @@ export default function StationFiltersFeature(): React.JSX.Element {
 	}
 
 	const applyFilters = () => {
+		if (!stationFilters.connectors.length) return
+
 		setStationFilters({
 			...stationFilters,
 			isModified: false,
@@ -162,7 +164,9 @@ export default function StationFiltersFeature(): React.JSX.Element {
 					onClick={applyFilters}
 					variant='fill'
 					text='Применить'
-					disabled={!stationFilters.isModified}
+					disabled={
+						!stationFilters.isModified || !stationFilters.connectors.length
+					}
 				/>
 			</div>
 		</div>

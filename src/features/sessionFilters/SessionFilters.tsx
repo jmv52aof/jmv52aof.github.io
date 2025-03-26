@@ -46,6 +46,8 @@ export default function SessionFilters(): React.JSX.Element {
 	}
 
 	const applyFilters = () => {
+		if (!sessionFilters.connectors.length) return
+
 		showSnackbar('success', 'Фильтры применены')
 		setSessionFilters({
 			...sessionFilters,
@@ -55,8 +57,8 @@ export default function SessionFilters(): React.JSX.Element {
 	}
 
 	const resetFilters = () => {
-		showSnackbar('success', 'Фильтры сброшены')
 		setSessionFilters({ ...DEFAULT_FILTERS, shouldUpdateSessions: true })
+		showSnackbar('success', 'Фильтры сброшены')
 	}
 
 	return (
@@ -158,7 +160,9 @@ export default function SessionFilters(): React.JSX.Element {
 					onClick={applyFilters}
 					variant='fill'
 					text='Применить'
-					disabled={!sessionFilters.isModified}
+					disabled={
+						!sessionFilters.isModified || !sessionFilters.connectors.length
+					}
 				/>
 			</div>
 		</div>
