@@ -57,7 +57,7 @@ export default function StationCard(props: Readonly<Props>) {
 					<div className={styles.connectorsList}>
 						{connectorsToRender.map((connector, index) => (
 							<Connector
-								key={connector.id}
+								key={index}
 								connector={connector}
 								isLast={index === connectorsToRender.length - 1}
 							/>
