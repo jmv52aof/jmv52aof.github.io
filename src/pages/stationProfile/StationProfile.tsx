@@ -36,7 +36,11 @@ export default function StationProfilePage(): React.JSX.Element {
 	)
 
 	if (loading) {
-		return <Loader />
+		return (
+			<div className={styles.loader}>
+				<Loader />
+			</div>
+		)
 	}
 	if (!station) {
 		return <NotFoundPage />
