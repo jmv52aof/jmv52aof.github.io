@@ -36,21 +36,21 @@ export default function StationCard(props: Readonly<Props>) {
 	return (
 		<div className={styles.stationCard} onClick={handleClick}>
 			<div className={styles.stationCard__header}>
+				<StationMarker color={STATION_STATUS_COLORS[props.station.status]} />
 				<div className={styles.header__mainInfo}>
-					<StationMarker color={STATION_STATUS_COLORS[props.station.status]} />
-					<div className={styles.mainInfo__texts}>
-						<p className={styles.texts__name}>{props.station.name}</p>
-						<p className={styles.texts__description}>{props.station.address}</p>
+					<div className={styles.mainInfo__top}>
+						<a className={styles.top__name}>{props.station.name}</a>
+						{getDistance() && props.showDistance && (
+							<div className={styles.top__path}>
+								<img className={styles.path__icon} src={pathImage} alt='path' />
+								<a className={styles.path__text}>{getDistance()} км</a>
+							</div>
+						)}
 					</div>
+					<a className={styles.mainInfo__description}>
+						{props.station.address}
+					</a>
 				</div>
-				{getDistance() && props.showDistance && (
-					<div className={styles.content__path}>
-						<div className={styles.path__icon}>
-							<img src={pathImage} alt='path' />
-						</div>
-						<p className={styles.path__text}>{getDistance()} км</p>
-					</div>
-				)}
 			</div>
 			<div className={styles.stationCard__body}>
 				<div className={styles.body__connectorsList}>

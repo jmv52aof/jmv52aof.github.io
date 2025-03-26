@@ -21,15 +21,24 @@
 	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
+	gap: 8px;
 }
 
 .header__mainInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	width: 100%;
+}
+
+.mainInfo__top {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 4px;
+}
+
+.top__path {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -37,38 +46,17 @@
 	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row;
-	gap: 8px;
+	align-items: center;
+	gap: 2px;
+	height: fit-content;
 }
 
 .path__icon {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-
-	img {
-		width: 24px;
-		height: 24px;
-	}
+	width: 20px;
+	height: 20px;
 }
 
-.mainInfo__texts {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	gap: 2px;
-}
-
-.texts__name,
+.top__name,
 .content__text {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -77,41 +65,17 @@
 	color: #373435;
 }
 
-.texts__name {
-	margin: 0;
-}
-
-.texts__description,
+.mainInfo__description,
 .path__text {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 18px;
-	margin: 0;
 	color: #8e949f;
 }
 
 .path__text {
-	text-align: right;
 	white-space: nowrap;
-	min-width: 38px;
-}
-
-.content__path {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	gap: 2px;
 }
 
 .stationCard__body {
