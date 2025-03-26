@@ -103,6 +103,8 @@ export default function MapboxMap(props: Readonly<Props>): React.JSX.Element {
 	}, [props.markers])
 
 	useEffect(() => {
+		if (!points.length) return
+
 		const index = new Supercluster({ radius: 40, maxZoom: maxZoom - 2 })
 		//@ts-ignore
 		index.load(points)
