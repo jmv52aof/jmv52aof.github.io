@@ -15,7 +15,8 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	const nav = useNavigate()
 
 	const { loading } = usePaymentMethodLoader()
-	const { paymentMethod, setPaymentMethod, showSnackbar } = useContext(RootStateContext)
+	const { paymentMethod, setPaymentMethod, showSnackbar } =
+		useContext(RootStateContext)
 	const {
 		createPaymentMethodFromApi,
 		getPaymentUrlFromApi,
@@ -25,17 +26,18 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const createNewPaymentMethod = async () => {
-		setIsLoading(true);
+		setIsLoading(true)
 		await createPaymentMethodFromApi({})
 
-		let paymentUrl = await getPaymentUrlFromApi({})
-		paymentUrl = paymentUrl ? JSON.parse(paymentUrl as string) : undefined
+		const paymentUrl = await getPaymentUrlFromApi({}).then(res => {
+			return res ? JSON.parse(res) : undefined
+		})
 		if (paymentUrl) {
-			window.Telegram.WebApp.openLink(paymentUrl, true);
+			window.Telegram.WebApp.openLink(paymentUrl, true)
 		} else {
 			showSnackbar('error', 'Не удалось создать способ оплаты')
 		}
-		setIsLoading(false);
+		setIsLoading(false)
 	}
 
 	const doDeletePaymentMethod = async () => {
@@ -46,9 +48,7 @@ export default function PaymentMethodPage(): React.JSX.Element {
 	}
 
 	const processClickAction = () => {
-		paymentMethod && !paymentMethod.error
-			? setPopupIsOpen(true)
-			: createNewPaymentMethod()
+		paymentMethod ? setPopupIsOpen(true) : createNewPaymentMethod()
 	}
 
 	const onPaymentMethodDeleted = async () => {
@@ -85,18 +85,14 @@ export default function PaymentMethodPage(): React.JSX.Element {
 
 			<div className={styles.page__main}>
 				<PaymentMethod
-					paymentMethod={
-						paymentMethod && !paymentMethod.error ? paymentMethod : undefined
-					}
+					paymentMethod={paymentMethod ? paymentMethod : undefined}
 				/>
 			</div>
 			<ActionButton
 				text={
-					paymentMethod && !paymentMethod.error
-						? 'Удалить способ оплаты'
-						: 'Привязать способ оплаты'
+					paymentMethod ? 'Удалить способ оплаты' : 'Привязать способ оплаты'
 				}
-				variant={paymentMethod && !paymentMethod.error ? 'red' : 'green'}
+				variant={paymentMethod ? 'red' : 'green'}
 				onClick={processClickAction}
 				disabled={isLoading}
 			/>
